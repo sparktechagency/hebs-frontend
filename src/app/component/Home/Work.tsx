@@ -69,10 +69,10 @@ const Work = () => {
               className="h-full w-full object-contain"
             />
           </div>
-          <p className="mb-4 text-xl font-bold">
+          <p className={`mb-4 text-xl font-bold ${styles.fontRozha}`}>
             {feature.title}
           </p>
-          <p className="text-gray-600">{feature.description}</p>
+          <p className={`text-gray-600 ${styles.fontPopins}`}>{feature.description}</p>
         </div>
       ))}
     </div>
