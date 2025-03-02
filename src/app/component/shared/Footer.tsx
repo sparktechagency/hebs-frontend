@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { Space, } from "antd"
-import { FacebookOutlined, TwitterOutlined, InstagramOutlined, YoutubeOutlined, FacebookFilled, InstagramFilled, TikTokFilled, ShoppingCartOutlined } from "@ant-design/icons"
+import { FacebookFilled, InstagramFilled, TikTokFilled, ShoppingCartOutlined } from "@ant-design/icons"
 
 
 const FooterPage = ()=> {
