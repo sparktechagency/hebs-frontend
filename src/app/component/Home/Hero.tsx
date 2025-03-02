@@ -1,21 +1,21 @@
-"use client"
-
-import { Typography } from "antd"
-import Image from "next/image"
-import img1 from "@/assets/Image (1).png"
-import img2 from "@/assets/Image.png"
+"use client";
 
 
+import Image from "next/image";
+import img1 from "@/assets/Image (1).png";
+import img2 from "@/assets/Image.png";
 
-import style from '@/app/styles.module.css'
-
+import style from "@/app/styles.module.css";
 
 const Hero = () => {
-    return (
-        <div className="flex flex-col container mx-auto">
-      {/* Top Banner */}
-      <div className={`${style.fontPoppins} text-center`}>
-        <p className="text-black ">Free shipping. Unlimited returns. Cancel anytime.</p>
+  return (
+    <div className="flex flex-col container mx-auto mb:relative mb:-top-16 lg:relative lg:-top-16">
+
+        {/* Top Banner */}
+        <div className={`${style.fontPoppins} text-center py-2 `}>
+        <p className="text-black text-xl ">
+          Free shipping. Unlimited returns. Cancel anytime.
+        </p>
       </div>
 
       {/* Hero Content */}
@@ -24,23 +24,29 @@ const Hero = () => {
           <div className="relative z-10 max-w-4xl mx-auto">
             {/* Main Content */}
             <div className="text-center mb-8">
-              <p className={`text-3xl md:text-5xl lg:text-6xl ${style.fontRozha} mb-6 `}>
+              <p
+                className={`text-3xl md:text-5xl lg:text-6xl ${style.fontRozha} mb-6 `}
+              >
                 Expertly selected kids&apos; books
                 <br />
                 for every reading level.
               </p>
-             
             </div>
-      
 
             {/* Bullet Points */}
-            <div className={`space-y-4 text-lg md:text-xl max-w-3xl mx-auto ${style.poppins} `}>
-            <p className={`text-lg md:text-xl ${style.poppins} block mb-8 items-start`}>
+            <div
+              className={`space-y-4 text-lg md:text-xl max-w-3xl mx-auto ${style.poppins} `}
+            >
+              <p
+                className={`text-lg md:text-xl ${style.poppins} block mb-8 items-start`}
+              >
                 Our team tailors each book to your readers age and interests.
               </p>
               <div className="flex items-start">
                 <span className="mr-2">–</span>
-                <p>Discover Islamic and English stories that fit their interest</p>
+                <p>
+                  Discover Islamic and English stories that fit their interest
+                </p>
               </div>
               <div className="flex items-start">
                 <span className="mr-2">–</span>
@@ -48,7 +54,10 @@ const Hero = () => {
               </div>
               <div className="flex items-start">
                 <span className="mr-2">–</span>
-                <p>Feel at ease that the English books are Islamically appropriate</p>
+                <p>
+                  Feel at ease that the English books are Islamically
+                  appropriate
+                </p>
               </div>
             </div>
           </div>
@@ -73,15 +82,16 @@ const Hero = () => {
               width={300}
               height={400}
               className=""
-            //   style={{
-            //     transform: "rotate(15deg)",
-            //   }}
+              //   style={{
+              //     transform: "rotate(15deg)",
+              //   }}
             />
           </div>
         </div>
       </div>
+
     </div>
-    );
+  );
 };
 
 export default Hero;

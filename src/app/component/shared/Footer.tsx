@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { Space, } from "antd"
-import { FacebookOutlined, TwitterOutlined, InstagramOutlined, YoutubeOutlined } from "@ant-design/icons"
+import { FacebookOutlined, TwitterOutlined, InstagramOutlined, YoutubeOutlined, FacebookFilled, InstagramFilled, TikTokFilled, ShoppingCartOutlined } from "@ant-design/icons"
 
 
 const FooterPage = ()=> {
@@ -36,7 +36,7 @@ const FooterPage = ()=> {
             <Space direction="vertical" className=" uppercase">
            
               <p  className="text-white">
-              Tiny Mu'mins
+              Tiny Mu&apos;mins
               </p>
               <p  className="text-white">
               Little Caliphs
@@ -70,31 +70,71 @@ const FooterPage = ()=> {
             </Space>
           </div>
 
-          {/* Contact Info */}
+          {/* Info */}
           <div>
-            <p  className="text-[#FAF397] py-3">
-              Contact Us
-            </p>
-            <Space direction="vertical" className="text-white">
-              <p className="block ">1234 Reading Lane</p>
-              <p className="block">Booktown, BT 12345</p>
-              <p className="block">contact@illuminate.com</p>
-              <p className="block">(555) 123-4567</p>
-              <Space className="mt-4">
-                <Link href="https://facebook.com" className="text-white ">
-                  <FacebookOutlined className="text-2xl" />
-                </Link>
-                <Link href="https://twitter.com" className="text-white ">
-                  <TwitterOutlined className="text-2xl" />
-                </Link>
-                <Link href="https://instagram.com" className="text-white ">
-                  <InstagramOutlined className="text-2xl" />
-                </Link>
-                <Link href="https://youtube.com" className="text-white ">
-                  <YoutubeOutlined className="text-2xl" />
-                </Link>
-              </Space>
-            </Space>
+         
+            <div className="mb-8 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-6">
+          <Link href="/login">
+            <button
+           
+           
+              className="h-12 w-[160px] rounded-full border-none bg-white text-[#f08080] hover:bg-white/90"
+            >
+              Log In
+            </button>
+          </Link>
+          <Link href="/cart">
+            <button
+            
+              className="h-12 w-[160px] rounded-full border-none bg-white text-[#f08080] hover:bg-white/90"
+              
+            >
+              <ShoppingCartOutlined style={{ fontSize: "18px" }} />
+              Cart
+            </button>
+           
+          </Link>
+        </div>
+
+        <div className="flex flex-col items-center gap-6 text-center">
+          <a
+            href="mailto:INFO@ILLUMINATEMUSLIMMINDS.COM"
+            className="text-lg font-medium uppercase text-[#fff7c2] hover:text-[#fff7c2]/80"
+          >
+            INFO@ILLUMINATEMUSLIMMINDS.COM
+          </a>
+
+          <div className="flex items-center gap-6">
+            <Link
+              href="https://facebook.com/illuminatemuslimminds"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white hover:text-white/80"
+            >
+              <FacebookFilled className="h-6 w-6" />
+              <span className="sr-only">Facebook</span>
+            </Link>
+            <Link
+              href="https://instagram.com/illuminatemuslimminds"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white hover:text-white/80"
+            >
+              <InstagramFilled className="h-6 w-6" />
+              <span className="sr-only">Instagram</span>
+            </Link>
+            <Link
+              href="https://tiktok.com/@illuminatemuslimminds"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white hover:text-white/80"
+            >
+              <TikTokFilled className="h-5 w-5" />
+              <span className="sr-only">TikTok</span>
+            </Link>
+            <span className="text-sm font-medium uppercase text-white">@ILLUMINATEMUSLIMMINDS</span>
+          </div>
+        </div>
           </div>
         </div>
 

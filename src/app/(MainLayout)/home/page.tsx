@@ -1,16 +1,13 @@
-import Hero from "@/app/component/Hero";
-
-
+import Banner from "@/app/component/Home/Banner";
+import Hero from "@/app/component/Home/Hero";
 
 const HomePage = () => {
-  return (
-    <div className="">
-    
-
-      <Hero/>
-    
-    </div>
-  );
+    return (
+        <div>
+            <Banner/>
+            <Hero/>
+        </div>
+    );
 };
 
 export default HomePage;
