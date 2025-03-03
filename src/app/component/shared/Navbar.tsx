@@ -37,7 +37,7 @@ export default function Navbar() {
           <Link href="/kidsBookClub" className="text-sm font-medium text-white hover:text-white/80">
             KIDS BOOK CLUBS
           </Link>
-          <Link href="/online-book-store" className="text-sm font-medium text-white hover:text-white/80">
+          <Link href="/bookStore" className="text-sm font-medium text-white hover:text-white/80">
             ONLINE BOOK STORE
           </Link>
           <Link href="/book-registry" className="text-sm font-medium text-white hover:text-white/80">
