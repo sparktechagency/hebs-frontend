@@ -13,3 +13,6 @@
 .fontJost {
   font-family: var(--font-jost), sans-serif; /* Use Jost font */
 }
+.fontInter {
+  font-family: var(--font-inter), sans-serif; /* Use Jost font */
+}
