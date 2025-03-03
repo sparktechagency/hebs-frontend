@@ -12,7 +12,7 @@ const FooterPage = ()=> {
 
 
         {/* Main Footer Content */}
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-4">
+        <div className="grid mt-0 md:mt-12 lg:mt-12 grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-4">
         
           <div>
             <p  className="text-[#FAF397] py-3">
@@ -73,7 +73,7 @@ const FooterPage = ()=> {
           {/* Info */}
           <div>
          
-            <div className="mb-8 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-6">
+            <div className="mb-8  flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-6">
           <Link href="/login">
             <button
            

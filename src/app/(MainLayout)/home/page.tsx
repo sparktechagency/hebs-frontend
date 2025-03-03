@@ -1,5 +1,6 @@
 import Banner from "@/app/component/Home/Banner";
 import Discover from "@/app/component/Home/Discover";
+import FeatureBook from "@/app/component/Home/FeatureBook";
 import FunFact from "@/app/component/Home/FunFact";
 import HadithSlider from "@/app/component/Home/HadithSlider";
 import Hero from "@/app/component/Home/Hero";
@@ -20,6 +21,7 @@ const HomePage = () => {
             <LittleCalips/>
             <Discover/>
             <Islamic/>
+            <FeatureBook/>
         </div>
     );
 };
