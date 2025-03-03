@@ -21,7 +21,7 @@ export default function Navbar() {
     <header className="w-full bg-gradient-to-r from-[#f08080] to-[#ffeb99] px-4 py-2 md:px-10">
       <div className="mx-auto flex  items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex items-center">
+        <Link href="/home" className="flex items-center">
           <div className="relative h-14 w-36">
             <Image
             src={logo}
@@ -34,7 +34,7 @@ export default function Navbar() {
 
         {/* Desktop Navigation */}
         <nav className="hidden lg:flex lg:items-center lg:space-x-6">
-          <Link href="/kids-book-clubs" className="text-sm font-medium text-white hover:text-white/80">
+          <Link href="/kidsBookClub" className="text-sm font-medium text-white hover:text-white/80">
             KIDS BOOK CLUBS
           </Link>
           <Link href="/online-book-store" className="text-sm font-medium text-white hover:text-white/80">

@@ -1,6 +1,6 @@
 "use client";
 
-import FooterPage from "../component/shared/Footer";
+
 import Navbar from "../component/shared/Navbar";
 
 const MainLayout = ({
@@ -11,12 +11,12 @@ const MainLayout = ({
   return (
     <>
       <div>
-        <div className="min-h-screen ">
+        <div className="">
           <Navbar />
           {children}
         </div>
         <div>
-          <FooterPage />
+    
         </div>
       </div>
     </>
