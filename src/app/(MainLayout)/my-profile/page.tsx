@@ -9,6 +9,7 @@ import { faFacebook } from "@fortawesome/free-brands-svg-icons";
 import Image from "next/image"
 import google from "@/assets/Social media logo.png"
 import right from "@/assets/right.png"
+import Link from "next/link"
 const MyProfilePage=()=> {
   const [accountInfo, setAccountInfo] = useState({
     firstName: "",
@@ -25,22 +26,22 @@ const MyProfilePage=()=> {
         <nav className="p-4">
           <ul className="space-y-2">
             <li>
-              <a href="#" className="flex items-center p-2 text-gray-600 hover:bg-gray-100 rounded-md">
+              <Link href="/boxes" className="flex items-center p-2 text-gray-600 hover:bg-gray-100 rounded-md">
                 <Package className="h-5 w-5 mr-3 text-gray-500" />
                 <span>Boxes</span>
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="flex items-center p-2 bg-[#f08080] text-white rounded-md">
+              <Link href="/my-profile" className="flex items-center p-2 bg-[#f08080] text-white rounded-md">
                 <User className="h-5 w-5 mr-3" />
                 <span>Account Details</span>
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="flex items-center p-2 text-gray-600 hover:bg-gray-100 rounded-md">
+              <Link href="#" className="flex items-center p-2 text-gray-600 hover:bg-gray-100 rounded-md">
                 <FileText className="h-5 w-5 mr-3 text-gray-500" />
                 <span>Billing History</span>
-              </a>
+              </Link>
             </li>
           </ul>
 

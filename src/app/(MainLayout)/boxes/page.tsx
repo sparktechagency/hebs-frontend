@@ -21,7 +21,7 @@ const BoxesPage=()=> {
               </Link>
             </li>
             <li>
-              <Link href="/account" className="flex items-center p-2 text-gray-600 hover:bg-gray-100 rounded-md">
+              <Link href="/my-profile" className="flex items-center p-2 text-gray-600 hover:bg-gray-100 rounded-md">
                 <User className="h-5 w-5 mr-3 text-gray-500" />
                 <span>Account Details</span>
               </Link>
@@ -69,9 +69,11 @@ const BoxesPage=()=> {
                 </div>
               </div>
 
+              <Link href={"/checkoutSummary"}>
               <button className="w-full bg-[#f08080] hover:bg-[#f08080]/90 text-white py-4 px-6 rounded-full mt-4 font-medium shadow-sm transition-all hover:shadow-md">
                 See Details
               </button>
+              </Link>
             </div>
 
            
