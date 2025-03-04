@@ -3,6 +3,7 @@ import Image from "next/image";
 
 import bannerImg from '@/assets/BannerImage.png'
 import styles from "@/app/styles.module.css"
+import Link from "next/link";
 const Banner = () => {
 
     return (
@@ -27,12 +28,14 @@ const Banner = () => {
               shipped to your door.
             </p>
  
-              <button
+         <Link href={"/name"}>
+         <button
                 
                 className="h-12 rounded-full bg-[#F37975] px-8 text-lg hover:bg-[#e57373] text-white"
               >
                 START TODAY
               </button>
+         </Link>
        
           </div>
 
