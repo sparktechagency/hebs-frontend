@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Input, Button } from "antd"
+import { Input,  } from "antd"
 import { Package, User, FileText, Plus, ChevronRight, } from "lucide-react"
 import styles from "@/app/styles.module.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -9,7 +9,7 @@ import { faFacebook } from "@fortawesome/free-brands-svg-icons";
 import Image from "next/image"
 import google from "@/assets/Social media logo.png"
 import right from "@/assets/right.png"
-export default function AccountSettings() {
+const MyProfilePage=()=> {
   const [accountInfo, setAccountInfo] = useState({
     firstName: "",
     lastName: "",
@@ -187,3 +187,4 @@ export default function AccountSettings() {
   )
 }
 
+export default MyProfilePage

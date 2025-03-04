@@ -28,7 +28,7 @@ const SubscriptionPage=()=> {
         <nav className="p-4">
           <ul className="space-y-2">
             <li>
-              <Link href="#" className="flex items-center p-2 text-gray-600 hover:bg-gray-100 rounded-md">
+              <Link href="/boxes" className="flex items-center p-2 text-gray-600 hover:bg-gray-100 rounded-md">
                 <Package className="h-5 w-5 mr-3 text-gray-500" />
                 <span>Boxes</span>
               </Link>
