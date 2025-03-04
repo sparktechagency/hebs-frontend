@@ -1,0 +1,244 @@
+"use client"
+
+import { useState } from "react"
+import { ChevronDown, ChevronRight, Package, User, FileText, Plus } from "lucide-react"
+import { Form, Input, Modal, Select } from "antd"
+import Link from "next/link";
+const { Option } = Select;
+
+const SubscriptionPage=()=> {
+  const [showBooks1, setShowBooks1] = useState(false)
+  const [showBooks2, setShowBooks2] = useState(false)
+  const [showUpdateModal, setShowUpdateModal] = useState(false)
+  // Add form state
+  const [readerDetails, setReaderDetails] = useState({
+    name: "Ahmed",
+    birthday: "July 2019",
+    readingLevel: "Little Caliphs",
+  })
+  const handleSave = () => {
+    // Handle saving the updated details
+    console.log("Saving:", readerDetails)
+    setShowUpdateModal(false)
+  }
+  return (
+    <div className="flex flex-col md:flex-row min-h-screen bg-gray-50">
+      {/* Sidebar */}
+      <aside className="w-full md:w-64 bg-white border-r border-gray-200 md:min-h-screen">
+        <nav className="p-4">
+          <ul className="space-y-2">
+            <li>
+              <Link href="#" className="flex items-center p-2 text-gray-600 hover:bg-gray-100 rounded-md">
+                <Package className="h-5 w-5 mr-3 text-gray-500" />
+                <span>Boxes</span>
+              </Link>
+            </li>
+            <li>
+              <Link href="my-profile" className="flex items-center p-2 text-gray-600 hover:bg-gray-100 rounded-md">
+                <User className="h-5 w-5 mr-3 text-gray-500" />
+                <span>Account Details</span>
+              </Link>
+            </li>
+            <li>
+              <Link href="#" className="flex items-center p-2 text-gray-600 hover:bg-gray-100 rounded-md">
+                <FileText className="h-5 w-5 mr-3 text-gray-500" />
+                <span>Billing History</span>
+              </Link>
+            </li>
+          </ul>
+
+          <div className="mt-8 border-t border-gray-200 pt-4">
+            <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">SUBSCRIPTION SETTINGS</h3>
+            <div className="flex items-center justify-between p-2 text-gray-600 hover:bg-gray-100 rounded-md">
+              <div className="flex flex-col">
+                <span className="text-[#f08080]">Ahmed</span>
+                <span className="text-xs text-[#f08080]/70">Inactive</span>
+              </div>
+              <ChevronRight className="h-5 w-5 text-[#f08080]" />
+            </div>
+          </div>
+
+          <button className="mt-4 flex items-center text-[#f08080] p-2">
+            <Plus className="h-4 w-4 mr-1" />
+            <span>Add Subscriptions</span>
+          </button>
+        </nav>
+      </aside>
+
+      {/* Main Content */}
+      <main className="flex-1 p-4 md:p-8">
+        <h1 className="text-2xl font-bold mb-8">Ahmed&apos;s Subscription</h1>
+
+        {/* Plan Section */}
+        <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
+            <div>
+              <h2 className="text-xl font-semibold mb-2">Your Plan</h2>
+              <span className="inline-block bg-red-100 text-gray-700 px-3 py-1 rounded-md text-sm">
+                Try Before You Buy Legacy
+              </span>
+            </div>
+            <button className="mt-4 md:mt-0 bg-[#f08080] hover:bg-[#f08080]/90 text-white px-6 py-2 rounded-full">
+              Cancel Request
+            </button>
+          </div>
+
+          <div className="border-t border-gray-200 mt-4 pt-4">
+            <p className="bg-red-50 p-3 rounded-md text-gray-700">Connected on May 11, 2025</p>
+          </div>
+        </div>
+
+        {/* Reader Details Section */}
+        <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
+            <h2 className="text-xl font-semibold">Reader Details</h2>
+            <button className="mt-4 md:mt-0 border border-[#f08080] text-[#f08080] hover:bg-[#f08080]/5 px-6 py-2 rounded-full"
+             onClick={() => setShowUpdateModal(true)}
+            >
+              Update Details
+            </button>
+          </div>
+
+          <div className="border-t border-gray-200 pt-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div>
+                <h3 className="text-gray-500 mb-1">Name</h3>
+                <p className="font-medium">Ahmed</p>
+              </div>
+              <div>
+                <h3 className="text-gray-500 mb-1">Birth Month</h3>
+                <p className="font-medium">July 2019</p>
+              </div>
+            </div>
+
+            <div className="mb-4">
+              <h3 className="text-gray-500 mb-1">Reading Level</h3>
+              <p className="font-medium">Little Caliphs</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Shipping Address Section */}
+        <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
+          <h2 className="text-xl font-semibold mb-6">Shipping Address</h2>
+
+          <div className="border-t border-gray-200 pt-6">
+            <p className="font-medium">Los Angelas, east 92st, USA</p>
+          </div>
+        </div>
+
+        {/* Books Section 1 */}
+        <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
+            <h3 className="font-medium">Reader&apos;s Allah made me</h3>
+            <button className="mt-4 md:mt-0 bg-[#f08080] hover:bg-[#f08080]/90 text-white px-6 py-2 rounded-full">
+              Review Books
+            </button>
+          </div>
+
+          <div className="border-t border-gray-200 pt-4">
+            <button
+              className="w-full bg-gray-400 hover:bg-gray-500 text-white py-3 rounded-md flex items-center justify-center"
+              onClick={() => setShowBooks1(!showBooks1)}
+            >
+              <span className="mr-2">Show Books</span>
+              <ChevronDown className="h-5 w-5" />
+            </button>
+
+            {showBooks1 && (
+              <div className="mt-4 p-4 bg-gray-50 rounded-md">
+                <p>Book details would appear here</p>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Books Section 2 */}
+        <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
+            <h3 className="font-medium">Reader&apos;s Allah made me</h3>
+            <button className="mt-4 md:mt-0 bg-[#f08080] hover:bg-[#f08080]/90 text-white px-6 py-2 rounded-full">
+              Review Books
+            </button>
+          </div>
+
+          <div className="border-t border-gray-200 pt-4">
+            <button
+              className="w-full bg-gray-400 hover:bg-gray-500 text-white py-3 rounded-md flex items-center justify-center"
+              onClick={() => setShowBooks2(!showBooks2)}
+            >
+              <span className="mr-2">Show Books</span>
+              <ChevronDown className="h-5 w-5" />
+            </button>
+
+            {showBooks2 && (
+              <div className="mt-4 p-4 bg-gray-50 rounded-md">
+                <p>Book details would appear here</p>
+              </div>
+            )}
+          </div>
+        </div>
+         {/* Update Details Modal */}
+         <Modal
+        title="Reader Details"
+        open={showUpdateModal}
+        onCancel={() => setShowUpdateModal(false)}
+        footer={null} // Remove default footer buttons
+        styles={{
+          header: { borderBottom: "none", paddingBottom: 0 },
+          body: { paddingTop: 16 },
+        }}
+      >
+        <div className="border-t border-gray-200 my-4"></div>
+        <Form layout="vertical">
+          <div className="grid grid-cols-2 gap-4">
+            {/* Name Field */}
+            <Form.Item label="Name" className="mb-4">
+              <Input
+                value={readerDetails.name}
+                onChange={(e) => setReaderDetails({ ...readerDetails, name: e.target.value })}
+                className="rounded-lg"
+              />
+            </Form.Item>
+
+            {/* Birthday Field */}
+            <Form.Item label="Birthday" className="mb-4">
+              <Input
+                value={readerDetails.birthday}
+                onChange={(e) => setReaderDetails({ ...readerDetails, birthday: e.target.value })}
+                className="rounded-lg"
+              />
+            </Form.Item>
+          </div>
+
+          {/* Reading Level Field */}
+          <Form.Item label="Reading Level" className="mb-6">
+            <Select
+              value={readerDetails.readingLevel}
+              onChange={(value) => setReaderDetails({ ...readerDetails, readingLevel: value })}
+              placeholder="Reading Level"
+              className="w-full rounded-lg"
+            >
+              <Option value="Little Caliphs">Little Caliphs</Option>
+              <Option value="Intermediate">Intermediate</Option>
+              <Option value="Advanced">Advanced</Option>
+            </Select>
+          </Form.Item>
+
+          {/* Save Button */}
+          <div className="flex justify-end">
+            <button
+              onClick={handleSave}
+              className="text-[#ff0000] hover:text-[#ff0000]/90 font-medium border-0 bg-transparent cursor-pointer"
+            >
+              Save
+            </button>
+          </div>
+        </Form>
+      </Modal>
+      </main>
+    </div>
+  )
+}
+
+export default SubscriptionPage
