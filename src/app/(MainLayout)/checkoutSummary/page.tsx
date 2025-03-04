@@ -8,6 +8,7 @@ import animal from '@/assets/animals.png'
 import eid from '@/assets/eid.png'
 import songBook from '@/assets/songBook.png'
 import shape from "@/assets/shape.png"
+import Link from "next/link"
 const books = [
   {
     id: 1,
@@ -69,9 +70,11 @@ export default function BookReview() {
         </div>
        
        <div>
-       <button className="bg-[#f08080] hover:bg-[#f08080]/90 text-white px-8 py-3 rounded-full font-medium shadow-md transition-all hover:shadow-lg hover:-translate-y-0.5">
+<Link href={"/bookCheckout"}>
+<button className="bg-[#f08080] hover:bg-[#f08080]/90 text-white px-8 py-3 rounded-full font-medium shadow-md transition-all hover:shadow-lg hover:-translate-y-0.5">
           See Checkout Summary
         </button>
+</Link>
        </div>
 
       </div>
