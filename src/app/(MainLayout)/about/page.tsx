@@ -1,7 +1,9 @@
 import AboutBanner from "@/app/component/About/AboutBanner";
 import Mission from "@/app/component/About/Mission";
+import NewsletterSignup from "@/app/component/About/NewsLetter";
 import OurTeam from "@/app/component/About/OurTeam";
 import ValuesSection from "@/app/component/About/OurValues";
+import FeatureBook from "@/app/component/Home/FeatureBook";
 
 const AboutPage = () => {
     return (
@@ -16,7 +18,8 @@ const AboutPage = () => {
               </h2>
             </div>
             <OurTeam/>
-
+            <NewsletterSignup/>
+<FeatureBook/>
         </div>
     );
 };
