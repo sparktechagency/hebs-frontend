@@ -8,6 +8,7 @@ import img4 from '@/assets/work4.png'
 
 
 import React from 'react';
+import Link from 'next/link';
 
 const features = [
     {
@@ -84,12 +85,14 @@ const Work = () => {
     {/* CTA Button */}
     <div className="relative -top-7 flex justify-center">
     
-        <button
+   <Link href={"/name"}>
+   <button
          
-          className="h-12 rounded-full bg-[#f08080] px-8 text-lg hover:bg-[#e57373]"
-        >
-          GET STARTED
-        </button>
+         className="h-12 rounded-full bg-[#f08080] px-8 text-lg hover:bg-[#e57373]"
+       >
+         GET STARTED
+       </button>
+   </Link>
   
     </div>
     </div>
