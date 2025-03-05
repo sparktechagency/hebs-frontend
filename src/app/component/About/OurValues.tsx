@@ -1,6 +1,6 @@
 'use client'
 import Image from "next/image"
-import { Button } from "antd"
+
 import img1 from "@/assets/valueImg1.png"
 import img2 from "@/assets/valueImg2.png"
 import img3 from "@/assets/valueImg3.png"
