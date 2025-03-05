@@ -6,6 +6,7 @@ import bookCover from "@/assets/bookCover.png.png"
 import book2 from "@/assets/blog2.png"
 import book3 from "@/assets/blog3.png"
 import { FacebookOutlined, MailOutlined } from "@ant-design/icons";
+import FeatureBook from "@/app/component/Home/FeatureBook";
 
 const BlogPage = () => {
   return (
@@ -108,6 +109,7 @@ const BlogPage = () => {
           </div>
         </div>
       </div>
+      <FeatureBook/>
     </div>
   );
 };
