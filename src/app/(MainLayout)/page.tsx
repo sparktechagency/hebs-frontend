@@ -4,7 +4,7 @@ import HomePage from "./home/page";
 const MainPage = () => {
   return (
     <div>
-     <HomePage/>
+    <h1>Welcome to Illuminate</h1>
     </div>
   );
 };
