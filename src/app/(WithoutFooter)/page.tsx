@@ -1,6 +1,6 @@
 
 
-const page = () => {
+const WithoutFooterPage = () => {
     return (
         <div>
             <h1>without footer</h1>
@@ -8,4 +8,4 @@ const page = () => {
     );
 };
 
-export default page;
+export default WithoutFooterPage;

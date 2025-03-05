@@ -1,6 +1,6 @@
 
 
-const page = () => {
+const SurveyPage = () => {
     return (
         <div>
             <h1>hiii</h1>
@@ -8,4 +8,4 @@ const page = () => {
     );
 };
 
-export default page;
+export default SurveyPage;
