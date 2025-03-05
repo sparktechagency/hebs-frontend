@@ -1,11 +1,12 @@
-import HomePage from "./(MainLayout)/home/page";
+import React from 'react';
+import MainPage from './(MainLayout)/page';
 
-
-
-export default function Home() {
+const HomePage = () => {
   return (
-<div>
-<HomePage/>
-</div>
+    <div>
+      <MainPage/>
+    </div>
   );
-}
+};
+
+export default HomePage;

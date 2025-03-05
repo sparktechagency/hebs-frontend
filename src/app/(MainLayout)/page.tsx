@@ -1,4 +1,12 @@
-export default function MainLayoutPage() {
-    return <div>Main Layout Page</div>;
-  }
-  
+import HomePage from "./home/page";
+
+
+const MainPage = () => {
+  return (
+    <div>
+     <HomePage/>
+    </div>
+  );
+};
+
+export default MainPage;
