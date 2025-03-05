@@ -1,4 +1,4 @@
-import HomePage from "./home/page";
+
 
 
 const MainPage = () => {
