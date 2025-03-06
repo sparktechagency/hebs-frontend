@@ -1,10 +1,10 @@
 import Image from "next/image"
-import { RightOutlined } from "@ant-design/icons"
+
 import frame2 from "@/assets/tinyMuminsFrame2.png"
 import book from "@/assets/littleCalips.png"
 import style from '@/app/styles.module.css'
 import Link from "next/link"
-
+import arrow from "@/assets/arrowLogo.png"
 const Islamic =() =>{
   return (
     <div
@@ -63,7 +63,7 @@ const Islamic =() =>{
 
                 <div className="flex items-start gap-3">
                   <div className="mt-1 text-[#F5A77D]">
-                    <RightOutlined size={20} className="transform rotate-45" />
+                  <Image src={arrow} alt="logo"/>
                   </div>
                   <p
                     className={`text-base md:text-lg text-[#333333] ${style.fontJost}`}
@@ -75,7 +75,7 @@ const Islamic =() =>{
 
                 <div className="flex items-start gap-3">
                   <div className="mt-1 text-[#F5A77D]">
-                    <RightOutlined size={20} className="transform rotate-45" />
+                  <Image src={arrow} alt="logo"/>
                   </div>
                   <p
                     className={`text-base md:text-lg text-[#333333] ${style.fontJost}`}
@@ -86,7 +86,7 @@ const Islamic =() =>{
 
                 <div className="flex items-start gap-3">
                   <div className="mt-1 text-[#F5A77D]">
-                    <RightOutlined size={20} className="transform rotate-45" />
+                  <Image src={arrow} alt="logo"/>
                   </div>
                   <p
                     className={`text-base md:text-lg text-[#333333] ${style.fontJost}`}

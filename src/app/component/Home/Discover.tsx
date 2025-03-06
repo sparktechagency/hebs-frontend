@@ -1,9 +1,10 @@
 import Image from "next/image"
-import { RightOutlined } from "@ant-design/icons"
+
 import frame1 from "@/assets/tinyMuminsFrame1.png"
 import book from "@/assets/discovers.png"
 import style from '@/app/styles.module.css'
 import Link from "next/link"
+import arrow from "@/assets/arrowLogo.png"
 const  Discover=()=> {
   return (
     <div
@@ -38,7 +39,7 @@ const  Discover=()=> {
 
                 <div className="flex items-start gap-3">
                   <div className="mt-1 text-[#F5A77D]">
-                    <RightOutlined size={20} className="transform rotate-45" />
+                  <Image src={arrow} alt="logo"/>
                   </div>
                   <p className={`text-base md:text-lg text-[#333333] ${style.fontJost}`}>
                   Boost cognitive development
@@ -47,7 +48,7 @@ const  Discover=()=> {
 
                 <div className="flex items-start gap-3">
                   <div className="mt-1 text-[#F5A77D]">
-                    <RightOutlined size={20} className="transform rotate-45" />
+                  <Image src={arrow} alt="logo"/>
                   </div>
                   <p className={`text-base md:text-lg text-[#333333] ${style.fontJost}`}>
                   Increase their love for Islamic stories
@@ -56,7 +57,7 @@ const  Discover=()=> {
 
                 <div className="flex items-start gap-3">
                   <div className="mt-1 text-[#F5A77D]">
-                    <RightOutlined size={20} className="transform rotate-45" />
+                  <Image src={arrow} alt="logo"/>
                   </div>
                   <p className={`text-base md:text-lg text-[#333333] ${style.fontJost}`}>
                   Help them read more accurately and fluently

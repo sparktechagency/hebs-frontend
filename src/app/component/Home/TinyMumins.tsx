@@ -1,6 +1,7 @@
 import Image from "next/image"
-import { RightOutlined } from "@ant-design/icons"
+
 import frame1 from "@/assets/tinyMuminsFrame1.png"
+import arrow from "@/assets/arrowLogo.png"
 import book from "@/assets/tinyMumins.png"
 import style from '@/app/styles.module.css'
 import Link from "next/link"
@@ -38,7 +39,8 @@ const  TinyMuminsSection=()=> {
 
                 <div className="flex items-start gap-3">
                   <div className="mt-1 text-[#F5A77D]">
-                    <RightOutlined size={20} className="transform rotate-45" />
+<Image src={arrow} alt="logo"/>
+                
                   </div>
                   <p className={`text-base md:text-lg text-[#333333] ${style.fontJost}`}>
                     Help with sensory development
@@ -47,7 +49,7 @@ const  TinyMuminsSection=()=> {
 
                 <div className="flex items-start gap-3">
                   <div className="mt-1 text-[#F5A77D]">
-                    <RightOutlined size={20} className="transform rotate-45" />
+                  <Image src={arrow} alt="logo"/>
                   </div>
                   <p className={`text-base md:text-lg text-[#333333] ${style.fontJost}`}>
                     Help your little Muslim in discovering sounds, words, and language, developing literacy skills
@@ -56,7 +58,7 @@ const  TinyMuminsSection=()=> {
 
                 <div className="flex items-start gap-3">
                   <div className="mt-1 text-[#F5A77D]">
-                    <RightOutlined size={20} className="transform rotate-45" />
+                  <Image src={arrow} alt="logo"/>
                   </div>
                   <p className={`text-base md:text-lg text-[#333333] ${style.fontJost}`}>
                     Enhance your child&apos;s brain development and ability to focus and concentrate
