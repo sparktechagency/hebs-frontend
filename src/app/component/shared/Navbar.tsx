@@ -93,12 +93,16 @@ export default function Navbar() {
             <div className="w-full space-y-5 text-center">
               <h2 className="text-[#FF7F7F] text-xl font-medium">Kids Book Clubs</h2>
               <div className="space-y-3 flex flex-col items-center justify-center">
-                <button className="h-10 w-48 rounded-full bg-white border border-black hover:bg-[#FF7F7F] hover:text-white hover:border-[#FF7F7F] transition-all">
+               <Link href={"/name"}>
+               <button className="h-10 w-48 rounded-full bg-white border border-black hover:bg-[#FF7F7F] hover:text-white hover:border-[#FF7F7F] transition-all">
                   GET STARTED
                 </button>
-                <button className="h-10 w-48 rounded-full bg-white border border-black hover:bg-[#FF7F7F] hover:text-white hover:border-[#FF7F7F] transition-all">
+               </Link>
+             <Link href={"/login"}>
+             <button className="h-10 w-48 rounded-full bg-white border border-black hover:bg-[#FF7F7F] hover:text-white hover:border-[#FF7F7F] transition-all">
                   LOGIN
                 </button>
+             </Link>
               </div>
             </div>
 
@@ -223,6 +227,11 @@ export default function Navbar() {
                   <Link href="/gift" className="block text-base text-black hover:text-[#FF7F7F]">
                     Give a Gift
                   </Link>
+                  <Link href={"/name"}>
+               <button className="h-10 w-48 rounded-full bg-white border border-black hover:bg-[#FF7F7F] hover:text-white hover:border-[#FF7F7F] transition-all">
+                  GET STARTED
+                </button>
+               </Link>
                 </div>
               )}
             </div>
