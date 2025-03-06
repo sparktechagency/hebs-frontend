@@ -123,12 +123,12 @@ const BookReview5=()=> {
       </div>
     </div>
     <div className="flex justify-center gap-8 bg-[#FFFFFF] rounded-lg shadow-2xl p-4 mt-8">
-     <Link href={"/reviews-third"}>  
+     <Link href={"/"}>  
       <button className="h-10 w-36 rounded-full bg-white border border-black hover:bg-[#FF7F7F] hover:text-white hover:border-[#FF7F7F] transition-all uppercase">
                   Skip Book
                 </button>
                 </Link>
-                <Link href={"/reviews-third"}>
+                <Link href={"/"}>
                 
                 <button
                 

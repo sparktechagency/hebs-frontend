@@ -96,7 +96,7 @@ export default function Navbar() {
                     <Link href="/my-profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                       Account Details
                     </Link>
-                    <Link href="/billing-history" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                    <Link href="/billing" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                       Billing History
                     </Link>
                     <Link href="/favorites" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">

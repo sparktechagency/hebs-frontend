@@ -38,7 +38,7 @@ const MyProfilePage=()=> {
               </Link>
             </li>
             <li>
-              <Link href="#" className="flex items-center p-2 text-gray-600 hover:bg-gray-100 rounded-md">
+              <Link href="/billing" className="flex items-center p-2 text-gray-600 hover:bg-gray-100 rounded-md">
                 <FileText className="h-5 w-5 mr-3 text-gray-500" />
                 <span>Billing History</span>
               </Link>
