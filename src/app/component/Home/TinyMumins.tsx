@@ -3,6 +3,7 @@ import { RightOutlined } from "@ant-design/icons"
 import frame1 from "@/assets/tinyMuminsFrame1.png"
 import book from "@/assets/tinyMumins.png"
 import style from '@/app/styles.module.css'
+import Link from "next/link"
 const  TinyMuminsSection=()=> {
   return (
     <div
@@ -64,9 +65,11 @@ const  TinyMuminsSection=()=> {
               </div>
 
               <div className="pt-4">
-                <button className={`bg-[#F08080] hover:bg-[#E57373] text-white font-medium py-3 px-6 rounded-full transition-colors ${style.fontJost}`}>
+              <Link href={"tinyMuslimBox"}>
+              <button className={`bg-[#F08080] hover:bg-[#E57373] text-white font-medium py-3 px-6 rounded-full transition-colors ${style.fontJost}`}>
                   GET TINY MU&apos;MINS BOX
                 </button>
+              </Link>
               </div>
             </div>
 
