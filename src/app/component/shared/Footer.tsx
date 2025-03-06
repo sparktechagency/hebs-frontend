@@ -12,7 +12,7 @@ const FooterPage = ()=> {
 
 
         {/* Main Footer Content */}
-        <div className="grid mt-0 md:mt-12 lg:mt-12 grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-4">
+        <div className="grid mt-0 md:mt-12 lg:mt-12 grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-4 border-t border-[#E8E8E8] py-5">
         
           <div>
             <p  className="text-[#FAF397] py-3">

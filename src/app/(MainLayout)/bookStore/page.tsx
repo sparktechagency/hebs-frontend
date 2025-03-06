@@ -69,21 +69,21 @@ const BookStore = () => {
     return (
         <div className="container mx-auto">
            
-            <div className="flex justify-between items-center p-4 bg-white   border-b border-black py-8">
+           <div className="flex flex-wrap justify-between items-center p-4 bg-white border-b border-black py-6 gap-4">
       {/* Filter Section */}
-      <div className="flex items-center space-x-2">
+      <div className="flex flex-wrap items-center gap-2 sm:gap-4">
         <span className="text-gray-600">Filter:</span>
-        <Select defaultValue="Availability" className="w-40" />
-        <Select defaultValue="Price" className="w-32" />
-        <Select defaultValue="Age Category" className="w-44" />
-        <Select defaultValue="Grade" className="w-32" />
-        <Select defaultValue="Collections" className="w-40" />
+        <Select defaultValue="Availability" className="min-w-[140px]" />
+        <Select defaultValue="Price" className="min-w-[120px]" />
+        <Select defaultValue="Age Category" className="min-w-[160px]" />
+        <Select defaultValue="Grade" className="min-w-[120px]" />
+        <Select defaultValue="Collections" className="min-w-[140px]" />
       </div>
 
       {/* Sort By Section */}
-      <div className="flex items-center space-x-2">
+      <div className="flex flex-wrap items-center gap-2 sm:gap-4">
         <span className="text-gray-600">Sort by:</span>
-        <Select defaultValue="Alphabetically, A-Z" className="w-52" />
+        <Select defaultValue="Alphabetically, A-Z" className="min-w-[180px]" />
       </div>
     </div>
 {/* card  section */}

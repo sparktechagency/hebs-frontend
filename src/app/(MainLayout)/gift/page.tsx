@@ -7,21 +7,21 @@ import gift from "@/assets/gift.png"
 const GiftPage = () => {
     return (
         <div className='container mx-auto'>
-                        <div className="flex justify-between items-center p-4 bg-white   border-b border-black py-8">
-      {/* Filter Section */}
-      <div className="flex items-center space-x-2">
-        <span className="text-gray-600">Filter:</span>
-        <Select defaultValue="Availability" className="w-40" />
-        <Select defaultValue="Price" className="w-32" />
-   
-      </div>
+<div className="flex flex-col sm:flex-row justify-between items-center p-4 bg-white border-b border-black py-8">
+  {/* Filter Section */}
+  <div className="flex items-center space-x-2 mb-4 sm:mb-0">
+    <span className="text-gray-600">Filter:</span>
+    <Select defaultValue="Availability" className="w-40" />
+    <Select defaultValue="Price" className="w-32" />
+  </div>
 
-      {/* Sort By Section */}
-      <div className="flex items-center space-x-2">
-        <span className="text-gray-600">Sort by:</span>
-        <Select defaultValue="Alphabetically, A-Z" className="w-52" />
-      </div>
-    </div>
+  {/* Sort By Section */}
+  <div className="flex items-center space-x-2">
+    <span className="text-gray-600">Sort by:</span>
+    <Select defaultValue="Alphabetically, A-Z" className="w-52" />
+  </div>
+</div>
+
 {/* cart */}
 
 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
