@@ -3,6 +3,7 @@ import { RightOutlined } from "@ant-design/icons"
 import frame2 from "@/assets/tinyMuminsFrame2.png"
 import book from "@/assets/littleCalips.png"
 import style from '@/app/styles.module.css'
+import Link from "next/link"
 
 const Islamic =() =>{
   return (
@@ -96,11 +97,14 @@ const Islamic =() =>{
               </div>
 
               <div className="pt-4">
+                <Link href={"/islamic"}>
+                
                 <button
                   className={`bg-[#F08080] hover:bg-[#E57373] text-white font-medium py-3 px-6 rounded-full transition-colors ${style.fontJost}`}
                 >
                   Get Islamic Explorers Box
                 </button>
+                </Link>
               </div>
             </div>
           </div>

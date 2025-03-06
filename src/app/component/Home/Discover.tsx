@@ -3,6 +3,7 @@ import { RightOutlined } from "@ant-design/icons"
 import frame1 from "@/assets/tinyMuminsFrame1.png"
 import book from "@/assets/discovers.png"
 import style from '@/app/styles.module.css'
+import Link from "next/link"
 const  Discover=()=> {
   return (
     <div
@@ -64,9 +65,12 @@ const  Discover=()=> {
               </div>
 
               <div className="pt-4">
+                <Link href={"/deen"}>
+                
                 <button className={`bg-[#F08080] hover:bg-[#E57373] text-white font-medium py-3 px-6 rounded-full transition-colors ${style.fontJost}`}>
                 Get Deen Discoverers Box
                 </button>
+                </Link>
               </div>
             </div>
 

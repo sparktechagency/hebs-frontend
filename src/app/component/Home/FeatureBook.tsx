@@ -2,7 +2,7 @@ import wild from '@/assets/wild.png'
 import color from '@/assets/colorMe.png'
 import animal from '@/assets/animals.png'
 import eid from '@/assets/eid.png'
-import songBook from '@/assets/songBook.png'
+import songBook from '@/assets/songBook2.png'
 import Image from 'next/image'
 
 const images = [
