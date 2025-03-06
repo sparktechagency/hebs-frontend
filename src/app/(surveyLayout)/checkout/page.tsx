@@ -5,11 +5,12 @@ import {
   InfoCircleOutlined,
   LeftOutlined,
   RightOutlined,
-  ShakeOutlined,
+
 } from "@ant-design/icons";
 import Image from "next/image";
 import packaging from "@/assets/illuminate packaging box 0-3 1.png";
 import Link from "next/link";
+import handShack from "@/assets/handshake-light-skin-tone_svgrepo.com.png"
 export default function CheckoutPage() {
   return (
     <>
@@ -126,7 +127,7 @@ export default function CheckoutPage() {
                 </p>
               </div>
               <div className="ml-4">
-                <ShakeOutlined style={{ fontSize: 24, color: "#f87171" }} />
+              <Image src={handShack} alt="icon" />
               </div>
             </div>
 
@@ -161,7 +162,7 @@ export default function CheckoutPage() {
       <div className=" bg-[#EDEBE6] shadow-lg p-5 w-full">
         <div className="container mx-auto flex justify-between ">
           {/* Back Button */}
-          <Link href="/checkout">
+          <Link href="/payment">
             <button className="border border-black text-black px-6 py-2 rounded-full inline-flex items-center justify-center space-x-2 hover:bg-gray-100 active:bg-gray-200 transition">
               <LeftOutlined />
               <span className="font-semibold">Skip</span>
@@ -169,7 +170,7 @@ export default function CheckoutPage() {
           </Link>
 
           {/* Next Button */}
-          <Link href={"/checkout"}>
+          <Link href={"/payment"}>
             <button className="border border-black text-black px-6 py-2 rounded-full inline-flex items-center justify-center space-x-2 hover:bg-gray-100 active:bg-gray-200 transition disabled:opacity-50">
               <span className="font-semibold">Next</span>
               <RightOutlined />
