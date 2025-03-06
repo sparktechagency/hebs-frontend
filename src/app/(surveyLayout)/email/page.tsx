@@ -19,7 +19,7 @@ const EmailPage = () => {
           Lastly What is Your Email
         </h3>
 
-        <h2 className="font-bold text-[#F37975] my-5">First and last name</h2>
+  
 
         {/* Input Field */}
         <Input
