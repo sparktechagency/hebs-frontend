@@ -24,6 +24,6 @@ const HomePage = () => {
             <FeatureBook/>
         </div>
     );
-};
+}
 
 export default HomePage;

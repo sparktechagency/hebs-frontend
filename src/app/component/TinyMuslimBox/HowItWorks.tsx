@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import work1 from "@/assets/tinyWork1.png"
 import work2 from "@/assets/tinyWork2.png"
-import work3 from "@/assets/tinyWork3.png"
-import work4 from "@/assets/tinyWork4.png"
+import work3 from "@/assets/TinyWork3.png"
+import work4 from "@/assets/TinyWork4.png"
 import Link from 'next/link';
 export default function HowItWorks() {
   return (
