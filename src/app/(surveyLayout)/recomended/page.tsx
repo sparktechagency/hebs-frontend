@@ -92,7 +92,7 @@ export default function BookRecommendations() {
 </Link>
 
 {/* Next Button */}
-<Link href={"/subscription"}>
+<Link href={"/subscriptionPlan"}>
 <button
   className="border border-black text-black px-6 py-2 rounded-full inline-flex items-center justify-center space-x-2 hover:bg-gray-100 active:bg-gray-200 transition disabled:opacity-50"
  
