@@ -1,4 +1,5 @@
 import { RightOutlined } from "@ant-design/icons"
+import Link from "next/link"
 
 interface AgeCategory {
   name: string
@@ -51,9 +52,11 @@ const KidsBookPage = () => {
             {/* Gifts Section */}
             <div className="w-full space-y-5">
               <h2 className="text-[#FF7F7F] text-xl font-medium">Gifts</h2>
-              <button className="h-10 w-48 rounded-full bg-white border border-black hover:bg-[#FF7F7F] hover:text-white hover:border-[#FF7F7F] transition-all">
+          <Link href={"/gift"}>
+          <button className="h-10 w-48 rounded-full bg-white border border-black hover:bg-[#FF7F7F] hover:text-white hover:border-[#FF7F7F] transition-all">
                 Give a Gift
               </button>
+          </Link>
             </div>
           </div>
         </div>
