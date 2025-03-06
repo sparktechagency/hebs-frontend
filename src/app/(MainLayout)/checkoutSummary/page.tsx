@@ -85,9 +85,9 @@ export default function BookReview() {
       {/* Rate Button */}
       <div className="grid gap-5 justify-end">
         
-        <button className="bg-[#f08080] hover:bg-[#f08080]/90 text-white px-8 py-3 rounded-full font-medium shadow-md transition-all hover:shadow-lg hover:-translate-y-0.5">
+        <Link href={"/reviews"}><button className="bg-[#f08080] hover:bg-[#f08080]/90 text-white px-8 py-3 rounded-full font-medium shadow-md transition-all hover:shadow-lg hover:-translate-y-0.5">
           Rate Your Books
-        </button>
+        </button></Link>
       </div>
 
       {/* Books Section */}
