@@ -9,6 +9,7 @@ import logo from "@/assets/logo.png";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const [user, setUser] = useState(true);
   const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
   const [kidsClubDropdownOpen, setKidsClubDropdownOpen] = useState(false);
 
@@ -36,7 +37,7 @@ export default function Navbar() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [profileDropdownOpen, kidsClubDropdownOpen]);
 
-  const user = true;
+
   interface AgeCategory {
     name: string
     range: string
@@ -143,7 +144,7 @@ export default function Navbar() {
         <div className="hidden lg:flex items-center space-x-3">
           {!user && (
             <Link href="/login">
-              <Button type="default" shape="round" className="bg-white text-black hover:bg-white/90">
+              <Button  onClick={() => setUser(!user)} type="default" shape="round" className="bg-white text-black hover:bg-white/90">
                 Log In
               </Button>
             </Link>
@@ -175,7 +176,7 @@ export default function Navbar() {
                   </Link>
                   <div className="border-t border-gray-200 my-1"></div>
                   <button
-                    onClick={() => console.log("Logout clicked")}
+                    onClick={() => setUser(!user)}
                     className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   >
                     Logout
@@ -225,7 +226,9 @@ export default function Navbar() {
                     </a>
                   ))}
                   <Link href="/gift" className="block text-base text-black hover:text-[#FF7F7F]">
-                    Give a Gift
+                  <button className="h-10 mb-3 w-48 rounded-full bg-white border border-black hover:bg-[#FF7F7F] hover:text-white hover:border-[#FF7F7F] transition-all">
+                  Give a Gift
+                </button>
                   </Link>
                   <Link href={"/name"}>
                <button className="h-10 w-48 rounded-full bg-white border border-black hover:bg-[#FF7F7F] hover:text-white hover:border-[#FF7F7F] transition-all">
