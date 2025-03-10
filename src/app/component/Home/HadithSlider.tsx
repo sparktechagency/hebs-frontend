@@ -90,7 +90,7 @@ const  HadithSlider =() =>{
       </div>
      
     </div>
-    <hr className="w-full border-b-1 border-black"/>
+    {/* <hr className="w-full border-b-1 border-black"/> */}
     </div>
   )
 }
