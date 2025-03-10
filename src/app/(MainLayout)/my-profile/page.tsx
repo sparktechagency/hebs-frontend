@@ -20,7 +20,7 @@ const MyProfilePage=()=> {
   })
 
   return (
-    <div className="flex flex-col md:flex-row min-h-screen bg-gray-50">
+    <div className="flex flex-col md:flex-row min-h-screen bg-gray-50 md:p-16">
       {/* Sidebar */}
       <aside className="w-full md:w-64 bg-white border-r border-gray-200">
         <nav className="p-4">
@@ -56,10 +56,12 @@ const MyProfilePage=()=> {
             </div>
           </div>
 
-          <button className="mt-4 flex items-center text-[#f08080] p-2">
+        <Link href={"/name"}>
+        <button className="mt-4 flex items-center text-[#f08080] p-2" style={{ textShadow: "2px 2px 4px #00000040" }}>
             <Plus className="h-4 w-4 mr-1" />
             <span>Add Subscriptions</span>
           </button>
+        </Link>
         </nav>
       </aside>
 
@@ -155,7 +157,7 @@ const MyProfilePage=()=> {
           <div className="border-t border-gray-200 pt-6 ">
             <div className=" p-4 rounded-lg mb-4 bg-[#FBD5D4] text-[#F37975]">Add a payment method</div>
             <div className="flex justify-end">
-            <button className={`border border-[#F37975] text-[#f08080] hover:text-[#f08080]/90 hover:border-[#f08080]/90 rounded-full px-4 py-2 ${styles.fontPoppins}`}>
+            <button className={`border border-[#F37975] text-[#f08080] hover:text-[#f08080]/90 hover:border-[#f08080]/90 rounded-full px-4 py-2 ${styles.fontPoppins}`} style={{ textShadow: "2px 2px 4px #00000040" }}>
   Add Payment Method
 </button>
 
