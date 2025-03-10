@@ -1,6 +1,6 @@
 'use client'
 import Image from "next/image"
-
+import style from "@/app/styles.module.css";
 import img1 from "@/assets/valueImg1.png"
 import img2 from "@/assets/valueImg2.png"
 import img3 from "@/assets/valueImg3.png"
@@ -38,7 +38,7 @@ export default function ValuesSection() {
 
         {/* Content */}
         <div className="relative p-8 md:p-12 bg-[#FFFFFF] border border-[#FF0000]">
-          <h2 className="text-4xl font-bold text-center mb-12 relative">
+          <h2 className={`${style.fontRozha} text-4xl font-bold text-center mb-12 relative`}>
             Our Values
             <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-16 h-2 bg-red-200 rounded-full" />
           </h2>
@@ -55,8 +55,8 @@ export default function ValuesSection() {
                     className="object-contain"
                   />
                 </div>
-                <h3 className="text-2xl font-semibold mb-4">{value.title}</h3>
-                <p className="text-gray-600 mb-6">{value.description}</p>
+                <h3 className={`text-2xl font-semibold mb-4 ${style.fontRozha}`}>{value.title}</h3>
+                <p className={`${style.fontPoppins} text-gray-600 mb-6`}>{value.description}</p>
                 {value.hasButton && (
                        <Link href={"/name"}>
                        <button
