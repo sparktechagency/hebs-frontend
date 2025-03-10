@@ -16,7 +16,7 @@ import {
 } from "@ant-design/icons"
 import img from "@/assets/1001Inventions_1.png.png"
 import RelatedBooks from "@/app/component/RelatedBooks"
-
+import styles from "@/app/styles.module.css"
 export default function DetailsPage() {
   const [quantity, setQuantity] = useState(1)
 
@@ -38,7 +38,7 @@ export default function DetailsPage() {
 
   return (
     <>
-<div className={`w-full shadow-2xl`}>
+<div className={`w-full shadow-2xl  ${styles.fontInter}`}>
 <div className={`flex justify-between container mx-auto  `}>
       <div>
       <h1 className=" text-[#595959] text-xl mb-4 p-5">

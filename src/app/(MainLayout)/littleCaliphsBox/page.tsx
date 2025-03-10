@@ -1,7 +1,8 @@
 import FeatureBook from "@/app/component/Home/FeatureBook";
-import HowCaliphsWorks from "@/app/component/LittleCaliphs/HowCaliphsWork";
+// import HowCaliphsWorks from "@/app/component/LittleCaliphs/HowCaliphsWork";
 import InsideLittleCaliphs from "@/app/component/LittleCaliphs/InsideLittleCaliphs";
 import LittleCaliphsHero from "@/app/component/LittleCaliphs/LittleCalipsBanner";
+import HowItWorks from "@/app/component/TinyMuslimBox/HowItWorks";
 
 
 const LittleCalipsPage = () => {
@@ -9,7 +10,8 @@ const LittleCalipsPage = () => {
         <div>
             <LittleCaliphsHero/>
             <InsideLittleCaliphs/>
-            <HowCaliphsWorks/>
+            {/* <HowCaliphsWorks/> */}
+            <HowItWorks/>
             <FeatureBook/>
         </div>
     );

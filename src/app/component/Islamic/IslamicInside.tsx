@@ -6,7 +6,7 @@ const IslamicInside = () => {
     return (
         <div className="bg-[#FFF7F3] py-16 text-center">
         <h2 className="text-4xl font-bold text-black">
-          Inside the Deen <span className="text-yellow-600">Box</span>
+          Inside the Deen <span className="text-[#F37975]">Box</span>
         </h2>
         <p className="text-gray-600 mt-2 max-w-lg mx-auto">
           Peek inside a sample box—your reader’s bundle will be personalized just for them.
