@@ -17,7 +17,14 @@ import {
 import img from "@/assets/1001Inventions_1.png.png"
 import RelatedBooks from "@/app/component/RelatedBooks"
 import styles from "@/app/styles.module.css"
+import { useParams } from "next/navigation"
+
+
 export default function DetailsPage() {
+    const params=useParams();
+    console.log(params);
+    const {id} = params;
+    console.log(id);
   const [quantity, setQuantity] = useState(1)
 
   const handleQuantityChange = (value: number | null) => {
@@ -35,6 +42,8 @@ export default function DetailsPage() {
   const increaseQuantity = () => {
     setQuantity(quantity + 1)
   }
+
+
 
   return (
     <div className="">

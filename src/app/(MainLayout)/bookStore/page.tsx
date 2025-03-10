@@ -7,7 +7,7 @@ import { Pagination } from "antd"
 import Image from "next/image"
 
 import { useState } from "react"
-import { useRouter } from "next/navigation"
+import {  useRouter } from "next/navigation"
 
 const allProducts = Array(15)
   .fill(null)
