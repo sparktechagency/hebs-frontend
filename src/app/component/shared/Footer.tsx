@@ -78,7 +78,7 @@ const FooterPage = ()=> {
             <button
            
            
-              className="h-12 w-[160px] rounded-full border-none bg-white text-[#f08080] hover:bg-white/90"
+              className="h-12 w-[160px] rounded-full border-none bg-white text-black hover:bg-[#f08080]"
             >
               Log In
             </button>
@@ -86,7 +86,7 @@ const FooterPage = ()=> {
           <Link href="/cart">
             <button
             
-              className="h-12 w-[160px] rounded-full border-none bg-white text-[#f08080] hover:bg-white/90"
+              className="h-12 w-[160px] rounded-full border-none bg-white text-[black] hover:bg-[#f08080]"
               
             >
               <ShoppingCartOutlined style={{ fontSize: "18px" }} />

@@ -145,7 +145,7 @@ export default function Navbar() {
         <div className="hidden lg:flex items-center space-x-3">
           {!user && (
             <Link href="/login">
-              <Button  onClick={() => setUser(!user)} type="default" shape="round" className="bg-white text-black hover:bg-white/90">
+              <Button  onClick={() => setUser(!user)} type="default" shape="round" className="bg-white  text-black hover:bg-[#f08080]">
                 Log In
               </Button>
             </Link>
@@ -155,7 +155,7 @@ export default function Navbar() {
               <Button
                 type="default"
                 shape="round"
-                className="bg-white text-black hover:bg-white/90"
+                className="bg-white  text-black hover:bg-[#f08080]"
                 onClick={() => setProfileDropdownOpen(!profileDropdownOpen)}
               >
                 My Profile
@@ -188,7 +188,7 @@ export default function Navbar() {
           )}
 
           <Link href="/cart">
-            <Button type="default" shape="round" className="bg-white text-black hover:bg-white/90">
+            <Button type="default" shape="round" className="bg-white  text-black hover:bg-[#f08080]">
               <ShoppingCartOutlined style={{ marginRight: 8 }} />
               Cart
             </Button>
