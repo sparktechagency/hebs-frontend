@@ -19,9 +19,9 @@ const Hero = () => {
       </div>
 
       {/* Hero Content */}
-      <div className="relative  bg-[#FAF397] ">
-        <div className="container mx-auto px-4 py-16 md:py-24">
-          <div className="relative z-10 md:max-w-4xl lg:max-w-4xl  mx-auto">
+      <div className="relative  bg-[#FAF397] w-full">
+        <div className="container mx-auto px-4 py-16 md:py-24 lg:py-24 xl:py-24">
+          <div className="relative z-10  md:max-w-4xl lg:max-w-4xl xl:max-w-4xl  mx-auto">
             {/* Main Content */}
             <div className="text-center mb-8">
               <p
@@ -63,7 +63,7 @@ const Hero = () => {
           </div>
 
           {/* Book Images */}
-          <div className="md:absolute md:left-0 md:bottom-0 w-[300px] h-[400px] transform -translate-x-1/4  md:block">
+          <div className="md:absolute md:left-0 md:bottom-0 w-[200px] h-[200px] md:w-[300px] md:h-[400px] transform -translate-x-1/4  md:block">
             <Image
               src={img2}
               alt="My Prophet Muhammad - My Hero"
@@ -75,7 +75,7 @@ const Hero = () => {
               }}
             />
           </div>
-          <div className="md:absolute md:right-0 md:bottom-0 w-[300px] h-[400px] transform translate-x-1/4  md:block">
+          <div className="md:absolute md:right-0 md:bottom-0 w-[200px] h-[200px] md:w-[300px] md:h-[400px] transform translate-x-1/4  md:block">
             <Image
               src={img1}
               alt="Planet Omar"

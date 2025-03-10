@@ -124,7 +124,7 @@ export default function SubscriptionPlanPage() {
   className="border border-black text-black px-6 py-2 rounded-full inline-flex items-center justify-center space-x-2 hover:bg-gray-100 active:bg-gray-200 transition disabled:opacity-50"
  
 >
-  <span className="font-semibold">Next</span>
+  <span className="font-semibold">Continue</span>
   <RightOutlined />
 </button>
 </Link>

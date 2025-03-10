@@ -48,7 +48,7 @@ const FooterPage = ()=> {
               Islamic Explorers
               </p>
             </Space>
-          </div>
+          </div> 
 
          
           <div>

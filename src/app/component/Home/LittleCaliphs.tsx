@@ -8,7 +8,7 @@ import arrow from "@/assets/arrowLogo.png"
 const LittleCalips =() =>{
   return (
     <div
-      className="relative w-full bg-top bg-no-repeat bg-cover  p-12"
+      className="relative w-full bg-top bg-no-repeat bg-cover  p-4 md:p-12"
       style={{ backgroundImage: `url(${frame2.src})` }}
     >
       <div className="px-4 py-16 md:py-24">
@@ -81,7 +81,8 @@ catchy rhyming books, and exciting Islamic tales!
               </div>
 
               <div className="pt-4">
-                <Link href={"/littleCaliphsBox"}>
+                <Link href={"/name"}>
+                {/* <Link href={"/littleCaliphsBox"}> */}
                 
                 <button className={`bg-[#F08080] hover:bg-[#E57373] text-white font-medium py-3 px-6 rounded-full transition-colors ${style.fontJost}`}>
                 Get Little Caliphs Box

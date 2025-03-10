@@ -9,10 +9,10 @@ export default function BookRecommendations() {
   return (
     <>
     
-    <div className="min-h-screen text-black p-6">
+    <div className="min-h-screen text-black p-4 md:p-12">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
-        <h1 className="text-3xl md:text-4xl font-bold mb-12">
+        <h1 className="text-3xl text-center md:text-4xl font-bold mb-12">
           Here&apos;s what we recommend for eyasin!
         </h1>
 

@@ -41,13 +41,14 @@ export default function Navbar() {
   interface AgeCategory {
     name: string
     range: string
+    route:string
   }
   
   const ageCategories: AgeCategory[] = [
-    { name: "TINY MU’MINS", range: "(0-3 years)" },
-    { name: "LITTLE CALIPHS", range: "(4-6 years)" },
-    { name: "DEEN DISCOVERERS", range: "(7-8 years)" },
-    { name: "ISLAMIC EXPLORERS", range: "(9-11 years)" },
+    { name: "TINY MU’MINS", range: "(0-3 years)" ,route:"/tinyMuslimBox"},
+    { name: "LITTLE CALIPHS", range: "(4-6 years)" ,route:"/littleCaliphsBox"},
+    { name: "DEEN DISCOVERERS", range: "(7-8 years)" ,route:"/deen"},
+    { name: "ISLAMIC EXPLORERS", range: "(9-11 years)" ,route:"/islamic"},
   ]
 
   return (
@@ -79,12 +80,12 @@ export default function Navbar() {
             <h2 className="text-[#FF7F7F] text-xl font-medium mb-6">Age</h2>
             <nav className="space-y-5">
               {ageCategories.map((category, index) => (
-                <a key={index} href="#" className="flex items-center group hover:opacity-80 transition-opacity">
+                <Link key={index} href={category.route} className="flex items-center group hover:opacity-80 transition-opacity">
                   <RightOutlined className="text-[#FF7F7F] text-xs mr-2.5 transition-transform group-hover:translate-x-1" />
                   <span className="text-base font-medium uppercase">
                     {category.name} <span className="text-gray-500 font-normal">{category.range}</span>
                   </span>
-                </a>
+                </Link>
               ))}
             </nav>
           </div>
@@ -126,9 +127,9 @@ export default function Navbar() {
           <Link href="/bookStore" className="text-sm font-medium text-white hover:text-white/80">
             ONLINE BOOK STORE
           </Link>
-          <Link href="/book-registry" className="text-sm font-medium text-white hover:text-white/80">
+          {/* <Link href="/book-registry" className="text-sm font-medium text-white hover:text-white/80">
             BOOK REGISTRY
-          </Link>
+          </Link> */}
           <Link href="/about" className="text-sm font-medium text-white hover:text-white/80">
             ABOUT
           </Link>
@@ -221,9 +222,9 @@ export default function Navbar() {
               {kidsClubDropdownOpen && (
                 <div className="pl-4 mt-2 space-y-3">
                   {ageCategories.map((category, index) => (
-                    <a key={index} href="#" className="block text-base text-black hover:text-[#FF7F7F]">
+                    <Link key={index} href={category.route} className="block text-base text-black hover:text-[#FF7F7F]">
                       {category.name} <span className="text-gray-500">{category.range}</span>
-                    </a>
+                    </Link>
                   ))}
                   <Link href="/gift" className="block text-base text-black hover:text-[#FF7F7F]">
                   <button className="h-10 mb-3 w-48 rounded-full bg-white border border-black hover:bg-[#FF7F7F] hover:text-white hover:border-[#FF7F7F] transition-all">
@@ -241,9 +242,9 @@ export default function Navbar() {
             <Link href="/bookStore" className="text-sm font-medium text-white hover:text-white/80">
             ONLINE BOOK STORE
           </Link>
-          <Link href="/book-registry" className="text-sm font-medium text-white hover:text-white/80">
+          {/* <Link href="/book-registry" className="text-sm font-medium text-white hover:text-white/80">
             BOOK REGISTRY
-          </Link>
+          </Link> */}
           <Link href="/about" className="text-sm font-medium text-white hover:text-white/80">
             ABOUT
           </Link>

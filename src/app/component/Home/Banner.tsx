@@ -7,7 +7,7 @@ import Link from "next/link";
 const Banner = () => {
 
     return (
-        <div className="w-full bg-[#FDFBDF] p-12">
+        <div className="w-full bg-[#FDFBDF] p-4 md:p-12 lg:p-12 xl:p-12">
              <section className="relative min-h-[600px] w-full px-4 ">
       <div className="container mx-auto">
         <div className="grid items-center  lg:grid-cols-2">
@@ -17,13 +17,14 @@ const Banner = () => {
               The Muslim Book Club
             </h1>
             <p
-             
-              className={`mt-4 md:mb-0 mb-8 text-[#1C1C1C] font-bold text-4xl h-[65.32px]  ${styles.fontRozha}`}
-             
+  className={`mt-4 md:mb-0 mb-8 text-[#1C1C1C] font-bold text-4xl h-[65.32px] ${styles.fontRozha}`}
+  style={{ textShadow: "2px 2px 4px #00000040" }}
+>
+  for exceptional young readers.
+</p>
+            <p className={` mb-8 max-w-lg text-lg  ${styles.fontPoppins}` }
+              style={{ textShadow: "2px 2px 4px #00000040" }}
             >
-              for exceptional young readers.
-            </p>
-            <p className={` mb-8 max-w-lg text-lg  ${styles.fontPoppins}` }>
               Help your readers grow with a personalized book selection curated monthly by our team of experts and
               shipped to your door.
             </p>
@@ -31,7 +32,7 @@ const Banner = () => {
          <Link href={"/name"}>
          <button
                 
-                className="h-12 rounded-full bg-[#F37975] px-8 text-lg hover:bg-[#e57373] text-white"
+                className="h-12 rounded-full bg-[#F37975] px-8 text-lg hover:bg-[#e57373] text-white"   style={{ textShadow: "2px 2px 4px #00000040" }}
               >
                 START TODAY
               </button>

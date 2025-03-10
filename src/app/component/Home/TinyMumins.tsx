@@ -8,7 +8,7 @@ import Link from "next/link"
 const  TinyMuminsSection=()=> {
   return (
     <div
-      className="relative w-full bg-top bg-no-repeat bg-cover p-12"
+      className="relative w-full bg-top bg-no-repeat bg-cover p-4 md:p-12"
       style={{ backgroundImage: `url(${frame1.src})` }}
     >
       <div className="px-4 py-16 md:py-24">
@@ -67,7 +67,8 @@ const  TinyMuminsSection=()=> {
               </div>
 
               <div className="pt-4">
-              <Link href={"tinyMuslimBox"}>
+              <Link href={"/name"}>
+              {/* <Link href={"tinyMuslimBox"}> */}
               <button className={`bg-[#F08080] hover:bg-[#E57373] text-white font-medium py-3 px-6 rounded-full transition-colors ${style.fontJost}`}>
                   GET TINY MU&apos;MINS BOX
                 </button>

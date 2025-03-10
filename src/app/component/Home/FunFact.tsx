@@ -16,16 +16,16 @@ const FunFact = () => {
     return (
         <div className="bg-[#FFFFFF] ">
              <section className="relative w-full ">
-      <div className="bg-[#f08080] w-4/2 py-2 px-12 md:w-1/3 lg:w-1/3 md:px-8 lg:px-8">
+      <div className="bg-[#f08080] w-1/2 py-2 px-12 md:w-1/3 lg:w-1/3 md:px-8 lg:px-8">
       <p  className="m-0 py-6 text-end text-3xl font-bold text-[#FFFFFF] md:text-4xl">
         Fun Facts
       </p>
       </div>
 
-      <div className="container mx-auto p-12  py-12 md:py-16">
+      <div className="container mx-auto p-4 md:p-12  py-12 md:py-16">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
           {/* Left Column */}
-          <div className="space-y-12">
+          <div className="space-y-12">  
             {/* Fun Facts */}
             <div className="space-y-8">
               <div className="flex items-start gap-6">

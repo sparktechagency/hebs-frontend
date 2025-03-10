@@ -40,7 +40,7 @@ const features = [
   ]
 const Work = () => {
     return (
-        <div className="bg-[#FBD5D4] w-full p-12">
+        <div className="bg-[#FBD5D4] w-full p-4 md:p-12">
 <div className='py-12'>
 <h1 className={`text-center text-5xl  py-3 ${styles.fontRozha}`}>How it Works</h1>
 <p className={`text-center text-2xl py-3 ${styles.fontPopins}`}>Receive five books. Only buy the ones you love.</p>

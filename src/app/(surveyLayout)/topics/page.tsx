@@ -30,7 +30,7 @@ const TopicsPage = () => {
         {/* Content Wrapper */}
         <div className="text-center max-w-md w-full p-10">
           <h3 className={`text-[#F37975] font-medium text-xl mb-12 ${style.fontInter}`}>
-            Select a Topic
+          Which of thede topics might you and talia mosleh enjoy?
           </h3>
 
           {/* Select Field */}
