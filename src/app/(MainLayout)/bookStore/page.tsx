@@ -8,6 +8,7 @@ import Image from "next/image"
 
 import { useState } from "react"
 import {  useRouter } from "next/navigation"
+import Link from "next/link"
 
 const allProducts = Array(15)
   .fill(null)
@@ -106,10 +107,12 @@ function BookStore() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
           {currentProducts.map((product, index) => (
-            <div
-              key={`${product.id}-${index}`}
+          <Link  key={`${product.id}-${index}`} href={`/bookStore/${product.id}`}>
+          
+          <div
+             
               className="rounded-lg p-3 flex flex-col cursor-pointer"
-              onClick={() => router.push(`/bookStore/${product.id}`)} // 🔥 Navigate on click
+              // onClick={() => router.push(`/bookStore/${product.id}`)} 
             >
               <div className="relative h-48 mb-3 rounded-md bg-[#fffbeb]">
                 <Image
@@ -145,6 +148,7 @@ function BookStore() {
               <h3 className="text-sm font-medium line-clamp-2 mb-1">{product.title}</h3>
               <p className="text-sm">${product.price.toFixed(2)}</p>
             </div>
+          </Link>
           ))}
         </div>
 
