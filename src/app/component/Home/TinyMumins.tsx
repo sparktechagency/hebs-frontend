@@ -39,7 +39,7 @@ const  TinyMuminsSection=()=> {
 
                 <div className="flex items-start gap-3">
                   <div className="mt-1 text-[#F5A77D]">
-<Image src={arrow} alt="logo"/>
+<Image src={arrow}  alt="logo"/>
                 
                   </div>
                   <p className={`text-base md:text-lg text-[#333333] ${style.fontJost}`}>

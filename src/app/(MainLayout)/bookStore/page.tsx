@@ -109,7 +109,7 @@ function BookStore() {
             <div
               key={`${product.id}-${index}`}
               className="rounded-lg p-3 flex flex-col cursor-pointer"
-              onClick={() => router.push(`/product-details/${product.id}`)} // 🔥 Navigate on click
+              onClick={() => router.push(`/bookStore/${product.id}`)} // 🔥 Navigate on click
             >
               <div className="relative h-48 mb-3 rounded-md bg-[#fffbeb]">
                 <Image
