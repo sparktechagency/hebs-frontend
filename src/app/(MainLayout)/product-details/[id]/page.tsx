@@ -37,24 +37,28 @@ export default function DetailsPage() {
   }
 
   return (
-    <>
-<div className={`w-full shadow-2xl  ${styles.fontInter}`}>
-<div className={`flex justify-between container mx-auto  `}>
-      <div>
-      <h1 className=" text-[#595959] text-xl mb-4 p-5">
-          1001 Inventions and Awesome Facts from Muslim Civilization
-          </h1>
-      </div>
-<div className="my-4">
-<Link href={"/cart"}>
-<button className={`uppercase bg-[#E8E8E8] p-2`}>
-Add to bag
-  </button>
-</Link>
+    <div className="">
+<div className={`w-full shadow-2xl ${styles.fontInter}`}>
+  <div className="container mx-auto flex flex-wrap justify-between items-center px-4 sm:px-8 md:px-10 py-4">
+    
+    {/* Title */}
+    <h1 className="text-lg sm:text-xl text-[#595959] mb-4">
+      1001 Inventions and Awesome Facts from Muslim Civilization
+    </h1>
+
+    {/* Button */}
+    <div className="my-4">
+      <Link href="/cart">
+        <button className="uppercase bg-[#E8E8E8] px-4 py-2 text-sm sm:text-base">
+          Add to bag
+        </button>
+      </Link>
+    </div>
+    
+  </div>
 </div>
-          </div>
-</div>
-    <div className="max-w-7xl mx-auto px-4 py-8">
+
+    <div className="max-w-7xl mx-auto p-6 md:p-12">
 
       <div className="grid md:grid-cols-2 gap-8">
         {/* Product Image */}
@@ -196,7 +200,7 @@ Add to bag
   </div>
 <div>
 <Link href={"/cart"}>
-<button className="w-full bg-[#F37975] px-8 h-12 flex items-center justify-center text-[#ffffff] hover:bg-red-500 border-none mb-4">
+<button className="w-full bg-[#F37975] md:px-8 p-4  md:h-12 flex items-center justify-center text-[#ffffff] hover:bg-red-500 border-none mb-4">
   ADD TO BAG
 </button>
 </Link>
@@ -259,7 +263,7 @@ Add to bag
         <RelatedBooks />
       </div>
     </div>
-    </>
+    </div>
   )
 }
 
