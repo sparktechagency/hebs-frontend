@@ -2,6 +2,7 @@
 import Image from "next/image";
 import packaging from "@/assets/islamicPackaging.png"
 import styles from "@/app/styles.module.css"
+import Link from "next/link";
 export default function IslamicHero() {
     return (
       <div className=" bg-white">
@@ -20,9 +21,9 @@ export default function IslamicHero() {
                 </div>
               </div>
   
-              <button className="inline-flex items-center px-8 py-3 text-lg font-medium text-white bg-red-400 hover:bg-red-500 rounded-full transition-colors duration-150">
+         <Link href={"/name"}>     <button className="inline-flex items-center px-8 py-3 text-lg font-medium text-white bg-red-400 hover:bg-red-500 rounded-full transition-colors duration-150">
                 Get Start
-              </button>
+              </button></Link>
   
               <p className={`text-sm text-[#181816] italic  ${styles.fontPoppins}`}>
                 *Average cost to keep 3 of 5 books in each box is $38. Easy, free returns. Cancel anytime.

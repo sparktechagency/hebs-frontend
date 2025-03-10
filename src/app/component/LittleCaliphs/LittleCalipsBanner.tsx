@@ -2,6 +2,7 @@
 import Image from "next/image";
 import packaging from "@/assets/littleCalipsPackaging.png"
 import styles from "@/app/styles.module.css"
+import Link from "next/link";
 export default function LittleCaliphsHero() {
     return (
       <div className=" bg-white">
@@ -19,10 +20,12 @@ export default function LittleCaliphsHero() {
                   <p className={`text-2xl font-semibold text-gray-900  ${styles.fontPoppins}`}>$14.99</p>
                 </div>
               </div>
-  
+              <Link href={"/name"}>
+              
               <button className="inline-flex items-center px-8 py-3 text-lg font-medium text-white bg-red-400 hover:bg-red-500 rounded-full transition-colors duration-150">
                 Get Start
               </button>
+              </Link>
   
               <p className={`text-sm text-[#181816] italic  ${styles.fontPoppins}`}>
                 *Average cost to keep 3 of 5 books in each box is $38. Easy, free returns. Cancel anytime.

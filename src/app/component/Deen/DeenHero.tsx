@@ -2,6 +2,7 @@
 import Image from "next/image";
 import packaging from "@/assets/deenPackage.png"
 import styles from "@/app/styles.module.css"
+import Link from "next/link";
 export default function DeenHero() {
     return (
       <div className=" bg-white">
@@ -19,10 +20,12 @@ export default function DeenHero() {
                   <p className={` ${styles.fontPoppins} text-2xl font-semibold text-gray-900`}>$14.99</p>
                 </div>
               </div>
-  
+              <Link href={"/name"}>
+              
               <button className="inline-flex items-center px-8 py-3 text-lg font-medium text-white bg-red-400 hover:bg-red-500 rounded-full transition-colors duration-150">
                 Get Start
               </button>
+              </Link>
   
               <p className={` ${styles.fontPoppins} text-sm text-[#181816] italic`}>
                 *Average cost to keep 3 of 5 books in each box is $38. Easy, free returns. Cancel anytime.
