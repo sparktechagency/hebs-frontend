@@ -45,7 +45,7 @@ const  HadithSlider =() =>{
   }
 
   return (
-    <div className="mb-10">
+    <div className="mb-10 p-4">
 
     <div className="relative max-w-4xl mx-auto px-4 py-8 ">
       {/* Left quotation mark */}

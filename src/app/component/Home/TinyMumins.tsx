@@ -8,7 +8,7 @@ import Link from "next/link"
 const  TinyMuminsSection=()=> {
   return (
     <div
-      className="relative w-full bg-top bg-no-repeat bg-cover"
+      className="relative w-full bg-top bg-no-repeat bg-cover p-12"
       style={{ backgroundImage: `url(${frame1.src})` }}
     >
       <div className="px-4 py-16 md:py-24">

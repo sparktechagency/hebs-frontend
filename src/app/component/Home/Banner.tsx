@@ -7,7 +7,7 @@ import Link from "next/link";
 const Banner = () => {
 
     return (
-        <div className="w-full bg-[#FDFBDF] ">
+        <div className="w-full bg-[#FDFBDF] p-12">
              <section className="relative min-h-[600px] w-full px-4 ">
       <div className="container mx-auto">
         <div className="grid items-center  lg:grid-cols-2">

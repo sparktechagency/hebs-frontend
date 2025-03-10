@@ -9,19 +9,19 @@ import style from "@/app/styles.module.css";
 
 const Hero = () => {
   return (
-    <div className="flex flex-col container mx-auto mb:relative mb:-top-16 lg:relative lg:-top-16">
+    <div className="flex flex-col container mx-auto mb:relative mb:-top-16 lg:relative lg:-top-16 p-12 md:p-0 lg:p-0">
 
         {/* Top Banner */}
-        <div className={`${style.fontPoppins} text-center py-2 `}>
+        <div className={`${style.fontPoppins} text-center pb-12 md:py-2 lg:py-2 `}>
         <p className="text-black text-xl ">
           Free shipping. Unlimited returns. Cancel anytime.
-        </p>
+        </p> 
       </div>
 
       {/* Hero Content */}
-      <div className="relative  bg-[#FAF397]">
+      <div className="relative  bg-[#FAF397] ">
         <div className="container mx-auto px-4 py-16 md:py-24">
-          <div className="relative z-10 max-w-4xl mx-auto">
+          <div className="relative z-10 md:max-w-4xl lg:max-w-4xl  mx-auto">
             {/* Main Content */}
             <div className="text-center mb-8">
               <p
@@ -30,7 +30,7 @@ const Hero = () => {
                 Expertly selected kids&apos; books
                 <br />
                 for every reading level.
-              </p>
+              </p>   
             </div>
 
             {/* Bullet Points */}

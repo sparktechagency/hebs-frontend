@@ -8,7 +8,7 @@ import arrow from "@/assets/arrowLogo.png"
 const LittleCalips =() =>{
   return (
     <div
-      className="relative w-full bg-top bg-no-repeat bg-cover"
+      className="relative w-full bg-top bg-no-repeat bg-cover  p-12"
       style={{ backgroundImage: `url(${frame2.src})` }}
     >
       <div className="px-4 py-16 md:py-24">
