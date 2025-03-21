@@ -13,7 +13,7 @@ const Hero = () => {
 
         {/* Top Banner */}
         <div className={`${style.fontPoppins} text-center pb-12 md:py-2 lg:py-2 `}>
-        <p className="text-black text-xl ">
+        <p className="text-[#D3D3D3] text-xl ">
           Free shipping. Unlimited returns. Cancel anytime.
         </p> 
       </div>
@@ -25,20 +25,24 @@ const Hero = () => {
             {/* Main Content */}
             <div className="text-center mb-8">
               <p
-                className={`text-3xl md:text-5xl lg:text-6xl ${style.fontRozha} mb-6 `}
+                className={`text-3xl md:text-5xl lg:text-6xl ${style.fontRozha} mb-1 `}
               >
                 Expertly selected kids&apos; books
                 <br />
-                for every reading level.
+                <span className="relative inline-block mr-3">
+      for every
+      <span className="absolute left-0 bottom-0 w-full h-[25px] bg-red-400 -z-10"></span>
+    </span>
+                reading level.
               </p>   
             </div>
 
             {/* Bullet Points */}
             <div
-              className={`space-y-4 text-lg md:text-xl max-w-3xl mx-auto ${style.poppins} `}
+              className={`space-y-1 text-lg md:text-xl max-w-3xl mx-auto ${style.poppins} `}
             >
               <p
-                className={`text-lg md:text-xl ${style.poppins} block mb-8 items-start`}
+                className={`text-lg md:text-xl font-medium ${style.poppins} block mb-1 items-start`}
               >
                 Our team tailors each book to your readers age and interests.
               </p>
