@@ -11,7 +11,7 @@ import Work from "@/app/component/Home/Work";
 
 const HomePage = () => {
     return (
-        <div>
+        <div className="overflow-hidden">
             <Banner/>
             <Hero/>
             <FunFact/>

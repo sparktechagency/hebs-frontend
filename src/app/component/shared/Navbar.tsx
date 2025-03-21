@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { MenuOutlined, RightOutlined, ShoppingCartOutlined } from "@ant-design/icons";
-import { Button, Drawer } from "antd";
+import {Drawer } from "antd";
 import Image from "next/image";
 import logo from "@/assets/logo.png";
 
@@ -52,12 +52,12 @@ export default function Navbar() {
   ]
 
   return (
-    <header className="w-full bg-gradient-to-r from-[#f08080] to-[#ffeb99] px-4 py-2 md:px-10">
+    <header className="w-full bg-gradient-to-r from-[#f08080] to-[#ffeb99] px-4 py-2 md:px-10  ">
       <div className="mx-auto flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center">
-          <div className="relative h-14 w-36">
-            <Image src={logo || "/placeholder.svg"} alt="logo" width="100" height="100" />
+          <div className="relative ">
+            <Image src={logo || "/placeholder.svg"} alt="logo" width="150" height="150" />
           </div>
         </Link>
 
@@ -67,7 +67,7 @@ export default function Navbar() {
           <div className="relative kids-club-dropdown">
   <button
     onClick={() => setKidsClubDropdownOpen(!kidsClubDropdownOpen)}
-    className="text-sm font-medium text-white hover:text-white/80 focus:outline-none"
+    className="text-sm font-extrabold text-white hover:text-white/80 focus:outline-none"
   >
     KIDS BOOK CLUB ▼
   </button>
@@ -77,12 +77,12 @@ export default function Navbar() {
         <div className="flex flex-col md:flex-row justify-between gap-12">
           {/* Left Side - Age Categories */}
           <div className="w-full md:w-1/2 lg:w-1/2 border-r border-gray-200 text-center lg:text-start">
-            <h2 className="text-[#FF7F7F] text-xl font-medium mb-6">Age</h2>
+            <h2 className="text-[#FF7F7F] text-xl font-extrabold mb-6">Age</h2>
             <nav className="space-y-5">
               {ageCategories.map((category, index) => (
                 <Link key={index} href={category.route} className="flex items-center group hover:opacity-80 transition-opacity">
                   <RightOutlined className="text-[#FF7F7F] text-xs mr-2.5 transition-transform group-hover:translate-x-1" />
-                  <span className="text-base font-medium uppercase">
+                  <span className="text-base font-extrabold uppercase">
                     {category.name} <span className="text-gray-500 font-normal">{category.range}</span>
                   </span>
                 </Link>
@@ -93,7 +93,7 @@ export default function Navbar() {
           {/* Right Side - Kids Book Clubs & Gifts */}
           <div className="w-full md:w-1/2 lg:w-1/2 flex flex-col items-center justify-center text-center space-y-12">
             <div className="w-full space-y-5 text-center">
-              <h2 className="text-[#FF7F7F] text-xl font-medium">Kids Book Clubs</h2>
+              <h2 className="text-[#FF7F7F] text-xl font-extrabold">Kids Book Clubs</h2>
               <div className="space-y-3 flex flex-col items-center justify-center">
                <Link href={"/name"}>
                <button className="h-10 w-48 rounded-full bg-white border border-black hover:bg-[#FF7F7F] hover:text-white hover:border-[#FF7F7F] transition-all">
@@ -101,7 +101,7 @@ export default function Navbar() {
                 </button>
                </Link>
              <Link href={"/login"}>
-             <button className="h-10 w-48 rounded-full bg-white border border-black hover:bg-[#FF7F7F] hover:text-white hover:border-[#FF7F7F] transition-all">
+             <button className="h-10 w-48 rounded-full bg-white border border-black hover:bg-[#FF7F7F] hover:text-white hover:border-[#FF7F7F] transition-all font-extrabold">
                   LOGIN
                 </button>
              </Link>
@@ -110,7 +110,7 @@ export default function Navbar() {
 
             {/* Gifts Section */}
             <div className="w-full space-y-5">
-              <h2 className="text-[#FF7F7F] text-xl font-medium">Gifts</h2>
+              <h2 className="text-[#FF7F7F] text-xl font-extrabold">Gifts</h2>
               <Link href={"/gift"}>
                 <button className="h-10 w-48 rounded-full bg-white border border-black hover:bg-[#FF7F7F] hover:text-white hover:border-[#FF7F7F] transition-all">
                   Give a Gift
@@ -124,42 +124,41 @@ export default function Navbar() {
   )}
 </div>
 
-          <Link href="/bookStore" className="text-sm font-medium text-white hover:text-white/80">
+          <Link href="/bookStore" className="text-sm font-extrabold text-white hover:text-white/80">
             ONLINE BOOK STORE
           </Link>
           {/* <Link href="/book-registry" className="text-sm font-medium text-white hover:text-white/80">
             BOOK REGISTRY
           </Link> */}
-          <Link href="/about" className="text-sm font-medium text-white hover:text-white/80">
+          <Link href="/about" className="text-sm font-extrabold text-white hover:text-white/80">
             ABOUT
           </Link>
-          <Link href="/contact" className="text-sm font-medium text-white hover:text-white/80">
+          <Link href="/contact" className="text-sm font-extrabold text-white hover:text-white/80">
             CONTACT
           </Link>
-          <Link href="/blog" className="text-sm font-medium text-white hover:text-white/80">
+          <Link href="/blog" className="text-sm font-extrabold text-white hover:text-white/80">
             BLOG
-          </Link>
+          </Link> 
         </nav>
 
         {/* User Profile and Cart */}
         <div className="hidden lg:flex items-center space-x-3">
           {!user && (
             <Link href="/login">
-              <Button  onClick={() => setUser(!user)} type="default" shape="round" className="bg-white  text-black hover:bg-[#f08080]">
+              <button  onClick={() => setUser(!user)} className="h-12 rounded-full bg-[#F37975] font-bold px-8 text-lg hover:bg-[#e57373] text-white">
                 Log In
-              </Button>
+              </button>
             </Link>
           )}
           {user && (
             <div className="relative profile-dropdown">
-              <Button
-                type="default"
-                shape="round"
-                className="bg-white  text-black hover:bg-[#f08080]"
+              <button
+                className="h-12 font-bold rounded-full bg-[#F37975] px-8 text-lg hover:bg-[#e57373] text-white"
+                
                 onClick={() => setProfileDropdownOpen(!profileDropdownOpen)}
               >
                 My Profile
-              </Button>
+              </button>
 
               {profileDropdownOpen && (
                 <div className="absolute right-0 mt-2 w-56 bg-white shadow-md rounded-md z-10">
@@ -178,7 +177,7 @@ export default function Navbar() {
                   <div className="border-t border-gray-200 my-1"></div>
                   <button
                     onClick={() => setUser(!user)}
-                    className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    className="h-12 rounded-full bg-[#F37975] font-bold px-8 text-lg hover:bg-[#e57373] text-white"
                   >
                     Logout
                   </button>
@@ -188,10 +187,10 @@ export default function Navbar() {
           )}
 
           <Link href="/cart">
-            <Button type="default" shape="round" className="bg-white  text-black hover:bg-[#f08080]">
+            <button  className="h-12 rounded-full bg-[#F37975] font-bold px-8 text-lg hover:bg-[#e57373] text-white">
               <ShoppingCartOutlined style={{ marginRight: 8 }} />
               Cart
-            </Button>
+            </button>
           </Link>
         </div>
 
@@ -239,32 +238,32 @@ export default function Navbar() {
                 </div>
               )}
             </div>
-            <Link href="/bookStore" className="text-sm font-medium text-white hover:text-white/80">
+            <Link href="/bookStore" className="text-sm font-extrabold text-white hover:text-white/80">
             ONLINE BOOK STORE
           </Link>
           {/* <Link href="/book-registry" className="text-sm font-medium text-white hover:text-white/80">
             BOOK REGISTRY
           </Link> */}
-          <Link href="/about" className="text-sm font-medium text-white hover:text-white/80">
+          <Link href="/about" className="text-sm font-extrabold text-white hover:text-white/80">
             ABOUT
           </Link>
-          <Link href="/contact" className="text-sm font-medium text-white hover:text-white/80">
+          <Link href="/contact" className="text-sm font-extrabold text-white hover:text-white/80">
             CONTACT
           </Link>
-          <Link href="/blog" className="text-sm font-medium text-white hover:text-white/80">
+          <Link href="/blog" className="text-sm font-extrabold text-white hover:text-white/80">
             BLOG
           </Link>
             <div className="flex flex-col space-y-3 pt-4">
               <Link href="/login">
-                <Button type="default" shape="round" block className="bg-white text-black hover:bg-white/90">
+                <button    className="h-12 rounded-full bg-[#F37975] font-bold px-8 text-lg hover:bg-[#e57373] text-white">
                   Log In
-                </Button>
+                </button>
               </Link>
               <Link href="/cart">
-                <Button type="default" shape="round" block className="bg-white text-black hover:bg-white/90">
+                <button  className="h-12 rounded-full bg-[#F37975] font-bold px-8 text-lg hover:bg-[#e57373] text-white">
                   <ShoppingCartOutlined style={{ marginRight: 8 }} />
                   Cart
-                </Button>
+                </button>
               </Link>
             </div>
           </div>
