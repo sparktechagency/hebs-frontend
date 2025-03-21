@@ -57,7 +57,7 @@ export default function Navbar() {
         {/* Logo */}
         <Link href="/" className="flex items-center">
           <div className="relative ">
-            <Image src={logo || "/placeholder.svg"} alt="logo" width="150" height="150" />
+            <Image src={logo || "/placeholder.svg"} alt="logo" width="140" height="140" />
           </div>
         </Link>
 
