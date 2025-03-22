@@ -3,26 +3,26 @@
 import Link from "next/link"
 import { Space, } from "antd"
 import { FacebookFilled, InstagramFilled, TikTokFilled, ShoppingCartOutlined } from "@ant-design/icons"
-
+import style from '@/app/styles.module.css'
 
 const FooterPage = ()=> {
   return (
     <div className="bg-[#F37975] px-4 pt-16 pb-8 text-white md:px-8">
-      <div className="container mx-auto ">
+      <div className="container mx-auto max-w-7xl">
 
 
         {/* Main Footer Content */}
         <div className="grid mt-0 md:mt-12 lg:mt-12 grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-4 border-t border-[#E8E8E8] py-5">
         
           <div>
-            <p  className="text-[#FAF397] py-3">
+            <p  className={`text-[#FAF397] font-bold py-3 ${style.fontJosefin}`}>
              Our Story
             </p>
             <Space direction="vertical" className=" uppercase">
-              <p  className="text-white">
+              <p  className={`text-white ${style.fontJosefin}`}>
                 About Us
               </p>
-              <p  className="text-white">
+              <p  className={`text-white ${style.fontJosefin}`}>
                 Contact Us
               </p>
               </Space>
@@ -30,21 +30,21 @@ const FooterPage = ()=> {
 
     
           <div>
-            <p className="text-[#FAF397] py-3">
+            <p className={`text-[#FAF397] font-bold py-3 ${style.fontJosefin}`}>
               Book Clubs
             </p>
             <Space direction="vertical" className=" uppercase">
            
-              <p  className="text-white">
+              <p  className={`text-white ${style.fontJosefin}`}>
               Tiny Mu&apos;mins
               </p>
-              <p  className="text-white">
+              <p  className={`text-white ${style.fontJosefin}`}>
               Little Caliphs
               </p>
-              <p  className="text-white">
+              <p  className={`text-white ${style.fontJosefin}`}>
               Deen Discoverers
               </p>
-              <p  className="text-white">
+              <p  className={`text-white ${style.fontJosefin}`}>
               Islamic Explorers
               </p>
             </Space>
@@ -52,7 +52,7 @@ const FooterPage = ()=> {
 
          
           <div>
-            <p  className="text-[#FAF397]  py-3">
+            <p  className={`text-[#FAF397] font-bold  py-3 ${style.fontJosefin}`}>
            More
             </p>
             <Space direction="vertical" className=" uppercase">
@@ -78,7 +78,7 @@ const FooterPage = ()=> {
             <button
            
            
-              className="h-12 w-[160px] rounded-full border-none bg-white text-[#f08080] hover:bg-white/90"
+              className={`h-12 w-[160px] font-bold rounded-full border-none bg-white text-[#f08080] hover:bg-white/90 ${style.fontJosefin}`}
             >
               Log In
             </button>
@@ -86,7 +86,7 @@ const FooterPage = ()=> {
           <Link href="/cart">
             <button
             
-              className="h-12 w-[160px] rounded-full border-none bg-white text-[#f08080] hover:bg-white/90"
+              className={`h-12 w-[160px] font-bold rounded-full border-none bg-white text-[#f08080] hover:bg-white/90 ${style.fontJosefin}`}
               
             >
               <ShoppingCartOutlined style={{ fontSize: "18px" }} />
@@ -99,7 +99,7 @@ const FooterPage = ()=> {
         <div className="flex flex-col items-center gap-6 text-center">
           <a
             href="mailto:INFO@ILLUMINATEMUSLIMMINDS.COM"
-            className="text-lg font-medium uppercase text-[#fff7c2] hover:text-[#fff7c2]/80"
+            className={`text-lg  uppercase text-[#fff7c2] hover:text-[#fff7c2]/80 ${style.fontJosefin}`}
           >
             INFO@ILLUMINATEMUSLIMMINDS.COM
           </a>
@@ -109,7 +109,7 @@ const FooterPage = ()=> {
               href="https://facebook.com/illuminatemuslimminds"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white hover:text-white/80"
+              className={`text-white hover:text-white/80 ${style.fontJosefin}`}
             >
               <FacebookFilled className="h-6 w-6" />
               <span className="sr-only">Facebook</span>
@@ -118,7 +118,7 @@ const FooterPage = ()=> {
               href="https://instagram.com/illuminatemuslimminds"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white hover:text-white/80"
+              className={`text-white hover:text-white/80 ${style.fontJosefin}`}
             >
               <InstagramFilled className="h-6 w-6" />
               <span className="sr-only">Instagram</span>
@@ -127,12 +127,12 @@ const FooterPage = ()=> {
               href="https://tiktok.com/@illuminatemuslimminds"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white hover:text-white/80"
+              className={`text-white hover:text-white/80 ${style.fontJosefin}`}
             >
               <TikTokFilled className="h-5 w-5" />
               <span className="sr-only">TikTok</span>
             </Link>
-            <span className="text-sm font-medium uppercase text-white">@ILLUMINATEMUSLIMMINDS</span>
+            <span className={`text-sm  uppercase text-white ${style.fontJosefin}`}>@ILLUMINATEMUSLIMMINDS</span>
           </div>
         </div>
           </div>
@@ -141,7 +141,7 @@ const FooterPage = ()=> {
         {/* Bottom Footer */}
         <div className="mt-16 border-t border-white/20 pt-8">
           <div className="flex flex-col items-center justify-between gap-4 text-sm  sm:flex-row">
-            <p className="text-white">© 2024 Illuminate. All rights reserved.</p>
+            <p className="text-white">© 2024 Illuminate muslim minds. All rights reserved.</p>
             <Space className="">
               <p  className="text-white">
                 Terms of Service

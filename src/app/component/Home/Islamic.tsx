@@ -12,7 +12,7 @@ const Islamic =() =>{
       style={{ backgroundImage: `url(${frame2.src})` }}
     >
       <div className="px-4 py-16 md:py-24">
-        <div className="container mx-auto">
+        <div className="container mx-auto max-w-7xl">
           <div className="flex flex-col md:flex-row items-center gap-8 md:gap-16">
             {/* Left content */}
        

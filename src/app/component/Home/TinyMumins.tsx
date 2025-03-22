@@ -11,8 +11,8 @@ const  TinyMuminsSection=()=> {
       className="relative w-full bg-top bg-no-repeat bg-cover p-4 md:p-12"
       style={{ backgroundImage: `url(${frame1.src})` }}
     >
-      <div className="px-4 py-16 md:py-24">
-        <div className="container mx-auto">
+      <div className="px-4 py-16 md:py-24 max-w-7xl mx-auto">
+        <div className="">
           <div className="flex flex-col md:flex-row items-center gap-8 md:gap-16">
             {/* Left content */}
             <div className="w-full md:w-1/2 space-y-6">
