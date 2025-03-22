@@ -1,10 +1,10 @@
 'use client'
 import styles from '@/app/styles.module.css'
 import Image from 'next/image';
-import img1 from '@/assets/work1.png'
-import img2 from '@/assets/work2.png'
-import img3 from '@/assets/work3.png'
-import img4 from '@/assets/work4.png'
+import img1 from '@/assets/work5.png'
+import img2 from '@/assets/work6.png'
+import img3 from '@/assets/work7.png'
+import img4 from '@/assets/work8.png'
 
 
 import React from 'react';
@@ -40,17 +40,21 @@ const features = [
   ]
 const Work = () => {
     return (
-        <div className="bg-[#FBD5D4] w-full p-4 md:p-12">
-<div className='py-12'>
-<h1 className={`text-center text-5xl  py-3 ${styles.fontRozha}`}>How it Works</h1>
-<p className={`text-center text-2xl py-3 ${styles.fontPopins}`}>Receive five books. Only buy the ones you love.</p>
+        <div className="bg-[#FBD5D4] w-full py-2">
+<div className='max-w-7xl mx-auto'>
+<div className='py-12 relative z-10 '>
+<h1 className={`text-center text-5xl   ${styles.fontRozha}`}>How it   <span className="relative inline-block mr-3">
+Works
+      <span className="absolute left-0 bottom-0 w-full h-4 sm:h-6 md:h-[25px] bg-[#FFDE21] -z-10"></span>
+    </span></h1>
+<p className={`text-center text-2xl  ${styles.fontPopins}`}>Receive five books. Only buy the ones you love.</p>
 </div>
 
 
-        <section className="relative md:w-[1400px] lg:w-[1600px] container mx-auto border border-red-500 bg-[#FFFFFF] px-4 py-16 md:py-24">
-  <div className="container mx-auto">
+        <section className="relative   border-4 border-red-500 bg-[#FFFFFF] px-4 py-16 md:py-24">
+  <div className="">
 
-
+  
     {/* Features Grid */}
     <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
       {features.map((feature, index) => (
@@ -82,13 +86,14 @@ const Work = () => {
    <Link href={"/name"}>
    <button
          
-         className="h-12 rounded-full bg-[#f08080] px-8 text-lg hover:bg-[#e57373]"
+         className={`h-12 rounded-full text-white bg-[#f08080] px-8 text-lg hover:bg-[#e57373] ${styles.fontPopins}`}
        >
          GET STARTED
        </button>
    </Link>
   
     </div>
+</div>
     </div>
     );
 };

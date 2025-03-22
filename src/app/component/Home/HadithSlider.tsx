@@ -63,7 +63,7 @@ const  HadithSlider =() =>{
 
       {/* Carousel */}
       <div className="relative z-10">
-        <Carousel ref={setCarouselRef} dots={false} autoplay autoplaySpeed={5000} className="hadith-carousel">
+        <Carousel ref={setCarouselRef} dots={false} autoplay autoplaySpeed={3000} className="hadith-carousel">
           {hadiths.map((hadith) => (
             <div key={hadith.id} className="px-12 py-4">
               <p className={`text-center text-lg md:text-xl font-medium max-w-2xl mx-auto ${styles.fontPoppins}`}>{hadith.text}</p>

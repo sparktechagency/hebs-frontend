@@ -137,7 +137,7 @@ const FunFact = () => {
                 src={group1}
                 alt="Children reading and drawing"
                 width={600}
-                height={600}
+                height={800}
                 className="object-contain"
               />
             </div>
