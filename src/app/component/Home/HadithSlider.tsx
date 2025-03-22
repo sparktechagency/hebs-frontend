@@ -49,12 +49,12 @@ const  HadithSlider =() =>{
 
     <div className="relative max-w-4xl mx-auto px-4 py-8 ">
       {/* Left quotation mark */}
-      <div className="absolute left-0 mb:-left-96 lg:-left-96 top-4 text-[#FAF39766] text-[200px] font-serif leading-none z-0 opacity-100 ">
+      <div className="absolute  left-0 mb:-left-96 lg:-left-96 -top-16  text-[#FAF39766] text-[300px] font-serif leading-none z-0 opacity-100  ">
         &ldquo;
       </div>
 
       {/* Right quotation mark */}
-      <div className="absolute right-0 -bottom-36 mb:-right-96 lg:-right-96 mb:-bottom-36 lg:-bottom-36 text-[#F379754A] text-[200px] font-serif leading-none z-0 opacity-100">
+      <div className="absolute right-0 top-96 md:top-64  -bottom-36 mb:-right-96 lg:-right-96 mb:-bottom-36 lg:-bottom-64 text-[#F379754A] text-[300px] font-serif leading-none z-0 opacity-100">
         &rdquo;
       </div>
 
