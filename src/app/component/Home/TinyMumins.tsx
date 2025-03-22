@@ -17,13 +17,13 @@ const  TinyMuminsSection=()=> {
             {/* Left content */}
             <div className="w-full md:w-1/2 space-y-6">
               <div>
-                <h3 className={`text-[#F37975] font-medium text-xl mb-1 ${style.fontJost}`}>AGES 0-3</h3>
-                <h2 className="text-4xl md:text-5xl font-bold text-[#333333]">
+                <h3 className={`text-[#F37975] font-bold text-xl mb-1 ${style.fontJost}`}>AGES 0-3</h3>
+                <h2 className={`text-4xl md:text-5xl font-bold text-[#333333] ${style.fontJost}`}>
                   Tiny Mu&apos;mins
                 </h2>
               </div>
 
-              <p className={`text-xl md:text-2xl font-medium text-[#333333] leading-snug ${style.fontPoppins}`}>
+              <p className={`text-xl md:text-2xl  text-[#333333] leading-snug ${style.fontPoppins}`}>
                 Create a home library that will spark your child&apos;s imagination and curiosity!
               </p>
 
@@ -32,7 +32,7 @@ const  TinyMuminsSection=()=> {
                 radiant picture books.
               </p>
 
-              <div className="space-y-4 pt-2">
+              <div className="space-y-1 ">
                 <h3 className={`text-xl font-semibold text-[#333333] ${style.fontJost}`}>
                   The books for Tiny Mu&apos;mins will:
                 </h3>
@@ -69,7 +69,7 @@ const  TinyMuminsSection=()=> {
               <div className="pt-4">
               <Link href={"/name"}>
               {/* <Link href={"tinyMuslimBox"}> */}
-              <button className={`bg-[#F08080] hover:bg-[#E57373] text-white font-medium py-3 px-6 rounded-full transition-colors ${style.fontJost}`}>
+              <button className={`bg-[#F08080] hover:bg-[#E57373] text-white font-bold py-3 px-6 rounded-full transition-colors ${style.fontJost}`}>
                   GET TINY MU&apos;MINS BOX
                 </button>
               </Link>
