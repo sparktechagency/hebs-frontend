@@ -5,6 +5,7 @@ import group1 from "@/assets/Group1.png"
 import fun1 from "@/assets/fun1.png"
 import fun2 from "@/assets/fun2.png"
 import fun3 from "@/assets/fun3.png"
+import style from '@/app/styles.module.css'
 const FunFact = () => {
     const [form] = Form.useForm()
 
@@ -15,12 +16,12 @@ const FunFact = () => {
     }
     return (
         <div className="bg-[#FFFFFF] ">
-             <section className="relative w-full ">
-      <div className="bg-[#f08080] w-1/2 py-2 px-12 md:w-1/3 lg:w-1/3 md:px-8 lg:px-8">
-      <p  className="m-0 py-6 text-end text-3xl font-bold text-[#FFFFFF] md:text-4xl">
+      <div className="bg-[#f08080] w-1/2 py-2 px-12   ">
+      <p  className={`m-0 py-6 text-end text-4xl  text-[#FFFFFF] md:text-5xl ${style.fontRozha}`}>
         Fun Facts
       </p>
       </div>
+             <section className="relative max-w-7xl mx-auto ">
 
       <div className="container mx-auto p-4 md:p-12  py-12 md:py-16">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
@@ -28,7 +29,7 @@ const FunFact = () => {
           <div className="space-y-12">  
             {/* Fun Facts */}
             <div className="space-y-8">
-              <div className="flex items-start gap-6">
+              <div className="flex items-center justify-center gap-6">
                 <div className="flex-shrink-0">
                   <Image
                     src={fun1}
@@ -38,12 +39,12 @@ const FunFact = () => {
                     className="object-contain"
                   />
                 </div>
-                <p className="text-lg text-black">
+                <p className={`text-xl text-black ${style.fontPoppins}`}>
                   Kids that read at least 20 minutes each day will get exposure to around 2 million words each year.
                 </p>
               </div>
 
-              <div className="flex items-start gap-6">
+              <div className="flex items-center gap-6">
                 <div className="flex-shrink-0">
                   <Image
                     src={fun2}
@@ -53,12 +54,12 @@ const FunFact = () => {
                     className="object-contain"
                   />
                 </div>
-                <p className="text-lg text-black">
+                <p className={`text-xl text-black ${style.fontPoppins}`}>
                   Children who read for pleasure have higher academic achievement.
                 </p>
               </div>
 
-              <div className="flex items-start gap-6">
+              <div className="flex items-center gap-6">
                 <div className="flex-shrink-0">
                   <Image
                     src={fun3}
@@ -68,19 +69,19 @@ const FunFact = () => {
                     className="object-contain"
                   />
                 </div>
-                <p className="text-lg text-black">
+                <p className={`text-xl text-black ${style.fontPoppins}`}>
                   Children who read for pleasure are more likely to have better mental health and well-being.
                 </p>
               </div>
             </div>
 
             {/* Newsletter Form */}
-            <div className="bg-[#FEECDE] p-8">
+            <div className="bg-[#FEECDE] p-8 md:w-96">
 
-            <p  className="mb-4 text-2xl font-bold">
+            <p  className={`mb-4 text-2xl  ${style.fontJost}`}>
         JOIN OUR NEWSLETTER.
       </p>
-      <p className="mb-8 block text-gray-600">
+      <p className="mb-2 block text-gray-600">
         Stay up to date on upcoming fun activities and educational material.
       </p>
 
@@ -90,7 +91,7 @@ const FunFact = () => {
         </p>
         <Form.Item
           label={
-            <span className="flex items-center gap-1">
+            <span className="flex items-center gap-1 font-bold">
               Email Address
               <span className="text-[#f08080]">*</span>
             </span>
@@ -104,7 +105,12 @@ const FunFact = () => {
           <Input size="large" className="rounded border-gray-200" />
         </Form.Item>
 
-        <Form.Item label="First Name" name="firstName">
+        <Form.Item      label={
+            <span className="flex items-center gap-1 font-bold">
+              First Name
+              <span className="text-[#f08080]">*</span>
+            </span>
+          } name="firstName">
           <Input size="large" className="rounded border-gray-200" />
         </Form.Item>
 

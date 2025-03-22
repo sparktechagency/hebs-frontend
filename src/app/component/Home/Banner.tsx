@@ -6,8 +6,8 @@ import Link from "next/link";
 const Banner = () => {
   return (
     <div className="w-full  bg-[#FDFBDF] px-4 py-8 md:py-12 lg:py-16 ">
-      <section className="relative w-full max-w-[1200px] mx-auto px-4">
-        <div className="grid items-center place-items-center lg:grid-cols-2">
+      <section className="relative  max-w-7xl  mx-auto px-4">
+        <div className="grid items-center place-items-center lg:grid-cols-2  ">
           {/* Left Content */}
           <div className="relative z-10 text-center lg:text-left">
             <h1 className={`font-cursive text-4xl text-[#F37975] sm:text-5xl md:text-7xl lg:text-7xl ${styles.fontHotel}`}>

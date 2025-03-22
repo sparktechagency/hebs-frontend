@@ -19,7 +19,7 @@ const Hero = () => {
       </div>
 
       {/* Hero Content */}
-      <div className="relative  bg-[#FAF397] max-w-7xl px-12  mx-auto">
+      <div className="relative  bg-[#FAF397] max-w-7xl px-4  mx-auto">
         <div className="container mx-auto px-4 py-16 md:py-24 lg:py-24 xl:py-24">
           <div className="relative z-10  ">
             {/* Main Content */}
