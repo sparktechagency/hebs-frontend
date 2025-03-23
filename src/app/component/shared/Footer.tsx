@@ -89,7 +89,7 @@ const FooterPage = ()=> {
               className={`h-12 w-[160px] font-bold rounded-full border-none bg-white text-[#f08080] hover:bg-white/90 ${style.fontJosefin}`}
               
             >
-              <ShoppingCartOutlined style={{ fontSize: "18px" }} />
+              <ShoppingCartOutlined style={{ fontSize: "18px" }} className="px-2" />
               Cart
             </button>
            
