@@ -1,6 +1,5 @@
 "use client";
 
-
 import Image from "next/image";
 import img1 from "@/assets/Image (1).png";
 import img2 from "@/assets/Image.png";
@@ -10,12 +9,13 @@ import style from "@/app/styles.module.css";
 const Hero = () => {
   return (
     <div className="flex flex-col container mx-auto mb:relative mb:-top-16 lg:relative lg:-top-16 p-12 md:p-0 lg:p-0">
-
-        {/* Top Banner */}
-        <div className={`${style.fontPoppins} text-center pb-12 md:py-2 lg:py-2 `}>
+      {/* Top Banner */}
+      <div
+        className={`${style.fontPoppins} text-center pb-12 md:py-2 lg:py-2 `}
+      >
         <p className="text-[#D3D3D3] text-xl ">
           Free shipping. Unlimited returns. Cancel anytime.
-        </p> 
+        </p>
       </div>
 
       {/* Hero Content */}
@@ -30,11 +30,11 @@ const Hero = () => {
                 Expertly selected kids&apos; books
                 <br />
                 <span className="relative inline-block mr-3">
-      for every
-      <span className="absolute left-0 bottom-0 w-full h-4 sm:h-6 md:h-[25px] bg-red-400 -z-10"></span>
-    </span>
+                  for every
+                  <span className="absolute left-0 bottom-0 w-full h-4 sm:h-6 md:h-[25px] bg-red-400 -z-10"></span>
+                </span>
                 reading level.
-              </p>   
+              </p>
             </div>
 
             {/* Bullet Points */}
@@ -93,7 +93,6 @@ const Hero = () => {
           </div>
         </div>
       </div>
-
     </div>
   );
 };

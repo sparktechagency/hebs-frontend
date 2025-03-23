@@ -4,7 +4,7 @@ import style from "@/app/styles.module.css";
 import img1 from "@/assets/valueImg1.png"
 import img2 from "@/assets/valueImg2.png"
 import img3 from "@/assets/valueImg3.png"
-import Link from "next/link"
+
 const values = [
   {
     title: "'Ilm",
@@ -32,16 +32,20 @@ export default function ValuesSection() {
     <div className="bg-[#FDFBDF] my-3" >
 
     <section className="max-w-7xl mx-auto px-4 py-16 ">
-      <div className="relative">
+      <div className=" ">
         {/* Border */}
-        <div className="absolute inset-0 border border-red-200 rounded-2xl" />
+        <div className="absolute inset-0 border border-red-200 rounded-2xl " />
 
         {/* Content */}
-        <div className="relative p-8 md:p-12 bg-[#FFFFFF] border border-[#FF0000]">
-          <h2 className={`${style.fontRozha} text-4xl font-bold text-center mb-12 relative`}>
-            Our Values
-            <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-16 h-2 bg-red-200 rounded-full" />
+        <div className="relative p-6 bg-[#FFFFFF] border-4 border-[#FF0000]  z-10">
+          <h2 className={`${style.fontRozha} text-4xl font-bold text-center mb-12 relative`}> 
+            Our 
+            <span className="relative inline-block ml-3">
+            Values
+                  <span className="absolute left-0 bottom-0 w-full h-4 sm:h-6 md:h-[15px] bg-red-400 -z-10"></span> 
+                </span>
           </h2>
+
 
           <div className="grid md:grid-cols-3 gap-8 md:gap-12">
             {values.map((value, index) => (
@@ -57,16 +61,7 @@ export default function ValuesSection() {
                 </div>
                 <h3 className={`text-2xl font-semibold mb-4 ${style.fontRozha}`}>{value.title}</h3>
                 <p className={`${style.fontPoppins} text-gray-600 mb-6`}>{value.description}</p>
-                {value.hasButton && (
-                       <Link href={"/name"}>
-                       <button
-                              
-                              className="h-12 rounded-full bg-[#F37975] px-8 text-lg hover:bg-[#e57373] text-white uppercase"
-                            >
-                             Get Started
-                            </button>
-                       </Link>
-                )}
+ 
               </div>
             ))}
           </div>

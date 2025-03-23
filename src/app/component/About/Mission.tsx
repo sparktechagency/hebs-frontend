@@ -8,7 +8,7 @@ const Mission = () => {
         
         {/* Background Wrapper */}
         <div
-          className="relative w-fit px-6 py-4 text-center bg-no-repeat bg-contain flex justify-center items-center"
+          className=" w-fit px-6 py-4 text-center bg-no-repeat bg-contain flex justify-center items-center relative z-10 "
           style={{
             backgroundImage: `url(${frame2.src})`,
             backgroundSize: "100% 100%",
@@ -19,12 +19,12 @@ const Mission = () => {
             
             {/* "Our Mission" with Underline */}
             <div className="text-center">
-              <p className={`text-[#181816] font-bold text-3xl mb-1 text-center ${style.fontRozha}`}>
+              <p className={`text-[#181816] font-bold text-4xl mb-1 text-center ${style.fontRozha}`}>
                 Our
                 <span className={`relative inline-block ml-3 ${style.fontRozha}`}>
                   Mission 
                   {/* Background Line Behind Mission */}
-                  <span className="absolute left-0 bottom-0 w-full h-4 sm:h-6 md:h-[10px] bg-red-400 z-10"></span>
+                  <span className="absolute  left-0 bottom-0 w-full h-4 sm:h-6 md:h-[18px] bg-red-400 -z-10"></span>
                 </span>
               </p>
             </div>
