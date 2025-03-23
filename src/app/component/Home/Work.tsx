@@ -45,7 +45,7 @@ const Work = () => {
 <div className='py-12 relative z-10 '>
 <h1 className={`text-center text-5xl   ${styles.fontRozha}`}>How it   <span className="relative inline-block mr-3">
 Works
-      <span className="absolute left-0 bottom-0 w-full h-4 sm:h-6 md:h-[25px] bg-[#FFDE21] -z-10"></span>
+      <span className="absolute left-0 bottom-0 w-full h-4 sm:h-6 md:h-[25px] bg-[#FAF397] -z-10"></span>
     </span></h1>
 <p className={`text-center text-2xl  ${styles.fontPopins}`}>Receive five books. Only buy the ones you love.</p>
 </div>
