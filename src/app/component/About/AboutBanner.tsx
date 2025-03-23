@@ -16,12 +16,12 @@ const AboutBanner = () => {
             <div className="w-full md:w-1/2 space-y-6">
               <div>
                 <h3
-                  className={`text-[#FCB876] text-9xl mb-1 ${style.fontRozha}`}
+                  className={`text-[#FCB876] text-4xl md:text-9xl mb-1 ${style.fontRozha}`}
                 >
                   ABOUT
                 </h3>
                 <h2
-                  className={`text-4xl md:text-8xl  text-[#F37975] ${style.fontHotel}`}
+                  className={`text-4xl md:text-7xl  text-[#F37975] ${style.fontHotel}`}
                 >
                   illuminate muslim minds
                 </h2>

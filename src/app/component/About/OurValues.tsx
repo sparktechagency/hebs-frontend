@@ -34,7 +34,7 @@ export default function ValuesSection() {
     <section className="max-w-7xl mx-auto px-4 py-16 ">
       <div className=" ">
         {/* Border */}
-        <div className="absolute inset-0 border border-red-200 rounded-2xl " />
+        {/* <div className="absolute inset-0 border border-red-200 rounded-2xl " /> */}
 
         {/* Content */}
         <div className="relative p-6 bg-[#FFFFFF] border-4 border-[#FF0000]  z-10">
