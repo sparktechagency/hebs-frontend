@@ -141,7 +141,7 @@ const FooterPage = ()=> {
         {/* Bottom Footer */}
         <div className="mt-16 border-t border-white/20 pt-8">
           <div className="flex flex-col items-center justify-between gap-4 text-sm  sm:flex-row">
-            <p className="text-white">© 2024 Illuminate muslim minds. All rights reserved.</p>
+            <p className="text-white">© {new Date().getFullYear()} Illuminate muslim minds. All rights reserved.</p>
             <Space className="">
               <p  className="text-white">
                 Terms of Service
