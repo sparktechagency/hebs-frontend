@@ -6,10 +6,10 @@ import Link from "next/link";
 const Banner = () => {
   return (
     <div className="w-full  bg-[#FDFBDF] px-4 py-8 md:py-12 lg:py-16 ">
-      <section className="relative  max-w-7xl  mx-auto ">
+      <section className="relative  max-w-7xl  mx-auto  md:px-12 md:ml-[410px]">
         <div className="grid justify-center item-center lg:grid-cols-2  ">
           {/* Left Content */}
-          <div className="relative z-10 text-center lg:text-left">
+          <div className="relative z-10 text-center lg:text-left md:mt-16">
             <h1 className={`font-cursive text-4xl text-[#F37975] sm:text-5xl md:text-7xl lg:text-7xl ${styles.fontHotel}`}>
               The Muslim Book Club
             </h1>
@@ -28,8 +28,8 @@ const Banner = () => {
           </div>
 
           {/* Right Content - Book Covers */}
-          <div className="flex justify-center lg:justify-end">
-            <Image src={bannerImg} alt="Book Club Banner" width={400} height={400} className="max-w-full h-auto" />
+          <div className="flex">
+            <Image src={bannerImg} alt="Book Club Banner" width={400} height={400} className="" />
           </div>
         </div>
       </section>
