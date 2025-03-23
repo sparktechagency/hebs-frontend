@@ -12,20 +12,20 @@ const RelationshipPage = () => {
     (optionA?.label ?? "").toLowerCase().localeCompare((optionB?.label ?? "").toLowerCase());
 
   return (
-<div>
-<div className="relative w-full min-h-screen flex flex-col gap-8 items-center justify-center bg-cover bg-no-repeat bg-center px-4"
-      style={{ backgroundImage: `url(${frame1.src}) ` }}
+    <div
+      className="fixed inset-0 flex flex-col gap-8 items-center justify-center bg-cover bg-no-repeat bg-center px-4 mt-24"
+      style={{ backgroundImage: `url(${frame1.src})`, backgroundSize: 'cover' }}
     >
       {/* Content Wrapper */}
-      <div className="text-center max-w-md w-full  p-10 ">
-        <h3  className={`text-[#F37975] font-medium text-xl mb-12 ${style.fontInter}`}>
+      <div className="text-center max-w-md w-full p-10">
+        <h3 className={`text-[#F37975] font-medium text-xl mb-12 ${style.fontInter}`}>
           What is your relationship to Talia Mosleh?
         </h3>
 
         {/* Select Field */}
         <Select
           showSearch
-          className="w-full p-8"
+          className="w-full p-2"
           placeholder="Select an option"
           optionFilterProp="label"
           filterSort={filterSort} // ✅ Now it's a reference, not inline
@@ -40,21 +40,16 @@ const RelationshipPage = () => {
         />
       </div>
 
-   
+      {/* Button directly under select */}
+      <div className="mt-2">
+        <Link href="/birth-month">
+          <button className="border border-black text-black px-6 py-2 rounded-full inline-flex items-center justify-center space-x-2 hover:bg-gray-100 active:bg-gray-200 transition">
+            <span className="font-semibold">Continue</span>
+            <RightOutlined />
+          </button>
+        </Link>
+      </div>
     </div>
-    {/* button */}
-<div className="flex items-end justify-end my-8">
-
-<Link href={"/birth-month"}>
-<button
-      className="border mr-16 border-black text-black px-6 py-2 rounded-full inline-flex items-center justify-center space-x-2 hover:bg-gray-100 active:bg-gray-200 transition"
-    >
-      <span className="font-semibold">Continue</span>
-      <RightOutlined />
-    </button>
-</Link>
-</div>
-</div>
   );
 };
 

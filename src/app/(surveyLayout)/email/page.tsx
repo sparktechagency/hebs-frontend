@@ -8,7 +8,7 @@ const EmailPage = () => {
     <div>
 
     <div
-      className="relative w-full  min-h-screen flex items-center justify-center bg-cover bg-no-repeat bg-center "
+      className="fixed inset-0 w-full  min-h-screen flex items-center justify-center bg-cover bg-no-repeat bg-center mt-24"
       style={{ backgroundImage: `url(${frame1.src})` }}
     >
       {/* Content Wrapper */}

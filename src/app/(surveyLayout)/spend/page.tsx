@@ -23,7 +23,7 @@ const SpendPage = () => {
   return (
     <div>
       <div
-        className="relative w-full min-h-screen flex flex-col gap-8 items-center justify-center bg-cover bg-no-repeat bg-center px-4"
+        className="fixed inset-0 w-full min-h-screen flex flex-col gap-8 items-center justify-center bg-cover bg-no-repeat bg-center px-4 mt-24"
         style={{ backgroundImage: `url(${frame1.src}) ` }}
       >
         {/* Content Wrapper */}
