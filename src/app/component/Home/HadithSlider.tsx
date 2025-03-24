@@ -64,7 +64,7 @@ const  HadithSlider =() =>{
 </div>
 
 {/* Right quotation mark */}
-<div className="absolute right-2 sm:right-4 md:right-8 lg:-right-24 xl:-right-40 -bottom-12 sm:-bottom-20 md:-bottom-20 lg:-bottom-44 xl:-bottom-72 text-[#F379754A] text-[20vw] sm:text-[20vw] md:text-[20vw] lg:text-[20vw] xl:text-[20vw] font-serif leading-none z-0 opacity-75 ">
+<div className="absolute right-2 sm:right-4 md:right-8 lg:-right-24 xl:-right-40 -bottom-12 sm:-bottom-20 md:-bottom-20 lg:-bottom-44 xl:-bottom-64 text-[#F379754A] text-[20vw] sm:text-[20vw] md:text-[20vw] lg:text-[20vw] xl:text-[20vw] font-serif leading-none z-0 opacity-75 ">
   &rdquo;
 </div>
 

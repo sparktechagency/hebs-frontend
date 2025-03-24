@@ -4,7 +4,7 @@ import frame2 from "@/assets/tinyMuminsFrame2.png"
 import book from "@/assets/littleCalips.png"
 import style from '@/app/styles.module.css'
 import Link from "next/link"
-import arrow from "@/assets/arrowLogo.png"
+import arrow from "@/assets/arrow2.png"
 const LittleCalips =() =>{
   return (
     <div
@@ -29,62 +29,64 @@ const LittleCalips =() =>{
               </div>
             </div>
             {/* Right content - Books */}
-            <div className="w-full md:w-1/2 space-y-6">
+            <div className="w-full md:w-1/2 space-y-1">
               <div>
                 <h3 className={`text-[#F37975] font-medium text-xl mb-1 ${style.fontJost}`}>AGES 4-6</h3>
-                <h2 className="text-4xl md:text-5xl font-bold text-[#333333]">
+                <h2 className={`text-3xl md:text-4xl  text-[#333333] ${style.fontJost}`}>
                 Little Caliphs
                 </h2>
               </div>
 
-              <p className={`text-xl md:text-2xl font-medium text-[#333333] leading-snug ${style.fontPoppins}`}>
+              <p className={`text-xl md:text-2xl  text-[#333333] leading-snug ${style.fontPoppins}`}>
               Build strong bonds through shared reading adventures.
               </p>
 
-              <p className={ `text-base md:text-lg text-[#333333] ${style.fontJost}`}>
+              <p className={ `text-base md:text-xl text-[#333333] ${style.fontJost}`}>
               Little Caliphs will dive into a world of colorful picture books,
 catchy rhyming books, and exciting Islamic tales!
               </p>
-
               <div className="space-y-4 pt-2">
-                <h3 className={`text-xl font-semibold text-[#333333] ${style.fontJost}`}>
-                The books for Little Caliphs will:
-                </h3>
+  <h3 className={`text-xl text-[#333333] ${style.fontJost}`}>
+    The books for Little Caliphs will:
+  </h3>
 
-                <div className="flex items-start gap-3">
-                  <div className="mt-1 text-[#F5A77D]">
-                  <Image src={arrow} alt="logo"/>
-                  </div>
-                  <p className={`text-base md:text-lg text-[#333333] ${style.fontJost}`}>
-                  Develop their language skills
-                  </p>
-                </div>
+  {/* Bullet 1 */}
+  <div className="flex items-center gap-2 ">
+    <div className="w-6 flex-shrink-0">
+      <Image src={arrow} alt="logo" className="w-full" />
+    </div>
+    <p className={`text-base md:text-lg text-[#333333] ${style.fontJost}`}>
+      Develop their language skills
+    </p>
+  </div>
 
-                <div className="flex items-start gap-3">
-                  <div className="mt-1 text-[#F5A77D]">
-                  <Image src={arrow} alt="logo"/>
-                  </div>
-                  <p className={`text-base md:text-lg text-[#333333] ${style.fontJost}`}>
-                
-                  Help with emotional and social growth
-                  </p>
-                </div>
+  {/* Bullet 2 */}
+  <div className="flex items-center gap-2 ">
+    <div className="w-6 flex-shrink-0">
+      <Image src={arrow} alt="logo" className="w-full" />
+    </div>
+    <p className={`text-base md:text-lg text-[#333333] ${style.fontJost}`}>
+      Help with emotional and social growth
+    </p>
+  </div>
 
-                <div className="flex items-start gap-3">
-                  <div className="mt-1 text-[#F5A77D]">
-                  <Image src={arrow} alt="logo"/>
-                  </div>
-                  <p className={`text-base md:text-lg text-[#333333] ${style.fontJost}`}>
-                  Prepare for academic success 
-                  </p>
-                </div>
-              </div>
+  {/* Bullet 3 */}
+  <div className="flex items-center gap-2 ">
+    <div className="w-6 flex-shrink-0">
+      <Image src={arrow} alt="logo" className="w-full" />
+    </div>
+    <p className={`text-base md:text-lg text-[#333333] ${style.fontJost}`}>
+      Prepare for academic success 
+    </p>
+  </div>
+</div>
+
 
               <div className="pt-4">
                 <Link href={"/name"}>
                 {/* <Link href={"/littleCaliphsBox"}> */}
                 
-                <button className={`bg-[#F08080] hover:bg-[#E57373] text-white font-medium py-3 px-6 rounded-full transition-colors ${style.fontJost}`}>
+                <button className={`bg-[#FAF397]  shadow-2xl hover:bg-[#E57373] text-black font-bold py-3 px-6 rounded-full transition-colors ${style.fontJost}`}>
                 Get Little Caliphs Box
                 </button>
                 </Link>

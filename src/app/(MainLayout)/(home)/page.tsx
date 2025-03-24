@@ -17,8 +17,8 @@ const HomePage = () => {
             <FunFact/>
             <Work/>
             <HadithSlider/>
-            {/* <TinyMuminsSection/> */}
-            {/* <LittleCalips/> */}
+            <TinyMuminsSection/>
+            <LittleCalips/>
             {/* <Discover/> */}
             {/* <Islamic/> */}
           <FeatureBook/>
