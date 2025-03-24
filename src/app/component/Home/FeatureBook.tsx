@@ -31,7 +31,7 @@ const images = [
 const FeatureBook = () => {
 
     return (
-        <div className="max-w-7xl  bg-[#FFF2C9] container mx-auto grid md:grid-cols-5 lg:grid-cols-5 gap-4 p-5 justify-center md:mb-0 lg:mb-0 mb-6 mb:relative mb:top-20 lg:relative lg:top-20">
+        <div className="max-w-7xl px-5  bg-[#FFF2C9] container mx-auto grid md:grid-cols-5 lg:grid-cols-5 gap-4 p-5 justify-center md:mb-0 lg:mb-0 mb-6 mb:relative mb:top-20 lg:relative lg:top-20">
         {images.map((image) => (
           <div key={image.id} className="relative mb-4">
             <Image

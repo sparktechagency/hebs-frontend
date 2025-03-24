@@ -8,7 +8,7 @@ import style from "@/app/styles.module.css";
 
 const Hero = () => {
   return (
-    <div className="flex flex-col container mx-auto mb:relative mb:-top-16 lg:relative lg:-top-16 p-12 md:p-0 lg:p-0">
+    <div className="flex flex-col container mx-auto mb:relative mb:-top-16 lg:relative lg:-top-16 p-12 md:p-0 lg:p-0 ">
       {/* Top Banner */}
       <div className={`${style.fontPoppins} text-center  py-2`}>
         <p className="text-[#D3D3D3] text-xl">

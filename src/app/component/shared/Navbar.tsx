@@ -5,8 +5,8 @@ import Link from "next/link";
 import { MenuOutlined, RightOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 import {Drawer } from "antd";
 import Image from "next/image";
-import logo from "@/assets/logo.png";
-
+import logo from "@/assets/Illuminate Muslim Minds Logo WHT.png";
+import style from "@/app/styles.module.css";
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [user, setUser] = useState(true);
@@ -52,7 +52,7 @@ export default function Navbar() {
   ]
 
   return (
-    <header className="w-full bg-gradient-to-r from-[#f08080] to-[#ffeb99] px-4 py-6 md:px-10  ">
+    <header className="w-full bg-gradient-to-r from-[#f08080] to-[#ffeb99] px-4 py-1 md:px-10  ">
       <div className="mx-auto flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center">
@@ -67,12 +67,12 @@ export default function Navbar() {
           <div className="relative kids-club-dropdown">
   <button
     onClick={() => setKidsClubDropdownOpen(!kidsClubDropdownOpen)}
-    className="text-xl font-bold text-white hover:text-white/80 focus:outline-none"
+    className={`text-xl  text-white hover:text-white/80 focus:outline-none ${style.fontInter}`}
   >
     KIDS BOOK CLUB ▼
   </button>
   {kidsClubDropdownOpen && (
-    <div className="absolute z-40 bg-white w-[600px] shadow-lg mt-2"> {/* Increased width to 600px */}
+    <div className="absolute z-40 bg-white w-[600px] shadow-lg mt-2"> 
       <div className="container mx-auto px-4 py-10">
         <div className="flex flex-col md:flex-row justify-between gap-12">
           {/* Left Side - Age Categories */}
@@ -124,19 +124,19 @@ export default function Navbar() {
   )}
 </div>
 
-          <Link href="/bookStore" className="text-xl font-bold text-white hover:text-white/80">
+          <Link href="/bookStore" className={`text-xl  text-white hover:text-white/80 ${style.fontInter}`}>
             ONLINE BOOK STORE
           </Link>
           {/* <Link href="/book-registry" className="text-sm font-medium text-white hover:text-white/80">
             BOOK REGISTRY
           </Link> */}
-          <Link href="/about" className="text-xl font-bold text-white hover:text-white/80">
+          <Link href="/about" className={`text-xl  text-white hover:text-white/80 ${style.fontInter}`}>
             ABOUT
           </Link>
-          <Link href="/contact" className="text-xl font-bold text-white hover:text-white/80">
+          <Link href="/contact" className={`text-xl  text-white hover:text-white/80 ${style.fontInter}`}>
             CONTACT
           </Link>
-          <Link href="/blog" className="text-xl font-bold text-white hover:text-white/80">
+          <Link href="/blog" className={`text-xl  text-white hover:text-white/80 ${style.fontInter}`}>
             BLOG
           </Link> 
         </nav>
@@ -153,7 +153,7 @@ export default function Navbar() {
           {user && (
             <div className="relative profile-dropdown">
               <button
-                className="h-12 font-bold rounded-full bg-[#F37975] px-8 text-lg hover:bg-[#e57373] text-white"
+                className={`py-3 w-[100px] md:w-[120px] flex gap-1 items-center justify-center font-bold rounded-full border-none bg-white text-[#f08080] hover:bg-white/90 ${style.fontJosefin}`}
                 
                 onClick={() => setProfileDropdownOpen(!profileDropdownOpen)}
               >
@@ -177,7 +177,7 @@ export default function Navbar() {
                   <div className="border-t border-gray-200 my-1"></div>
                   <button
                     onClick={() => setUser(!user)}
-                    className="h-12 rounded-full bg-[#F37975] font-bold px-8 text-lg hover:bg-[#e57373] text-white"
+                    className={`py-3 w-[100px] md:w-[120px] flex gap-1 items-center justify-center font-bold rounded-full border-none bg-white text-[#f08080] hover:bg-white/90 ${style.fontJosefin}`}
                   >
                     Logout
                   </button>
@@ -187,7 +187,7 @@ export default function Navbar() {
           )}
 
           <Link href="/cart">
-            <button  className="h-12 rounded-full bg-[#F37975] font-bold px-8 text-lg hover:bg-[#e57373] text-white">
+            <button  className={`py-3 w-[100px] md:w-[120px] flex gap-1 items-center justify-center font-bold rounded-full border-none bg-white text-[#f08080] hover:bg-white/90 ${style.fontJosefin}`}>
               <ShoppingCartOutlined style={{ marginRight: 8 }} />
               Cart
             </button>
@@ -238,19 +238,19 @@ export default function Navbar() {
                 </div>
               )}
             </div>
-            <Link href="/bookStore" className="text-xl font-bold text-white hover:text-white/80">
+            <Link href="/bookStore" className={`text-xl  text-white hover:text-white/80 ${style.fontInter}`}>
             ONLINE BOOK STORE
           </Link>
           {/* <Link href="/book-registry" className="text-sm font-medium text-white hover:text-white/80">
             BOOK REGISTRY
           </Link> */}
-          <Link href="/about" className="text-xl font-bold text-white hover:text-white/80">
+          <Link href="/about" className={`text-xl  text-white hover:text-white/80 ${style.fontInter}`}>
             ABOUT
           </Link>
-          <Link href="/contact" className="text-xl font-bold text-white hover:text-white/80">
+          <Link href="/contact" className={`text-xl  text-white hover:text-white/80 ${style.fontInter}`}>
             CONTACT
           </Link>
-          <Link href="/blog" className="text-xl font-bold text-white hover:text-white/80">
+          <Link href="/blog" className={`text-xl  text-white hover:text-white/80 ${style.fontInter}`}>
             BLOG
           </Link>
             <div className="flex flex-col space-y-3 pt-4">

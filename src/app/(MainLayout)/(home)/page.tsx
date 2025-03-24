@@ -12,16 +12,16 @@ import Work from "@/app/component/Home/Work";
 const HomePage = () => {
     return (
         <div className="">
-            <Banner/>
-            {/* <Hero/>
-            <FunFact/>
-            <Work/>
-            <HadithSlider/>
-            <TinyMuminsSection/>
-            <LittleCalips/>
-            <Discover/>
-            <Islamic/>
-            <FeatureBook/> */}
+            {/* <Banner/> */}
+            {/* <Hero/> */}
+            {/* <FunFact/> */}
+            {/* <Work/> */}
+            {/* <HadithSlider/> */}
+            {/* <TinyMuminsSection/> */}
+            {/* <LittleCalips/> */}
+            {/* <Discover/> */}
+            {/* <Islamic/> */}
+          {/* <FeatureBook/> */}
         </div>
     );
 }
