@@ -68,7 +68,7 @@ Works
               className="h-full w-full object-contain"
             />
           </div>
-          <p className={`mb-4 text-xl font-bold ${styles.fontRozha}`}>
+          <p className={`mb-4 text-2xl  ${styles.fontRozha}`}>
             {feature.title}
           </p>
           <p className={`text-gray-600 ${styles.fontPopins}`}>{feature.description}</p>
