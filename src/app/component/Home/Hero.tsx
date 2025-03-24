@@ -71,7 +71,7 @@ const Hero = () => {
             </div>
 
             {/* Right Image */}
-            <div className="absolute right-0 md:-right-60 bottom-0 w-[150px] md:w-[250px]">
+            <div className="absolute -top-[265px] right-0 md:-right-60 bottom-0 w-[150px] md:w-[250px]">
               <Image
                 src={img1}
                 alt="Planet Omar"
