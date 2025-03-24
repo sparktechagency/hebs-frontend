@@ -49,14 +49,27 @@ const  HadithSlider =() =>{
 
     <div className="relative max-w-4xl mx-auto px-4 py-8 ">
       {/* Left quotation mark */}
-      <div className="absolute  left-0 mb:-left-96 lg:-left-96 -top-16  text-[#FAF39766] text-[100px] lg:text-[200px] xl:text-[300px] font-serif leading-none z-0 opacity-100  ">
+      {/* <div className="absolute  left-0  xl:-left-96 xl:-top-16  text-[#FAF39766] text-[300px] font-serif leading-none z-0 opacity-100  ">
         &ldquo;
-      </div>
+      </div> */}
 
       {/* Right quotation mark */}
-      <div className="absolute right-0 top-96 md:top-64  -bottom-36 mb:-right-96 lg:-right-96 mb:-bottom-36 lg:-bottom-64 text-[#F379754A] text-[100px] lg:text-[200px] xl:text-[300px] font-serif leading-none z-0 opacity-100">
+      {/* <div className="absolute right-0 xl:top-96 md:top-64  -bottom-36 mb:-right-36 xl:-right-96 mb:-bottom-36 lg:-bottom-64 text-[#F379754A] text-[300px] font-serif leading-none z-0 opacity-100">
         &rdquo;
-      </div>
+      </div> */}
+
+{/* Left quotation mark */}
+<div className="absolute left-2 sm:left-4 md:left-8 lg:-left-24 xl:-left-40 top-2 sm:top-12 md:top-8 lg:-top-16 xl:-top-16 text-[#FAF39766] text-[20vw] sm:text-[20vw] md:text-[20vw] lg:text-[20vw] xl:text-[20vw] font-serif leading-none z-0 opacity-75 ">
+  &ldquo;
+</div>
+
+{/* Right quotation mark */}
+<div className="absolute right-2 sm:right-4 md:right-8 lg:-right-24 xl:-right-40 -bottom-12 sm:-bottom-20 md:-bottom-20 lg:-bottom-44 xl:-bottom-72 text-[#F379754A] text-[20vw] sm:text-[20vw] md:text-[20vw] lg:text-[20vw] xl:text-[20vw] font-serif leading-none z-0 opacity-75 ">
+  &rdquo;
+</div>
+
+
+
 
       {/* Title */}
       <h2 className={`text-center mt-16 mb:mt-8 lg:mt-8 text-[#F37975] text-4xl font-semibold mb-6 ${styles.fontRozha}`}>Duaa and Hadith</h2>

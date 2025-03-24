@@ -10,7 +10,7 @@ const Hero = () => {
   return (
     <div className="flex flex-col container mx-auto mb:relative mb:-top-16 lg:relative lg:-top-16 p-12 md:p-0 lg:p-0 ">
       {/* Top Banner */}
-      <div className={`${style.fontPoppins} text-center  py-2`}>
+      <div className={`${style.fontPoppins} text-center mb-3 lg:mb-0 py-2`}>
         <p className="text-[#D3D3D3] text-xl">
           Free shipping. Unlimited returns. Cancel anytime.
         </p>
@@ -26,7 +26,7 @@ const Hero = () => {
               <br />
               <span className="relative inline-block mr-3">
                 for every
-                <span className="absolute left-0 bottom-0 w-full h-4 sm:h-6 md:h-[15px] bg-red-400 -z-10"></span>
+                <span className="absolute left-0 bottom-0 w-full h-3 md:h-[15px] bg-red-400 -z-10"></span>
               </span>
               reading level.
             </p>
@@ -57,7 +57,7 @@ const Hero = () => {
           </div>
 
           {/* Book Images - Positioned Responsively */}
-          <div className="relative hidden md:block">
+          <div className="relative hidden lg:block">
             {/* Left Image */}
             <div className="absolute left-0 md:-left-64 bottom-0 w-[150px] md:w-[250px]">
               <Image
@@ -71,7 +71,7 @@ const Hero = () => {
             </div>
 
             {/* Right Image */}
-            <div className="absolute -top-[265px] right-0 md:-right-60 bottom-0 w-[150px] md:w-[250px]">
+            <div className="absolute -top-[265px] right-0 md:-right-60 bottom-0 w-[150px] md:w-[250px] hidden lg:block">
               <Image
                 src={img1}
                 alt="Planet Omar"

@@ -20,7 +20,7 @@ const Banner = () => {
               Help your readers grow with a personalized book selection curated monthly by our team of experts and shipped to your door.
             </p>
             <Link href="/name">
-              <button className={`h-10 sm:h-12 rounded-full bg-[#F37975] px-4 sm:px-6 md:px-8 font-bold text-base sm:text-lg md:text-xl hover:bg-[#e57373] text-white ${styles.fontPoppins}`}>
+              <button className={`h-10 sm:h-12 rounded-full bg-[#F37975] px-4 sm:px-6 md:px-8  text-base sm:text-lg md:text-xl hover:bg-[#e57373] text-white ${styles.fontPoppins}`}>
                 START TODAY
               </button>
             </Link>
