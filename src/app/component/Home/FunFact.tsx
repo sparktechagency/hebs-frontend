@@ -23,7 +23,7 @@ const FunFact = () => {
       </div>
              <section className="relative max-w-7xl mx-auto ">
 
-      <div className="container mx-auto p-4 md:p-12  py-12 md:py-16">
+      <div className="container  mx-auto p-4 md:p-12  py-12 md:py-16">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
           {/* Left Column */}
           <div className="space-y-12">  

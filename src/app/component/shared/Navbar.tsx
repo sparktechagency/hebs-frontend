@@ -52,12 +52,12 @@ export default function Navbar() {
   ]
 
   return (
-    <header className="w-full bg-gradient-to-r from-[#f08080] to-[#ffeb99] px-4 py-2 md:px-10  ">
+    <header className="w-full bg-gradient-to-r from-[#f08080] to-[#ffeb99] px-4 py-6 md:px-10  ">
       <div className="mx-auto flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center">
           <div className="relative ">
-            <Image src={logo || "/placeholder.svg"} alt="logo" width="140" height="140" />
+            <Image src={logo || "/placeholder.svg"} alt="logo" width="140" height="140" className=""/>
           </div>
         </Link>
 
@@ -67,12 +67,12 @@ export default function Navbar() {
           <div className="relative kids-club-dropdown">
   <button
     onClick={() => setKidsClubDropdownOpen(!kidsClubDropdownOpen)}
-    className="text-sm font-extrabold text-white hover:text-white/80 focus:outline-none"
+    className="text-xl font-bold text-white hover:text-white/80 focus:outline-none"
   >
     KIDS BOOK CLUB ▼
   </button>
   {kidsClubDropdownOpen && (
-    <div className="absolute z-40 bg-white w-[1000px] shadow-lg mt-2"> {/* Increased width to 600px */}
+    <div className="absolute z-40 bg-white w-[600px] shadow-lg mt-2"> {/* Increased width to 600px */}
       <div className="container mx-auto px-4 py-10">
         <div className="flex flex-col md:flex-row justify-between gap-12">
           {/* Left Side - Age Categories */}
@@ -124,19 +124,19 @@ export default function Navbar() {
   )}
 </div>
 
-          <Link href="/bookStore" className="text-sm font-extrabold text-white hover:text-white/80">
+          <Link href="/bookStore" className="text-xl font-bold text-white hover:text-white/80">
             ONLINE BOOK STORE
           </Link>
           {/* <Link href="/book-registry" className="text-sm font-medium text-white hover:text-white/80">
             BOOK REGISTRY
           </Link> */}
-          <Link href="/about" className="text-sm font-extrabold text-white hover:text-white/80">
+          <Link href="/about" className="text-xl font-bold text-white hover:text-white/80">
             ABOUT
           </Link>
-          <Link href="/contact" className="text-sm font-extrabold text-white hover:text-white/80">
+          <Link href="/contact" className="text-xl font-bold text-white hover:text-white/80">
             CONTACT
           </Link>
-          <Link href="/blog" className="text-sm font-extrabold text-white hover:text-white/80">
+          <Link href="/blog" className="text-xl font-bold text-white hover:text-white/80">
             BLOG
           </Link> 
         </nav>
@@ -213,7 +213,7 @@ export default function Navbar() {
           <div className="relative">
               <button
                   onClick={() => setKidsClubDropdownOpen(!kidsClubDropdownOpen)}
-                className="text-lg font-medium text-black flex justify-between w-full px-4 py-2 border-b border-gray-300"
+                className="text-xl font-bold  text-white flex justify-between w-full px-4 py-2 border-b border-gray-300"
               >
                 KIDS BOOK CLUB
                 <RightOutlined className={`transition-transform ${kidsClubDropdownOpen ? "rotate-90" : ""}`} />
@@ -238,19 +238,19 @@ export default function Navbar() {
                 </div>
               )}
             </div>
-            <Link href="/bookStore" className="text-sm font-extrabold text-white hover:text-white/80">
+            <Link href="/bookStore" className="text-xl font-bold text-white hover:text-white/80">
             ONLINE BOOK STORE
           </Link>
           {/* <Link href="/book-registry" className="text-sm font-medium text-white hover:text-white/80">
             BOOK REGISTRY
           </Link> */}
-          <Link href="/about" className="text-sm font-extrabold text-white hover:text-white/80">
+          <Link href="/about" className="text-xl font-bold text-white hover:text-white/80">
             ABOUT
           </Link>
-          <Link href="/contact" className="text-sm font-extrabold text-white hover:text-white/80">
+          <Link href="/contact" className="text-xl font-bold text-white hover:text-white/80">
             CONTACT
           </Link>
-          <Link href="/blog" className="text-sm font-extrabold text-white hover:text-white/80">
+          <Link href="/blog" className="text-xl font-bold text-white hover:text-white/80">
             BLOG
           </Link>
             <div className="flex flex-col space-y-3 pt-4">

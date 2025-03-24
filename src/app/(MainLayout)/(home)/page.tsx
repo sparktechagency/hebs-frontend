@@ -13,7 +13,7 @@ const HomePage = () => {
     return (
         <div className="">
             <Banner/>
-            <Hero/>
+            {/* <Hero/>
             <FunFact/>
             <Work/>
             <HadithSlider/>
@@ -21,7 +21,7 @@ const HomePage = () => {
             <LittleCalips/>
             <Discover/>
             <Islamic/>
-            <FeatureBook/>
+            <FeatureBook/> */}
         </div>
     );
 }
