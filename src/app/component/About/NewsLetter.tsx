@@ -13,7 +13,7 @@ export default function NewsletterSignup() {
     <div className="flex items-center justify-center bg-[#ffffff] py-16 relative">
       <div className="bg-[#FEECDE] p-8 md:w-[800px]  max-w-7xl flex flex-col md:flex-row items-center relative rounded-lg shadow-lg  ">
         {/* Left Book Image (Hidden on small screens) */}
-        <div className="absolute -left-80 bottom-0 hidden md:block ">
+        <div className="absolute lg:-left-72 md:-left:36 xl:-left-80 bottom-0 hidden md:block ">
           <Image
             src={img1}
             alt="My Prophet Muhammad - My Hero"
@@ -24,7 +24,7 @@ export default function NewsletterSignup() {
         </div>
 
         {/* Center Content */}
-        <div className="flex flex-col md:flex-row items-center w-full ">
+        <div className="flex flex-col md:flex-row items-center ">
           {/* Image Section (Tablet in the center) */}
           <div className="w-full md:w-1/2 flex justify-center">
             <div className="p-2 rounded-lg border-8 border-black">   
@@ -40,7 +40,7 @@ export default function NewsletterSignup() {
 
           {/* Form Section */}
           <div className="w-full md:w-1/2 px-4 py-8 md:px-6 md:py-10 text-center md:text-left">
-            <h2 className={`text-3xl md:text-6xl  text-[#F37975] ${style.fontJost}`}>
+            <h2 className={`text-2xl md:text-3xl lg:text-4xl xl:text-6xl  text-[#F37975] ${style.fontJost}`}>
               JOIN OUR NEWSLETTER.
             </h2>
             <p className={`${style.fontPoppins} text-gray-700 mt-2`}>
@@ -66,7 +66,7 @@ export default function NewsletterSignup() {
         </div>
 
         {/* Right Book Image (Hidden on small screens) */}
-        <div className="absolute -right-72 bottom-0 hidden md:block">
+        <div className="absolute md:-right-36 lg:-right-64 xl:-right-72 bottom-0 hidden md:block ">
           <Image
             src={img2}
             alt="Planet Omar"

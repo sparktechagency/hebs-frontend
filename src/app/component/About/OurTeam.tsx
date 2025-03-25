@@ -10,9 +10,9 @@ export default function OurTeam() {
     <div className="w-full">
       
       {/* Team Member 1 */}
-      <section className="px-4 ">
+      <section className="px-4 sm:px-6 md:px-10 py-16 md:py-24 bg-[#FEECDE]">
         <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-6 md:gap-10 py-10">
+          <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-center">
             
             {/* Text Content */}
             <div className=" text-center md:text-left py-5">
@@ -63,7 +63,7 @@ Driven by a mission to blend fun with Islamic learning, Illuminate Muslim Minds 
 
             {/* Text Content */}
             <div className="space-y-6 text-center md:text-left">
-              <p className={`text-[#F37975] text-xl sm:text-2xl  ${style.fontPoppins}`}>
+              <p className={`text-[#F37975] sm:text-xl font-bold  text-xl   ${style.fontPoppins}`}>
                 Chief Operating Officer: Heba Morad
               </p>
               <p className={`${style.fontPoppins} leading-relaxed text-base sm:text-lg`}>
@@ -77,12 +77,12 @@ Driven by a mission to blend fun with Islamic learning, Illuminate Muslim Minds 
 
       {/* Team Member 3 */}
       <section className="px-4 sm:px-6 md:px-10 py-16 md:py-24 bg-[#FEECDE]">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-7xl mx-auto">  
           <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-center">
             
             {/* Text Content */}
             <div className="space-y-6 text-center md:text-left">
-              <p className={`text-[#F37975] text-xl sm:text-2xl  ${style.fontPoppins}`}>
+            <p className={`text-[#F37975] sm:text-xl font-bold  text-xl   ${style.fontPoppins}`}>
                 Social Media and Logistics Coordinator: Nadean Ghouleh
               </p>
               <p className={`${style.fontPoppins} leading-relaxed text-base sm:text-lg`}>

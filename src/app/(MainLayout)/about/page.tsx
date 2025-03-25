@@ -9,9 +9,9 @@ const AboutPage = () => {
     return (
         <div>
             <AboutBanner/>
-            {/* <Mission/> */}
-            {/* <ValuesSection/>  */}
-            {/* <div className="text-center  relative z-10 mt-8">
+            <Mission/>
+            <ValuesSection/> 
+            <div className="text-center  relative z-10 mt-8 mb-3">
             <h2 className={`text-4xl md:text-5xl  text-black  relative inline-block ${style.fontRozha}`}>
                 Meet the      <span className="relative inline-block mr-3">
                 Team
@@ -19,10 +19,12 @@ const AboutPage = () => {
                 </span>
          
               </h2>
-            </div> */}
-            {/* <OurTeam/> */}
-            {/* <NewsletterSignup/> */}
-{/* <FeatureBook/> */}
+            </div>
+            <OurTeam/>
+    <div className="overflow-x-hidden">
+    <NewsletterSignup/>
+    </div>
+<FeatureBook/>
         </div>
     );
 };

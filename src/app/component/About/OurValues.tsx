@@ -29,22 +29,22 @@ const values = [
 
 export default function ValuesSection() {
   return (
-    <div className="bg-[#FDFBDF] my-3" >
+    <div className="bg-[#FDFBDF] " >
 
-    <section className="max-w-7xl mx-auto px-4 py-16 ">
+    <section className="max-w-7xl mx-auto px-4 py-8 ">
       <div className=" ">
         {/* Border */}
         {/* <div className="absolute inset-0 border border-red-200 rounded-2xl " /> */}
 
         {/* Content */}
-        <div className="relative p-6 bg-[#FFFFFF] border-4 border-[#FF0000]  z-10">
-          <h2 className={`${style.fontRozha} text-4xl font-bold text-center mb-12 relative`}> 
+          <h2 className={`${style.fontRozha} text-4xl font-bold text-center mb-5 relative`}> 
             Our 
             <span className="relative inline-block ml-3">
             Values
                   <span className="absolute left-0 bottom-0 w-full h-4 sm:h-6 md:h-[15px] bg-red-400 -z-10"></span> 
                 </span>
           </h2>
+        <div className="relative p-6 bg-[#FFFFFF] border-4 border-[#FF0000]  z-10">
 
 
           <div className="grid md:grid-cols-3 gap-8 md:gap-12">
