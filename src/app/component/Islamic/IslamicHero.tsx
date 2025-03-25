@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import Image from "next/image";
-import packaging from "@/assets/illuminate packaging box 9-11.png"
+import packaging from "@/assets/islamicPackaging.png"
 import styles from "@/app/styles.module.css"
 import Link from "next/link";
 export default function IslamicHero() {
