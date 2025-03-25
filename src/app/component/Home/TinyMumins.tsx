@@ -18,7 +18,7 @@ const  TinyMuminsSection=()=> {
             <div className="w-full md:w-1/2 space-y-6">
               <div>
                 <h3 className={`text-[#F37975] font-bold text-xl mb-1 ${style.fontJost}`}>AGES 0-3</h3>
-                <h2 className={`text-4xl md:text-5xl  text-[#333333] ${style.fontJost}`}>
+                <h2 className={`text-3xl md:text-4xl text-[#333333] ${style.fontJost}`}>
                   Tiny Mu&apos;mins
                 </h2>
               </div>

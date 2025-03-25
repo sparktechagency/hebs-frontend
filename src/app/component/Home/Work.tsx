@@ -42,7 +42,7 @@ const Work = () => {
     return (
         <div className="bg-[#FBD5D4] w-full py-2">
 <div className='max-w-7xl mx-auto'>
-<div className='py-12 relative z-10 '>
+<div className='py-8 relative z-10 '>
 <h1 className={`text-center text-5xl   ${styles.fontRozha}`}>How it   <span className="relative inline-block mr-3">
 Works
       <span className="absolute left-0 bottom-0 w-full h-4 sm:h-6 md:h-[25px] bg-[#FAF397] -z-10"></span>
@@ -51,7 +51,7 @@ Works
 </div>
 
 
-        <section className="relative   border-4 border-red-500 bg-[#FFFFFF] px-4 py-16 md:py-24">
+        <section className="relative w-[90%]  mx-auto border-4 border-red-500 bg-[#FFFFFF] px-4 py-6">
   <div className="">
 
   
@@ -86,7 +86,7 @@ Works
    <Link href={"/name"}>
    <button
          
-         className={`h-12 rounded-full text-white bg-[#f08080] px-8 text-lg hover:bg-[#e57373] ${styles.fontPopins}`}
+         className={`h-12 rounded-full text-white bg-[#f08080] px-8 text-lg hover:bg-[#e57373] ${styles.fontInter}`}
        >
          GET STARTED
        </button>

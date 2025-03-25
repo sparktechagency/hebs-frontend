@@ -7,7 +7,7 @@ import Link from "next/link"
 import arrow from "@/assets/arrow2.png"
 const LittleCalips =() =>{
   return (
-    <div
+    <div   
       className="relative w-full bg-top bg-no-repeat bg-cover  p-4 md:p-12"
       style={{ backgroundImage: `url(${frame2.src})` }}
     >
@@ -31,7 +31,7 @@ const LittleCalips =() =>{
             {/* Right content - Books */}
             <div className="w-full md:w-1/2 space-y-1">
               <div>
-                <h3 className={`text-[#F37975] font-medium text-xl mb-1 ${style.fontJost}`}>AGES 4-6</h3>
+                <h3 className={`text-[#F37975] font-bold text-xl mb-1 ${style.fontJost}`}>AGES 4-6</h3>
                 <h2 className={`text-3xl md:text-4xl  text-[#333333] ${style.fontJost}`}>
                 Little Caliphs
                 </h2>
@@ -86,7 +86,7 @@ catchy rhyming books, and exciting Islamic tales!
                 <Link href={"/name"}>
                 {/* <Link href={"/littleCaliphsBox"}> */}
                 
-                <button className={`bg-[#FAF397]  shadow-2xl hover:bg-[#E57373] text-black font-bold py-3 px-6 rounded-full transition-colors ${style.fontJost}`}>
+                <button className={`bg-[#FAF397]  shadow-2xl hover:bg-[#E57373] text-black font-bold py-3 px-6 rounded-full transition-colors ${style.fontInter}`}>
                 Get Little Caliphs Box
                 </button>
                 </Link>

@@ -32,51 +32,51 @@ const Islamic =() =>{
             <div className="w-full md:w-1/2 space-y-6">
             <div>
                 <h3
-                  className={`text-[#F37975] font-medium text-xl mb-1 ${style.fontJost}`}
+                className={`text-[#F37975] font-bold text-xl mb-1 ${style.fontJost}`}
                 >
                   AGES 9-11
                 </h3>
-                <h2 className="text-4xl md:text-5xl font-bold text-[#333333]">
+                <h2 className={`text-3xl md:text-4xl  text-[#333333] ${style.fontJost}`}>
                   Islamic Explorers
                 </h2>
               </div>
 
               <p
-                className={`text-xl md:text-2xl font-medium text-[#333333] leading-snug ${style.fontPoppins}`}
+               className={`text-xl md:text-2xl  text-[#333333] leading-snug ${style.fontPoppins}`}
               >
                 Embark on the adventure of independent reading.
               </p>
 
               <p
-                className={`text-base md:text-lg text-[#333333] ${style.fontJost}`}
+             className={ `text-base md:text-xl text-[#333333] ${style.fontJost}`}
               >
                 Their vocabulary and critical thinking skills will expand as
                 they dive into reading advanced plotlines and chapter books.
               </p>
 
-              <div className="space-y-4 pt-2">
+              <div className="space-y-4 pt-2">      
                 <h3
-                  className={`text-xl font-semibold text-[#333333] ${style.fontJost}`}
+                  className={`text-xl  text-[#333333] ${style.fontJost}`}
                 >
                   The books for Islamic Explorers will:
                 </h3>
 
-                <div className="flex items-start gap-3">
-                  <div className="mt-1 text-[#F5A77D]">
-                  <Image src={arrow} alt="logo"/>
-                  </div>
+                <div className="flex items-center gap-2 ">
+                <div className="w-6 flex-shrink-0">
+      <Image src={arrow} alt="logo" className="w-full" />
+    </div>
                   <p
-                    className={`text-base md:text-lg text-[#333333] ${style.fontJost}`}
+                  className={`text-base md:text-lg text-[#333333] ${style.fontJost}`}
                   >
                     Help expose your reader to broader array of material like
                     plays, poetry, fictional and nonfictional books
                   </p>
                 </div>
 
-                <div className="flex items-start gap-3">
-                  <div className="mt-1 text-[#F5A77D]">
-                  <Image src={arrow} alt="logo"/>
-                  </div>
+                <div className="flex items-center gap-2 ">
+                <div className="w-6 flex-shrink-0">
+      <Image src={arrow} alt="logo" className="w-full" />
+    </div>
                   <p
                     className={`text-base md:text-lg text-[#333333] ${style.fontJost}`}
                   >
@@ -84,10 +84,10 @@ const Islamic =() =>{
                   </p>
                 </div>
 
-                <div className="flex items-start gap-3">
-                  <div className="mt-1 text-[#F5A77D]">
-                  <Image src={arrow} alt="logo"/>
-                  </div>
+                <div className="flex items-center gap-2 ">
+                <div className="w-6 flex-shrink-0">
+      <Image src={arrow} alt="logo" className="w-full" />
+    </div>
                   <p
                     className={`text-base md:text-lg text-[#333333] ${style.fontJost}`}
                   >
@@ -100,9 +100,7 @@ const Islamic =() =>{
                 {/* <Link href={"/islamic"}> */}
                 <Link href={"/name"}>
                 
-                <button
-                  className={`bg-[#F08080] hover:bg-[#E57373] text-white font-medium py-3 px-6 rounded-full transition-colors ${style.fontJost}`}
-                >
+                <button className={`bg-[#FAF397]  shadow-2xl hover:bg-[#E57373] text-black font-bold py-3 px-6 rounded-full transition-colors ${style.fontInter}`}>
                   Get Islamic Explorers Box
                 </button>
                 </Link>

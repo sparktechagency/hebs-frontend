@@ -72,7 +72,7 @@ const  HadithSlider =() =>{
 
 
       {/* Title */}
-      <h2 className={`text-center mt-16 mb:mt-8 lg:mt-8 text-[#F37975] text-4xl font-semibold mb-6 ${styles.fontRozha}`}>Duaa and Hadith</h2>
+      <h2 className={`text-center mt-16 mb:mt-8 lg:mt-8 text-[#F37975] text-4xl font-bold mb-6 ${styles.fontRozha}`}>Duaas and Hadith</h2>
 
       {/* Carousel */}
       <div className="relative z-10">
