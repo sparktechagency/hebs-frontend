@@ -1,5 +1,5 @@
-import inside1 from "@/assets/Little Caliphs Box Inside.png"
-import inside2 from "@/assets/tiniInside2.png"
+import inside1 from "@/assets/5pillers.png"
+import inside2 from "@/assets/commonInside.png"
 import Image from "next/image";
 import styles from "@/app/styles.module.css"
 const InsideLittleCaliphs = () => {

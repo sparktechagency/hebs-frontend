@@ -1,5 +1,5 @@
-import inside1 from "@/assets/Islamic Explorers Box.png"
-import inside2 from "@/assets/tiniInside2.png"
+import inside1 from "@/assets/maliks.png"
+import inside2 from "@/assets/commonInside.png"
 import Image from "next/image";
 import styles from "@/app/styles.module.css"
 const IslamicInside = () => {
