@@ -8,7 +8,7 @@ import {
 
 } from "@ant-design/icons";
 import Image from "next/image";
-import packaging from "@/assets/illuminate packaging box 0-3 1.png";
+import packaging from "@/assets/tinnymuslimBox.png";
 import Link from "next/link";
 import handShack from "@/assets/handshake-light-skin-tone_svgrepo.com.png"
 export default function CheckoutPage() {

@@ -4,7 +4,7 @@ import { useState } from "react"
 import { Radio, Tooltip } from "antd"
 import { InfoCircleOutlined, GiftOutlined, LeftOutlined, RightOutlined } from "@ant-design/icons"
 import Image from "next/image"
-import packaging from "@/assets/illuminate packaging box 0-3 1.png";
+import packaging from "@/assets/tinnymuslimBox.png";
 import Link from "next/link"
 export default function SubscriptionPlanPage() {
   const [selectedPlan, setSelectedPlan] = useState("monthly")

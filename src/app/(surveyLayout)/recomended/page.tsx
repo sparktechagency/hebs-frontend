@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { Sparkles } from "lucide-react";
-import packaging from "@/assets/illuminate packaging box 0-3 1.png";
+import packaging from "@/assets/tinnymuslimBox.png";
 import Link from "next/link";
 import { RightOutlined ,LeftOutlined} from "@ant-design/icons";
 export default function BookRecommendations() {

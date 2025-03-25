@@ -4,7 +4,7 @@ import { useState } from "react"
 import { Input, Radio, Checkbox, Tooltip } from "antd"
 import { InfoCircleOutlined, LeftOutlined, LockOutlined, RightOutlined } from "@ant-design/icons"
 import Image from "next/image"
-import packaging from "@/assets/illuminate packaging box 0-3 1.png";
+import packaging from "@/assets/tinnymuslimBox.png";
 import paypal from "@/assets/paypal.png";
 import visa from "@/assets/visa-4-logo_svgrepo.com.png";
 import master from "@/assets/master-card_svgrepo.com.png";
@@ -36,7 +36,7 @@ export default function PaymentPage() {
                 alt="Book box"
                 width={120}
                 height={80}
-                className="object-contain"
+                className="object-contain shadow-2xl"
               />
             </div>
           </div>
