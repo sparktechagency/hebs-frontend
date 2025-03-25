@@ -62,12 +62,12 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden lg:flex lg:items-center lg:space-x-6">
+        <nav className="hidden lg:flex lg:items-center space-x-1 lg:space-x-2 xl:space-x-6">
           {/* Kids Book Club Dropdown */}
           <div className="relative kids-club-dropdown">
   <button
     onClick={() => setKidsClubDropdownOpen(!kidsClubDropdownOpen)}
-    className={`text-xl  text-white hover:text-white/80 focus:outline-none ${style.fontInter}`}
+    className={`md:text-sm text-xs xl:text-xl  text-white hover:text-white/80 focus:outline-none ${style.fontInter}`}
   >
     KIDS BOOK CLUB ▼
   </button>
@@ -124,19 +124,19 @@ export default function Navbar() {
   )}
 </div>
 
-          <Link href="/bookStore" className={`text-xl  text-white hover:text-white/80 ${style.fontInter}`}>
+          <Link href="/bookStore" className={`md:text-sm text-xs xl:text-xl  text-white hover:text-white/80 ${style.fontInter}`}>
             ONLINE BOOK STORE
           </Link>
           {/* <Link href="/book-registry" className="text-sm font-medium text-white hover:text-white/80">
             BOOK REGISTRY
           </Link> */}
-          <Link href="/about" className={`text-xl  text-white hover:text-white/80 ${style.fontInter}`}>
+          <Link href="/about" className={`md:text-sm text-xs xl:text-xl  text-white hover:text-white/80 ${style.fontInter}`}>
             ABOUT
           </Link>
-          <Link href="/contact" className={`text-xl  text-white hover:text-white/80 ${style.fontInter}`}>
+          <Link href="/contact" className={`md:text-sm text-xs xl:text-xl  text-white hover:text-white/80 ${style.fontInter}`}>
             CONTACT
           </Link>
-          <Link href="/blog" className={`text-xl  text-white hover:text-white/80 ${style.fontInter}`}>
+          <Link href="/blog" className={`md:text-sm text-xs xl:text-xl  text-white hover:text-white/80 ${style.fontInter}`}>
             BLOG
           </Link> 
         </nav>
@@ -213,7 +213,7 @@ export default function Navbar() {
           <div className="relative">
               <button
                   onClick={() => setKidsClubDropdownOpen(!kidsClubDropdownOpen)}
-                className="text-xl font-bold  text-white flex justify-between w-full px-4 py-2 border-b border-gray-300"
+                className="md:text-sm text-xs xl:text-xl font-bold  text-white flex justify-between w-full px-4 py-2 border-b border-gray-300"
               >
                 KIDS BOOK CLUB
                 <RightOutlined className={`transition-transform ${kidsClubDropdownOpen ? "rotate-90" : ""}`} />
@@ -238,19 +238,19 @@ export default function Navbar() {
                 </div>
               )}
             </div>
-            <Link href="/bookStore" className={`text-xl  text-white hover:text-white/80 ${style.fontInter}`}>
+            <Link href="/bookStore" className={`md:text-sm text-xs xl:text-xl  text-white hover:text-white/80 ${style.fontInter}`}>
             ONLINE BOOK STORE
           </Link>
           {/* <Link href="/book-registry" className="text-sm font-medium text-white hover:text-white/80">
             BOOK REGISTRY
           </Link> */}
-          <Link href="/about" className={`text-xl  text-white hover:text-white/80 ${style.fontInter}`}>
+          <Link href="/about" className={`md:text-sm text-xs xl:text-xl  text-white hover:text-white/80 ${style.fontInter}`}>
             ABOUT
           </Link>
-          <Link href="/contact" className={`text-xl  text-white hover:text-white/80 ${style.fontInter}`}>
+          <Link href="/contact" className={`md:text-sm text-xs xl:text-xl  text-white hover:text-white/80 ${style.fontInter}`}>
             CONTACT
           </Link>
-          <Link href="/blog" className={`text-xl  text-white hover:text-white/80 ${style.fontInter}`}>
+          <Link href="/blog" className={`md:text-sm text-xs xl:text-xl  text-white hover:text-white/80 ${style.fontInter}`}>
             BLOG
           </Link>
             <div className="flex flex-col space-y-3 pt-4">

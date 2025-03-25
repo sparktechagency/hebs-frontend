@@ -6,22 +6,22 @@ import aboutTop from "@/assets/aboutTop.png";
 const AboutBanner = () => {
   return (
     <div
-      className="relative w-full bg-top bg-no-repeat bg-cover mt-2"
+      className=" w-full bg-top bg-no-repeat bg-cover mt-2 "
       style={{ backgroundImage: `url(${frame2.src})` }}
     >
-      <div className="px-4 py-16 md:py-24 ">
-        <div className="container mx-auto max-w-7xl">
-          <div className="flex flex-col md:flex-row items-center mb:gap-6">
+      <div className="  py-8 ">
+        <div className="px-3 md:container  mx-auto ">   
+          <div className="flex flex-col lg:flex-row mb:gap-20">
             {/* Left content */}
-            <div className="w-full md:w-1/2 space-y-6">
+            <div className="lg:w-1/2 mt-6">
               <div>
                 <h3
-                  className={`text-[#FCB876] text-4xl md:text-9xl mb-1 ${style.fontRozha}`}
+                  className={`text-[#FCB876] text-4xl md:text-7xl xl:text-9xl  mb-1 ${style.fontRozha}`}
                 >
                   ABOUT
                 </h3>
                 <h2
-                  className={`text-4xl md:text-7xl  text-[#F37975] ${style.fontHotel}`}
+                  className={`text-4xl md:text-5xl xl:text-7xl  text-[#F37975] ${style.fontHotel}`}
                 >
                   illuminate muslim minds
                 </h2>
@@ -49,15 +49,15 @@ const AboutBanner = () => {
               </p>
             </div>
             {/* Right content - Books */}
-            <div className="w-full md:w-1/2 lg:w-1/2 relative mb:mt-32">
+            <div className=" relative  flex items-center justify-center">
               {/* Book 1 - I've Loved You Since Forever */}
               <div className="">
                 <Image
                   src={aboutTop}
                   alt="I've Loved You Since Forever book cover"
-                  width={610}
-                  height={570}
-                  className="rounded-md"
+                  width={500}
+                  height={500}
+                  className="rounded-md lg:ml-10"
                 />
               </div>
             </div>
