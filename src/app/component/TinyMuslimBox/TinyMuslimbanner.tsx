@@ -1,30 +1,32 @@
 /* eslint-disable react/no-unescaped-entities */
 import Image from "next/image";
-import packaging from "@/assets/illuminate packaging box 0-3 1.png"
+import packaging from "@/assets/illuminate packaging box 0-3.png"
 import styles from "@/app/styles.module.css"
 import Link from "next/link";
 export default function TinyHero() {
     return (
       <div className=" bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-24">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-24">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             {/* Left Column - Text Content */}
-            <div className="space-y-6">
-              <h1 className={`text-5xl md:text-6xl font-bold text-gray-900 tracking-tight ${styles.fontRozha}`}>Tiny Mu'mins Box</h1>
+            <div className="space-y-1">
+              <h1 className={`text-2xl md:text-4xl xl:text-6xl tracking-wide  text-gray-900  ${styles.fontRozha}`}>Tiny Mu'mins Box</h1>
   
-              <div className="space-y-4">
-                <p className={`text-2xl md:text-3xl text-gray-600  ${styles.poppins}`}>0-3 years</p>
+              <div className="space-y-1">
+                <p className={`text-xl md:text-2xl xl:text-3xl text-gray-600  ${styles.poppins}`}>0-3 years</p>
   
-                <div className="flex items-baseline space-x-2">
+                <div className="flex items-baseline  space-x-2">
                   <p className={`text-xl text-gray-70  ${styles.poppins}`}>Subscription cost per box |</p>
-                  <p className="text-2xl font-semibold text-gray-900">$14.99</p>
+                  <p className={`text-2xl font-semibold text-gray-900 ${styles.fontPoppins}`}>$14.99</p>
                 </div>
               </div>
               <Link href={"/name"}>
               
-              <button className={`inline-flex items-center px-8 py-3 text-lg font-medium text-white bg-red-400 hover:bg-red-500 rounded-full transition-colors duration-150  ${styles.fontPoppins}`}>
+             <div className="mt-2 mb-1"> 
+             <button className={`inline-flex items-center px-8 py-3 text-lg font-bold tracking-wide text-white bg-red-400 hover:bg-red-500 rounded-full transition-colors duration-150  ${styles.fontPoppins}`}>
                 Get Start
               </button>
+             </div>
               </Link>
   
               <p className={`text-sm text-[#181816] italic  ${styles.fontPoppins}`}>
@@ -42,7 +44,7 @@ export default function TinyHero() {
                         alt="The Quiet Book"
                         width={723}
                         height={366}
-                        className="object-cover rounded shadow-lg"
+                        className="object-cover rounded "
                       />
                     </div>
   
