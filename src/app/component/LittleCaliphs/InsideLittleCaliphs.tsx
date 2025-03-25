@@ -3,7 +3,7 @@ import inside2 from "@/assets/tiniInside2.png"
 import Image from "next/image";
 import styles from "@/app/styles.module.css"
 const InsideLittleCaliphs = () => {
-    return (
+    return (   
 <div className="bg-[#FFF7F3] py-16 text-center">
 <div className="relative z-10">
 <h2 className={`text-4xl  text-black tracking-wider  ${styles.fontRozha}`}>
