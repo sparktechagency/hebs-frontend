@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const Banner = () => {
   return (
-<div className="w-full bg-[#FDFBDF] px-4 py-8 md:py-12 lg:py-16">
+<div className="w-full bg-[#FDFBDF] px-4 py-28 lg:py-28">
       <section className="relative max-w-7xl mx-auto">
         <div className="flex flex-col-reverse md:flex-row items-center justify-between gap-8">
           {/* Left Content */}

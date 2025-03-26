@@ -13,7 +13,9 @@ const HomePage = () => {
     return (
         <div className="">
             <Banner/>
+
             <Hero/>
+
             <FunFact/>
             <Work/>
             <HadithSlider/>

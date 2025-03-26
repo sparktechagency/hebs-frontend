@@ -15,9 +15,9 @@ const FunFact = () => {
   
     }
     return (
-        <div className="bg-[#FFFFFF] ">
+        <div className="bg-[#FFFFFF] mt-6">
       <div className="bg-[#f08080] w-1/2 py-2 px-12   ">
-      <p  className={`m-0 py-6 text-end text-4xl  text-black md:text-5xl ${style.fontRozha}`}>
+      <p  className={`m-0 py-6 text-end text-4xl  text-white md:text-5xl ${style.fontRozha}`}>
         Fun Facts
       </p>
       </div>
