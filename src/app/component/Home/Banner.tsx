@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const Banner = () => {
   return (
-<div className="w-full bg-[#FDFBDF] px-4 py-28 lg:py-28">
+<div className="w-full bg-[#FDFBDF] px-4 py-12 lg:py-28">
       <section className="relative max-w-7xl mx-auto">
         <div className="flex flex-col-reverse md:flex-row items-center justify-between gap-8">
           {/* Left Content */}
@@ -13,10 +13,10 @@ const Banner = () => {
             <h1 className={`font-cursive text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-[#F37975] ${styles.fontHotel}`}>
               The Muslim Book Club
             </h1>
-            <p className={`text-[#1C1C1C] text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl ${styles.fontRozha} `}>
+            <p className={`text-[#1C1C1C] text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl ${styles.fontRozha} border-b-4 border-[#F37975] mt-3 pb-2`}>
               for exceptional young readers.
-              <div className="border-b-4 border-[#F37975] mt-3"></div>
             </p>
+              {/* <div className="border-b-4 border-[#F37975] mt-3"></div> */}
             <p className={`text-xm sm:text-sm md:text-base lg:text-lg xl:text-xl text-center md:text-left max-w-md lg:max-w-lg xl:max-w-xl ${styles.fontPoppins}`}>
               Help your readers grow with a personalized book selection curated monthly by our team of experts and shipped to your door.
             </p>
