@@ -199,7 +199,7 @@ export default function Navbar() {
           <div className="">
               <button
                   onClick={() => setKidsClubDropdownOpen(!kidsClubDropdownOpen)}
-                className="md:text-sm text-xs xl:text-xl font-bold  text-white flex justify-between w-full px-4 py-2 border-b border-gray-300"
+                className="md:text-sm text-xs xl:text-xl font-bold  text-white flex justify-between w-full py-2 border-b border-gray-300"
               >
                 KIDS BOOK CLUB
                 <RightOutlined className={`transition-transform ${kidsClubDropdownOpen ? "rotate-90" : ""}`} />
