@@ -195,8 +195,8 @@ export default function Navbar() {
             body: { background: "linear-gradient(to right, #f08080, #ffeb99)" },
           }}
         >
-          <div className="flex flex-col space-y-6 pt-4">
-          <div className="relative">
+          <div className="flex flex-col space-y-3 pt-0">
+          <div className="">
               <button
                   onClick={() => setKidsClubDropdownOpen(!kidsClubDropdownOpen)}
                 className="md:text-sm text-xs xl:text-xl font-bold  text-white flex justify-between w-full px-4 py-2 border-b border-gray-300"
@@ -204,21 +204,36 @@ export default function Navbar() {
                 KIDS BOOK CLUB
                 <RightOutlined className={`transition-transform ${kidsClubDropdownOpen ? "rotate-90" : ""}`} />
               </button>
+
+
               {kidsClubDropdownOpen && (
-                <div className="pl-4 mt-2 space-y-3">
-                  {ageCategories.map((category, index) => (
-                    <Link key={index} href={category.route} className={`text-[#FF7F7F] text-2xl  mb-1 uppercase ${style.fontRozha}`}>
-                      {category.name} <span className="font-normal text-[#F37975]">{category.range}</span>
-                    </Link>
-                  ))}
-                  <Link href="/gift" className="block text-base text-black hover:text-[#FF7F7F]">
-                  <button className="h-10 mb-3 w-48 rounded-full bg-white border border-black hover:bg-[#FF7F7F] hover:text-white hover:border-[#FF7F7F] transition-all">
-                  Give a Gift
-                </button>
-                  </Link>
-           
-                </div>
-              )}
+  <div className="pl-4 mt-2 space-y-3">
+     {kidsClubDropdownOpen && (
+        <div className="pl-4 mt-2 space-y-3">
+          {ageCategories?.map((category, index) => (
+            <Link
+              key={index}
+              href={category.route}
+              passHref
+              className="flex items-center group hover:opacity-80 transition-opacity"
+              onClick={() => {
+                // Use setTimeout to delay closing dropdown after navigation starts
+                setTimeout(() => {
+                  setKidsClubDropdownOpen(false);
+                }, 200); // Wait for 200ms to allow navigation to happen
+              }}
+            >
+              <RightOutlined className="text-white text-xs mr-2.5 transition-transform group-hover:translate-x-1" />
+              <span className="text-base font-semibold tracking-wide uppercase text-white">
+                {category.name} <span className="font-normal text-white">{category.range}</span>
+              </span>
+            </Link>
+          ))}
+        </div>
+      )}
+  </div>
+)}
+
             </div>
             <Link href="/bookStore" className={`md:text-sm text-xs xl:text-xl  text-white hover:text-white/80 ${style.fontInter}`}>
             ONLINE BOOK STORE
