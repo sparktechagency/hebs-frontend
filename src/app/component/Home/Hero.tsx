@@ -17,7 +17,7 @@ const Hero = () => {
       </div>
 
       {/* Hero Content - Increased Width for Better Layout */}
-      <div className="relative bg-[#FAF397] w-[90%] md:w-[750px] lg:w-[900px] xl:w-[1000px]  py-6 md:py-6 mx-auto">
+      <div className="relative bg-[#FAF397] w-[80%] md:w-[750px] lg:w-[900px] xl:w-[1000px]  py-6 md:py-6 mx-auto">
         <div className=" px-4 ">
           {/* Main Content */}
           <div className="relative z-10 text-center w-[70%] md:w-auto mx-auto">
@@ -80,7 +80,7 @@ const Hero = () => {
           </div>
         </div>
         {/* Left Image */}
-        <div className="absolute -top-5 lg:top-2 -left-9 lg:-left-14 xl:top-0 xl:bottom-7 xl:-left-28 2xl:-left-44 w-[130px] lg:w-[180px] xl:w-[200px] 2xl:w-[250px]">
+        <div className="absolute -top-5 lg:top-2 -left-11 lg:-left-14 xl:top-0 xl:bottom-7 xl:-left-28 2xl:-left-44 w-[130px] lg:w-[180px] xl:w-[200px] 2xl:w-[250px]">
           <Image
             src={img2}
             alt="My Prophet Muhammad - My Hero"

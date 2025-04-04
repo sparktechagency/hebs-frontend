@@ -2,10 +2,13 @@ import Image from "next/image";
 import bannerImg from "@/assets/BannerImage.png";
 import styles from "@/app/styles.module.css";
 import Link from "next/link";
-
+import frame1 from "@/assets/tinyMuminsFrame1.png"
 const Banner = () => {
+  // bg-[#FDFBDF]
   return (
-<div className="w-full bg-[#FDFBDF] px-4 py-12 lg:py-28">
+<div className="w-full  px-4 py-12 lg:py-28"
+  style={{ backgroundImage: `url(${frame1.src})` }}
+>
       <section className="relative max-w-7xl mx-auto">
         <div className="flex flex-col-reverse md:flex-row items-center justify-between gap-8">
           {/* Left Content */}
