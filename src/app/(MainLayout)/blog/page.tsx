@@ -7,7 +7,7 @@ import book2 from "@/assets/blog2.png"
 import book3 from "@/assets/blog3.png"
 import { FacebookOutlined, MailOutlined } from "@ant-design/icons";
 import FeatureBook from "@/app/component/Home/FeatureBook";
-
+import styles from "@/app/styles.module.css";
 const BlogPage = () => {
   return (
     <div>
@@ -16,7 +16,7 @@ const BlogPage = () => {
       </div>
       <div className="flex flex-col lg:flex-row gap-5 justify-center px-4 lg:px-0">
         {/* Left Column */}
-        <div className="text-black py-8 px-6 flex flex-col items-center text-center w-full lg:w-1/4">
+        <div className="text-black py-8 px-6 hidden md:flex flex-col items-center text-center w-full lg:w-1/4">
           {/* Connect Section */}
           <h2 className="text-orange-400 font-bold text-lg">CONNECT</h2>
           <div className="flex space-x-4 mt-2">
@@ -48,18 +48,18 @@ const BlogPage = () => {
           {/* First Article */}
           <div className="text-black py-16 px-6 flex flex-col items-center text-center relative mt-12">
             {/* Book Image */}
-            <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-40 h-40">
+            <div className="flex justify-center items-center   w-40 h-40">
               <Image src={bookCover} alt="My Sadaqah Jar is Empty" width={160} height={160} className="rounded-full" />
             </div>
 
             {/* Article Title */}
-            <h2 className="text-red-400 text-2xl font-bold max-w-2xl mt-16">
+            <h2 className={`text-red-400 text-3xl tracking-widest max-w-2xl mt-16 ${styles.fontPoppins}`}>
               TEACHING GENEROSITY: CREATING A CHARITY JAR WITH YOUR CHILD AFTER READING "MY SADAQAH JAR IS EMPTY"
             </h2>
 
             {/* Article Description */}
-            <p className="text-gray-400 max-w-3xl mt-4">
-              As parents, we strive to instill values of kindness, generosity, and empathy in our children. One effective and enjoyable way to teach these values is through stories and hands-on activities. At Illuminate Muslim Minds, we believe in the power of books to illuminate young minds and nurture Islamic morals. This month, we're excited to feature [...]
+            <p className={`text-gray-400 text-xl tracking-widest max-w-3xl mt-4 ${styles.fontPoppins}`}>
+              As parents, we strive to instill values of kindness, generosity, and empathy in our children. One effective and enjoyable way to teach these values is through stories and hands-on activities. At Illuminate Muslim Minds, we believe in the power of books to illuminate young minds and nurture Islamic morals. This month, we're excited to feature 
             </p>
 
             {/* View Post Button */}
@@ -74,13 +74,13 @@ const BlogPage = () => {
             </div>
 
             {/* Article Title */}
-            <h2 className="text-red-400 text-2xl font-bold max-w-2xl mt-16">
+            <h2 className={`text-red-400 text-3xl tracking-widest max-w-2xl mt-16 ${styles.fontPoppins}`}>
               TEACHING GENEROSITY: CREATING A CHARITY JAR WITH YOUR CHILD AFTER READING "MY SADAQAH JAR IS EMPTY"
             </h2>
 
             {/* Article Description */}
-            <p className="text-gray-400 max-w-3xl mt-4">
-              As parents, we strive to instill values of kindness, generosity, and empathy in our children. One effective and enjoyable way to teach these values is through stories and hands-on activities. At Illuminate Muslim Minds, we believe in the power of books to illuminate young minds and nurture Islamic morals. This month, we're excited to feature [...]
+            <p className={`text-gray-400 text-xl tracking-widest max-w-3xl mt-4 ${styles.fontPoppins}`}>
+              As parents, we strive to instill values of kindness, generosity, and empathy in our children. One effective and enjoyable way to teach these values is through stories and hands-on activities. At Illuminate Muslim Minds, we believe in the power of books to illuminate young minds and nurture Islamic morals. This month, we're excited to feature 
             </p>
 
             {/* View Post Button */}
@@ -94,14 +94,14 @@ const BlogPage = () => {
               <Image src={book3} alt="My Sadaqah Jar is Empty" width={160} height={160} className="rounded-full" />
             </div>
 
-            {/* Article Title */}
-            <h2 className="text-red-400 text-2xl font-bold max-w-2xl mt-16">
+             {/* Article Title */}
+             <h2 className={`text-red-400 text-3xl tracking-widest max-w-2xl mt-16 ${styles.fontPoppins}`}>
               TEACHING GENEROSITY: CREATING A CHARITY JAR WITH YOUR CHILD AFTER READING "MY SADAQAH JAR IS EMPTY"
             </h2>
 
             {/* Article Description */}
-            <p className="text-gray-400 max-w-3xl mt-4">
-              As parents, we strive to instill values of kindness, generosity, and empathy in our children. One effective and enjoyable way to teach these values is through stories and hands-on activities. At Illuminate Muslim Minds, we believe in the power of books to illuminate young minds and nurture Islamic morals. This month, we're excited to feature [...]
+            <p className={`text-gray-400 text-xl tracking-widest max-w-3xl mt-4 ${styles.fontPoppins}`}>
+              As parents, we strive to instill values of kindness, generosity, and empathy in our children. One effective and enjoyable way to teach these values is through stories and hands-on activities. At Illuminate Muslim Minds, we believe in the power of books to illuminate young minds and nurture Islamic morals. This month, we're excited to feature 
             </p>
 
             {/* View Post Button */}
