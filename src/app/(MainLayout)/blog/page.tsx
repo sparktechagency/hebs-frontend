@@ -18,7 +18,7 @@ const BlogPage = () => {
         {/* Left Column */}
         <div className="text-black py-8 px-6 hidden md:flex flex-col items-center text-center w-full lg:w-1/4">
           {/* Connect Section */}
-          <h2 className="text-orange-400 font-bold text-lg">CONNECT</h2>
+          <h2 className={`text-orange-400 font-bold text-2xl ${styles.fontJosefin}`}>CONNECT</h2>
           <div className="flex space-x-4 mt-2">
             <FacebookOutlined className="text-red-400 text-xl" />
             <MailOutlined className="text-red-400 text-xl" />
@@ -26,8 +26,8 @@ const BlogPage = () => {
 
           {/* Categories Section */}
           <div className="bg-yellow-100 p-4 mt-6 w-60 text-black rounded-lg shadow-md">
-            <h3 className="font-semibold">CATEGORIES</h3>
-            <ul className="mt-2 space-y-2 text-sm">
+            <h3 className={`tracking-widest ${styles.fontPoppins}`}>CATEGORIES</h3>
+            <ul className={`mt-2 space-y-2 text-sm ${styles.fontPoppins}`}>
               <li>Babies & Toddlers</li>
               <li>Category Two</li>
               <li>Category Three</li>
@@ -37,7 +37,7 @@ const BlogPage = () => {
           </div>
 
           {/* Search Section */}
-          <h3 className="text-gray-400 mt-6">SEARCH</h3>
+          <h3 className={`text-gray-400 mt-6 tracking-widest ${styles.fontPoppins}`}>SEARCH</h3>
           <div className="w-full mt-2">
             <Input placeholder="Search..." className="bg-black text-white border-gray-600" />
           </div>
@@ -63,7 +63,7 @@ const BlogPage = () => {
             </p>
 
             {/* View Post Button */}
-            <Button className="mt-6 bg-red-500 border-none text-white px-6 py-2 rounded">+ VIEW POST</Button>
+            <Button className={`mt-6 bg-red-500 border-none text-white px-6 py-2 rounded font-thin ${styles.fontJost} tracking-widest`}>+ VIEW POST</Button>
           </div>
 
           {/* Second Article */}
@@ -84,7 +84,7 @@ const BlogPage = () => {
             </p>
 
             {/* View Post Button */}
-            <Button className="mt-6 bg-red-500 border-none text-white px-6 py-2 rounded">+ VIEW POST</Button>
+            <Button className={`mt-6 bg-red-500 border-none text-white px-6 py-2 rounded font-thin ${styles.fontJost} tracking-widest`}>+ VIEW POST</Button>
           </div>
 
           {/* Third Article */}
@@ -104,8 +104,8 @@ const BlogPage = () => {
               As parents, we strive to instill values of kindness, generosity, and empathy in our children. One effective and enjoyable way to teach these values is through stories and hands-on activities. At Illuminate Muslim Minds, we believe in the power of books to illuminate young minds and nurture Islamic morals. This month, we're excited to feature 
             </p>
 
-            {/* View Post Button */}
-            <Button className="mt-6 bg-red-500 border-none text-white px-6 py-2 rounded">+ VIEW POST</Button>
+            {/* View Post Button */}  
+              <Button className={`mt-6 bg-red-500 border-none text-white px-6 py-2 rounded font-thin ${styles.fontJost} tracking-widest`}>+ VIEW POST</Button>
           </div>
         </div>
       </div>
