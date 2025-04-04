@@ -14,7 +14,7 @@ import style from "@/app/styles.module.css";
 const FooterPage = () => {
   return (
     <div className="bg-[#F37975] px-4 pt-16 pb-8 text-white md:px-8 ">
-      <div className="container mx-auto xl:max-w-7xl md:px-8">
+      <div className="container mx-auto text-center md:text-start md:px-8">
         {/* Main Footer Content */}
         <div className="flex flex-col lg:flex-row mt-0 md:mt-12 lg:mt-12  gap-8 s border-t border-[#E8E8E8] py-5">
           <div className="lg:w-[20%]">
@@ -61,8 +61,8 @@ const FooterPage = () => {
           </div>
 
           {/* Info */}
-          <div className="w-[40%] lg:w-[40%]">
-            <div className="mb-8 flex gap-4">
+          <div className="w-[100%] lg:w-[40%] flex flex-col justify-center items-center">
+            <div className="mb-8 flex  gap-4">
               <Link href="/login">
                 <button
                   className={`py-3 w-[100px] md:w-[120px] font-bold rounded-full border-none bg-white text-[#f08080] hover:bg-white/90 ${style.fontJosefin}`}

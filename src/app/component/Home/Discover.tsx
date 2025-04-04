@@ -13,7 +13,7 @@ const  Discover=()=> {
     >
       <div className="px-4 py-16 md:py-24">
         <div className="container mx-auto xl:max-w-7xl">
-          <div className="flex flex-col md:flex-row items-center gap-8 md:gap-16">
+          <div className="flex flex-col-reverse md:flex-row items-center gap-8 md:gap-16">
             {/* Left content */}
             <div className="w-full md:w-1/2 space-y-6">
               <div>
