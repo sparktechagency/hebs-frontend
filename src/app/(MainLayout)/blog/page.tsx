@@ -58,8 +58,8 @@ const BlogPage = () => {
             </h2>
 
             {/* Article Description */}
-            <p className={`text-gray-400 text-xl tracking-widest max-w-3xl mt-4 ${styles.fontPoppins}`}>
-              As parents, we strive to instill values of kindness, generosity, and empathy in our children. One effective and enjoyable way to teach these values is through stories and hands-on activities. At Illuminate Muslim Minds, we believe in the power of books to illuminate young minds and nurture Islamic morals. This month, we're excited to feature 
+            <p className={`text-gray-400 text-xl md:text-sm tracking-widest max-w-3xl mt-4 ${styles.fontPoppins}`}>
+              As parents, we strive to instill values of kindness, generosity, and empathy in our children. One effective and enjoyable way to teach these values is through stories and hands-on activities. At Illuminate Muslim Minds, we believe in the power of books to illuminate young minds and nurture Islamic morals. This month, we're excited to feature […]
             </p>
 
             {/* View Post Button */}
@@ -79,8 +79,8 @@ const BlogPage = () => {
             </h2>
 
             {/* Article Description */}
-            <p className={`text-gray-400 text-xl tracking-widest max-w-3xl mt-4 ${styles.fontPoppins}`}>
-              As parents, we strive to instill values of kindness, generosity, and empathy in our children. One effective and enjoyable way to teach these values is through stories and hands-on activities. At Illuminate Muslim Minds, we believe in the power of books to illuminate young minds and nurture Islamic morals. This month, we're excited to feature 
+            <p className={`text-gray-400 text-xl md:text-sm tracking-widest max-w-3xl mt-4 ${styles.fontPoppins}`}>
+              As parents, we strive to instill values of kindness, generosity, and empathy in our children. One effective and enjoyable way to teach these values is through stories and hands-on activities. At Illuminate Muslim Minds, we believe in the power of books to illuminate young minds and nurture Islamic morals. This month, we're excited to feature […]
             </p>
 
             {/* View Post Button */}
@@ -100,8 +100,8 @@ const BlogPage = () => {
             </h2>
 
             {/* Article Description */}
-            <p className={`text-gray-400 text-xl tracking-widest max-w-3xl mt-4 ${styles.fontPoppins}`}>
-              As parents, we strive to instill values of kindness, generosity, and empathy in our children. One effective and enjoyable way to teach these values is through stories and hands-on activities. At Illuminate Muslim Minds, we believe in the power of books to illuminate young minds and nurture Islamic morals. This month, we're excited to feature 
+            <p className={`text-gray-400 md:text-sm text-xl tracking-widest max-w-3xl mt-4 ${styles.fontPoppins}`}>
+              As parents, we strive to instill values of kindness, generosity, and empathy in our children. One effective and enjoyable way to teach these values is through stories and hands-on activities. At Illuminate Muslim Minds, we believe in the power of books to illuminate young minds and nurture Islamic morals. This month, we're excited to feature […]
             </p>
 
             {/* View Post Button */}  
