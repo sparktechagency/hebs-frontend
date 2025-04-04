@@ -10,7 +10,7 @@ const Banner = () => {
   style={{ backgroundImage: `url(${frame1.src})` }}
 >
       <section className="relative max-w-7xl mx-auto">
-        <div className="flex flex-col-reverse md:flex-row items-center justify-between gap-8">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-8">
           {/* Left Content */}
           <div className="w-full md:w-[55%] text-center md:text-left flex flex-col justify-center items-center md:items-start space-y-4 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
             <h1 className={`font-cursive text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-[#F37975] ${styles.fontHotel}`}>
@@ -24,14 +24,16 @@ const Banner = () => {
               Help your readers grow with a personalized book selection curated monthly by our team of experts and shipped to your door.
             </p>
             <Link href="/name">
-              <button className={`h-10 sm:h-12 rounded-full bg-[#F37975] px-4 sm:px-6 md:px-8  text-base sm:text-lg md:text-xl hover:bg-[#e57373] text-white ${styles.fontPoppins}`}>
+             <div className="flex  justify-center ">
+             <button className={`absolute md:static top-[480px] md:top-0 tracking-wider  rounded-full bg-[#F37975] p-2 md:p-3  text-base sm:text-lg md:text-xl hover:bg-[#e57373] text-white ${styles.fontPoppins}`}>
                 START TODAY
               </button>
+             </div>
             </Link>
           </div>
           
           {/* Right Content - Book Covers */}
-          <div className="w-full md:w-[45%] flex justify-center px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
+          <div className="w-full mb-6 md:mb-0 md:w-[45%] flex justify-center px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
             <Image 
               src={bannerImg} 
               alt="Book Club Banner" 
