@@ -26,7 +26,7 @@ export default function NewsletterSignup() {
         {/* Center Content */}
         <div className="flex flex-col md:flex-row items-center ">
           {/* Image Section (Tablet in the center) */}
-          <div className="w-full md:w-1/2 flex justify-center">
+          <div className="w-1/2 flex justify-center">
             <div className="p-2 rounded-lg border-8 border-black">   
               <Image
                 src={tab}
@@ -40,22 +40,27 @@ export default function NewsletterSignup() {
 
           {/* Form Section */}
           <div className="w-full md:w-1/2 px-4 py-8 md:px-6 md:py-10 text-center md:text-left">
-            <h2 className={`text-2xl md:text-3xl lg:text-4xl xl:text-6xl  text-[#F37975] ${style.fontJost}`}>
+         <div className="flex justify-center items-center w-[95%]">
+         <h2 className={`text-3xl md:text-4xl lg:text-5xl xl:text-6xl  text-[#F37975] ${style.fontJost}`}>
               JOIN OUR NEWSLETTER.
             </h2>
+         </div>
             <p className={`${style.fontPoppins} text-gray-700 mt-2`}>
               Stay up to date on upcoming fun activities and educational material.
             </p>
 
+              <label className={`block text-black  my-1 text-xs text-end ${style.fontPoppins}`}>
+              * indicates required
+              </label>
             <div className="mt-4">
-              <label className={`block text-gray-800 font-medium ${style.fontPoppins}`}>
+              <label className={`block text-gray-800 font-medium text-start ${style.fontPoppins}`}>
                 Email Address <span className="text-red-500">*</span>
               </label>
               <Input placeholder="Enter your email" className="mt-1 rounded-md" />
             </div>
 
             <div className="mt-4">
-              <label className={`${style.fontPoppins} block text-gray-800 font-medium`}>First Name</label>
+              <label className={`${style.fontPoppins} block text-gray-800 font-medium text-start`}>First Name</label>
               <Input placeholder="Enter your first name" className="mt-1 rounded-md" />
             </div>
 

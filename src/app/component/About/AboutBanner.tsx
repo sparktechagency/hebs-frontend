@@ -11,7 +11,7 @@ const AboutBanner = () => {
     >
       <div className="  py-8 ">
         <div className="px-3 md:container  mx-auto ">   
-          <div className="flex flex-col lg:flex-row mb:gap-20">
+          <div className="flex flex-col-reverse lg:flex-row mb:gap-20">
             {/* Left content */}
             <div className="lg:w-1/2 mt-6">
               <div>
@@ -49,7 +49,7 @@ const AboutBanner = () => {
               </p>
             </div>
             {/* Right content - Books */}
-            <div className=" relative  flex items-center justify-center">
+            <div className="  flex items-center justify-center">
               {/* Book 1 - I've Loved You Since Forever */}
               <div className="">
                 <Image
