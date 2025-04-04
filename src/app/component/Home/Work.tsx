@@ -43,11 +43,11 @@ const Work = () => {
         <div className="bg-[#FBD5D4] w-full py-2">
 <div className='max-w-7xl mx-auto'>
 <div className='py-8 relative z-10 '>
-<h1 className={`text-center text-5xl   ${styles.fontRozha}`}>How it   <span className="relative inline-block mr-3">
+<h1 className={`text-center text-3xl md:text-5xl   ${styles.fontRozha}`}>How it   <span className="relative inline-block mr-3">
 Works
       <span className="absolute left-0 bottom-0 w-full h-4 sm:h-6 md:h-[25px] bg-[#FAF397] -z-10"></span>
     </span></h1>
-<p className={`text-center text-2xl  ${styles.fontPopins}`}>Receive five books. Only buy the ones you love.</p>
+<p className={`text-center text-xl md:text-2xl  ${styles.fontPopins}`}>Receive five books. Only buy the ones you love.</p>
 </div>
 
 
