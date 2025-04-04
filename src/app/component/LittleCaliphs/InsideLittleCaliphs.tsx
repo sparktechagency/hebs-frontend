@@ -16,18 +16,33 @@ const InsideLittleCaliphs = () => {
      <p className={`text-black mt-2 max-w-lg mx-auto  ${styles.fontPoppins}`}>
        Peek inside a sample box—your reader’s bundle will be personalized just for them.
      </p>
-     <div className="flex flex-wrap justify-center gap-12 mt-12 ">  
+     <div className="flex flex-row justify-center gap-12 mt-12 p-3">  
        {/* Left Group */}
        <div className=" ">
          <div className="" />
-         <Image src={inside1} alt="Bilal Cooks Daal" width={512} height={512} className="" />
-      
+   <div >
+   <Image src={inside1} alt="Bilal Cooks Daal" width={512} height={512}           className="w-[500px]"/>
+   </div>
+         <p className={`${styles.fontInter}`}>
+         Five hand-picked books, including engaging picture books, activity books, and easy readers.
+            </p>
        </div>
        
        {/* Right Group */}
-       <div className=" flex flex-wrap gap-6 justify-center">
+       <div className=" ">
          <div className="" />
-         <Image src={inside2} alt="Bilal Cooks Daal" width={512} height={512} className="" />
+         <div>
+            <Image
+              src={inside2}
+              alt="Bilal Cooks Daal"
+              width={512}
+              height={512}
+              className="w-[500px]"
+            />
+            <p className={`${styles.fontInter} mt-11 md:mt-0`}>
+              Stickers, frameable artwork, and surprise extras.
+            </p>
+          </div>
  
        </div>
      </div>

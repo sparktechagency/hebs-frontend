@@ -16,18 +16,34 @@ const InsideDeen = () => {
            <p className={`text-black mt-2 max-w-lg mx-auto  ${styles.fontPoppins}`}>
              Peek inside a sample box—your reader’s bundle will be personalized just for them.
            </p>
-           <div className="flex flex-wrap justify-center gap-12 mt-12 ">  
+           <div className="flex flex-row justify-center gap-2 mt-12 ">  
              {/* Left Group */}
              <div className=" ">
                <div className="" />
-               <Image src={inside1} alt="Bilal Cooks Daal" width={512} height={512} className="" />
-            
+               <Image src={inside1} alt="Bilal Cooks Daal" width={512} height={512}  className="w-[500px]" />
+ {/* <div className="w-[50%]">
+ <p className={`${styles.fontInter} `}>
+Inside the Deen Discoverers Box
+Peek inside a sample box—your reader’s bundle will be personalized just for them.
+ Five hand-picked books, including engaging activity books, chapters books, and easy reader books.</p>
+ </div> */}
              </div>
              
              {/* Right Group */}
-             <div className=" flex flex-wrap gap-6 justify-center">
+             <div className=" ">
                <div className="" />
-               <Image src={inside2} alt="Bilal Cooks Daal" width={512} height={512} className="" />
+               <div>
+            <Image
+              src={inside2}
+              alt="Bilal Cooks Daal"
+              width={512}
+              height={512}
+              className="w-[500px]"
+            />
+            <p className={`${styles.fontInter} mt-11 md:mt-0`}>
+              Stickers, frameable artwork, and surprise extras.
+            </p>
+          </div>
        
              </div>
            </div>

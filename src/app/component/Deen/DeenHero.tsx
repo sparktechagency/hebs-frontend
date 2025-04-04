@@ -7,9 +7,9 @@ export default function DeenHero() {
     return (
       <div className=" bg-white">
         <div className={`container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-24 }`}>
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div className="flex flex-col-reverse md:flex-row gap-12 justify-center items-center">
             {/* Left Column - Text Content */}
-            <div className="space-y-1">
+            <div className="space-y-1 text-center">
               <h1 className={`text-2xl md:text-4xl xl:text-6xl tracking-wide  text-gray-900  ${styles.fontRozha}`}>Deen Discoverers Box</h1>
   
               <div className="space-y-1">
@@ -23,8 +23,8 @@ export default function DeenHero() {
               <Link href={"/name"}>
               
              <div className="mt-2 mb-1"> 
-             <button className={`inline-flex items-center px-8 py-3 text-lg font-bold tracking-wide text-white bg-red-400 hover:bg-red-500 rounded-full transition-colors duration-150  ${styles.fontPoppins}`}>
-                Get Start
+             <button className={`inline-flex items-center px-8 py-3 text-lg font-bold  uppercase tracking-widest text-white bg-red-400 hover:bg-red-500 rounded-full transition-colors duration-150  ${styles.fontPoppins}`}>
+                Get Started
               </button>
              </div>   
               </Link>
