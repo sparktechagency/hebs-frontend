@@ -12,6 +12,7 @@ export default function Navbar() {
   const [user, setUser] = useState(true);
   const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
   const [kidsClubDropdownOpen, setKidsClubDropdownOpen] = useState(false);
+  const [kidsClubMobileDropdownOpen, setKidsClubMobileDropdownOpen] = useState(false);
 
   const showDrawer = () => setOpen(true);
   const onClose = () => setOpen(false);
@@ -110,6 +111,9 @@ export default function Navbar() {
   )}
 </div>
 
+          <Link href="/" className={`md:text-sm text-xs xl:text-xl  text-white hover:text-white/80 ${style.fontInter}`}>
+            Home
+          </Link>
           <Link href="/bookStore" className={`md:text-sm text-xs xl:text-xl  text-white hover:text-white/80 ${style.fontInter}`}>
             ONLINE BOOK STORE
           </Link>
@@ -198,7 +202,7 @@ export default function Navbar() {
           <div className="flex flex-col space-y-3 pt-0">
           <div className="">
               <button
-                  onClick={() => setKidsClubDropdownOpen(!kidsClubDropdownOpen)}
+                  onClick={() => setKidsClubMobileDropdownOpen(!kidsClubMobileDropdownOpen)}
                 className="md:text-sm text-xs xl:text-xl font-bold  text-white flex justify-between w-full py-2 border-b border-gray-300"
               >
                 KIDS BOOK CLUB
@@ -206,35 +210,26 @@ export default function Navbar() {
               </button>
 
 
-              {kidsClubDropdownOpen && (
-  <div className="pl-4 mt-2 space-y-3">
-     {kidsClubDropdownOpen && (
+
+     {kidsClubMobileDropdownOpen && (
         <div className="pl-4 mt-2 space-y-3">
           {ageCategories?.map((category, index) => (
-            <Link
-              key={index}
-              href={category.route}
-              passHref
-              className="flex items-center group hover:opacity-80 transition-opacity"
-              onClick={() => {
-                // Use setTimeout to delay closing dropdown after navigation starts
-                setTimeout(() => {
-                  setKidsClubDropdownOpen(false);
-                }, 200); // Wait for 200ms to allow navigation to happen
-              }}
-            >
-              <RightOutlined className="text-white text-xs mr-2.5 transition-transform group-hover:translate-x-1" />
-              <span className="text-base font-semibold tracking-wide uppercase text-white">
+        <Link key={index} href={category.route} className="flex items-center group hover:opacity-80 transition-opacity">
+              <RightOutlined className={`md:text-sm text-xs xl:text-xl  text-white hover:text-white/80 ${style.fontInter}`}/>
+              <span className={`md:text-sm text-xs xl:text-xl  text-white hover:text-white/80 ${style.fontInter}`}>
                 {category.name} <span className="font-normal text-white">{category.range}</span>
               </span>
             </Link>
           ))}
         </div>
       )}
-  </div>
-)}
+
+
 
             </div>
+            <Link href="/" className={`md:text-sm text-xs xl:text-xl  text-white hover:text-white/80 ${style.fontInter}`}>
+            Home
+          </Link>
             <Link href="/bookStore" className={`md:text-sm text-xs xl:text-xl  text-white hover:text-white/80 ${style.fontInter}`}>
             ONLINE BOOK STORE
           </Link>
@@ -250,6 +245,8 @@ export default function Navbar() {
           <Link href="/blog" className={`md:text-sm text-xs xl:text-xl  text-white hover:text-white/80 ${style.fontInter}`}>
             BLOG
           </Link>
+      
+
             <div className="flex flex-col space-y-3 pt-4">
               <Link href="/login">
                 <button    className="h-12 rounded-full bg-[#F37975] font-bold px-8 text-lg hover:bg-[#e57373] text-white">
