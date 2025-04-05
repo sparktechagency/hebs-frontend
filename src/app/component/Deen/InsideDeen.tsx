@@ -18,9 +18,10 @@ const InsideDeen = () => {
            </p>
            <div className="flex flex-row justify-center gap-2 mt-12 ">  
              {/* Left Group */}
-             <div className=" ">
-               <div className="" />
-               <Image src={inside1} alt="Bilal Cooks Daal" width={512} height={512}  className="w-[500px]" />
+             <div className=" w-[500px]">
+             <Image src={inside1} alt="Bilal Cooks Daal" width={512} height={512}  className="w-[500px]" />
+             <p className={`${styles.fontInter} mt-3 md:mt-0`}> Five hand-picked books, including engaging activity books, chapters books, and easy reader books.</p>
+            
  {/* <div className="w-[50%]">
  <p className={`${styles.fontInter} `}>
 Inside the Deen Discoverers Box
@@ -40,7 +41,7 @@ Peek inside a sample box—your reader’s bundle will be personalized just for 
               height={512}
               className="w-[500px]"
             />
-            <p className={`${styles.fontInter} mt-11 md:mt-0`}>
+            <p className={`${styles.fontInter} mt-3 md:mt-0`}>
               Stickers, frameable artwork, and surprise extras.
             </p>
           </div>

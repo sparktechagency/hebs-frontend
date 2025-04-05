@@ -12,7 +12,7 @@ const BlogPage = () => {
   return (
     <div>
       <div>
-        <Image alt="blogImg" src={blogbg} height={450} className="w-full object-cover" />
+        <Image alt="blogImg" src={blogbg} height={450} className=" w-full object-cover" />
       </div>
       <div className="flex flex-col lg:flex-row gap-5 justify-center px-4 lg:px-0">
         {/* Left Column */}

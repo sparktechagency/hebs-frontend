@@ -8,11 +8,11 @@ import Link from 'next/link';
 import styles from "@/app/styles.module.css"
 export default function HowItWorks() {
   return (
-    <div className="bg-[#FBD5D4] py-8 text-center">
+    <div className="bg-[#FBD5D4] p-8 text-center">
       <h2 className={`text-3xl font-bold text-black  ${styles.fontRozha}`}>How it Works</h2>
       <p className={`text-gray-700 mt-2  ${styles.fontPoppins}`}>Receive five books. Only buy the ones you love.</p>
        
-      <div className="bg-white border border-red-400 rounded-lg py-6 px-8 mt-8 mx-auto max-w-7xl"> 
+      <div className="bg-white border-4 border-red-400 rounded-lg py-6 px-8 mt-8 mx-auto max-w-7xl"> 
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 justify-center items-center">
           {/* Feature 1 */}
           <div className="text-center">
