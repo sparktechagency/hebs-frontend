@@ -15,7 +15,7 @@ export default function OurTeam() {
             {/* Text Content */}
             <div className=" text-center md:text-left py-5 md:w-[50%]">
               <p
-                className={`text-black text-xl sm:text-2xl  ${style.fontJost}`}
+                className={`text-black text-2xl  ${style.fontJost}`}
               >
                 Founders: <span>Khader Zahdan and Eanara Ghouleh</span>
               </p>

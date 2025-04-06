@@ -15,11 +15,11 @@ const  Discover=()=> {
         <div className="container mx-auto xl:max-w-7xl">
           <div className="flex flex-col-reverse md:flex-row items-center gap-8 md:gap-16">
             {/* Left content */}
-            <div className="w-full md:w-1/2 space-y-6">
+            <div className="w-full md:w-1/2 space-y-2">
               <div>
              
-                <h3 className={`text-[#F37975] font-bold text-xl mb-1 ${style.fontJost}`}>AGES 7-8</h3>
-                <h2 className={`text-3xl md:text-4xl  text-[#333333] ${style.fontJost}`}>
+                <h3 className={`text-[#F37975] font-bold text-2xl mb-1 ${style.fontJost}`}>AGES 7-8</h3>
+                <h2 className={`text-3xl md:text-4xl font-bold  text-[#333333] ${style.fontJost}`}>
                 Deen Discoverers
                 </h2>
               </div>  

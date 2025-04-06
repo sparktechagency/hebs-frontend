@@ -97,7 +97,7 @@ export default function Navbar() {
 
             {/* Gifts Section */}
             <div className="">
-              <h2 className={`text-[#FF7F7F] text-xl font-extrabold mb-3 uppercase tracking-wide ${style.fontPoppins}`}>Gifts</h2>
+              <h2 className={`text-[#FF7F7F] text-xl font-extrabold mb-3 uppercase tracking-wide ${style.fontRozha}`}>Gifts</h2>
               <Link href={"/gift"}>
                 <button className={`h-10 w-48 rounded-full text-white bg-[#FF7F7F] uppercase tracking-wide ${style.fontPoppins}`}>
                   Give a Gift

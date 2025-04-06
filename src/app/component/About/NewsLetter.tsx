@@ -6,6 +6,7 @@ import { Input} from "antd";
 import style from "@/app/styles.module.css";
 import img1 from "@/assets/Image.png";
 import img2 from "@/assets/Image (1).png";
+
 import tab from "@/assets/tab.png";
 
 export default function NewsletterSignup() {
@@ -41,7 +42,7 @@ export default function NewsletterSignup() {
           {/* Form Section */}
           <div className="w-full md:w-1/2 px-4 py-8 md:px-6 md:py-10 text-center md:text-left">
          <div className="flex justify-center items-center w-[95%]">
-         <h2 className={`text-3xl md:text-4xl lg:text-5xl xl:text-6xl  text-[#F37975] ${style.fontJost}`}>
+         <h2 className={`text-3xl md:text-4xl lg:text-5xl   text-[#F37975] ${style.fontJost}`}>
               JOIN OUR NEWSLETTER.
             </h2>
          </div>
@@ -71,12 +72,12 @@ export default function NewsletterSignup() {
         </div>
 
         {/* Right Book Image (Hidden on small screens) */}
-        <div className="absolute md:-right-36 lg:-right-64 xl:-right-72 bottom-0 hidden md:block ">
+        <div className="absolute md:-right-36 lg:-right-64 xl:-right-80 bottom-0 hidden md:block ">
           <Image
             src={img2}
             alt="Planet Omar"
-            width={350}
-            height={470}
+            width={520}
+            height={520}
              className="object-contain rotate-[-5deg]"
           />
         </div>
