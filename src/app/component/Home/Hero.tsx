@@ -48,14 +48,14 @@ const Hero = () => {
             className={`space-y-4 text-lg md:text-xl mx-auto ${style.poppins}`}
           >
             <p
-              className={`text-lg 2xl:text-2xl text-center font-medium ${style.poppins} block mb-4`}
+              className={`text-xl 2xl:text-2xl text-center font-bold ${style.poppins} block mb-4`}
             >
               Our team tailors each book to your reader&apos;s age and
               interests.
             </p>
 
             <div className="md:w-[600px] mx-auto">
-              <div className="flex flex-col justify-start items-start space-y-2">
+              <div className="flex flex-col justify-start items-start ">
                 <div className="flex items-start">
                   <span className="mr-2">–</span>
                   <p className="leading-snug text-[16px] xl:text-lg text-center">
@@ -80,7 +80,7 @@ const Hero = () => {
           </div>
         </div>
         {/* Left Image */}
-        <div className="absolute -top-5 lg:top-2 -left-11 lg:-left-14 xl:top-0 xl:bottom-7 xl:-left-28 2xl:-left-44 w-[130px] lg:w-[180px] xl:w-[200px] 2xl:w-[250px]">
+        <div className="absolute -top-5 lg:top-2 -left-11 lg:-left-28 xl:top-0 xl:bottom-7 xl:-left-28 2xl:-left-44 w-[120px]  lg:w-[250px] xl:w-[250px] 2xl:w-[250px]">
           <Image
             src={img2}
             alt="My Prophet Muhammad - My Hero"
@@ -92,7 +92,7 @@ const Hero = () => {
         </div> 
 
         {/* Right Image */}
-        <div className="absolute bottom-0 -right-7 lg:-right-12 -top-5 lg:top-2 xl:top-0 xl:bottom-0 xl:-right-28 2xl:-right-44 w-[120px] lg:w-[180px] xl:w-[200px] 2xl:w-[250px] ">
+        <div className="absolute bottom-0 -right-7 lg:-right-16 -top-5 lg:top-2 xl:top-0 xl:bottom-0 xl:-right-28 2xl:-right-44 w-[120px] lg:w-[250px] xl:w-[250px] 2xl:w-[250px] ">
           <Image
             src={img1}
             alt="Planet Omar"

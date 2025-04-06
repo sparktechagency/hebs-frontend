@@ -63,7 +63,7 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden lg:flex lg:items-center space-x-1 lg:space-x-2 xl:space-x-6">
+        <nav className="hidden lg:flex lg:items-center space-x-1 lg:space-x-5 font-bold drop xl:space-x-6">
           {/* Kids Book Club Dropdown */}
           <div className="relative kids-club-dropdown">
   <button
@@ -111,9 +111,9 @@ export default function Navbar() {
   )}
 </div>
 
-          <Link href="/" className={`md:text-sm text-xs xl:text-xl  text-white hover:text-white/80 ${style.fontInter}`}>
+          {/* <Link href="/" className={`md:text-sm text-xs xl:text-xl  text-white hover:text-white/80 ${style.fontInter}`}>
             Home
-          </Link>
+          </Link> */}
           <Link href="/bookStore" className={`md:text-sm text-xs xl:text-xl  text-white hover:text-white/80 ${style.fontInter}`}>
             ONLINE BOOK STORE
           </Link>
@@ -227,9 +227,9 @@ export default function Navbar() {
 
 
             </div>
-            <Link href="/" className={`md:text-sm text-xs xl:text-xl  text-white hover:text-white/80 ${style.fontInter}`}>
+            {/* <Link href="/" className={`md:text-sm text-xs xl:text-xl  text-white hover:text-white/80 ${style.fontInter}`}>
             Home
-          </Link>
+          </Link> */}
             <Link href="/bookStore" className={`md:text-sm text-xs xl:text-xl  text-white hover:text-white/80 ${style.fontInter}`}>
             ONLINE BOOK STORE
           </Link>

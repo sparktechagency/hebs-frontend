@@ -1,10 +1,10 @@
 'use client'
 import styles from '@/app/styles.module.css'
 import Image from 'next/image';
-import img1 from '@/assets/work5.png'
-import img2 from '@/assets/work6.png'
-import img3 from '@/assets/work7.png'
-import img4 from '@/assets/work8.png'
+import img1 from '@/assets/work9 (2).png'
+import img2 from '@/assets/work10 (2).png'
+import img3 from '@/assets/donate2.png'
+import img4 from '@/assets/freeReturn.png'
 
 
 import React from 'react';
