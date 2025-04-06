@@ -48,7 +48,7 @@ const InsideTinyMuslim = () => {
               height={512}
               className="w-[500px]"
             />
-            <p className={`${styles.fontInter} mt-5 md:mt-0`}>
+            <p className={`${styles.fontInter} text-center mt-5 md:mt-0`}>
               Stickers, frameable artwork, and surprise extras.
             </p>
           </div>

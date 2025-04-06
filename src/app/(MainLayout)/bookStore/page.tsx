@@ -9,6 +9,7 @@ import Image from "next/image"
 import { useState } from "react"
 import {  useRouter } from "next/navigation"
 import Link from "next/link"
+import { useGetAllBooksQuery } from "@/redux/features/books/bookApi"
 
 const allProducts = Array(15)
   .fill(null)
@@ -51,7 +52,8 @@ function BookStore() {
   const [searchQuery, setSearchQuery] = useState("")
   const router = useRouter()
   const pageSize = 10
-
+  const { data: products,  } = useGetAllBooksQuery(undefined);
+  console.log("products===>",products);
   // Filter products based on search query
   const filteredProducts = allProducts.filter((product) =>
     product.title.toLowerCase().includes(searchQuery.toLowerCase()),
