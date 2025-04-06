@@ -9,11 +9,11 @@ export default function TinyHero() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-24">
           <div className="flex flex-col-reverse md:flex-row gap-12 justify-center items-center">
             {/* Left Column - Text Content */}
-            <div className="space-y-1 text-center">
-              <h1 className={`text-2xl md:text-4xl xl:text-6xl tracking-wide  text-gray-900  ${styles.fontRozha}`}>Tiny Mu'mins Box</h1>
+            <div className="space-y-1 text-start">
+              <h1 className={`text-2xl md:text-4xl xl:text-5xl tracking-wide inl  text-gray-900  ${styles.fontRozha}`}>Tiny Mu'mins Box</h1>
   
               <div className="space-y-1">
-                <p className={`text-xl md:text-2xl xl:text-3xl text-gray-600  ${styles.poppins}`}>0-3 years</p>
+                <p className={`text-xl md:text-xl xl:text-2xl text-gray-600  ${styles.poppins}`}>0-3 years</p>
   
                 <div className="flex items-baseline  space-x-2">
                   <p className={`text-xl text-gray-70  ${styles.poppins}`}>Subscription cost per box |</p>

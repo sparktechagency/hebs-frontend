@@ -93,8 +93,6 @@ export default function Navbar() {
 
           {/* Right Side - Kids Book Clubs & Gifts */}
           <div className="w-full md:w-1/2 lg:w-1/2 flex flex-col space-y-12">
-    
-
             {/* Gifts Section */}
             <div className="">
               <h2 className={`text-[#FF7F7F] text-xl font-extrabold mb-3 uppercase tracking-wide ${style.fontRozha}`}>Gifts</h2>

@@ -16,12 +16,12 @@ const IslamicInside = () => {
            <p className={`text-black mt-2 max-w-lg mx-auto  ${styles.fontPoppins}`}>
              Peek inside a sample box—your reader’s bundle will be personalized just for them.
            </p>
-           <div className="flex flex-row p-3 justify-center gap-12 mt-12 ">  
+           <div className="flex flex-col lg:flex-row justify-center items-center gap-2 mt-12 p-3">  
              {/* Left Group */}
-             <div className=" ">
-               <div className="" />
-               <Image src={inside1} alt="Bilal Cooks Daal" width={512} height={512}  className="w-[500px]" />
-               <p className={`${styles.fontInter}`}>
+             <div className="flex flex-col items-center text-center lg:w-[500px]">
+              
+               <Image src={inside1} alt="Bilal Cooks Daal" width={512} height={512} />
+               <p className={` w-full ${styles.fontInter}`}>
                Five hand-picked books, including middle grade fiction, chapter books, and activity books.
           </p>
              </div>
@@ -29,15 +29,15 @@ const IslamicInside = () => {
              {/* Right Group */}
              <div className=" ">
                <div className="" />
-               <div>
+               <div className="flex flex-col items-center text-center lg:w-[500px]">
             <Image
               src={inside2}
               alt="Bilal Cooks Daal"
               width={512}
               height={512}
-              className="w-[500px]"
+        
             />
-            <p className={`${styles.fontInter} mt-11 md:mt-0`}>
+            <p className={`w-full ${styles.fontInter} mt-11 md:mt-0`}>
               Stickers, frameable artwork, and surprise extras.
             </p>
           </div>
