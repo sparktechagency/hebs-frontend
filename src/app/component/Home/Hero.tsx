@@ -31,7 +31,7 @@ const Hero = () => {
             </div>
 
             <p
-              className={` text-2xl lg:text-4xl xl:text-5xl hidden md:block ${style.fontRozha} mb-4`}
+              className={` lg:text-4xl xl:text-5xl hidden md:block ${style.fontRozha} mb-4`}
             >
               Expertly selected kids&apos; books
               <br />
@@ -92,7 +92,7 @@ const Hero = () => {
         </div> 
 
         {/* Right Image */}
-        <div className="absolute bottom-0 -right-16 md:-right-16 lg:-right-28 -top-5 lg:top-2 xl:top-0 xl:bottom-0 xl:-right-28 2xl:-right-44 w-[180px] lg:w-[400px] xl:w-[400px] 2xl:w-[400px] ">
+        <div className="absolute bottom-0  -right-8 md:-right-16 lg:-right-28 -top-3 lg:top-2 xl:top-0 xl:bottom-0 xl:-right-28 2xl:-right-44 w-[180px] lg:w-[400px] xl:w-[400px] 2xl:w-[400px] ">
           <Image
             src={img1}
             alt="Planet Omar"

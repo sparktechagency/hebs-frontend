@@ -25,7 +25,7 @@ const Banner = () => {
             </p>
             <Link href="/name">
              <div className="flex  justify-center ">
-             <button className={`absolute md:static top-[480px] md:top-0 tracking-wider  rounded-full bg-[#F37975] p-2 md:p-3  text-base sm:text-lg md:text-xl hover:bg-[#e57373] text-white ${styles.fontPoppins}`}>
+             <button className={`absolute md:static top-[465px] md:top-0 tracking-wider  rounded-full bg-[#F37975] p-2 md:p-3  text-base sm:text-lg md:text-xl hover:bg-[#e57373] text-white ${styles.fontPoppins}`}>
                 START TODAY
               </button>
              </div>
