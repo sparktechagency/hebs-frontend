@@ -92,12 +92,12 @@ const Hero = () => {
         </div> 
 
         {/* Right Image */}
-        <div className="absolute bottom-0 -right-7 lg:-right-16 -top-5 lg:top-2 xl:top-0 xl:bottom-0 xl:-right-28 2xl:-right-44 w-[120px] lg:w-[250px] xl:w-[250px] 2xl:w-[250px] ">
+        <div className="absolute bottom-0 -right-16 md:-right-16 lg:-right-28 -top-5 lg:top-2 xl:top-0 xl:bottom-0 xl:-right-28 2xl:-right-44 w-[180px] lg:w-[400px] xl:w-[400px] 2xl:w-[400px] ">
           <Image
             src={img1}
             alt="Planet Omar"
-            width={250}
-            height={250}
+            width={500}
+            height={500}
             className="object-contain"
           />
         </div> 
