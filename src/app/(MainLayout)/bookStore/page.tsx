@@ -6,7 +6,7 @@ import { HeartIcon } from "lucide-react"
 import { Pagination } from "antd"
 import Image from "next/image"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import {  useRouter } from "next/navigation"
 import Link from "next/link"
 import { useGetAllBooksQuery } from "@/redux/features/books/bookApi"
@@ -47,13 +47,31 @@ const allProducts = Array(15)
   ])
 
 function BookStore() {
+  const { data, isLoading,error } = useGetAllBooksQuery(undefined);
+    // Now you can access:
+    const books = data?.data ?? [];
+    const meta = data?.meta;
+    const message = data?.message;
+    console.log("data===>",data);
+    console.log("Books:", books);
+    console.log("Meta:", meta);
+    console.log("Message:", message);
   const [currentPage, setCurrentPage] = useState(1)
   const [favorites, setFavorites] = useState<number[]>([])
   const [searchQuery, setSearchQuery] = useState("")
   const router = useRouter()
   const pageSize = 10
-  const { data: products,  } = useGetAllBooksQuery(undefined);
-  console.log("products===>",products);
+  useEffect(() => {
+    if (error) {
+      console.error("Query Error:", error);
+    }
+  }, [error]);
+  if (isLoading) return <div>Loading...</div>;
+
+
+
+
+
   // Filter products based on search query
   const filteredProducts = allProducts.filter((product) =>
     product.title.toLowerCase().includes(searchQuery.toLowerCase()),
