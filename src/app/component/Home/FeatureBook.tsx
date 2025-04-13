@@ -1,14 +1,16 @@
-import wild from '@/assets/wild.png'
+// import wild from '@/assets/wild.png'
 import color from '@/assets/colorMe.png'
 import animal from '@/assets/animals.png'
 import eid from '@/assets/eid.png'
 import songBook from '@/assets/songBook2.png'
+import prophetSunnah from '@/assets/the_prophet_sunnah.png'
+// import nameMean from '@/assets/my_name_mean.png'
 import Image from 'next/image'
 
 const images = [
     {
       id: 1,
-      img: wild, 
+      img: prophetSunnah, 
     },
     {
       id: 2,
@@ -38,8 +40,8 @@ const FeatureBook = () => {
             <Image
               src={image.img}
               alt="book"
-              width={300} 
-              height={400} 
+              width={500} 
+              height={500} 
               layout="intrinsic" 
               objectFit="cover" // Ensures images fit their container
             />
@@ -52,8 +54,8 @@ const FeatureBook = () => {
             <Image
               src={image.img}
               alt="book"
-              width={300} 
-              height={400} 
+              width={500} 
+              height={500} 
               layout="intrinsic" 
               objectFit="cover" 
             />
