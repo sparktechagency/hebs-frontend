@@ -6,13 +6,13 @@ import Link from "next/link";
 export default function IslamicHero() {
     return (
       <div className=" bg-white">
-      <div className={`container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-24 }`}>
+      <div className={`container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-24 `}>
         <div className="flex flex-col-reverse md:flex-row gap-12 justify-center items-center ">
           {/* Left Column - Text Content */}
           <div className="space-y-1 text-start">
             <h1 className={`text-2xl md:text-4xl xl:text-5xl tracking-wide  text-gray-900  ${styles.fontRozha}`}>Islamic Explorers Box</h1>
 
-            <div className="space-y-1">
+            <div className="space-y-1">  
               <p className={`text-xl md:text-xl xl:text-2xl text-gray-600  ${styles.poppins}`}>9-11 years</p>
 
               <div className="flex items-baseline  space-x-2">

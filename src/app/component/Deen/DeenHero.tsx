@@ -10,7 +10,7 @@ export default function DeenHero() {
           <div className="flex flex-col-reverse md:flex-row gap-12 justify-center items-center">
             {/* Left Column - Text Content */}
             <div className="space-y-1 text-start">
-              <h1 className={`text-2xl md:text-3xl xl:text-4xl tracking-wide  text-gray-900  ${styles.fontRozha}`}>Deen Discoverers Box</h1>
+              <h1 className={`text-2xl md:text-4xl xl:text-5xl tracking-wide  text-gray-900  ${styles.fontRozha}`}>Deen Discoverers Box</h1>
   
               <div className="space-y-1">
                 <p className={`text-xl md:text-xl xl:text-2xl text-gray-600  ${styles.poppins}`}>7-8 years</p>
