@@ -20,7 +20,7 @@ const InsideTinyMuslim = () => {
         Peek inside a sample box—your reader’s bundle will be personalized just
         for them.
       </p>
-      <div className="flex flex-col lg:flex-row justify-center items-center gap-2 mt-12 p-3">
+      <div className="flex flex-col md:flex-row justify-center items-center gap-2 mt-12 p-3">
         {/* Left Group */}
         <div className="flex flex-col items-center text-center lg:w-[500px] ">
         
@@ -48,7 +48,7 @@ const InsideTinyMuslim = () => {
               height={512}
               className="w-[500px]"
             />
-            <p className={`${styles.fontInter} text-center mt-5 md:mt-0`}>
+            <p className={`${styles.fontInter} md:ml-20 md:mt-16 lg:mt-0`}>
               Stickers, frameable artwork, and surprise extras.
             </p>
           </div>

@@ -29,8 +29,7 @@ const InsideLittleCaliphs = () => {
        </div>
        
        {/* Right Group */}
-       <div className=" ">
-         <div className="" />
+   
          <div className="flex flex-col items-center text-center lg:w-[500px]">
             <Image
               src={inside2}
@@ -39,12 +38,12 @@ const InsideLittleCaliphs = () => {
               height={512}
              
             />
-            <p className={`${styles.fontInter} mt-11 md:mt-0`}>
+            <p className={`${styles.fontInter} md:ml-20 md:mt-16 lg:mt-0`}>
               Stickers, frameable artwork, and surprise extras.
             </p>
           </div>
  
-       </div>
+   
      </div>
    </div>
     );
