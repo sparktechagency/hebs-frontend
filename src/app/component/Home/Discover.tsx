@@ -19,7 +19,7 @@ const  Discover=()=> {
               <div>
              
                 <h3 className={`text-[#F37975] font-bold text-2xl mb-1 ${style.fontJost}`}>AGES 7-8</h3>
-                <h2 className={`text-3xl md:text-4xl font-bold  text-[#333333] ${style.fontJost}`}>
+                <h2 className={`text-3xl font-bold md:text-4xl text-[#333333] ${style.fontJost}`}>
                 Deen Discoverers
                 </h2>
               </div>  
@@ -72,7 +72,8 @@ const  Discover=()=> {
                 {/* <Link href={"/deen"}> */}
                 <Link href={"/name"}>
                 
-                <button className={`bg-[#F08080] hover:bg-[#E57373] text-black font-bold py-3 px-6 rounded-full transition-colors ${style.fontInter}`}>
+          
+                <button className={`bg-[#F08080] hover:bg-[#E57373] text-black font-bold py-3 px-6 rounded-full uppercase  transition-colors ${style.fontJost}`}>
                 Get Deen Discoverers Box
                 </button>
                 </Link>

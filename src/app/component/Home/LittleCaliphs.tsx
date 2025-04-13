@@ -32,7 +32,7 @@ const LittleCalips =() =>{
             <div className="w-full md:w-1/2 space-y-2">
               <div>
                 <h3 className={`text-[#F37975] font-bold text-2xl mb-1 ${style.fontJost}`}>AGES 4-6</h3>
-                <h2 className={`text-3xl md:text-4xl font-bold  text-[#333333] ${style.fontJost}`}>
+                <h2 className={`text-3xl font-bold md:text-4xl text-[#333333] ${style.fontJost}`}>
                 Little Caliphs
                 </h2>
               </div>
@@ -86,9 +86,10 @@ catchy rhyming books, and exciting Islamic tales!
                 <Link href={"/name"}>
                 {/* <Link href={"/littleCaliphsBox"}> */}
                 
-                <button className={`bg-[#FAF397]  shadow-2xl hover:bg-[#E57373] text-black font-bold py-3 px-6 rounded-full transition-colors ${style.fontInter}`}>
-                Get Little Caliphs Box
+                <button className={`bg-[#FAF397]  shadow-2xl  text-black font-bold py-3 px-6 rounded-full uppercase  ${style.fontJost}`}>
+                Get Little Caliphs Box  
                 </button>
+       
                 </Link>
               </div>
             </div>

@@ -36,7 +36,7 @@ const Islamic =() =>{
                 >
                   AGES 9-11
                 </h3>
-                <h2 className={`text-3xl font-bold md:text-4xl  text-[#333333] ${style.fontJost}`}>
+                <h2 className={`text-3xl font-bold md:text-4xl text-[#333333] ${style.fontJost}`}>
                   Islamic Explorers
                 </h2>
               </div>
@@ -100,8 +100,8 @@ const Islamic =() =>{
                 {/* <Link href={"/islamic"}> */}
                 <Link href={"/name"}>
                 
-                <button className={`bg-[#FAF397]  shadow-2xl hover:bg-[#E57373] text-black font-bold py-3 px-6 rounded-full transition-colors ${style.fontInter}`}>
-                  Get Islamic Explorers Box
+                <button className={`bg-[#FAF397]  shadow-2xl  text-black font-bold py-3 px-6 rounded-full uppercase  ${style.fontJost}`}>
+                Get Islamic Explorers Box
                 </button>
                 </Link>
               </div>
