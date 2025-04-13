@@ -22,8 +22,8 @@ const Hero = () => {
           {/* Main Content */}
           <div className="relative z-10 text-center w-[70%] md:w-auto mx-auto">
             <div className="mb-5 md:hidden">
-            <h3 className={`text-xl md:hidden ${style.fontRozha}`}>Expertly selected kids</h3>
-            <h3 className={`text-xl md:hidden ${style.fontRozha}`}>books <span className={`relative inline-block`}>for every
+            <h3 className={`text-xl md:hidden ${style.fontRozha}`}>Expertly selected </h3>
+            <h3 className={`text-xl md:hidden ${style.fontRozha}`}>kids books <span className={`relative inline-block`}>for every
             <span className={`absolute left-0 bottom-0 w-full h-3 md:h-[15px] bg-red-400 -z-10 `}></span>
             </span>
             </h3>
@@ -31,7 +31,7 @@ const Hero = () => {
             </div>
 
             <p
-              className={` lg:text-4xl xl:text-5xl hidden md:block ${style.fontRozha} mb-4`}
+              className={` md:text-4xl xl:text-5xl hidden md:block ${style.fontRozha} mb-4`}
             >
               Expertly selected kids&apos; books
               <br />
@@ -48,29 +48,29 @@ const Hero = () => {
             className={`space-y-4 text-lg md:text-xl mx-auto ${style.poppins}`}
           >
             <p
-              className={`text-xl 2xl:text-2xl text-center font-bold ${style.poppins} block mb-4`}
+              className={`text-xl 2xl:text-xl text-center font-semibold ${style.poppins} block mb-4`}
             >
               Our team tailors each book to your reader&apos;s age and
               interests.
             </p>
 
-            <div className="md:w-[600px] mx-auto">
+            <div className="w-[70%] sm:w-[510px] mx-auto">
               <div className="flex flex-col justify-start items-start ">
                 <div className="flex items-start">
                   <span className="mr-2">–</span>
-                  <p className="leading-snug text-[16px] xl:text-lg text-center">
+                  <p className="leading-snug text-[16px] xl:text-lg text-start">  
                     Discover Islamic and English stories that fit their interest
                   </p>
                 </div>
                 <div className="flex items-start">
                   <span className="mr-2">–</span>
-                  <p className="leading-snug text-[16px] xl:text-lg text-center">
+                  <p className="leading-snug text-[16px] xl:text-lg text-start">
                     Increase knowledge, vocabulary, and comprehension
                   </p>
                 </div>
                 <div className="flex items-start">
                   <span className="mr-2">–</span>
-                  <p className="leading-snug text-[16px] xl:text-lg text-center">
+                  <p className="leading-snug text-[16px] xl:text-lg text-start">
                     Feel at ease that the English books are Islamically
                     appropriate
                   </p>
@@ -80,7 +80,7 @@ const Hero = () => {
           </div>
         </div>
         {/* Left Image */}
-        <div className="absolute -top-5 lg:top-2 -left-11 lg:-left-28 xl:top-0 xl:bottom-7 xl:-left-28 2xl:-left-44 w-[120px]  lg:w-[250px] xl:w-[250px] 2xl:w-[250px]">
+        <div className="absolute -top-5 lg:top-2 -left-10 lg:-left-28 xl:top-0 xl:bottom-7 xl:-left-28 2xl:-left-44 w-[120px]  lg:w-[250px] xl:w-[250px] 2xl:w-[250px]">
           <Image
             src={img2}
             alt="My Prophet Muhammad - My Hero"
@@ -92,7 +92,7 @@ const Hero = () => {
         </div> 
 
         {/* Right Image */}
-        <div className="absolute bottom-0  -right-8 md:-right-16 lg:-right-28 -top-3 lg:top-2 xl:top-0 xl:bottom-0 xl:-right-28 2xl:-right-44 w-[180px] lg:w-[400px] xl:w-[400px] 2xl:w-[400px] ">
+        <div className="absolute   -right-7 lg:-right-24 -top-3 lg:top-2 xl:top-0 xl:bottom-0 xl:-right-28 2xl:-right-44 w-[180px]  lg:w-[400px] xl:w-[400px] 2xl:w-[400px] ">
           <Image
             src={img1}
             alt="Planet Omar"
