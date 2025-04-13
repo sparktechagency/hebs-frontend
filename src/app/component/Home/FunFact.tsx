@@ -21,7 +21,7 @@ const FunFact = () => {
           Fun Facts
         </p>
       </div>
-      <section className=" max-w-7xl mx-auto ">
+      <section className=" container mx-auto ">
         <div className="container  mx-auto p-4 ">
           <div className="relative">
             {/* Left Column */}

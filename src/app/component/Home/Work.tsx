@@ -51,12 +51,12 @@ Works
 </div>
 
 
-        <section className="relative w-[90%]  mx-auto border-4 border-red-500 bg-[#FFFFFF] px-4 py-6">
+        <section className="relative w-[100%]  mx-auto border-4 border-red-500 bg-[#FFFFFF] px-4 py-6">
   <div className="">
 
   
     {/* Features Grid */}
-    <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+    <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
       {features.map((feature, index) => (
         <div key={index} className="flex flex-col items-center text-center">
           <div className="mb-6 h-48 w-48">

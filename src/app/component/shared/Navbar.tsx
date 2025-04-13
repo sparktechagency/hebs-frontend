@@ -53,7 +53,7 @@ export default function Navbar() {
   ]
 
   return (
-    <header className="w-full bg-gradient-to-r from-[#f08080] to-[#ffeb99] lg:px-4 py-1  md:px-10 ">
+    <header className="w-full bg-gradient-to-r from-[#f08080] to-[#ffeb99] px-4 py-1  md:px-10 ">
       <div className="mx-auto flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center">
@@ -130,7 +130,7 @@ export default function Navbar() {
         </nav>
 
         {/* User Profile and Cart */}
-        <div className="hidden lg:flex lg:space-x-1 lg:items-center space-x-3">
+        <div className="hidden lg:flex lg:space-x-1 items-center space-x-3">
           {!user && (
             <Link href="/login">
               <button  onClick={() => setUser(!user)} className="h-12 rounded-full bg-[#F37975] font-bold px-8 text-lg hover:bg-[#e57373] text-white">
