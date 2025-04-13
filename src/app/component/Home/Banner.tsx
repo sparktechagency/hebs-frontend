@@ -33,7 +33,7 @@ const Banner = () => {
           </div>
           
           {/* Right Content - Book Covers */}
-          <div className="w-full mb-6 md:mb-0 md:w-[45%] flex justify-center px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
+          <div className="w-full mb-6 md:mb-0 md:w-[48%] flex justify-center px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
             <Image 
               src={bannerImg} 
               alt="Book Club Banner" 
