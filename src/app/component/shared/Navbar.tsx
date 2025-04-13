@@ -73,7 +73,7 @@ export default function Navbar() {
     KIDS BOOK CLUB ▼
   </button>
   {kidsClubDropdownOpen && (
-    <div className="absolute z-40 bg-white w-[600px] shadow-lg mt-2"> 
+    <div className="absolute z-40 bg-white w-[650px] shadow-lg mt-2"> 
       <div className="container mx-auto px-4 py-10">
         <div className="flex flex-col md:flex-row justify-between gap-12">
           {/* Left Side - Age Categories */}
@@ -95,7 +95,7 @@ export default function Navbar() {
           <div className="w-full md:w-1/2 lg:w-1/2 flex flex-col space-y-12">
             {/* Gifts Section */}
             <div className="">
-              <h2 className={`text-[#FF7F7F] text-xl font-extrabold mb-3 uppercase tracking-wide ${style.fontRozha}`}>Gifts</h2>
+              <h2 className={`text-[#FF7F7F] text-2xl  mb-1 uppercase ${style.fontRozha}`}>Gifts</h2>
               <Link href={"/gift"}>
                 <button className={`h-10 w-48 rounded-full text-white bg-[#FF7F7F] uppercase tracking-wide ${style.fontPoppins}`}>
                   Give a Gift
@@ -124,9 +124,9 @@ export default function Navbar() {
           <Link href="/contact" className={`md:text-sm text-xs xl:text-xl  text-white hover:text-white/80 ${style.fontInter}`}>
             CONTACT
           </Link>
-          <Link href="/blog" className={`md:text-sm text-xs xl:text-xl  text-white hover:text-white/80 ${style.fontInter}`}>
+          {/* <Link href="/blog" className={`md:text-sm text-xs xl:text-xl  text-white hover:text-white/80 ${style.fontInter}`}>
             BLOG
-          </Link> 
+          </Link>  */}
         </nav>
 
         {/* User Profile and Cart */}
@@ -240,9 +240,9 @@ export default function Navbar() {
           <Link href="/contact" className={`md:text-sm text-xs xl:text-xl  text-white hover:text-white/80 ${style.fontInter}`}>
             CONTACT
           </Link>
-          <Link href="/blog" className={`md:text-sm text-xs xl:text-xl  text-white hover:text-white/80 ${style.fontInter}`}>
+          {/* <Link href="/blog" className={`md:text-sm text-xs xl:text-xl  text-white hover:text-white/80 ${style.fontInter}`}>
             BLOG
-          </Link>
+          </Link> */}
       
 
             <div className="flex flex-col space-y-3 pt-4">
