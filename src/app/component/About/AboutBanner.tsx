@@ -6,22 +6,22 @@ import aboutTop from "@/assets/aboutTop.png";
 const AboutBanner = () => {
   return (
     <div
-      className=" w-full bg-top bg-no-repeat bg-cover md:py-6 lg:py-1 lg:mt-1 "
+      className=" w-full bg-top bg-no-repeat bg-cover py-6 lg:py-1 lg:mt-1 "
       style={{ backgroundImage: `url(${frame2.src})` }}
     >
       <div className="  lg:py-1 ">
         <div className=" max-w-7xl  mx-auto ">   
-          <div className="flex flex-col-reverse md:flex-row px-6 lg:gap-5">
+          <div className="flex flex-col-reverse md:flex-row px-6 md:gap-3 lg:gap-5">
             {/* Left content */}
-            <div className="lg:w-1/2 lg:mt-1  w-[70%] ">
+            <div className="md:w-1/2  lg:mt-1  w-[100%] ">
               <div>
                 <h3
-                  className={`text-[#FCB876] text-6xl lg:text-7xl xl:text-9xl  lg:mb-1 ${style.fontRozha}`}
+                  className={`text-[#FCB876] text-4xl md:text-6xl lg:text-7xl xl:text-9xl  lg:mb-1 ${style.fontRozha}`}
                 >
                   ABOUT
                 </h3>
                 <h2
-                  className={`text-3xl md:text-5xl xl:text-7xl  text-[#F37975] ${style.fontHotel}`}
+                  className={`text-2xl md:text-5xl xl:text-7xl  text-[#F37975] ${style.fontHotel}`}
                 >
                   illuminate muslim minds
                 </h2>
@@ -35,7 +35,7 @@ const AboutBanner = () => {
 
               <p
               // text-[#333333]
-                className={`text-base lg:text-lg text-black  ${style.fontPoppins}`}
+                className={`text-[14px] md:text-base lg:text-lg text-black  ${style.fontPoppins}`}
               >
                 Illuminate Muslim Minds is dedicated to fostering a lifelong
                 love for reading by offering a carefully curated selection of
