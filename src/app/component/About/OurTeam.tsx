@@ -10,18 +10,18 @@ export default function OurTeam() {
     <div className="w-full">
       {/* Team Member 1 */}
       <section className="px-4 sm:px-6 md:px-10 py-16 md:py-24 bg-[#FEECDE]">
-        <div className="max-w-7xl mx-auto">
+        <div className="container mx-auto">
           <div className="flex  flex-col-reverse md:flex-row gap-8 md:gap-16 items-center">
             {/* Text Content */}
             <div className=" text-center md:text-left py-5 md:w-[50%]">
               <p
-                className={`text-black text-2xl  ${style.fontJost}`}
+                className={`text-black text-3xl  ${style.fontJost}`}
               >
                 Founders: <span>Khader Zahdan and Eanara Ghouleh</span>
               </p>
-              <p className={`${style.fontJost} text-lg sm:text-xl font-bold`}>
+              <p className={`${style.fontJost} text-2xl font-bold`}>
                 <span className="text-[#F37975]">CEO:</span>{" "}
-                <span className="text-[#ff8a8a]">Eanara Ghouleh</span>
+                <span className="text-[#F37975]">Eanara Ghouleh</span>
               </p>
 
               <p
@@ -65,7 +65,7 @@ export default function OurTeam() {
 
       {/* Team Member 2 */}
       <section className="px-4 sm:px-6 md:px-10 py-16 md:py-24 bg-[#FDFBDF]">
-        <div className="max-w-7xl mx-auto">
+        <div className="container mx-auto">
           <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-center flex-wrap-reverse">
             {/* Image */}
             <div className="flex justify-center md:justify-start">
@@ -81,7 +81,7 @@ export default function OurTeam() {
             {/* Text Content */}
             <div className="space-y-6 text-center md:text-left">
               <p
-                className={`text-[#F37975] sm:text-xl font-bold  text-xl   ${style.fontPoppins}`}
+                className={`text-[#F37975] text-2xl font-bold    ${style.fontPoppins}`}
               >
                 Chief Operating Officer: Heba Morad
               </p>
@@ -107,12 +107,12 @@ export default function OurTeam() {
 
       {/* Team Member 3 */}
       <section className="px-4 sm:px-6 md:px-10 py-16 md:py-24 bg-[#FEECDE]">
-        <div className="max-w-7xl mx-auto">
+        <div className="container mx-auto">
           <div className="flex  flex-col-reverse md:flex-row gap-8 md:gap-16 items-center">
             {/* Text Content */}
             <div className="space-y-6 text-center md:text-left md:w-[50%]">
               <p
-                className={`text-[#F37975] sm:text-xl font-bold  text-xl   ${style.fontPoppins}`}
+                className={`text-[#F37975]  font-bold  text-2xl   ${style.fontPoppins}`}
               >
                 Social Media and Logistics Coordinator: Nadean Ghouleh
               </p>
