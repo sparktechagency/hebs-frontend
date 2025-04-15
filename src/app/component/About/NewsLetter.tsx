@@ -7,14 +7,14 @@ import style from "@/app/styles.module.css";
 import img1 from "@/assets/Image.png";
 import img2 from "@/assets/Image (1).png";
 
-import tab from "@/assets/tab.png";
+import tab from "@/assets/tabUpdated.png";
 
 export default function NewsletterSignup() {
   return (
     <div className="flex items-center justify-center bg-[#ffffff] py-16 relative">
       <div className="bg-[#FEECDE] p-8 md:w-[800px]  max-w-7xl flex flex-col md:flex-row items-center relative rounded-lg shadow-lg  ">
         {/* Left Book Image (Hidden on small screens) */}
-        <div className="absolute lg:-left-72 md:-left:36 xl:-left-80 bottom-0 hidden md:block ">
+        <div className="absolute md:-left-[262px] lg:-left-72  xl:-left-80 bottom-0 hidden md:block ">
           <Image
             src={img1}
             alt="My Prophet Muhammad - My Hero"
@@ -27,14 +27,14 @@ export default function NewsletterSignup() {
         {/* Center Content */}
         <div className="flex flex-col md:flex-row items-center ">
           {/* Image Section (Tablet in the center) */}
-          <div className="w-1/2 flex justify-center">
-            <div className="p-2 rounded-lg border-8 border-black">   
+          <div className=" flex justify-center">
+            <div className="p-2 rounded-lg ">   
               <Image
                 src={tab}
                 alt="Newsletter Promo"
                 className="rounded-lg"
-                height={450}
-                width={450}
+                height={500}
+                width={500}
               />
             </div>
           </div>
@@ -72,7 +72,7 @@ export default function NewsletterSignup() {
         </div>
 
         {/* Right Book Image (Hidden on small screens) */}
-        <div className="absolute md:-right-36 lg:-right-64 xl:-right-80 bottom-0 hidden md:block ">
+        <div className="absolute md:-right-[300px] lg:-right-80 bottom-0 hidden md:block ">
           <Image
             src={img2}
             alt="Planet Omar"
