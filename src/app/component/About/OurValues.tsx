@@ -29,28 +29,29 @@ const values = [
 
 export default function ValuesSection() {
   return (
-    <div className="bg-[#FDFBDF] " >
+    <div className="bg-[#FDFBDF] relative z-10 py-5" >
 
-    <section className="max-w-7xl mx-auto px-4 py-8 ">
+    <section className="container mx-auto px-4 py- ">
       <div className=" ">
         {/* Border */}
         {/* <div className="absolute inset-0 border border-red-200 rounded-2xl " /> */}
 
         {/* Content */}
-          <h2 className={`${style.fontRozha} text-4xl font-bold text-center mb-5 relative`}> 
+          <h2 className={`${style.fontRozha} text-4xl font-bold text-center mb-5 `}> 
             Our 
             <span className="relative inline-block ml-3">
             Values
                   <span className="absolute left-0 bottom-0 w-full h-4 sm:h-6 md:h-[15px] bg-red-400 -z-10"></span> 
                 </span>
           </h2>
-        <div className="relative p-6 bg-[#FFFFFF] border-4 border-[#FF0000]  z-10">
+    
+        <div className=" p-6 bg-[#FFFFFF] border-4 border-[#FF0000]  ">
 
 
           <div className="grid md:grid-cols-3 gap-8 md:gap-12">
             {values.map((value, index) => (
               <div key={index} className="flex flex-col items-center text-center">
-                <div className="w-48 h-48 mb-6 relative">
+                <div className="w-48 h-48 mb-6 ">
                   <Image
                     src={value.image}
                     alt={value.title}
