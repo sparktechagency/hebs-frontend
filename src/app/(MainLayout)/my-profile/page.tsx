@@ -20,7 +20,7 @@ const MyProfilePage=()=> {
   })
 
   return (
-    <div className="flex flex-col md:flex-row min-h-screen bg-gray-50 md:p-16">
+    <div className="flex flex-col md:flex-row min-h-screen bg-gray-50 ">
       {/* Sidebar */}
       <aside className="w-full md:w-64 bg-white border-r border-gray-200">
         <nav className="p-4">
