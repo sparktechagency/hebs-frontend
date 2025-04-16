@@ -16,7 +16,7 @@ const Islamic =() =>{
           <div className="flex flex-col md:flex-row items-center gap-8 md:gap-16">
             {/* Left content */}
        
-            <div className="w-full md:w-1/2 lg:w-1/2 relative ">
+            <div className="w-full md:w-1/2 lg:w-1/2 -top-44 md:top-0 relative ">
               {/* Book 1 - I've Loved You Since Forever */}
               <div className="">
                 <Image
@@ -29,7 +29,7 @@ const Islamic =() =>{
               </div>
             </div>
             {/* Right content - Books */}
-            <div className="w-full md:w-1/2 space-y-2">
+            <div className="w-full md:w-1/2 space-y-2 -top-44 text-center md:top-0 relative">
             <div>
                 <h3
                 className={`text-[#F37975] font-bold text-2xl mb-1 ${style.fontJost}`}
@@ -66,7 +66,7 @@ const Islamic =() =>{
       <Image src={arrow} alt="logo" className="w-full" />
     </div>
                   <p
-                  className={`text-base md:text-lg text-[#333333] ${style.fontJost}`}
+                  className={`text-base text-start md:text-lg text-[#333333] ${style.fontJost}`}
                   >
                     Help expose your reader to broader array of material like
                     plays, poetry, fictional and nonfictional books
@@ -78,7 +78,7 @@ const Islamic =() =>{
       <Image src={arrow} alt="logo" className="w-full" />
     </div>
                   <p
-                    className={`text-base md:text-lg text-[#333333] ${style.fontJost}`}
+                    className={`text-base text-start md:text-lg text-[#333333] ${style.fontJost}`}
                   >
                     Help develop their critical thinking skills
                   </p>
@@ -89,7 +89,7 @@ const Islamic =() =>{
       <Image src={arrow} alt="logo" className="w-full" />
     </div>
                   <p
-                    className={`text-base md:text-lg text-[#333333] ${style.fontJost}`}
+                    className={`text-base text-start md:text-lg text-[#333333] ${style.fontJost}`}
                   >
                     Help expand Islamic knowledge
                   </p>

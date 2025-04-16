@@ -15,7 +15,7 @@ const  Discover=()=> {
         <div className="container mx-auto xl:max-w-7xl">
           <div className="flex flex-col-reverse md:flex-row items-center gap-8 md:gap-16">
             {/* Left content */}
-            <div className="w-full md:w-1/2 space-y-2">
+            <div className="w-full md:w-1/2 space-y-2 -top-44 text-center md:top-0 relative">
               <div>
              
                 <h3 className={`text-[#F37975] font-bold text-2xl mb-1 ${style.fontJost}`}>AGES 7-8</h3>
@@ -43,7 +43,7 @@ const  Discover=()=> {
         <div className="w-6 flex-shrink-0">
       <Image src={arrow} alt="logo" className="w-full" />
     </div>
-                  <p className={`text-base md:text-lg text-[#333333] ${style.fontJost}`}>
+                  <p className={`text-base text-start md:text-lg text-[#333333] ${style.fontJost}`}>
                   Boost cognitive development
                   </p>
                 </div>  
@@ -52,7 +52,7 @@ const  Discover=()=> {
                 <div className="w-6 flex-shrink-0">
       <Image src={arrow} alt="logo" className="w-full" />
     </div>
-                  <p className={`text-base md:text-lg text-[#333333] ${style.fontJost}`}>
+                  <p className={`text-base text-start md:text-lg text-[#333333] ${style.fontJost}`}>
                   Increase their love for Islamic stories
                   </p>
                 </div>
@@ -61,7 +61,7 @@ const  Discover=()=> {
                 <div className="w-6 flex-shrink-0">
       <Image src={arrow} alt="logo" className="w-full" />
     </div>
-                  <p className={`text-base md:text-lg text-[#333333] ${style.fontInter}`}>
+                  <p className={`text-base text-start md:text-lg text-[#333333] ${style.fontInter}`}>
                   Help them read more accurately and fluently
                   </p>
                 </div>
@@ -81,7 +81,7 @@ const  Discover=()=> {
             </div>
 
             {/* Right content - Books */}
-            <div className="w-full md:w-1/2 lg:w-1/2 relative ">
+            <div className="w-full md:w-1/2 lg:w-1/2 -top-44 md:top-0 relative ">
               {/* Book 1 - I've Loved You Since Forever */}
               <div className="">
                 <Image
