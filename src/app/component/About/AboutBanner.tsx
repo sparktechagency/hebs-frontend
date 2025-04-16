@@ -6,7 +6,7 @@ import aboutTop from "@/assets/aboutTop.png";
 const AboutBanner = () => {
   return (
     <div
-      className=" w-full bg-top bg-no-repeat bg-cover py-6 pb-20 md:pb-0 lg:py-1 lg:mt-1  text-center md:text-start"
+      className=" w-full bg-top bg-no-repeat bg-cover py-6 pb-20 lg:pb-0 lg:py-1 lg:mt-1  text-center md:text-start"
       style={{ backgroundImage: `url(${frame2.src})` }}
     >
       <div className="  lg:py-1 ">
