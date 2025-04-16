@@ -11,7 +11,7 @@ import tab from "@/assets/tabUpdated.png";
 
 export default function NewsletterSignup() {
   return (
-    <div className="flex items-center justify-center bg-[#ffffff] md:py-16 relative">
+    <div className="flex items-center justify-center bg-[#ffffff] pt-5  md:py-16 relative">
       <div className="bg-[#FEECDE] p-8 md:w-[800px]  max-w-7xl flex flex-col md:flex-row items-center relative rounded-lg shadow-lg  ">
         {/* Left Book Image (Hidden on small screens) */}
         <div className="absolute md:-left-[262px] lg:-left-72  xl:-left-80 bottom-0 hidden md:block ">
@@ -27,7 +27,7 @@ export default function NewsletterSignup() {
         {/* Center Content */}
         <div className="flex flex-col md:flex-row items-center ">
           {/* Image Section (Tablet in the center) */}
-          <div className=" flex justify-center">
+          <div className=" flex justify-center w-[300px] lg:w-[420px]">
             <div className="p-2 rounded-lg ">   
               <Image
                 src={tab}
@@ -72,12 +72,12 @@ export default function NewsletterSignup() {
         </div>
 
         {/* Right Book Image (Hidden on small screens) */}
-        <div className="absolute md:-right-[300px] lg:-right-80 bottom-0 hidden md:block ">
+        <div className="absolute md:-right-[230px] lg:-right-72 bottom-0 hidden md:block ">
           <Image
             src={img2}
             alt="Planet Omar"
-            width={520}
-            height={520}
+            width={320}
+            height={320}
              className="object-contain rotate-[-5deg]"
           />
         </div>
