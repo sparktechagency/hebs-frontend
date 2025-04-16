@@ -42,8 +42,12 @@ const TinyMuminsSection = () => {
                 books.
               </p>
 
-             
               <div className="space-y-4">
+                <h3
+                  className={`text-xl text-start  text-[#333333] ${style.fontJost}`}
+                >
+                  The books for Tiny Mu&apos;mins will:
+                </h3>
                 {/* Bullet 1 */}
                 <div className="flex items-center gap-2 ">
                   <div className="w-6 flex-shrink-0">

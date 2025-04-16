@@ -13,10 +13,10 @@ const Islamic =() =>{
     >
       <div className="px-4 py-16 md:py-24">
         <div className="container mx-auto max-w-7xl">
-          <div className="flex flex-col md:flex-row items-center gap-8 md:gap-16">
+          <div className="flex flex-col md:flex-row items-center  gap-8 md:gap-16">
             {/* Left content */}
        
-            <div className="w-full md:w-1/2 lg:w-1/2 -top-44 md:top-0 relative ">
+            <div className="w-full md:w-1/2 lg:w-1/2 -top-48 md:top-0 relative ">
               {/* Book 1 - I've Loved You Since Forever */}
               <div className="">
                 <Image
@@ -29,7 +29,7 @@ const Islamic =() =>{
               </div>
             </div>
             {/* Right content - Books */}
-            <div className="w-full md:w-1/2 space-y-2 -top-44 text-center md:top-0 relative">
+            <div className="w-full md:w-1/2 space-y-2 -top-48 text-center  md:text-start md:top-0 relative">
             <div>
                 <h3
                 className={`text-[#F37975] font-bold text-2xl mb-1 ${style.fontJost}`}
@@ -48,7 +48,7 @@ const Islamic =() =>{
               </p>
 
               <p
-             className={ `text-base md:text-xl text-[#333333] ${style.fontJost}`}
+             className={ `text-base md:text-xl text-[#333333] ${style.fontJost}`}   
               >
                 Their vocabulary and critical thinking skills will expand as
                 they dive into reading advanced plotlines and chapter books.
@@ -56,12 +56,12 @@ const Islamic =() =>{
 
               <div className="space-y-4 pt-2">      
                 <h3
-                  className={`text-xl  text-[#333333] ${style.fontJost}`}
+                  className={`text-xl text-start  text-[#333333] ${style.fontJost}`}
                 >
                   The books for Islamic Explorers will:
                 </h3>
 
-                <div className="flex items-center gap-2 ">
+                <div className="flex items-center gap-2 ">   
                 <div className="w-6 flex-shrink-0">
       <Image src={arrow} alt="logo" className="w-full" />
     </div>

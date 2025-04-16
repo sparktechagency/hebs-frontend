@@ -29,7 +29,7 @@ const LittleCalips =() =>{
               </div>
             </div>
             {/* Right content - Books */}
-            <div className="w-full md:w-1/2 space-y-2 -top-44 text-center md:top-0 relative">
+            <div className="w-full md:w-1/2 space-y-2 -top-44 text-center md:text-start md:top-0 relative">
               <div>
                 <h3 className={`text-[#F37975] font-bold text-2xl mb-1 ${style.fontJost}`}>AGES 4-6</h3>
                 <h2 className={`text-3xl font-bold md:text-4xl text-[#333333] ${style.fontJost}`}>
@@ -37,7 +37,7 @@ const LittleCalips =() =>{
                 </h2>
               </div>
 
-              <p className={`text-xl md:text-2xl  text-[#333333] leading-snug ${style.fontPoppins}`}>
+              <p className={`text-xl md:text-2xl  text-[#333333] leading-snug ${style.fontPoppins}`}>  
               Build strong bonds through shared reading adventures.
               </p>
 
@@ -45,8 +45,8 @@ const LittleCalips =() =>{
               Little Caliphs will dive into a world of colorful picture books,
 catchy rhyming books, and exciting Islamic tales!
               </p>
-              <div className="space-y-4 pt-2">
-  <h3 className={`text-xl text-[#333333] ${style.fontJost}`}>
+              <div className="space-y-4 pt-2 ">
+  <h3 className={`text-xl text-start  text-[#333333] ${style.fontJost}`}>
     The books for Little Caliphs will:
   </h3>
 

@@ -13,9 +13,9 @@ const  Discover=()=> {
     >
       <div className="px-4 py-16 md:py-24">
         <div className="container mx-auto xl:max-w-7xl">
-          <div className="flex flex-col-reverse md:flex-row items-center gap-8 md:gap-16">
+          <div className="flex flex-col-reverse md:flex-row items-center gap-8 md:gap-16">  
             {/* Left content */}
-            <div className="w-full md:w-1/2 space-y-2 -top-44 text-center md:top-0 relative">
+            <div className="w-full md:w-1/2 space-y-2 -top-64 text-center  md:text-start md:top-0 relative">
               <div>
              
                 <h3 className={`text-[#F37975] font-bold text-2xl mb-1 ${style.fontJost}`}>AGES 7-8</h3>
@@ -34,7 +34,7 @@ const  Discover=()=> {
               </p>
 
               <div className="space-y-4 pt-2">
-                <h3 className={`text-xl  text-[#333333] ${style.fontJost}`}>
+                <h3 className={`text-xl text-start   text-[#333333] ${style.fontJost}`}>
                 The books for Deen Discoverers will:
                 </h3>
 
@@ -81,7 +81,7 @@ const  Discover=()=> {
             </div>
 
             {/* Right content - Books */}
-            <div className="w-full md:w-1/2 lg:w-1/2 -top-44 md:top-0 relative ">
+            <div className="w-full md:w-1/2 lg:w-1/2 -top-64 md:top-0 relative ">
               {/* Book 1 - I've Loved You Since Forever */}
               <div className="">
                 <Image
