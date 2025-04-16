@@ -11,7 +11,7 @@ import tab from "@/assets/tabUpdated.png";
 
 export default function NewsletterSignup() {
   return (
-    <div className="flex items-center justify-center bg-[#ffffff] py-16 relative">
+    <div className="flex items-center justify-center bg-[#ffffff] md:py-16 relative">
       <div className="bg-[#FEECDE] p-8 md:w-[800px]  max-w-7xl flex flex-col md:flex-row items-center relative rounded-lg shadow-lg  ">
         {/* Left Book Image (Hidden on small screens) */}
         <div className="absolute md:-left-[262px] lg:-left-72  xl:-left-80 bottom-0 hidden md:block ">

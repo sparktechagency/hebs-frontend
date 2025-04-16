@@ -25,7 +25,7 @@ export default function OurTeam() {
               </p>
 
               <p
-                className={`${style.fontPoppins} leading-relaxed text-[13px] lg:text-lg`}
+                className={`${style.fontPoppins} leading-relaxed text-[20px] lg:text-lg`}
               >
                 Welcome to Illuminate Muslim Minds, where each book opens a
                 world of discovery and joyful adventure! Our story began with a
@@ -86,7 +86,7 @@ export default function OurTeam() {
                 Chief Operating Officer: Heba Morad
               </p>
               <p
-                className={`${style.fontPoppins} leading-relaxed text-[13px] lg:text-lg`}
+                className={`${style.fontPoppins} leading-relaxed text-[20px] lg:text-lg`}
               >
              Heba plays a pivotal role at Illuminate Muslim Minds, guiding
                 our mission to enrich young minds with the excitement of Islamic
@@ -122,7 +122,7 @@ export default function OurTeam() {
                 Social Media and Logistics Coordinator: Nadean Ghouleh
               </p>
               <p
-                className={`${style.fontPoppins} leading-relaxed text-[13px] lg:text-lg`}
+                className={`${style.fontPoppins} leading-relaxed text-[20px] lg:text-lg`}
               >
                 At the heart of our operation, Nadean brings a unique blend of
                 compassion and practicality to our team. With a professional
