@@ -36,7 +36,7 @@ const InsideLittleCaliphs = () => {
               alt="Bilal Cooks Daal"
               width={512}
               height={512}
-             className="w-[600px]"
+             className="w-[600px] md:w-[470px]"
             />
             <p className={`${styles.fontInter} md:ml-20 md:mt-16 mt-5 lg:mt-0`}>
               Stickers, frameable artwork, and surprise extras.

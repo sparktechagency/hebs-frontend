@@ -4,7 +4,7 @@ import Image from "next/image";
 import styles from "@/app/styles.module.css"
 const IslamicInside = () => {
     return (
-      <div className="bg-[#FFF7F3] py-16 text-center">
+      <div className="bg-[#FFF7F3] py-16 text-center overflow-hidden">
       <div className="relative z-10">
       <h2 className={`text-4xl  text-black tracking-wider  ${styles.fontRozha}`}>
       Inside the Islamic Explorers    <span className="relative inline-block mr-3">
@@ -34,7 +34,7 @@ const IslamicInside = () => {
               alt="Bilal Cooks Daal"
               width={512}
               height={512}
-        className="w-[620px]"
+        className="w-[620px] md:w-[470px]"
             />
             <p className={`w-full ${styles.fontInter} md:ml-20 md:mt-16 lg:mt-0`}>
               Stickers, frameable artwork, and surprise extras.

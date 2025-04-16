@@ -46,7 +46,7 @@ const InsideTinyMuslim = () => {
               alt="Bilal Cooks Daal"
               width={512}
               height={512}
-              className="w-[500px]"
+              className="w-[500px] md:w-[470px]"
             />
             <p className={`${styles.fontInter} md:ml-20 md:mt-16 mt-3 lg:mt-0`}>
               Stickers, frameable artwork, and surprise extras.

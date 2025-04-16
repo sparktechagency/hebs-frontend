@@ -4,7 +4,7 @@ import Image from "next/image";
 import styles from "@/app/styles.module.css"
 const InsideDeen = () => {
     return (
-      <div className="bg-[#FFF7F3] py-16 text-center">
+      <div className="bg-[#FFF7F3] py-16 text-center over">
       <div className="relative z-10">
       <h2 className={`text-4xl  text-black tracking-wider  ${styles.fontRozha}`}>
              Inside the Deen     <span className="relative inline-block mr-3">
@@ -32,7 +32,7 @@ const InsideDeen = () => {
               alt="Bilal Cooks Daal"
               width={512}
               height={512}
-            className="w-[700px]"
+            className="w-[700px] md:w-[470px]"
             />
             <p className={`${styles.fontInter} md:ml-20 md:mt-16 mt-3 lg:mt-0`}>
               Stickers, frameable artwork, and surprise extras.
