@@ -201,7 +201,7 @@ export default function Navbar() {
           <div className="">
               <button
                   onClick={() => setKidsClubMobileDropdownOpen(!kidsClubMobileDropdownOpen)}
-                className="md:text-sm text-xs xl:text-xl font-bold  text-white flex justify-between w-full py-2 border-b border-gray-300"
+                className="md:text-sm text-xs lg:text-xl   text-white flex justify-between w-full py-2 border-b border-gray-300"
               >
                 KIDS BOOK CLUB
                 <RightOutlined className={`transition-transform ${kidsClubDropdownOpen ? "rotate-90" : ""}`} />
@@ -228,7 +228,7 @@ export default function Navbar() {
             {/* <Link href="/" className={`md:text-sm text-xs xl:text-xl  text-white hover:text-white/80 ${style.fontInter}`}>
             Home
           </Link> */}
-            <Link href="/bookStore" className={`md:text-sm text-xs xl:text-xl  text-white hover:text-white/80 ${style.fontInter}`}>
+            <Link href="/bookStore" className={`md:text-sm text-xs xl:text-xl   text-white hover:text-white/80 ${style.fontInter}`}>
             ONLINE BOOK STORE
           </Link>
           {/* <Link href="/book-registry" className="text-sm font-medium text-white hover:text-white/80">
