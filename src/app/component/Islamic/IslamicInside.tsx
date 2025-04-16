@@ -16,7 +16,7 @@ const IslamicInside = () => {
            <p className={`text-black mt-2 max-w-lg mx-auto  ${styles.fontPoppins}`}>
              Peek inside a sample box—your reader’s bundle will be personalized just for them.
            </p>
-           <div className="flex flex-col lg:flex-row justify-center items-center gap-2 mt-12 p-3">  
+           <div className="flex flex-row lg:flex-row justify-center items-center gap-2 mt-12 p-3">  
              {/* Left Group */}
              <div className="flex flex-col items-center text-center lg:w-[500px]">
               
@@ -34,7 +34,7 @@ const IslamicInside = () => {
               alt="Bilal Cooks Daal"
               width={512}
               height={512}
-        
+        className="w-[620px]"
             />
             <p className={`w-full ${styles.fontInter} md:ml-20 md:mt-16 lg:mt-0`}>
               Stickers, frameable artwork, and surprise extras.
