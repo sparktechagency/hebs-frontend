@@ -28,7 +28,7 @@ const  Discover=()=> {
               Develop strong reading skills with imaginative stories.!
               </p>
 
-              <p className={ ` md:text-xl text-[#333333] ${style.fontJost}`}>
+              <p className={ ` text-xl text-[#333333] ${style.fontJost}`}>
               Readers will acquire phonics and sight reading skills as they
               progress from picture books to richer narratives.
               </p>

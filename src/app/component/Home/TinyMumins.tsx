@@ -36,7 +36,7 @@ const TinyMuminsSection = () => {
                 imagination and curiosity!
               </p>
 
-              <p className={` md:text-xl text-[#333333] ${style.fontJost}`}>
+              <p className={`text-xl md:text-xl text-[#333333] ${style.fontJost}`}>
                 Little Muslims will touch, feel, and see their way through
                 interactive board books, Islamic books, and radiant picture
                 books.
@@ -50,11 +50,11 @@ const TinyMuminsSection = () => {
                 </h3>
                 {/* Bullet 1 */}
                 <div className="flex items-center gap-2 ">
-                  <div className="w-6 flex-shrink-0">
+                  <div className="w-8 flex-shrink-0">
                     <Image src={arrow} alt="logo" className="w-full" />
                   </div>
                   <p
-                    className={`text-base text-start md:text-lg text-[#333333] ${style.fontJost}`}
+                    className={`text-xl text-start  text-[#333333] ${style.fontJost}`}
                   >
                     Help with sensory development
                   </p>
@@ -62,11 +62,11 @@ const TinyMuminsSection = () => {
 
                 {/* Bullet 2 */}
                 <div className="flex items-center gap-2 ">
-                  <div className="w-6 flex-shrink-0">
+                  <div className="w-8 flex-shrink-0">
                     <Image src={arrow} alt="logo" className="w-full" />
                   </div>
                   <p
-                    className={`text-base text-start md:text-lg text-[#333333] ${style.fontJost}`}
+                    className={`text-xl text-start  text-[#333333] ${style.fontJost}`}
                   >
                     Help your little Muslim in discovering sounds, words, and
                     language, developing literacy skills
@@ -75,11 +75,11 @@ const TinyMuminsSection = () => {
 
                 {/* Bullet 3 */}
                 <div className="flex items-center gap-2 ">
-                  <div className="w-6 flex-shrink-0">
+                  <div className="w-8 flex-shrink-0">
                     <Image src={arrow} alt="logo" className="w-full" />
                   </div>
                   <p
-                    className={`text-base text-start md:text-lg text-[#333333] ${style.fontJost}`}
+                    className={`text-xl text-start  text-[#333333] ${style.fontJost}`}
                   >
                     Enhance your child&apos;s brain development and ability to
                     focus and concentrate

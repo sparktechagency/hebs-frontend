@@ -5,11 +5,20 @@ import img1 from "@/assets/Image (1).png";
 import img2 from "@/assets/Image.png";
 
 import style from "@/app/styles.module.css";
+import Link from "next/link";
 
 const Hero = () => {
   return (
-    <div className="flex flex-col container mx-auto -mt-9 lg:-mt-28">
+    <div className="flex flex-col container mx-auto mt-3 md:-mt-28">
       {/* Top Banner */}
+      <Link href="/name">
+             <div className="flex md:hidden  justify-center mt-1">
+        
+             <button className={` tracking-widest  rounded-full bg-[#F37975] p-2 md:p-3  text-base sm:text-lg md:text-xl hover:bg-[#e57373] text-white ${style.fontPoppins}`}>
+                START TODAY
+              </button>
+             </div>
+            </Link>
       <div className={`${style.fontPoppins} text-center mb-3 lg:mb-0 py-2`}>
         <p className="text-[#1a1a1a73] text-md md:text-xl font-thin">
           Free shipping. Unlimited returns. Cancel anytime.
@@ -80,7 +89,7 @@ const Hero = () => {
           </div>
         </div>
         {/* Left Image */}
-        <div className="absolute -top-5 lg:top-2 -left-10 lg:-left-28 xl:top-0 xl:bottom-7 xl:-left-28 2xl:-left-44 w-[120px]  lg:w-[250px] xl:w-[250px] 2xl:w-[250px]">
+        <div className="absolute -top-5  lg:top-2 -left-14 md:-left-2 lg:-left-28 xl:top-0 xl:bottom-7 xl:-left-28 2xl:-left-44 w-[120px]  md:w-[130px] lg:w-[250px] xl:w-[250px] 2xl:w-[250px]">
           <Image
             src={img2}
             alt="My Prophet Muhammad - My Hero"
@@ -92,8 +101,8 @@ const Hero = () => {
         </div> 
 
         {/* Right Image */}
-        <div className="absolute   -right-7 lg:-right-24 -top-3 lg:top-2 xl:top-0 xl:bottom-0 xl:-right-28 2xl:-right-44 w-[180px]  lg:w-[400px] xl:w-[400px] 2xl:w-[400px] ">
-          <Image
+        <div className="absolute   -right-8 md:right-3 lg:-right-24 -top-3 lg:top-2 xl:top-4 xl:bottom-0 xl:-right-28 2xl:-right-36 w-[110px] md:w-[120px]  lg:w-[220px] xl:w-[220px] 2xl:w-[220px] ">
+          <Image  
             src={img1}
             alt="Planet Omar"
             width={500}
