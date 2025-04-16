@@ -59,12 +59,12 @@ const  HadithSlider =() =>{
       </div> */}
 
 {/* Left quotation mark */}
-<div className="absolute left-4 sm:left-4 md:left-8 lg:-left-6 xl:-left-2 -top-12 sm:-top-16 md:-top-16 lg:-top-20 xl:-top-28 2xl:-top-36 text-[#FAF39766] text-[40vw] sm:text-[30vw] md:text-[30vw] lg:text-[30vw] xl:text-[30vw] font-serif leading-none z-0 opacity-75 ">
+<div className="absolute -left-2 sm:left-4 md:left-8 lg:-left-6 xl:-left-2 -top-16 sm:-top-16 md:-top-16 lg:-top-20 xl:-top-28 2xl:-top-36 text-[#FAF39766] text-[70vw] sm:text-[30vw] md:text-[30vw] lg:text-[30vw] xl:text-[30vw] font-serif leading-none z-0 opacity-75 ">
   &ldquo;
 </div>
 
 {/* Right quotation mark */}
-<div className="absolute right-2 sm:right-4 md:right-8 lg:-right-2 xl:-right-2 -bottom-44 sm:-bottom-60 md:-bottom-64 lg:-bottom-80  xl:-bottom-96 z-10  2xl:-bottom-[500px]  text-[#F379754A] text-[40vw] sm:text-[30vw] md:text-[30vw] lg:text-[30vw] xl:text-[30vw] font-serif leading-none  opacity-75 ">
+<div className="absolute right-2 sm:right-4 md:right-8 lg:-right-2 xl:-right-2 -bottom-72 sm:-bottom-60 md:-bottom-64 lg:-bottom-80  xl:-bottom-96 z-10  2xl:-bottom-[500px]  text-[#F379754A] text-[70vw] sm:text-[30vw] md:text-[30vw] lg:text-[30vw] xl:text-[30vw] font-serif leading-none  opacity-75 ">
   &rdquo;
 </div>
 

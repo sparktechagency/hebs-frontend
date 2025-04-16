@@ -24,9 +24,9 @@ const Banner = () => {
               Help your readers grow with a personalized book selection curated monthly by our team of experts and shipped to your door.
             </p>
             <Link href="/name">
-             <div className="flex  justify-center mt-1">
-             {/* absolute md:static top-[480px] md:top-0 */}
-             <button className={` tracking-widest  rounded-full bg-[#F37975] p-2 md:p-3  text-base sm:text-lg md:text-xl hover:bg-[#e57373] text-white ${styles.fontPoppins}`}>
+             <div className="  absolute md:static top-[475px] sm:top-[420px]   md:top-0 flex   justify-center mt-1">
+           
+             <button className={` tracking-widest  rounded-full bg-[#F37975] p-1 md:p-2 lg:p-3  text-[14px]  md:text-xl hover:bg-[#e57373] text-white ${styles.fontPoppins}`}>
                 START TODAY
               </button>
              </div>
@@ -34,7 +34,7 @@ const Banner = () => {
           </div>
           
           {/* Right Content - Book Covers */}
-          <div className="w-full  md:mb-0 md:w-[48%] flex justify-center px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
+          <div className="w-full -mt-9 mb:-mt:0  md:mb-0 md:w-[48%] flex justify-center px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
             <Image 
               src={bannerImg} 
               alt="Book Club Banner" 

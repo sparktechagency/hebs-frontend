@@ -40,8 +40,8 @@ const features = [
   ]
 const Work = () => {
     return (
-        <div className="bg-[#FBD5D4] w-full py-2">
-<div className='max-w-7xl mx-auto'>
+        <div className="bg-[#FBD5D4] w-full p-5 md:p-0 py-2">
+<div className='container mx-auto'>
 <div className='py-8 relative z-10 '>
 <h1 className={`text-center text-3xl md:text-5xl   ${styles.fontRozha}`}>How it   <span className="relative inline-block mr-3">
 Works
