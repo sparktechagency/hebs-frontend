@@ -6,7 +6,7 @@ import Link from "next/link";
 export default function TinyHero() {
     return (
       <div className=" bg-white ">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-24">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 pb-12 md:py-24">
           <div className="flex flex-col-reverse md:flex-row md:gap-12 justify-center items-center">
             {/* Left Column - Text Content */}
             <div className="space-y-1 text-center md:text-start">
