@@ -48,7 +48,7 @@ const Islamic =() =>{
               </p>
 
               <p
-             className={ `text-base md:text-xl text-[#333333] ${style.fontJost}`}   
+             className={ `text-xl md:text-xl text-[#333333] ${style.fontJost}`}   
               >
                 Their vocabulary and critical thinking skills will expand as
                 they dive into reading advanced plotlines and chapter books.
@@ -62,11 +62,11 @@ const Islamic =() =>{
                 </h3>
 
                 <div className="flex items-center gap-2 ">   
-                <div className="w-6 flex-shrink-0">
+                <div className="w-8 flex-shrink-0">
       <Image src={arrow} alt="logo" className="w-full" />
     </div>
                   <p
-                  className={`text-base text-start md:text-lg text-[#333333] ${style.fontJost}`}
+                  className={`text-xl text-start  text-[#333333] ${style.fontJost}`}
                   >
                     Help expose your reader to broader array of material like
                     plays, poetry, fictional and nonfictional books
@@ -74,22 +74,22 @@ const Islamic =() =>{
                 </div>
 
                 <div className="flex items-center gap-2 ">
-                <div className="w-6 flex-shrink-0">
+                <div className="w-8 flex-shrink-0">
       <Image src={arrow} alt="logo" className="w-full" />
     </div>
                   <p
-                    className={`text-base text-start md:text-lg text-[#333333] ${style.fontJost}`}
+                    className={`text-xl text-start  text-[#333333] ${style.fontJost}`}
                   >
                     Help develop their critical thinking skills
                   </p>
                 </div>
 
                 <div className="flex items-center gap-2 ">
-                <div className="w-6 flex-shrink-0">
+                <div className="w-8 flex-shrink-0">
       <Image src={arrow} alt="logo" className="w-full" />
     </div>
                   <p
-                    className={`text-base text-start md:text-lg text-[#333333] ${style.fontJost}`}
+                    className={`text-xl text-start  text-[#333333] ${style.fontJost}`}
                   >
                     Help expand Islamic knowledge
                   </p>

@@ -40,28 +40,28 @@ const  Discover=()=> {
 
         <div className="space-y-4">
         <div className="flex items-center gap-2">
-        <div className="w-6 flex-shrink-0">
+        <div className="w-8 flex-shrink-0">
       <Image src={arrow} alt="logo" className="w-full" />
     </div>
-                  <p className={`text-base text-start md:text-lg text-[#333333] ${style.fontJost}`}>
+                  <p className={`text-xl text-start  text-[#333333] ${style.fontJost}`}>
                   Boost cognitive development
                   </p>
                 </div>  
 
                 <div className="flex items-center gap-2">
-                <div className="w-6 flex-shrink-0">
+                <div className="w-8 flex-shrink-0">
       <Image src={arrow} alt="logo" className="w-full" />
     </div>
-                  <p className={`text-base text-start md:text-lg text-[#333333] ${style.fontJost}`}>
+                  <p className={`text-xl text-start  text-[#333333] ${style.fontJost}`}>
                   Increase their love for Islamic stories
                   </p>
                 </div>
 
                 <div className="flex items-center gap-2">
-                <div className="w-6 flex-shrink-0">
+                <div className="w-8 flex-shrink-0">
       <Image src={arrow} alt="logo" className="w-full" />
     </div>
-                  <p className={`text-base text-start md:text-lg text-[#333333] ${style.fontInter}`}>
+                  <p className={`text-xl text-start  text-[#333333] ${style.fontInter}`}>
                   Help them read more accurately and fluently
                   </p>
                 </div>
