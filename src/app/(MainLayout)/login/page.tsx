@@ -5,7 +5,7 @@ import { useState } from "react"
 import { Button, Input, Form } from "antd"
 import { MailOutlined, FacebookFilled, GoogleOutlined } from "@ant-design/icons"
 import Link from "next/link"
-
+import styles from "@/app/styles.module.css"
 const Login=() =>{
   const [loading, setLoading] = useState(false)
 
@@ -22,10 +22,10 @@ const Login=() =>{
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 py-12 bg-white">
+    <div className={`md:min-h-screen flex items-center justify-center mt-5 md:mt-0 px-4 md:py-12 bg-white ${styles.fontInter}`}>
       <div className="w-full max-w-md space-y-8">
         <div className="text-center">
-          <h1 className="text-3xl font-semibold text-gray-900">Log in to your illuminate account</h1>
+          <h1 className={`text-3xl font-bold  text-gray-900 `}>Log in </h1>
         </div>
 
         <Form name="login" onFinish={onFinish} layout="vertical" className="mt-8 space-y-6">
@@ -62,7 +62,7 @@ const Login=() =>{
           </div>
 
           <div className="flex items-center justify-end">
-            <Link href="/forgot-password" className="text-sm text-gray-500 hover:text-gray-700">
+            <Link href="/forgot-password" className={`text-sm text-gray-500 hover:text-gray-700 ${styles.fontInter}`}>
               Forget Password?
             </Link>
           </div>

@@ -28,8 +28,8 @@ const SignUpPage=()=> {
   }
 
   return (
-    <div className="max-w-md mx-auto px-4 py-8">
-      <h1 className="text-2xl font-bold text-center mb-8">Create Your Account</h1>
+    <div className={`max-w-md mx-auto px-4 py-8 ${styles.fontInter}`}>
+      <h1 className={`text-2xl font-bold text-center mb-8 `}>Create Your Account</h1>
 
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="space-y-2">
