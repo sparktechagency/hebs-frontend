@@ -29,14 +29,14 @@ const Hero = () => {
       <div className="relative bg-[#FAF397] w-[80%] md:w-[750px] lg:w-[900px] xl:w-[1000px]  py-6 md:py-6 mx-auto">
         <div className=" px-4 ">
           {/* Main Content */}
-          <div className="relative z-10 text-center w-[70%] md:w-auto mx-auto">
+          <div className="relative z-10 text-center w-[60%] sm:w-[70%] md:w-auto mx-auto">
             <div className="mb-5 md:hidden">
-            <h3 className={`text-xl md:hidden ${style.fontRozha}`}>Expertly selected </h3>
-            <h3 className={`text-xl md:hidden ${style.fontRozha}`}>kids books <span className={`relative inline-block`}>for every
+            <h3 className={`text-[17px] sm:text-xl md:hidden ${style.fontRozha}`}>Expertly selected </h3>
+            <h3 className={`text-[17px] sm:text-xl md:hidden ${style.fontRozha}`}>kids books <span className={`relative inline-block`}>for every
             <span className={`absolute left-0 bottom-0 w-full h-3 md:h-[15px] bg-red-400 -z-10 `}></span>
             </span>
             </h3>
-            <h3 className={`text-xl md:hidden ${style.fontRozha}`}>reading level.</h3>
+            <h3 className={`text-[17px] sm:text-xl md:hidden ${style.fontRozha}`}>reading level.</h3>
             </div>
 
             <p
@@ -57,7 +57,7 @@ const Hero = () => {
             className={`space-y-4 text-lg md:text-xl mx-auto ${style.poppins}`}
           >
             <p
-              className={`text-xl 2xl:text-xl text-center font-semibold ${style.poppins} block mb-4`}
+              className={`text-[17px] sm:text-xl 2xl:text-xl text-center font-semibold ${style.poppins} block mb-4`}
             >
               Our team tailors each book to your reader&apos;s age and
               interests.
@@ -101,7 +101,7 @@ const Hero = () => {
         </div> 
 
         {/* Right Image */}
-        <div className="absolute   -right-8 md:right-3 lg:-right-24 -top-3 lg:top-2 xl:top-4 xl:bottom-0 xl:-right-28 2xl:-right-36 w-[110px] md:w-[120px]  lg:w-[220px] xl:w-[220px] 2xl:w-[220px] ">
+        <div className="absolute   -right-9 md:right-3 lg:-right-24 -top-3 lg:top-2 xl:top-4 xl:bottom-0 xl:-right-28 2xl:-right-36 w-[110px] md:w-[120px]  lg:w-[220px] xl:w-[220px] 2xl:w-[220px] ">
           <Image  
             src={img1}
             alt="Planet Omar"
