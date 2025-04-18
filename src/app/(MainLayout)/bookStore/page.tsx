@@ -125,7 +125,7 @@ function BookStore() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <h1 className="text-xl font-bold mb-6">{totalProducts} Products</h1>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-1 md:gap-6">
           {currentProducts.map((product, index) => (
           <Link  key={`${product.id}-${index}`} href={`/bookStore/${product.id}`}>
           

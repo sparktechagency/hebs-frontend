@@ -194,25 +194,25 @@ export default function Navbar() {
               {profileDropdownOpen && (
                 <div className="absolute right-0 mt-2 w-56 bg-white shadow-md rounded-md z-10">
                   <Link
-                    href="/subscription"
+                    href="/subscription"  onClick={() => setProfileDropdownOpen(false)}
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   >
                     Subscriptions
                   </Link>
                   <Link
-                    href="/my-profile"
+                    href="/my-profile"  onClick={() => setProfileDropdownOpen(false)}
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   >
                     Account Details
                   </Link>
                   <Link
-                    href="/billing"
+                    href="/billing"  onClick={() => setProfileDropdownOpen(false)}
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   >
                     Billing History
                   </Link>
                   <Link
-                    href="/favorites"
+                    href="/favorites"  onClick={() => setProfileDropdownOpen(false)}
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   >
                     Favorites

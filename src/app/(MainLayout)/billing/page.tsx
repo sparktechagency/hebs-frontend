@@ -1,8 +1,9 @@
 "use client"
-
+import { Package, User, FileText, Plus } from "lucide-react"
 import { useState } from "react"
 import { ChevronDown } from "lucide-react"
-
+import Link from "next/link"
+import styles from "@/app/styles.module.css"
 interface BillingItem {
   id: string
   status: "PAID" | "INVOICE"
@@ -58,8 +59,42 @@ const BillingHistory=()=> {
   }
 
   return (
-   <div className="bg-[#ffffff] py-12">
-     <div className="max-w-4xl mx-auto p-4 ">
+   <div className={`${styles.fontInter} flex flex-col md:flex-row min-h-screen bg-gray-50`}>
+          {/* Sidebar */}
+          <aside className="w-full md:w-64 bg-white border-r border-gray-200">
+            <nav className="p-4">
+              <ul className="space-y-2">
+                <li>
+                  <Link href="/boxes" className="flex items-center p-2   text-gray-600 hover:bg-gray-100 rounded-md">
+                    <Package className="h-5 w-5 mr-3" />
+                    <span>Boxes</span>
+                  </Link>  
+                </li>
+                <li>
+                  <Link href="/my-profile" className="flex items-center p-2 text-gray-600 hover:bg-gray-100 rounded-md">
+                    <User className="h-5 w-5 mr-3 text-gray-500" />
+                    <span>Account Details</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/billing" className={`flex items-center p-2 bg-[#f08080] text-white   rounded-md ${styles.fontInter}`}>
+                    <FileText className="h-5 w-5 mr-3 text-white" />
+                    <span>Billing History</span>
+                  </Link>
+                </li>
+              </ul>
+    
+              <div className="mt-8 pt-4">
+                <button className="flex items-center text-[#f08080] p-2 hover:bg-gray-100 rounded-md w-full">
+                  <Plus className="h-4 w-4 mr-1" />
+                  <span>Add Subscriptions</span>
+                </button>
+              </div>
+            </nav>
+          </aside>
+    
+          {/* Main Content */}
+     <div className="container mx-auto p-4 ">
       <h1 className="text-3xl font-bold mb-8">Billing History</h1>
 
       <div className="space-y-6">
