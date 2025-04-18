@@ -262,22 +262,11 @@ export default function Navbar() {
             <Link
               href="/"
               onClick={onClose}
-              className={`md:text-sm text-xs xl:text-xl  text-white hover:text-white/80 ${
-                style.fontInter
-              } ${pathname === "/" ? "text-yellow-400" : ""}`}
+              className={`md:text-sm text-sm xl:text-xl uppercase  text-white hover:text-white/80  ${style.fontJosefin} ${pathname === "/" ? "text-yellow-400" : ""}`}
             >
               Home
             </Link>
-            <Link
-              href="/bookStore"
-              onClick={onClose}
-              passHref
-              className={`md:text-sm text-xs xl:text-xl   text-white hover:text-white/80 ${
-                style.fontInter
-              } ${pathname === "/bookStore" ? "text-yellow-400" : ""}`}
-            >
-              ONLINE BOOK STORE
-            </Link>
+   
             {/* <Link href="/book-registry" className="text-sm font-medium text-white hover:text-white/80">
             BOOK REGISTRY
           </Link> */}
@@ -285,32 +274,36 @@ export default function Navbar() {
               href="/about"
               onClick={onClose}
               passHref
-              className={`md:text-sm text-xs xl:text-xl  text-white hover:text-white/80 ${
-                style.fontInter
-              } ${pathname === "/about" ? "text-yellow-400" : ""} `}
+              className={`md:text-sm text-sm xl:text-xl  text-white hover:text-white/80  ${style.fontJosefin} ${pathname === "/about" ? "text-yellow-400" : ""} `}
             >
-              ABOUT
+              ABOUT US
             </Link>
             <Link
               href="/contact"
               onClick={onClose}
               passHref
-              className={`md:text-sm text-xs xl:text-xl  text-white hover:text-white/80 ${
-                style.fontInter
-              } ${pathname === "/contact" ? "text-yellow-400" : ""}`}
+              className={`md:text-sm text-sm xl:text-xl  text-white hover:text-white/80  ${style.fontJosefin} ${pathname === "/contact" ? "text-yellow-400" : ""}`}
             >
               CONTACT
             </Link>
             <Link
+              href="/bookStore"
+              onClick={onClose}
+              passHref
+              className={`md:text-sm text-xsmxl:text-xl   text-white hover:text-white/80  ${style.fontJosefin} ${pathname === "/bookStore" ? "text-yellow-400" : ""}`}
+            >
+              ONLINE BOOK STORE
+            </Link>
+            <Link
               href="/blog"
               onClick={onClose}
-              className={`md:text-sm text-xs xl:text-xl  text-white hover:text-white/80 ${
-                style.fontInter
-              }  ${pathname === "/blog" ? "text-yellow-400" : ""}`}
+              className={`md:text-sm text-sm xl:text-xl  text-white hover:text-white/80  ${style.fontJosefin}  ${pathname === "/blog" ? "text-yellow-400" : ""}`}
             >
               BLOG
             </Link>
-
+            <p className={`text-[#FAF397] tracking-widest font-bold text-lg ${style.fontJosefin}`}>
+              Book Clubs
+            </p>
             {/* <div className="">
               <div className="pl-4 mt-2 space-y-3"> */}
                 {ageCategories?.map((category, index) => (
@@ -322,9 +315,7 @@ export default function Navbar() {
                     className="flex items-center group hover:opacity-80 transition-opacity"
                   >
                     <span
-                      className={`md:text-sm text-xs xl:text-xl  text-white hover:text-white/80 ${
-                        style.fontInter
-                      } ${
+                      className={`md:text-sm text-sm xl:text-xl  text-white hover:text-white/80  ${style.fontJosefin} ${
                         pathname === category.route ? "text-yellow-400" : ""
                       }`}
                     >
@@ -334,19 +325,30 @@ export default function Navbar() {
                 ))}
               {/* </div>
             </div> */}
-
+         <p className={`text-[#FAF397] tracking-widest font-bold text-lg uppercase ${style.fontJosefin}`}>
+              Gifts
+            </p>
+            <Link
+              href="/gift"
+              onClick={onClose}
+              className={`md:text-sm uppercase text-sm xl:text-xl  text-white hover:text-white/80  ${style.fontJosefin}  ${pathname === "/gift" ? "text-yellow-400" : ""}`}
+            >
+              give a gift
+            </Link>
             <div className="flex flex-col space-y-3 pt-4">
               <Link href="/login" onClick={onClose} passHref>
-                <button className="h-12 rounded-full bg-[#F37975] font-bold px-8 text-lg hover:bg-[#e57373] text-white">
+              <button
+                  className={`py-3 w-[100px] md:w-[120px] font-bold uppercase border-none bg-white text-[#f08080] hover:bg-white/90 ${style.fontJosefin}`}
+                >
                   Log In
                 </button>
               </Link>
-              <Link href="/cart" onClick={onClose} passHref>
+              {/* <Link href="/cart" onClick={onClose} passHref>
                 <button className="h-12 rounded-full bg-[#F37975] font-bold px-8 text-lg hover:bg-[#e57373] text-white">
                   <ShoppingCartOutlined style={{ marginRight: 8 }} />
                   Cart
                 </button>
-              </Link>
+              </Link> */}
             </div>
           </div>
         </Drawer>
