@@ -3,13 +3,14 @@ import style from "@/app/styles.module.css";
 import Image from "next/image";
 import aboutTop from "@/assets/aboutTop.png";
 
+
 const AboutBanner = () => {
   return (
     <div
-      className=" w-full bg-top bg-no-repeat bg-cover  py-20 lg:pb-0 md:py-20 md:mt-1  text-center md:text-start"
+      className="relative w-full bg-top bg-no-repeat bg-cover  pb-14 lg:pb-0 md:py-2 md:mt-1  text-center md:text-start"
       style={{ backgroundImage: `url(${frame2.src})` }}
     >
-      <div className="  lg:py-1 ">
+      <div className=" px-4 py-16 md:py-36  ">
         <div className=" max-w-7xl  mx-auto ">   
           <div className="flex flex-col-reverse md:flex-row px-6 md:gap-3 lg:gap-5">
             {/* Left content */}
@@ -49,8 +50,8 @@ const AboutBanner = () => {
               </p>
             </div>
             {/* Right content - Books */}
-            <div className="  flex items-center justify-center">
-              {/* Book 1 - I've Loved You Since Forever */}
+            <div className="  flex items-center justify-center">  
+         
               <div className="">
                 <Image
                   src={aboutTop}
@@ -65,6 +66,7 @@ const AboutBanner = () => {
         </div>
       </div>
     </div>
+ 
   );
 };
 
