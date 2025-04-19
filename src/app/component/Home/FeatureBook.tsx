@@ -1,10 +1,11 @@
 // import wild from '@/assets/wild.png'
 import color from '@/assets/colorMe.png'
-import animal from '@/assets/animals.png'
+// import animal from '@/assets/animals.png'
 import eid from '@/assets/eid.png'
 import songBook from '@/assets/songBook2.png'
 import prophetSunnah from '@/assets/the_prophet_sunnah.png'
 // import nameMean from '@/assets/my_name_mean.png'
+import draw from '@/assets/draw.png'
 import Image from 'next/image'
 
 const images = [
@@ -18,7 +19,7 @@ const images = [
     },
     {
       id: 3,
-      img: animal,
+      img: draw,
     },
     {
       id: 4,

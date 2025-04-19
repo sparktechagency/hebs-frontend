@@ -1,7 +1,8 @@
 import Image from "next/image"
 
 import frame2 from "@/assets/tinyMuminsFrame2.png"
-import book from "@/assets/littleCalips.png"
+// import book from "@/assets/littleCalips.png"
+import zaara from "@/assets/zaara.png"
 import style from '@/app/styles.module.css'
 import Link from "next/link"
 import arrow from "@/assets/arrowLogo.png"
@@ -20,7 +21,7 @@ const Islamic =() =>{
               {/* Book 1 - I've Loved You Since Forever */}
               <div className="">
                 <Image
-                  src={book}
+                  src={zaara}
                   alt="I've Loved You Since Forever book cover"
                   width={710}
                   height={670}
