@@ -254,18 +254,21 @@ export default function Navbar() {
           open={open}
           width="100vw" // full screen width
           styles={{
-            header: { background: "rgba(242, 127, 122, 0.9)" }, // 90% opacity (almost fully opaque)
-            body: { background: "rgba(242, 127, 122, 0.9)", height: "100vh" },
+            header: { background: "rgba(242, 127, 122, 0.8)" }, // 85% transparent
+            body: { background: "rgba(242, 127, 122, 0.8)", height: "100vh" },
           }}
         >
           <div className="flex flex-col justify-center items-center space-y-5 pt-0">
-            <Link
+          <p className={`text-[#FAF397] tracking-widest font-bold text-sm uppercase ${style.fontJosefin}`}>
+              Our Story
+            </p>
+            {/* <Link
               href="/"
               onClick={onClose}
               className={`md:text-sm text-sm xl:text-xl uppercase  text-white hover:text-white/80  ${style.fontJosefin} ${pathname === "/" ? "text-yellow-400" : ""}`}
             >
               Home
-            </Link>
+            </Link> */}
    
             {/* <Link href="/book-registry" className="text-sm font-medium text-white hover:text-white/80">
             BOOK REGISTRY
@@ -284,24 +287,10 @@ export default function Navbar() {
               passHref
               className={`md:text-sm text-sm xl:text-xl  text-white hover:text-white/80  ${style.fontJosefin} ${pathname === "/contact" ? "text-yellow-400" : ""}`}
             >
-              CONTACT
+              CONTACT US
             </Link>
-            <Link
-              href="/bookStore"
-              onClick={onClose}
-              passHref
-              className={`md:text-sm text-xsmxl:text-xl   text-white hover:text-white/80  ${style.fontJosefin} ${pathname === "/bookStore" ? "text-yellow-400" : ""}`}
-            >
-              ONLINE BOOK STORE
-            </Link>
-            <Link
-              href="/blog"
-              onClick={onClose}
-              className={`md:text-sm text-sm xl:text-xl  text-white hover:text-white/80  ${style.fontJosefin}  ${pathname === "/blog" ? "text-yellow-400" : ""}`}
-            >
-              BLOG
-            </Link>
-            <p className={`text-[#FAF397] tracking-widest font-bold text-lg ${style.fontJosefin}`}>
+
+            <p className={`text-[#FAF397] tracking-widest font-bold uppercase text-sm ${style.fontJosefin}`}>
               Book Clubs
             </p>
             {/* <div className="">
@@ -325,8 +314,8 @@ export default function Navbar() {
                 ))}
               {/* </div>
             </div> */}
-         <p className={`text-[#FAF397] tracking-widest font-bold text-lg uppercase ${style.fontJosefin}`}>
-              Gifts
+         <p className={`text-[#FAF397] tracking-widest font-bold text-sm uppercase ${style.fontJosefin}`}>
+              More
             </p>
             <Link
               href="/gift"
@@ -335,12 +324,38 @@ export default function Navbar() {
             >
               give a gift
             </Link>
-            <div className="flex flex-col space-y-3 pt-4">
+            <Link
+              href="/bookStore"
+              onClick={onClose}
+              passHref
+              className={`md:text-sm text-xsmxl:text-xl   text-white hover:text-white/80  ${style.fontJosefin} ${pathname === "/bookStore" ? "text-yellow-400" : ""}`}
+            >
+              ONLINE BOOK STORE
+            </Link>
+            <Link
+              href="/blog"
+              onClick={onClose}
+              className={`md:text-sm text-sm xl:text-xl  text-white hover:text-white/80  ${style.fontJosefin}  ${pathname === "/blog" ? "text-yellow-400" : ""}`}
+            >
+              BLOG
+            </Link>
+            <div className="flex justify-center items-center  gap-3">
               <Link href="/login" onClick={onClose} passHref>
               <button
-                  className={`py-3 w-[100px] md:w-[120px] font-bold uppercase border-none bg-white text-[#f08080] hover:bg-white/90 ${style.fontJosefin}`}
+                  className={`py-3 w-[100px] md:w-[120px] font-bold uppercase border-none bg-white text-[#f08080] hover:bg-white/90 rounded-full ${style.fontJosefin}`}
                 >
                   Log In
+                </button>
+              </Link>
+              <Link href="/login" onClick={onClose} passHref>
+              <button
+                  className={`py-3 w-[100px] md:w-[120px] font-bold uppercase border-none bg-white text-[#f08080] hover:bg-white/90 rounded-full ${style.fontJosefin}`}
+                >
+                         <ShoppingCartOutlined
+                    className="pr-2 text-[20px]"
+                  />
+                 
+                  Cart
                 </button>
               </Link>
               {/* <Link href="/cart" onClick={onClose} passHref>
