@@ -24,7 +24,7 @@ const Islamic =() =>{
                   src={zaara}
                   alt="I've Loved You Since Forever book cover"
                   width={710}
-                  height={670}
+                  height={770}
                   className="rounded-md"
                 />
               </div>
