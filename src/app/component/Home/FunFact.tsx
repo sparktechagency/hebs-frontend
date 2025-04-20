@@ -145,7 +145,7 @@ const FunFact = () => {
                 </Form>
               </div>
 
-              <div className=" md:absolute md:-bottom-0 md:-right-8 md:w-[380px] lg:w-[500px]   xl:right-16 mb-3 md:mb-0">
+              <div className=" md:absolute md:-bottom-0 md:-right-5 md:w-[350px] lg:w-[500px]   xl:right-16 mb-3 md:mb-0">
                 <Image
                   src={group1}
                   alt="Children reading and drawing"

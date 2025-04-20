@@ -14,7 +14,7 @@ import style from "@/app/styles.module.css";
 const FooterPage = () => {
   return (
     <div className="bg-[#F37975] px-4 pt-16 pb-8 text-white md:px-8 ">
-      <div className="container mx-auto text-center md:text-start md:px-8">
+      <div className="container mx-auto text-center lg:text-start md:px-8">
         {/* Main Footer Content */}
         <div className="flex flex-col lg:flex-row mt-0 md:mt-12 lg:mt-12  gap-8 s border-t border-[#E8E8E8] py-5">
           <div className="lg:w-[20%]">

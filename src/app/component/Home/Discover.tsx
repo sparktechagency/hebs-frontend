@@ -11,11 +11,11 @@ const Discover = () => {
       className="relative w-full bg-top bg-no-repeat bg-cover p-4 md:p-12"
       style={{ backgroundImage: `url(${frame1.src})` }}
     >
-      <div className="px-4 py-16 md:py-24">
+      <div className="px-4 py-16 pb-0 md:py-24">
         <div className="container mx-auto xl:max-w-7xl">
           <div className="flex flex-col-reverse md:flex-row items-center gap-8 md:gap-16">
             {/* Left content */}
-            <div className="w-full md:w-1/2 space-y-2 -top-64 text-center  md:text-start md:top-0 relative">
+            <div className="w-full md:w-1/2 space-y-2 -top-48 text-center  md:text-start md:top-0 relative">
               <div>
                 <h3
                   className={`text-[#F37975] font-bold text-2xl mb-1 ${style.fontJost}`}

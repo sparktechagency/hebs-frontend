@@ -12,12 +12,12 @@ const Islamic =() =>{
       className="relative w-full bg-top bg-no-repeat bg-cover p-4 md:p-12"
       style={{ backgroundImage: `url(${frame2.src})` }}
     >
-      <div className="px-4 py-16 md:py-24">
+      <div className="px-4 py-10  md:py-24">
         <div className="container mx-auto max-w-7xl">
           <div className="flex flex-col md:flex-row items-center  gap-8 md:gap-16">
             {/* Left content */}
        
-            <div className="w-full md:w-1/2 lg:w-1/2 -top-48 md:top-0 relative ">
+            <div className="w-[330px] md:w-1/2 lg:w-1/2 -top-48 md:top-0 relative ">
               {/* Book 1 - I've Loved You Since Forever */}
               <div className="">
                 <Image
