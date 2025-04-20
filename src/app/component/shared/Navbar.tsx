@@ -262,13 +262,13 @@ export default function Navbar() {
           <p className={`text-[#FAF397] tracking-widest font-bold text-sm uppercase ${style.fontJosefin}`}>
               Our Story
             </p>
-            {/* <Link
+            <Link
               href="/"
               onClick={onClose}
               className={`md:text-sm text-sm xl:text-xl uppercase  text-white hover:text-white/80  ${style.fontJosefin} ${pathname === "/" ? "text-yellow-400" : ""}`}
             >
               Home
-            </Link> */}
+            </Link> 
    
             {/* <Link href="/book-registry" className="text-sm font-medium text-white hover:text-white/80">
             BOOK REGISTRY
