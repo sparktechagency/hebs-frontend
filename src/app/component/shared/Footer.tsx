@@ -20,7 +20,7 @@ const FooterPage = () => {
           <div className="lg:w-[20%]">
             <p className={`text-[#FAF397] font-bold py-3 ${style.fontJosefin}`}>
               Our Story
-            </p>
+            </p> 
             <Space direction="vertical" className=" uppercase">
               <p className={`text-white ${style.fontJosefin}`}>About Us</p>
               <p className={`text-white ${style.fontJosefin}`}>Contact Us</p>

@@ -166,7 +166,7 @@ const MyProfilePage=()=> {
         </div>
 
         {/* Referrals Card */}
-        <div className="bg-white rounded-lg shadow-sm p-6">
+        {/* <div className="bg-white rounded-lg shadow-sm p-6">
           <h2 className="text-xl font-semibold mb-6">Referrals</h2>
           <div className="border-t border-gray-200 pt-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
@@ -184,7 +184,7 @@ const MyProfilePage=()=> {
               <div className="text-gray-600">Refer friends today!</div>
             </div>
           </div>
-        </div>
+        </div> */}
       </main>
     </div>
   )
