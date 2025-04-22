@@ -152,14 +152,36 @@ const MyProfilePage=()=> {
         </div>
 
         {/* Billing Card */}
-        <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
+        <div className={`${styles.fontInter} bg-white rounded-lg shadow-sm p-6 mb-8`}>
           <h2 className="text-xl font-semibold mb-6">Billing</h2>
           <div className="border-t border-gray-200 pt-6 ">
-            <div className=" p-4 rounded-lg mb-4 bg-[#FBD5D4] text-[#F37975]">Add a payment method</div>
+            <div className=" p-4 rounded-lg mb-4 bg-[#FBD5D4] text-[#F37975]">Billing Information</div>
+            <p>Please provide your credit card details to proceed with the payment.</p>
+  
+  <ul className="list-none p-1">
+    <li>
+      <strong>Card Number:</strong> 
+      <p>Enter your 16-digit card number. It typically appears on the front of your card. For example: <code>4242 4242 4242 4242</code></p>
+    </li>
+    
+    <li>
+      <strong>Expiry Date:</strong>
+      <p>Enter the expiry date of your card in the format <strong>MM/YY</strong>. This can be found on the front of your card, typically next to the card number. For example: <code>12/25</code></p>
+    </li>
+    
+    <li>
+      <strong>CVC (Card Verification Code):</strong>
+      <p>Enter the 3-digit CVC code found on the back of your card (for most cards) or the 4-digit code on the front for American Express cards. For example: <code>123</code> (Visa/Mastercard) or <code>1234</code> (Amex).</p>
+    </li>
+  </ul>
+  
+  <p><strong>Important:</strong> Your card details are securely processed and never stored on our servers.</p>
+  
+  <p>By submitting your payment, you agree to our <a href="/terms">Terms of Service</a> and <a href="/privacy">Privacy Policy</a>.</p>
             <div className="flex justify-end">
-            <button className={`border border-[#F37975] text-[#f08080] hover:text-[#f08080]/90 hover:border-[#f08080]/90 rounded-full px-4 py-2 ${styles.fontPoppins}`} style={{ textShadow: "2px 2px 4px #00000040" }}>
+            {/* <button className={`border border-[#F37975] text-[#f08080] hover:text-[#f08080]/90 hover:border-[#f08080]/90 rounded-full px-4 py-2 ${styles.fontPoppins}`} style={{ textShadow: "2px 2px 4px #00000040" }}>
   Add Payment Method
-</button>
+</button> */}
 
             </div>
           </div>
