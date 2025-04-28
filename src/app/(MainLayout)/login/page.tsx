@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
@@ -6,14 +7,17 @@ import { Button, Input, Form, message } from "antd";
 import { MailOutlined, FacebookFilled } from "@ant-design/icons";
 import Link from "next/link";
 import styles from "@/app/styles.module.css";
-import { useLazyLoginWithGoogleQuery, useLoginMutation } from "@/redux/features/auth/authApi";
+import { useLazyLoginWithFacebookQuery, useLazyLoginWithGoogleQuery, useLoginMutation } from "@/redux/features/auth/authApi";
 import { verifyToken } from "@/utils/VerifyToken";
 import { setUser, TUser } from "@/redux/features/auth/authSlice";
 import { useAppDispatch } from "@/redux/hooks";
 import { useRouter } from "next/navigation";
 import { FcGoogle } from "react-icons/fc";
 const Login = () => {
+
   const [triggerGoogleLogin, { data, error, isLoading }] = useLazyLoginWithGoogleQuery();
+
+  const [triggerFacebookLogin] = useLazyLoginWithFacebookQuery();
 
   const [login] = useLoginMutation();
   const [loading, setLoading] = useState(false);
@@ -39,6 +43,7 @@ const Login = () => {
       setLoading(false);
     }
   };
+  // google login
   const handleGoogleLogin = async () => {
     try {
       const res = await triggerGoogleLogin({}).unwrap();
@@ -49,13 +54,29 @@ const Login = () => {
       dispatch(setUser({ user: user, token: res.data.accessToken }));
   
       message.success(res.message || "Google login successful!");
-      // router.push("/");
+      router.push("/");
     } catch (error: any) {
       console.error("Google login error:", error);
       message.error(error?.data?.message || "Google login failed");
     }
   };
+  // facebooklogin
+  const handleFacebookLogin = async () => {
+    try {
+      const res = await triggerFacebookLogin({}).unwrap();
+      console.log("Google facebook Success:", res);
   
+      // Your logic: verify token, dispatch setUser, etc
+      const user = verifyToken(res.data.accessToken) as TUser;
+      dispatch(setUser({ user: user, token: res.data.accessToken }));
+  
+      message.success(res.message || "Facebook login successful!");
+      router.push("/");
+    } catch (error: any) {
+      console.error("Facebook login error:", error);
+      message.error(error?.data?.message || "Facebook login failed");
+    }
+  };
   return (
     <div
       className={`md:min-h-screen flex items-center justify-center mt-5 md:mt-0 px-4 md:py-12 bg-white ${styles.fontInter}`}
@@ -137,6 +158,7 @@ const Login = () => {
               icon={<FacebookFilled style={{ color: "#1877F2" }} />} // Facebook Blue Icon
               size="large"
               className="w-full h-12 rounded-xl flex items-center justify-center border-2 hover:border-gray-300"
+              onClick={()=>{handleFacebookLogin()}}
             >
               Continue with Facebook
             </Button>

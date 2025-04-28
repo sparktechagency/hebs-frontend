@@ -23,9 +23,16 @@ const authApi = baseApi.injectEndpoints({
         // body: userInfo,
       }),
     }),
+    loginWithFacebook: builder.query({
+      query: () => ({
+        url: "/user/auth/facebook",
+        method: "GET",  
+        // body: userInfo,
+      }),
+    }),
 
 
   }),
 });   
 
-export const { useLoginMutation,useSignUpMutation,useLazyLoginWithGoogleQuery} = authApi;
+export const { useLoginMutation,useSignUpMutation,useLazyLoginWithGoogleQuery,useLazyLoginWithFacebookQuery} = authApi;
