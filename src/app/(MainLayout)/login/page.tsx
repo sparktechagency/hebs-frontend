@@ -2,19 +2,35 @@
 "use client"
 
 import { useState } from "react"
-import { Button, Input, Form } from "antd"
+import { Button, Input, Form, message } from "antd"
 import { MailOutlined, FacebookFilled, GoogleOutlined } from "@ant-design/icons"
 import Link from "next/link"
 import styles from "@/app/styles.module.css"
+import { useLoginMutation } from "@/redux/features/auth/authApi"
+import { verifyToken } from "@/utils/VerifyToken"
+import { setUser, TUser } from "@/redux/features/auth/authSlice"
+import { useAppDispatch } from "@/redux/hooks"
+import { useRouter } from "next/navigation"
 const Login=() =>{
+  const [login]=useLoginMutation();
   const [loading, setLoading] = useState(false)
-
+  const dispatch = useAppDispatch();
+  const router = useRouter()
   const onFinish = async (values: any) => {
-    setLoading(true)
     try {
+      console.log(values);
       // Handle login logic here
-      console.log("Success:", values)
-    } catch (error) {
+      const res = await login(values).unwrap()
+      console.log("response:", res)
+      setLoading(true)
+      const user = verifyToken(res.data.accessToken) as TUser;
+        console.log("dispatchUser", user);
+        dispatch(setUser({ user: user, token: res.data.accessToken }));
+        setLoading(false)
+        message.success(res.message )
+        router.push("/");
+    } catch (error:any) {
+      message.error(error?.data?.message || error.data.error)
       console.error("Error:", error)
     } finally {
       setLoading(false)

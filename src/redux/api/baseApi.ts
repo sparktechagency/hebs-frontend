@@ -3,7 +3,7 @@ import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react"
      
 
 const baseQuery = fetchBaseQuery({
-    baseUrl: "https://458b-103-174-189-193.ngrok-free.app/v1",
+    baseUrl: "http://10.0.60.55:5003/v1",
     prepareHeaders: (headers) => {
       headers.set('Accept', 'application/json');
       return headers;

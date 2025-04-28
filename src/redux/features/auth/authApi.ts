@@ -4,7 +4,14 @@ const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     login: builder.mutation({
       query: (userInfo) => ({
-        url: "/auth/login",
+        url: "/user/auth/login",
+        method: "POST",
+        body: userInfo,
+      }),
+    }),
+    signUp: builder.mutation({
+      query: (userInfo) => ({
+        url: "/user/create",
         method: "POST",
         body: userInfo,
       }),
@@ -14,4 +21,4 @@ const authApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useLoginMutation} = authApi;
+export const { useLoginMutation,useSignUpMutation} = authApi;

@@ -1,10 +1,13 @@
+
 import Image from "next/image";
 import bannerImg from "@/assets/BannerImage.png";
 import styles from "@/app/styles.module.css";
 import Link from "next/link";
 import frame1 from "@/assets/tinyMuminsFrame1.png"
+
 const Banner = () => {
   // bg-[#FDFBDF]
+
   return (
 <div className="w-full  px-4 py-20 lg:py-28"
   style={{ backgroundImage: `url(${frame1.src})` }}   

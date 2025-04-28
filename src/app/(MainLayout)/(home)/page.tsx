@@ -9,7 +9,9 @@ import LittleCalips from "@/app/component/Home/LittleCaliphs";
 import TinyMuminsSection from "@/app/component/Home/TinyMumins";
 import Work from "@/app/component/Home/Work";
 
+
 const HomePage = () => {
+
     return (
         <div className="">
             <Banner/>
