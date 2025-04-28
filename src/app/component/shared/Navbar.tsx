@@ -7,14 +7,19 @@ import {
   RightOutlined,
   ShoppingCartOutlined,
 } from "@ant-design/icons";
-import { Drawer } from "antd";
+import { Drawer, message } from "antd";
 import Image from "next/image";
 import logo from "@/assets/Illuminate Muslim Minds Logo WHT.png";
 import style from "@/app/styles.module.css";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { logout, selectCurrentUser } from "@/redux/features/auth/authSlice";
 export default function Navbar() {
+  const user = useAppSelector(selectCurrentUser);
+  const dispatch = useAppDispatch();
+  const router = useRouter();
   const [open, setOpen] = useState(false);
-  const [user, setUser] = useState(true);
+
   const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
   const [kidsClubDropdownOpen, setKidsClubDropdownOpen] = useState(false);
   // const [kidsClubMobileDropdownOpen, setKidsClubMobileDropdownOpen] =
@@ -41,7 +46,12 @@ export default function Navbar() {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [profileDropdownOpen, kidsClubDropdownOpen]);
-
+  // logout
+  const handleLogout = () => {
+    dispatch(logout());
+    router.push("/login");
+    message.success("Logout Success");
+  };
   interface AgeCategory {
     name: string;
     range: string;
@@ -141,18 +151,13 @@ export default function Navbar() {
             )}
           </div>
 
-          {/* <Link href="/" className={`md:text-sm text-xs xl:text-xl  text-white hover:text-white/80 ${style.fontInter}`}>
-            Home
-          </Link> */}
           <Link
             href="/bookStore"
             className={`md:text-sm text-xs xl:text-xl  text-white hover:text-white/80 ${style.fontInter}`}
           >
             ONLINE BOOK STORE
           </Link>
-          {/* <Link href="/book-registry" className="text-sm font-medium text-white hover:text-white/80">
-            BOOK REGISTRY
-          </Link> */}
+
           <Link
             href="/about"
             className={`md:text-sm text-xs xl:text-xl  text-white hover:text-white/80 ${style.fontInter}`}
@@ -165,19 +170,13 @@ export default function Navbar() {
           >
             CONTACT
           </Link>
-          {/* <Link href="/blog" className={`md:text-sm text-xs xl:text-xl  text-white hover:text-white/80 ${style.fontInter}`}>
-            BLOG
-          </Link>  */}
         </nav>
 
         {/* User Profile and Cart */}
         <div className="hidden lg:flex lg:space-x-1 items-center space-x-3">
           {!user && (
             <Link href="/login">
-              <button
-                onClick={() => setUser(!user)}
-                className="h-12 rounded-full bg-[#F37975] font-bold px-8 text-lg hover:bg-[#e57373] text-white"
-              >
+              <button className="h-12 rounded-full bg-[#F37975] font-bold px-8 text-lg hover:bg-[#e57373] text-white">
                 Log In
               </button>
             </Link>
@@ -194,32 +193,36 @@ export default function Navbar() {
               {profileDropdownOpen && (
                 <div className="absolute right-0 mt-2 w-56 bg-white shadow-md rounded-md z-10">
                   <Link
-                    href="/subscription"  onClick={() => setProfileDropdownOpen(false)}
+                    href="/subscription"
+                    onClick={() => setProfileDropdownOpen(false)}
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   >
                     Subscriptions
                   </Link>
                   <Link
-                    href="/my-profile"  onClick={() => setProfileDropdownOpen(false)}
+                    href="/my-profile"
+                    onClick={() => setProfileDropdownOpen(false)}
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   >
                     Account Details
                   </Link>
                   <Link
-                    href="/billing"  onClick={() => setProfileDropdownOpen(false)}
+                    href="/billing"
+                    onClick={() => setProfileDropdownOpen(false)}
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   >
                     Billing History
                   </Link>
                   <Link
-                    href="/favorites"  onClick={() => setProfileDropdownOpen(false)}
+                    href="/favorites"
+                    onClick={() => setProfileDropdownOpen(false)}
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   >
                     Favorites
                   </Link>
                   <div className="border-t border-gray-200 my-1"></div>
                   <button
-                    onClick={() => setUser(!user)}
+                    onClick={() => handleLogout()}
                     className={`py-3 w-[100px] md:w-[120px] flex gap-1 items-center justify-center font-bold rounded-full border-none bg-white text-[#f08080] hover:bg-white/90 ${style.fontJosefin}`}
                   >
                     Logout
@@ -241,8 +244,6 @@ export default function Navbar() {
 
         {/* Mobile Menu Button */}
 
-
-
         <button className="lg:hidden block" onClick={showDrawer}>
           <MenuOutlined style={{ fontSize: "24px", color: "white" }} />
         </button>
@@ -259,25 +260,28 @@ export default function Navbar() {
           }}
         >
           <div className="flex flex-col justify-center items-center space-y-5 pt-0">
-          <p className={`text-[#FAF397] tracking-widest font-bold text-sm uppercase ${style.fontJosefin}`}>
+            <p
+              className={`text-[#FAF397] tracking-widest font-bold text-sm uppercase ${style.fontJosefin}`}
+            >
               Our Story
             </p>
             <Link
               href="/"
               onClick={onClose}
-              className={`md:text-sm text-sm xl:text-xl uppercase  text-white hover:text-white/80  ${style.fontJosefin} ${pathname === "/" ? "text-yellow-400" : ""}`}
+              className={`md:text-sm text-sm xl:text-xl uppercase  text-white hover:text-white/80  ${
+                style.fontJosefin
+              } ${pathname === "/" ? "text-yellow-400" : ""}`}
             >
               Home
-            </Link> 
-   
-            {/* <Link href="/book-registry" className="text-sm font-medium text-white hover:text-white/80">
-            BOOK REGISTRY
-          </Link> */}
+            </Link>
+
             <Link
               href="/about"
               onClick={onClose}
               passHref
-              className={`md:text-sm text-sm xl:text-xl  text-white hover:text-white/80  ${style.fontJosefin} ${pathname === "/about" ? "text-yellow-400" : ""} `}
+              className={`md:text-sm text-sm xl:text-xl  text-white hover:text-white/80  ${
+                style.fontJosefin
+              } ${pathname === "/about" ? "text-yellow-400" : ""} `}
             >
               ABOUT US
             </Link>
@@ -285,42 +289,49 @@ export default function Navbar() {
               href="/contact"
               onClick={onClose}
               passHref
-              className={`md:text-sm text-sm xl:text-xl  text-white hover:text-white/80  ${style.fontJosefin} ${pathname === "/contact" ? "text-yellow-400" : ""}`}
+              className={`md:text-sm text-sm xl:text-xl  text-white hover:text-white/80  ${
+                style.fontJosefin
+              } ${pathname === "/contact" ? "text-yellow-400" : ""}`}
             >
               CONTACT US
             </Link>
 
-            <p className={`text-[#FAF397] tracking-widest font-bold uppercase text-sm ${style.fontJosefin}`}>
+            <p
+              className={`text-[#FAF397] tracking-widest font-bold uppercase text-sm ${style.fontJosefin}`}
+            >
               Book Clubs
             </p>
-            {/* <div className="">
-              <div className="pl-4 mt-2 space-y-3"> */}
-                {ageCategories?.map((category, index) => (
-                  <Link
-                    key={index}
-                    href={category.route}
-                    onClick={onClose}
-                    passHref
-                    className="flex items-center group hover:opacity-80 transition-opacity"
-                  >
-                    <span
-                      className={`md:text-sm text-sm xl:text-xl  text-white hover:text-white/80  ${style.fontJosefin} ${
-                        pathname === category.route ? "text-yellow-400" : ""
-                      }`}
-                    >
-                      {category.name}
-                    </span>
-                  </Link>
-                ))}
-              {/* </div>
+
+            {ageCategories?.map((category, index) => (
+              <Link
+                key={index}
+                href={category.route}
+                onClick={onClose}
+                passHref
+                className="flex items-center group hover:opacity-80 transition-opacity"
+              >
+                <span
+                  className={`md:text-sm text-sm xl:text-xl  text-white hover:text-white/80  ${
+                    style.fontJosefin
+                  } ${pathname === category.route ? "text-yellow-400" : ""}`}
+                >
+                  {category.name}
+                </span>
+              </Link>
+            ))}
+            {/* </div>
             </div> */}
-         <p className={`text-[#FAF397] tracking-widest font-bold text-sm uppercase ${style.fontJosefin}`}>
+            <p
+              className={`text-[#FAF397] tracking-widest font-bold text-sm uppercase ${style.fontJosefin}`}
+            >
               More
             </p>
             <Link
               href="/gift"
               onClick={onClose}
-              className={`md:text-sm uppercase text-sm xl:text-xl  text-white hover:text-white/80  ${style.fontJosefin}  ${pathname === "/gift" ? "text-yellow-400" : ""}`}
+              className={`md:text-sm uppercase text-sm xl:text-xl  text-white hover:text-white/80  ${
+                style.fontJosefin
+              }  ${pathname === "/gift" ? "text-yellow-400" : ""}`}
             >
               give a gift
             </Link>
@@ -328,42 +339,37 @@ export default function Navbar() {
               href="/bookStore"
               onClick={onClose}
               passHref
-              className={`md:text-sm text-xsmxl:text-xl   text-white hover:text-white/80  ${style.fontJosefin} ${pathname === "/bookStore" ? "text-yellow-400" : ""}`}
+              className={`md:text-sm text-xsmxl:text-xl   text-white hover:text-white/80  ${
+                style.fontJosefin
+              } ${pathname === "/bookStore" ? "text-yellow-400" : ""}`}
             >
               ONLINE BOOK STORE
             </Link>
             <Link
               href="/blog"
               onClick={onClose}
-              className={`md:text-sm text-sm xl:text-xl  text-white hover:text-white/80  ${style.fontJosefin}  ${pathname === "/blog" ? "text-yellow-400" : ""}`}
+              className={`md:text-sm text-sm xl:text-xl  text-white hover:text-white/80  ${
+                style.fontJosefin
+              }  ${pathname === "/blog" ? "text-yellow-400" : ""}`}
             >
               BLOG
             </Link>
             <div className="flex justify-center items-center  gap-3">
               <Link href="/login" onClick={onClose} passHref>
-              <button
+                <button
                   className={`py-3 w-[100px] md:w-[120px] font-bold uppercase border-none bg-white text-[#f08080] hover:bg-white/90 rounded-full ${style.fontJosefin}`}
                 >
                   Log In
                 </button>
               </Link>
               <Link href="/login" onClick={onClose} passHref>
-              <button
+                <button
                   className={`py-3 w-[100px] md:w-[120px] font-bold uppercase border-none bg-white text-[#f08080] hover:bg-white/90 rounded-full ${style.fontJosefin}`}
                 >
-                         <ShoppingCartOutlined
-                    className="pr-2 text-[20px]"
-                  />
-                 
+                  <ShoppingCartOutlined className="pr-2 text-[20px]" />
                   Cart
                 </button>
               </Link>
-              {/* <Link href="/cart" onClick={onClose} passHref>
-                <button className="h-12 rounded-full bg-[#F37975] font-bold px-8 text-lg hover:bg-[#e57373] text-white">
-                  <ShoppingCartOutlined style={{ marginRight: 8 }} />
-                  Cart
-                </button>
-              </Link> */}
             </div>
           </div>
         </Drawer>
