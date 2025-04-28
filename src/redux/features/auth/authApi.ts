@@ -16,9 +16,16 @@ const authApi = baseApi.injectEndpoints({
         body: userInfo,
       }),
     }),
+    loginWithGoogle: builder.query({
+      query: () => ({
+        url: "/user/auth/google",
+        method: "GET",  
+        // body: userInfo,
+      }),
+    }),
 
 
   }),
-});
+});   
 
-export const { useLoginMutation,useSignUpMutation} = authApi;
+export const { useLoginMutation,useSignUpMutation,useLazyLoginWithGoogleQuery} = authApi;
