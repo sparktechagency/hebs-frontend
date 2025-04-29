@@ -10,17 +10,21 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { useFavouriteBooksMutation, useGetAllBooksQuery } from "@/redux/features/books/bookApi";
+import { useFavouriteBooksMutation, useGetAllBooksQuery, useGetAllFavouritesBooksQuery } from "@/redux/features/books/bookApi";
 import { useAppSelector } from "@/redux/hooks";
 import { selectCurrentUser } from "@/redux/features/auth/authSlice";
 
 function BookStore() {
   const { data, isLoading, error } = useGetAllBooksQuery(undefined);
+
   const user = useAppSelector(selectCurrentUser)
-  // console.log(user?.userId);
+  console.log(user?.userId);
   // console.log("book product==>", data?.meta);
+  // add fav books
   const [favouriteBook] = useFavouriteBooksMutation();
-  
+  // get fav books
+  const { data: favouriteBooks } = useGetAllFavouritesBooksQuery(user?.userId);
+  console.log(favouriteBooks?.data);
   const totalData = data?.meta?.totalData;
 
   const currentPageNo = data?.meta?.currentPage;
