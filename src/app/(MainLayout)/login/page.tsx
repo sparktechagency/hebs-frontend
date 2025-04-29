@@ -31,8 +31,10 @@ const Login = () => {
       // console.log("response:", res)
       setLoading(true);
       const user = verifyToken(res.data.accessToken) as TUser;
+      const modifiedUser={userId:res?.data?._id,user:user}
+      // console.log(modifiedUser);
       // console.log("dispatchUser", user);
-      dispatch(setUser({ user: user, token: res.data.accessToken }));
+      dispatch(setUser({ user: modifiedUser, token: res.data.accessToken }));
       setLoading(false);
       message.success(res.message);
       router.push("/");

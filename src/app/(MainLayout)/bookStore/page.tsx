@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-import { Select, Input } from "antd";
+import { Select, Input, message } from "antd";
 import type React from "react";
 
 import { HeartIcon } from "lucide-react";
@@ -10,12 +10,17 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { useGetAllBooksQuery } from "@/redux/features/books/bookApi";
+import { useFavouriteBooksMutation, useGetAllBooksQuery } from "@/redux/features/books/bookApi";
+import { useAppSelector } from "@/redux/hooks";
+import { selectCurrentUser } from "@/redux/features/auth/authSlice";
 
 function BookStore() {
   const { data, isLoading, error } = useGetAllBooksQuery(undefined);
+  const user = useAppSelector(selectCurrentUser)
+  // console.log(user?.userId);
   // console.log("book product==>", data?.meta);
-
+  const [favouriteBook] = useFavouriteBooksMutation();
+  
   const totalData = data?.meta?.totalData;
 
   const currentPageNo = data?.meta?.currentPage;
@@ -46,16 +51,38 @@ function BookStore() {
     currentPage * pageSize
   );
 
-  const toggleFavorite = (e: React.MouseEvent, productId: number) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setFavorites((prev) =>
-      prev.includes(productId)
-        ? prev.filter((id) => id !== productId)
-        : [...prev, productId]
-    );
-  };
+  // const toggleFavorite = (e: React.MouseEvent, productId: number) => {
+  //   e.preventDefault();
+  //   e.stopPropagation();
+  //   setFavorites((prev) =>
+  //     prev.includes(productId)
+  //       ? prev.filter((id) => id !== productId)
+  //       : [...prev, productId]
+  //   );
+  // };
 
+  const handleFavourite = async (bookId: string) => {
+    if (!user?.userId || !bookId) {
+      console.error("User or Book ID is missing");
+      return;
+    }
+  
+    try {
+      // Call the mutation and wait for the response
+      const res = await favouriteBook({ userId: user.userId, bookId });
+      console.log("Mutation Response:", res);
+  
+      // Assuming the message is inside `res.data` based on your mutation
+      if (res?.data?.message) {
+        message.success(res.data.message); // Show success message
+      } else {
+        console.error("Message not found in the response");
+      }
+    } catch (error) {
+      console.error("Error during mutation:", error);
+    }
+  };
+  
   return (
     <div className="container mx-auto px-4">
       {/* Filter Section */}
@@ -126,7 +153,7 @@ function BookStore() {
                     />
                   </Link>
                   <button
-                    onClick={(e) => toggleFavorite(e, product.id)}
+                    onClick={() => handleFavourite(product._id)}
                     className="absolute top-2 right-2 p-1.5 bg-white/80 rounded-full hover:bg-white transition-colors z-10"
                     aria-label={
                       favorites.includes(product.id)
@@ -143,6 +170,24 @@ function BookStore() {
                       }
                     />
                   </button>
+                  {/* <button
+                    onClick={(e) => toggleFavorite(e, product.id)}
+                    className="absolute top-2 right-2 p-1.5 bg-white/80 rounded-full hover:bg-white transition-colors z-10"
+                    aria-label={
+                      favorites.includes(product.id)
+                        ? "Remove from favorites"
+                        : "Add to favorites"
+                    }
+                  >
+                    <HeartIcon
+                      size={20}
+                      className={
+                        favorites.includes(product.id)
+                          ? "fill-red-500 text-red-500"
+                          : "text-gray-500"
+                      }
+                    />
+                  </button> */}
                 </div>
 
                 {/* Add to Bag Button */}

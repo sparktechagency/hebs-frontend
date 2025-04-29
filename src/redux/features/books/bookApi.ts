@@ -16,9 +16,21 @@ const bookApi = baseApi.injectEndpoints({
         method: "GET",
       }),
     }),
-
+    allFavouritesBooks: builder.query({
+      query: (id) => ({
+        url: `/favorite-book/retrieve/user/${id}`,
+        method: "GET",
+      }),
+    }),
+    favouriteBooks: builder.mutation({
+      query: ({userId,bookId}) => ({
+        url: `/favorite-book/add/new/${userId}`,
+        method: "POST",
+        body: bookId,
+      }),
+    })
 
   }),
 });
 
-export const {useGetAllBooksQuery,useGetSingleBooksQuery } = bookApi;
+export const {useGetAllBooksQuery,useGetSingleBooksQuery ,useAllFavouritesBooksQuery,useFavouriteBooksMutation} = bookApi;
