@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 import { Select, Input } from "antd"
 import type React from "react"
@@ -48,6 +49,8 @@ const allProducts = Array(15)
 
 function BookStore() {
   const { data, isLoading,error } = useGetAllBooksQuery(undefined);
+  console.log("book product==>",data?.data);
+  
     // Now you can access:
     const books = data?.data ?? [];
     const meta = data?.meta;
@@ -73,8 +76,8 @@ function BookStore() {
 
 
   // Filter products based on search query
-  const filteredProducts = allProducts.filter((product) =>
-    product.title.toLowerCase().includes(searchQuery.toLowerCase()),
+  const filteredProducts = data?.data?.filter((product:any) =>
+    product.name.toLowerCase().includes(searchQuery.toLowerCase()),
   )
 
   // Calculate total number of products
@@ -126,7 +129,7 @@ function BookStore() {
         <h1 className="text-xl font-bold mb-6">{totalProducts} Products</h1>
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-1 md:gap-6">
-          {currentProducts.map((product, index) => (
+          {currentProducts.map((product :any, index:number) => (
           <Link  key={`${product.id}-${index}`} href={`/bookStore/${product.id}`}>
           
           <div
@@ -134,10 +137,11 @@ function BookStore() {
               className="rounded-lg p-3 flex flex-col cursor-pointer"
               // onClick={() => router.push(`/bookStore/${product.id}`)} 
             >
+              
               <div className="relative h-48 mb-3 rounded-md bg-[#fffbeb]">
                 <Image
-                  src={product.image || "/placeholder.svg"}
-                  alt={product.title}
+                  src={product.coverImage || "/placeholder.svg"}
+                  alt={product.name}
                   fill
                   className="object-cover rounded-md"
                   sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, (max-width: 1280px) 25vw, 20vw"
@@ -166,7 +170,7 @@ function BookStore() {
               </button>
 
               <h3 className="text-sm font-medium line-clamp-2 mb-1">{product.title}</h3>
-              <p className="text-sm">${product.price.toFixed(2)}</p>
+              <p className="text-sm">${product.price.amount.toFixed(2)}</p>
             </div>
           </Link>
           ))}
