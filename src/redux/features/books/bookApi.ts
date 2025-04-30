@@ -28,9 +28,27 @@ const bookApi = baseApi.injectEndpoints({
         method: "POST",
         body: bookId,
       }),
-    })
+    }),
+    getCategories: builder.query({
+      query: () => ({
+        url: `/category/retrieve`,
+        method: "GET",
+      }),
+    }),
+    getGrade: builder.query({
+      query: () => ({
+        url: `/grade/retrieve`,
+        method: "GET",
+      }),
+    }),
+    getCollection: builder.query({
+      query: () => ({
+        url: `/collection/retrieve`,
+        method: "GET",
+      }),
+    }),
 
   }),
 });
 
-export const {useGetAllBooksQuery,useGetSingleBooksQuery ,useGetAllFavouritesBooksQuery,useFavouriteBooksMutation} = bookApi;
+export const {useGetAllBooksQuery,useGetSingleBooksQuery ,useGetAllFavouritesBooksQuery,useFavouriteBooksMutation,useGetCategoriesQuery,useGetGradeQuery,useGetCollectionQuery} = bookApi;
