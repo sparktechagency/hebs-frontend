@@ -5,10 +5,32 @@ import { baseApi } from "../../api/baseApi";
 const bookApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getAllBooks: builder.query({
-      query: () => ({
-        url: "/book/retrieve",
-        method: "GET",
-      }),
+      query: (args) => {
+        const params = new URLSearchParams();
+    
+        if (args && typeof args === "object") {
+          Object.entries(args).forEach(([key, value]) => {
+            if (value !== undefined && value !== null) {
+              params.append(key, value.toString());
+            }
+          });
+        }
+    
+        return {
+          url: "/book/retrieve",
+          method: "GET",
+          params: params,
+        };
+      },
+      providesTags: ["books"],
+      
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      transformResponse: (response: any) => {
+        return {
+          data: response?.data,
+          meta: response?.meta,
+        };
+      },
     }),
     getSingleBooks: builder.query({
       query: (id) => ({

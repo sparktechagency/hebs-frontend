@@ -11,19 +11,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-const ProductCard = ({ product }: { product: any }) => {
+const ProductCard = ({ product}: { product: any }) => {
+  // console.log("availability",availability);
+  // console.log("status",product.status);
   const [favouriteBook] = useFavouriteBooksMutation();
   const user = useAppSelector(selectCurrentUser);
   const router = useRouter();
   // get fav books
   const { data: favouriteBooks } = useGetAllFavouritesBooksQuery(user?.userId);
-  console.log(favouriteBooks?.data?.books);
-  const favouriteBooksArray = favouriteBooks?.data?.books;
-  const favouriteBooksArray2 =
-    favouriteBooks?.data?.books?.includes(favouriteBooksArray);
-  console.log("fav book array===>", favouriteBooksArray2);
-  const isFavourite = favouriteBooks?.data?.books?.includes(product._id);
-  console.log("Is favourite:", isFavourite, "for product ID:", product._id);
+
 
   // add favrt book
   const handleFavourite = async (bookId: string) => {
