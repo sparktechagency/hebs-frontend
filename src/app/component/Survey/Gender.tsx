@@ -52,7 +52,7 @@ const Gender = ({
                 { label: "Other", value: "other" },
               ]}
               placeholder="Select your gender"
-              className="w-full mt-5 py-2"
+              className="w-full mt-5"
             />
           )}
         />
@@ -60,7 +60,7 @@ const Gender = ({
           <p className="text-red-500 text-sm mt-1">{errors.gender.message as string}</p>
         )}
 
-        <div className="mt-6 flex justify-between">
+        <div className="mt-6 flex justify-center">
           <button
             type="submit"
             className="border border-black text-black px-6 py-2 rounded-full hover:bg-gray-100 transition"

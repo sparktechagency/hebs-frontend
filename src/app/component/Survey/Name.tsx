@@ -45,7 +45,7 @@ const Name = ({ setIsRelation, setIsName,setData }: { setIsRelation: (value: boo
             <Input
               {...field}
               placeholder="Type your name here"
-              className="w-full py-4 px-3 focus:border-[#F37975] focus:ring-[#F37975] rounded-md"
+              className="w-full py-3 px-3 focus:border-[#F37975] focus:ring-[#F37975] rounded-md"
             />
           )}
         />

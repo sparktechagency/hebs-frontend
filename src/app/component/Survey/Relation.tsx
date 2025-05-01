@@ -55,7 +55,7 @@ const Relation = ({
             <Select
               {...field}
               showSearch
-              className="w-full p-2"
+              className="w-full "
               placeholder="Select an option"
               optionFilterProp="label"
               filterSort={filterSort}

@@ -62,7 +62,7 @@ const BirthYear = ({
       </h3>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="text-center max-w-md w-full p-10"
+        className="text-center max-w-md w-full p-1"
       >
         <Controller
           name="birthYear"
@@ -85,7 +85,7 @@ const BirthYear = ({
           </p>
         )}
 
-        <div className="mt-6 flex justify-between">
+        <div className="mt-6 flex justify-center items-center">
           <button
             type="submit"
             className="border border-black text-black px-6 py-2 rounded-full hover:bg-gray-100 transition"

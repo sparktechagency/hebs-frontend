@@ -4,8 +4,42 @@ import Image from "next/image";
 import { Sparkles } from "lucide-react";
 import packaging from "@/assets/tinnymuslimBox.png";
 import Link from "next/link";
-import { RightOutlined ,LeftOutlined} from "@ant-design/icons";
+import { RightOutlined } from "@ant-design/icons";
+import { useAppSelector } from "@/redux/hooks";
+import { selectCurrentSurvey } from "@/redux/features/survey/surveySlice";
+// {setIsEmail,setIsRecomended}:{  setIsEmail: (value: boolean) => void,setIsRecomended: (value: boolean) => void} 
 export default function BookRecommendations() {
+  const surveyData = useAppSelector(selectCurrentSurvey)
+  console.log("survey from redux",surveyData);
+  // const handleBack = () => {
+  //   setIsEmail(true);
+  //   setIsRecomended(false);
+  // };
+  const text = [
+    {
+      id:"1",
+      title:"Focusing on high-contrast images"
+    },
+    {
+      id:"2",
+      title:"Touching pictures with textures"
+    },
+    {
+      id:"3",
+      title:"Opening peek-a-boo flaps"
+    },
+  ]
+  const bookType = [
+    {
+      id:"1",
+      title:"Board Books"
+    },
+    {
+      id:"2",
+      title:"Picture Books"
+    },
+ 
+  ]
   return (
     <>
     
@@ -17,13 +51,13 @@ export default function BookRecommendations() {
         </h1>
 
         {/* Books */}
-        <div className="flex justify-center items-end gap-4 md:relative md:top-16 lg:relative lg:top-16">
+        <div className="flex justify-center items-end gap-4 md:relative md:top-16 lg:relative lg:top-16 ">
           <Image
             src={packaging}
             alt={"packaging"}
             width={350}
             height={160}
-            className="rounded-lg shadow-2xl"
+            className="rounded-lg shadow-2xl bg-white"
           />
         </div>
 
@@ -44,11 +78,11 @@ export default function BookRecommendations() {
           <div className="space-y-6">
             <h1 className="text-start font-bold">Key skills to practice</h1>
             {/* Content items with sparkle icons */}
-            {[1, 2, 3].map((item) => (
-              <div key={item} className="flex items-start gap-3">
+            {text.map((item,id) => (
+              <div key={id} className="flex items-start gap-3">
                 <Sparkles className="w-5 h-5 text-[#ff7171] flex-shrink-0 mt-1" />
                 <p className="">
-                Focusing on high-contrast images
+               {item.title}
                 </p>
               </div>
             ))}
@@ -59,11 +93,11 @@ export default function BookRecommendations() {
    <div className="p-8  border-t border-black">
    <div className="space-y-6 mb-12">
         <h1 className="text-start font-bold py-3">Recommended book types</h1>
-          {[1, 2].map((item) => (
-            <div key={item} className="flex items-start gap-3">
+          {bookType.map((item,id) => (
+            <div key={id} className="flex items-start gap-3">
               <Sparkles className="w-5 h-5 text-[#ff7171] flex-shrink-0 mt-1" />
               <p className="">
-              Board Books
+          {item.title}
               </p>
             </div>
           ))}
@@ -81,15 +115,15 @@ export default function BookRecommendations() {
 
 {/* button */}
 <div className=" bg-[#EDEBE6] shadow-lg p-5 w-full">
-<div className="container mx-auto flex justify-between ">
+<div className="container mx-auto flex justify-center ">
           {/* Back Button */}
-          <Link href="/email">
+          {/* <Link href="/name">
 
-<button className="border border-black text-black px-6 py-2 rounded-full inline-flex items-center justify-center space-x-2 hover:bg-gray-100 active:bg-gray-200 transition">
+<button  className="border border-black text-black px-6 py-2 rounded-full inline-flex items-center justify-center space-x-2 hover:bg-gray-100 active:bg-gray-200 transition">
   <LeftOutlined/>
   <span className="font-semibold">Back</span>
 </button>
-</Link>
+</Link> */}
 
 {/* Next Button */}
 <Link href={"/subscriptionPlan"}>

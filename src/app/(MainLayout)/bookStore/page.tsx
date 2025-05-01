@@ -27,7 +27,8 @@ function BookStore() {
   >();
   // const [priceRange, setPriceRange] = useState<[number, number] | undefined>();
 
-  // const [sortBy, setSortBy] = useState<string | undefined>("price");
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [sortBy, setSortBy] = useState<string | undefined>("price");
 
   const [sortOrder, setSortOrder] = useState<"asc" | "desc" | undefined>("asc");
   // const [availability, setAvailability] = useState<string | undefined>();
@@ -38,14 +39,14 @@ function BookStore() {
     category: selectedCategory || undefined,
     grade: selectedGrade || undefined,
     collection: selectedCollection || undefined,
-    // sortBy: sortBy || undefined,
+    sortBy: sortBy || undefined,
     sortOrder: sortOrder || undefined,
     // minPrice: priceRange?.[0] || undefined,
     // maxPrice: priceRange?.[1] || undefined,
     // availability: availability || undefined,
     page: currentPage,
   };
-  // console.log(queryParams);
+  console.log(queryParams);
   const { data, isLoading, error } = useGetAllBooksQuery(queryParams);
   const { data: categories } = useGetCategoriesQuery(undefined);
   const { data: grades } = useGetGradeQuery(undefined);
@@ -149,6 +150,7 @@ function BookStore() {
             <span className="text-gray-600">Sort by:</span>
             <Select
               value={sortOrder}
+              
               className="w-48"
               size="middle"
               onChange={(value) => setSortOrder(value)}

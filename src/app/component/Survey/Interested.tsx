@@ -62,7 +62,7 @@ const Interested = ({
         <p className="text-red-500 text-sm mt-1">{errors.interestInArabic.message as string}</p>
       )}
 
-      <div className="mt-6 flex justify-between">
+      <div className="mt-6 flex justify-center">
 
         <button
           type="submit"

@@ -1,30 +1,72 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { Controller, FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import {
+  Controller,
+  FieldValues,
+  SubmitHandler,
+  useForm,
+} from "react-hook-form";
 import style from "@/app/styles.module.css";
 import { Input } from "antd";
+import { useDispatch } from "react-redux";
+import { updateSurveyData } from "@/redux/features/survey/surveySlice";
+import { useRouter } from "next/navigation";
 
 const Email = ({
   setIsEmail,
   setData,
   setIsSpend,
+  // setIsRecomended,
+  data,
 }: {
   setIsEmail: (value: boolean) => void;
   setIsSpend: (value: boolean) => void;
+  // setIsRecomended: (value: boolean) => void;
   setData: any;
+  data: any;
 }) => {
   const {
     control,
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const router = useRouter();
+  const dispatch = useDispatch();
+  const onSubmit: SubmitHandler<FieldValues> = (d) => {
+    console.log("Email entered:", d.email);
+    setData((prev: any) => ({ ...prev, email: d.email }));
 
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    console.log("Email entered:", data.email);
-    setData((prev: any) => ({ ...prev, email: data.email }));
+    const year = data?.birthYear;
+    const month = data?.birthMonth;
+    // If you have a day field, use it. If not, default to the first day of the month:
+    const day = "01";
+
+    // Pad month and day to ensure 2-digit format
+    const paddedMonth = String(month).padStart(2, "0");
+    const paddedDay = String(day).padStart(2, "0");
+
+    const dateOfBirth = `${year}-${paddedMonth}-${paddedDay}`;
+    const surveyData = {
+      readerName: data.readerName,
+      email: data.email,
+      relation: data.relation,
+      gender: data.gender,
+      dateOfBirth: dateOfBirth,
+      favoriteCollection: data.facoriteCollection,
+      interestInArabic: data.interestInArabic,
+      lavelInArabic: data.lavelInArabic,
+      constSpend: {
+        statement: data.statement,
+      },
+    };
+    console.log("surveyData from form inside email compo", surveyData);
+
+    dispatch(updateSurveyData(surveyData));
+    router.push("/recomended")
     // You can now proceed to the final step or submit the collected data
     // setIsEmail(false);
+    // setIsRecomended(true)
   };
 
   const handleBack = () => {
@@ -33,8 +75,13 @@ const Email = ({
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="text-center max-w-md w-full p-10">
-      <h3 className={`text-[#F37975] font-medium text-xl mb-4 ${style.fontInter}`}>
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="text-center max-w-md w-full p-10"
+    >
+      <h3
+        className={`text-[#F37975] font-medium text-xl mb-4 ${style.fontInter}`}
+      >
         Lastly, what is your email?
       </h3>
 
@@ -53,16 +100,17 @@ const Email = ({
             {...field}
             type="email"
             placeholder="Type your email here"
-            className="w-full mt-5 py-5 focus:border-[#F37975] focus:ring-[#F37975]"
+            className="w-full mt-5 py-3 focus:border-[#F37975] focus:ring-[#F37975]"
           />
         )}
       />
       {errors.email && (
-        <p className="text-red-500 text-sm mt-1">{errors.email.message as string}</p>
+        <p className="text-red-500 text-sm mt-1">
+          {errors.email.message as string}
+        </p>
       )}
 
-      <div className="mt-6 flex justify-between">
- 
+      <div className="mt-6 flex justify-center">
         <button
           type="submit"
           className="border border-black text-black px-6 py-2 rounded-full hover:bg-gray-100 transition"
@@ -70,8 +118,8 @@ const Email = ({
           Submit
         </button>
       </div>
-                                  {/* Progress Bar */}
-                                  <div className="fixed bottom-0 left-0 right-0 flex items-center justify-center p-4 bg-white border-t border-gray-200">
+      {/* Progress Bar */}
+      <div className="fixed bottom-0 left-0 right-0 flex items-center justify-center p-4 bg-white border-t border-gray-200">
         <div className="flex-1 max-w-3xl">
           <div className="flex items-center mb-1">
             <span className="text-sm font-medium text-gray-700">
@@ -105,11 +153,7 @@ const Email = ({
             </svg>
           </button>
 
-          <button
-          type="submit"
-            className="text-gray-500 hover:text-gray-700"
-           
-          >
+          <button type="submit" className="text-gray-500 hover:text-gray-700">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
