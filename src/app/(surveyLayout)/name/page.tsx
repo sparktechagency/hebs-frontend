@@ -8,6 +8,9 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Name from "@/app/component/Survey/Name";
 import Relation from "@/app/component/Survey/Relation";
+import BirthMonth from "@/app/component/Survey/BirthMonth";
+import BirthYear from "@/app/component/Survey/BirthYear";
+import Topics from "@/app/component/Survey/Topics";
 
 const NamePage = () => {
 const [data,setData]=useState({})
@@ -21,8 +24,8 @@ const [isInterested,setIsInterested]=useState(false)
 const [isSpend,setIsSpend]=useState(false)
 const [isTopics,setIsTopics]=useState(false)
 
-
-
+console.log("surveyData",data);
+      
   return (
     <div
       className="fixed inset-0 flex items-center justify-center bg-cover bg-no-repeat bg-center mt-24"
@@ -32,8 +35,9 @@ const [isTopics,setIsTopics]=useState(false)
  
    {isName &&   <Name setIsName={setIsName} setIsRelation={setIsRelation} setData={setData}/>}
  {  isRelation &&   <Relation setIsRelation={setIsRelation} setData={setData}  setIsBirthMonth={setIsBirthMonth}/>}
-
- 
+{isBirthMonth && <BirthMonth setIsBirthYear={setIsBirthYear} setData={setData}  setIsBirthMonth={setIsBirthMonth} setIsRelation={setIsRelation} />}
+{isBirthYear && <BirthYear setIsBirthYear={setIsBirthYear} setData={setData}  setIsBirthMonth={setIsBirthMonth} setIsTopics={setIsTopics}/>}
+{isTopics && <Topics setIsBirthYear={setIsBirthYear} setData={setData}  setIsInterested={setIsInterested} setIsTopics={setIsTopics}/>}
     </div>
   );
 };

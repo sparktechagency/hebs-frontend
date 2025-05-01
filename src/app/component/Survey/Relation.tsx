@@ -22,10 +22,10 @@ const Relation = ({
   } = useForm();
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    console.log("Submitted relationship:", data.relationship); // ✅ Will log the selected value
+    console.log("Submitted relationship:", data.relation); // ✅ Will log the selected value
     setIsRelation(false);
     setIsBirthMonth(true);
-    setData(data);
+    setData((prev: any) => ({ ...prev, relation: data.relation}));
   };
 
   const filterSort = (
@@ -48,9 +48,9 @@ const Relation = ({
 
         {/* Controlled Select Field */}
         <Controller
-          name="relationship"
+          name="relation"
           control={control}
-          rules={{ required: "Relationship is required" }}
+          rules={{ required: "Relation is required" }}
           render={({ field }) => (
             <Select
               {...field}
@@ -70,8 +70,8 @@ const Relation = ({
             />
           )}
         />
-        {errors.relationship && (
-          <p className="text-red-500 text-sm mt-1">{errors.relationship.message as string}</p>
+        {errors.relation && (
+          <p className="text-red-500 text-sm mt-1">{errors.relation.message as string}</p>
         )}
 
         {/* Submit Button */}

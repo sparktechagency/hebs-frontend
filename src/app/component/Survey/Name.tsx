@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Input } from "antd";
 import React from "react";
 import { RightOutlined } from "@ant-design/icons";
@@ -17,10 +18,10 @@ const Name = ({ setIsRelation, setIsName,setData }: { setIsRelation: (value: boo
   } = useForm();
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    console.log("Submitted name:", data.name); // This will now log correctly
+    console.log("Submitted name:", data.readerName); // This will now log correctly
     setIsName(false)
     setIsRelation(true)
-    setData(data)
+    setData((prev: any) => ({ ...prev, readerName: data.readerName }));
   };
   return (
     <div>
@@ -37,9 +38,9 @@ const Name = ({ setIsRelation, setIsName,setData }: { setIsRelation: (value: boo
       >
         {/* Controlled Input Field */}
         <Controller
-          name="name"
+          name="readerName"
           control={control}
-          rules={{ required: "Name is required" }}
+          rules={{ required: "readerName is required" }}
           render={({ field }) => (
             <Input
               {...field}
