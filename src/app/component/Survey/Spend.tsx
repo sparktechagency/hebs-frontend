@@ -27,9 +27,9 @@ const Spend = ({
 
     setData((prev: any) => ({
         ...prev,
-        constSpend: {
+       
           statement: data.monthlySpend
-        }
+       
       }));
       
     setIsSpend(false);

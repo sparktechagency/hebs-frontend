@@ -19,7 +19,7 @@ import Recommended from "@/app/component/Survey/Recommended";
 import Gender from "@/app/component/Survey/Gender";
 
 const NamePage = () => {
-const [data,setData]=useState({})
+  const [data, setData] = useState<any>({});
 const [isName,setIsName]=useState(true)
 const [isRelation,setIsRelation]=useState(false)
 const [isBirthMonth,setIsBirthMonth]=useState(false)
@@ -31,8 +31,33 @@ const [isInterested,setIsInterested]=useState(false)
 const [isSpend,setIsSpend]=useState(false)
 const [isTopics,setIsTopics]=useState(false)
 
-console.log("surveyData",data);
+console.log("surveyData from form",data);
     const router = useRouter();
+
+const year = data?.birthYear
+const month = data?.birthMonth
+// If you have a day field, use it. If not, default to the first day of the month:
+const day = "01";
+
+// Pad month and day to ensure 2-digit format
+const paddedMonth = String(month).padStart(2, "0");
+const paddedDay = String(day).padStart(2, "0");
+
+const dateOfBirth = `${year}-${paddedMonth}-${paddedDay}`;
+    const surveyData={
+      readerName: data.readerName,
+      email: data.email,
+      relation: data.relation,
+      gender: data.gender,
+      dateOfBirth: dateOfBirth,
+      favoriteCollection: data.facoriteCollection,
+      interestInArabic: data.interestInArabic,
+      lavelInArabic: data.lavelInArabic,
+      constSpend: {
+        statement: data.statement
+      }
+    }
+    console.log("surveyData modified",surveyData);
   return (
     <div
       className="fixed inset-0 flex items-center justify-center bg-cover bg-no-repeat bg-center mt-24"

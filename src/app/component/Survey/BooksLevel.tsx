@@ -29,8 +29,8 @@ const BooksLevel = ({
   } = useForm();
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    console.log("Selected book level:", data.bookLevel);
-    setData((prev: any) => ({ ...prev, bookLevel: data.bookLevel }));
+    console.log("Selected book level:", data.lavelInArabic);
+    setData((prev: any) => ({ ...prev, lavelInArabic: data.lavelInArabic }));
     setIsBooksLevel(false);
     setIsSpend(true);
   };
@@ -47,7 +47,7 @@ const BooksLevel = ({
       </h3>
 
       <Controller
-        name="bookLevel"
+        name="lavelInArabic"
         control={control}
         rules={{ required: "Please select a level" }}
         render={({ field }) => (
@@ -62,8 +62,8 @@ const BooksLevel = ({
           />
         )}
       />
-      {errors.bookLevel && (
-        <p className="text-red-500 text-sm mt-1">{errors.bookLevel.message as string}</p>
+      {errors.lavelInArabic && (
+        <p className="text-red-500 text-sm mt-1">{errors.lavelInArabic.message as string}</p>
       )}
 
       <div className="mt-6 flex justify-between">
