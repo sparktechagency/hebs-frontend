@@ -13,11 +13,11 @@ import {
 const BirthYear = ({
   setIsBirthYear,
   setIsBirthMonth,
-  setIsTopics,
+  setIsGender,
   setData,
 }: {
   setIsBirthYear: (value: boolean) => void;
-  setIsTopics: (value: boolean) => void;
+  setIsGender: (value: boolean) => void;
   setIsBirthMonth: (value: boolean) => void;
   setData: any;
 }) => {
@@ -43,7 +43,7 @@ const BirthYear = ({
  
     setData((prev: any) => ({ ...prev, birthYear: data.birthYear }));
     setIsBirthYear(false);
-    setIsTopics(true);
+    setIsGender(true);
   };
 
   // handle go back
@@ -104,7 +104,7 @@ const BirthYear = ({
           <div className="w-full bg-gray-200 rounded-full h-2">
             <div
               className="bg-black h-2 rounded-full"
-              style={{ width: "18%" }}
+              style={{ width: "32%" }}
             ></div>
           </div>
         </div>
