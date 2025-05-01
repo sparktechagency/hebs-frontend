@@ -113,7 +113,7 @@ export default function BookRecommendations() {
       </div>
     </div>
 
-{/* button */}
+{/* button is here*/}
 <div className=" bg-[#EDEBE6] shadow-lg p-5 w-full">
 <div className="container mx-auto flex justify-center ">
           {/* Back Button */}
@@ -123,7 +123,7 @@ export default function BookRecommendations() {
   <LeftOutlined/>
   <span className="font-semibold">Back</span>
 </button>
-</Link> */}
+</Link> */}  
 
 {/* Next Button */}
 <Link href={"/subscriptionPlan"}>
