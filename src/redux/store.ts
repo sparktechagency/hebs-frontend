@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "./features/auth/authSlice"
+import cartSlice from "./features/cart/cartSlice";
 import surveyReducer from "./features/survey/surveySlice"
 import { baseApi } from "./api/baseApi";
 import storage from "redux-persist/lib/storage";
@@ -20,6 +21,7 @@ export const store = configureStore({
         [baseApi.reducerPath]:baseApi.reducer,
         auth:persistedAuthReducer,
         survey: surveyReducer,
+        cart:cartSlice,
     },
     middleware:getDefaultMiddleware=>getDefaultMiddleware( {serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
