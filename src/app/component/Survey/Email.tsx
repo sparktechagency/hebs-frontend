@@ -47,13 +47,14 @@ const Email = ({
     const paddedDay = String(day).padStart(2, "0");
 
     const dateOfBirth = `${year}-${paddedMonth}-${paddedDay}`;
+ 
     const surveyData = {
       readerName: data.readerName,
-      email: data.email,
+      email: d.email,
       relation: data.relation,
       gender: data.gender,
       dateOfBirth: dateOfBirth,
-      favoriteCollection: data.facoriteCollection,
+      favoriteCollection: data.favoriteCollection,
       interestInArabic: data.interestInArabic,
       lavelInArabic: data.lavelInArabic,
       constSpend: {

@@ -15,6 +15,9 @@ import Spend from "@/app/component/Survey/Spend";
 import Email from "@/app/component/Survey/Email";
 
 import Gender from "@/app/component/Survey/Gender";
+import { useAppSelector } from "@/redux/hooks";
+import { selectCurrentSurvey } from "@/redux/features/survey/surveySlice";
+import { selectCurrentUser } from "@/redux/features/auth/authSlice";
 
 
 const NamePage = () => {
@@ -34,7 +37,9 @@ const NamePage = () => {
 
   console.log("surveyData from form", data);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-
+const surveyData = useAppSelector(selectCurrentSurvey)
+const user = useAppSelector(selectCurrentUser)
+console.log(user);
   return (
     <div
       className="fixed inset-0 flex items-center justify-center bg-cover bg-no-repeat bg-center mt-24"

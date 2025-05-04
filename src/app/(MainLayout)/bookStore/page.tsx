@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-import { Select, Input } from "antd";
+import { Select, Input, message } from "antd";
 import type React from "react";
 
 import { Pagination } from "antd";
@@ -15,12 +15,22 @@ import {
 // import { useAppSelector } from "@/redux/hooks";
 // import { selectCurrentUser } from "@/redux/features/auth/authSlice";
 import ProductCard from "@/app/component/shared/ProductCard";
+import { useAppDispatch } from "@/redux/hooks";
+import { addProduct, CartProduct } from "@/redux/features/cart/cartSlice";
 
 function BookStore() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<
     string | undefined
   >();
+  const dispatch = useAppDispatch();
+
+// add product to cart
+  const handleAddProduct = (product: CartProduct) => {
+    dispatch(addProduct(product));
+    message.success("Product Added ")
+  };
+  
   const [selectedGrade, setSelectedGrade] = useState<string | undefined>();
   const [selectedCollection, setSelectedCollection] = useState<
     string | undefined
@@ -171,7 +181,7 @@ function BookStore() {
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-1 md:gap-6">
           {data?.data?.map((product: any, index: number) => (
-            <ProductCard key={`${product.id}-${index}`} product={product} />
+            <ProductCard key={`${product.id}-${index}`} product={product} handleAddProduct={handleAddProduct}/>
           ))}
         </div>
 

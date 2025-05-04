@@ -9,14 +9,14 @@ import { message } from "antd";
 import { HeartIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 
-const ProductCard = ({ product}: { product: any }) => {
+
+const ProductCard = ({ product,handleAddProduct}: { product: any ,handleAddProduct:any}) => {
   // console.log("availability",availability);
   // console.log("status",product.status);
   const [favouriteBook] = useFavouriteBooksMutation();
   const user = useAppSelector(selectCurrentUser);
-  const router = useRouter();
+  // const router = useRouter();
   // get fav books
   const { data: favouriteBooks } = useGetAllFavouritesBooksQuery(user?.userId);
 
@@ -78,10 +78,7 @@ const ProductCard = ({ product}: { product: any }) => {
 
         {/* Add to Bag Button */}
         <button
-          onClick={(e) => {
-            e.stopPropagation(); // 🔥 Prevents clicking on the whole card
-            router.push("/cart");
-          }}
+          onClick={() => handleAddProduct(product)}
           className="w-full py-2 bg-[#ffd6d6] text-black rounded-md text-sm font-medium mb-2 hover:bg-[#ffbdbd] transition-colors"
         >
           Add to Bag

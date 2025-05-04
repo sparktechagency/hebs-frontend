@@ -15,13 +15,24 @@ const persistConfig={
     key:"auth",
     storage
 }
+const persistConfigCart = {
+    key: "cart",
+    storage,
+  };
+  
+  const persistConfigSurvey = {
+    key: "survey",
+    storage,
+  };
 const persistedAuthReducer=persistReducer(persistConfig,authReducer)
+const persistedCartReducer = persistReducer(persistConfigCart, cartSlice);
+const persistedSurveyReducer = persistReducer(persistConfigSurvey, surveyReducer);
 export const store = configureStore({
     reducer:{
         [baseApi.reducerPath]:baseApi.reducer,
         auth:persistedAuthReducer,
-        survey: surveyReducer,
-        cart:cartSlice,
+        survey: persistedSurveyReducer,
+    cart: persistedCartReducer,
     },
     middleware:getDefaultMiddleware=>getDefaultMiddleware( {serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
