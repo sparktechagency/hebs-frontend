@@ -28,7 +28,7 @@ const Login = () => {
       console.log(values);
       // Handle login logic here
       const res = await login(values).unwrap();
-      // console.log("response:", res)
+      console.log("response:", res)
       setLoading(true);
       const user = verifyToken(res.data.accessToken) as TUser;
       const modifiedUser={userId:res?.data?._id,user:user}
@@ -142,7 +142,7 @@ const Login = () => {
           <Button
             htmlType="submit"
             loading={loading}
-            className="w-full h-12 bg-black hover:bg-gray-800 rounded-xl"
+            className="w-full h-12 bg- hover:bg-gray-800 rounded-xl"
           >
             Log In
           </Button>

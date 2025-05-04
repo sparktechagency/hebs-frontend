@@ -38,7 +38,7 @@ const GiftPage = () => {
             sizes="(max-width: 640px) 100vw, 20vw"
           />
         </div>
-   <Link href={"/cart"}>
+   <Link href={"/checkout"}>
    <button className="w-full rounded-full py-2 bg-[#ffd6d6] text-black  text-sm font-medium mb-2 hover:bg-[#ffbdbd] transition-colors">
           Add to Bag
         </button>

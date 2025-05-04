@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { InputNumber, Button, Collapse, Modal } from "antd";
+import { InputNumber, Button, Collapse, Modal, message } from "antd";
 import {
   FacebookOutlined,
   TwitterOutlined,
@@ -19,6 +19,8 @@ import RelatedBooks from "@/app/component/RelatedBooks";
 import styles from "@/app/styles.module.css";
 import { useParams } from "next/navigation";
 import { useGetSingleBooksQuery } from "@/redux/features/books/bookApi";
+import { useAppDispatch } from "@/redux/hooks";
+import { addProduct, CartProduct } from "@/redux/features/cart/cartSlice";
 
 export default function DetailsPage() {
   const params = useParams();
@@ -28,10 +30,17 @@ export default function DetailsPage() {
   const {data}=useGetSingleBooksQuery(id)
   console.log("single book=>",data?.data);
 
-const {name,description,price,author,level,weight,quantity,format,coverImage,}=data?.data ||{};
+const {name,description,price,author,level,weight,format,coverImage,}=data?.data ||{};
 
   const [isModalVisible, setIsModalVisible] = useState(false);
 
+  const dispatch = useAppDispatch();
+
+  // add product to cart
+    const handleAddProduct = (product: CartProduct) => {
+      dispatch(addProduct(product));
+      message.success("Product Added ")
+    };
 
 
   const showModal = () => {
@@ -49,13 +58,13 @@ const {name,description,price,author,level,weight,quantity,format,coverImage,}=d
   return (
     <div className="">
       <div className={`w-full shadow-2xl ${styles.fontInter}`}>
-        <div className="container mx-auto flex flex-wrap justify-between items-center px-4 sm:px-8 md:px-10 py-4">
-          {/* Title */}
+        {/* <div className="container mx-auto flex flex-wrap justify-between items-center px-4 sm:px-8 md:px-10 py-4">
+ 
           <h1 className="text-lg sm:text-xl text-[#595959] mb-4">
          {name}
           </h1>
 
-          {/* Button */}
+      
           <div className="my-4">
             <Link href="/cart">
               <button className="uppercase bg-[#E8E8E8] px-4 py-2 text-sm sm:text-base">
@@ -63,7 +72,7 @@ const {name,description,price,author,level,weight,quantity,format,coverImage,}=d
               </button>
             </Link>
           </div>
-        </div>
+        </div> */}
       </div>
 
       <div className="max-w-7xl mx-auto p-6 md:p-12">
@@ -210,8 +219,9 @@ const {name,description,price,author,level,weight,quantity,format,coverImage,}=d
                     />
                     <InputNumber
                       min={1}
-                      value={quantity}
                       // onChange={handleQuantityChange}
+                      value={1}
+                      // value={quantity}
                       controls={false}
                       className="mx-2 w-16 text-center"
                     />
@@ -222,11 +232,11 @@ const {name,description,price,author,level,weight,quantity,format,coverImage,}=d
                     />
                   </div>
                   <div>
-                    <Link href={"/cart"}>
-                      <button className="w-full bg-[#F37975] md:px-8 p-4  md:h-12 flex items-center justify-center text-[#ffffff] hover:bg-red-500 border-none mb-4">
+                    {/* <Link href={"/cart"} > */}
+                      <button className="w-full bg-[#F37975] md:px-8 p-4  md:h-12 flex items-center justify-center text-[#ffffff] hover:bg-red-500 border-none mb-4" onClick={()=>handleAddProduct(data?.data)}>
                         ADD TO BAG
                       </button>
-                    </Link>
+                    {/* </Link> */}
                   </div>
                 </div>
               </div>
