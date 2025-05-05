@@ -11,7 +11,9 @@ import Image from "next/image";
 import packaging from "@/assets/tinnymuslimBox.png";
 import Link from "next/link";
 import handShack from "@/assets/handshake-light-skin-tone_svgrepo.com.png"
+
 export default function CheckoutPage() {
+
   return (
     <>
       <div className="max-w-6xl mx-auto p-6">
