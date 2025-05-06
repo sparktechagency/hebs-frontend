@@ -1,10 +1,25 @@
+'use client'
 import frame2 from "@/assets/tinyMuminsFrame2.png";
 import style from "@/app/styles.module.css";
 import Image from "next/image";
 import aboutTop from "@/assets/aboutTop.png";
+import { useGetAboutQuery } from "@/redux/features/others/othersApi";
 
 
 const AboutBanner = () => {
+  const {data:aboutdata}=useGetAboutQuery(undefined);
+  const description = aboutdata?.data?.description;
+
+  // Regex to separate all HTML tags
+const regex = /(<.*?>)(.*?)(?=<.*?>|$)/g;
+let match;
+const separatedContent = [];
+
+// Match all the tags and their content
+while ((match = regex.exec(description)) !== null) {
+  separatedContent.push({ tag: match[1], content: match[2] });
+}
+console.log("about data==>",separatedContent);
   return (
     <div
       className="relative w-full bg-top bg-no-repeat bg-cover  pb-14 lg:pb-0 md:py-2 md:mt-1  text-center md:text-start"
