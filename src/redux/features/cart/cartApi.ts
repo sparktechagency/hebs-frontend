@@ -1,10 +1,10 @@
 import { baseApi } from "../../api/baseApi";
 
-const surveyApi = baseApi.injectEndpoints({
+const cartApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    createServey: builder.mutation({
+    placeOrder: builder.mutation({
       query: (info) => ({
-        url: "/survey/create",
+        url: "/order/create",
         method: "POST",
         body: info,
       }),
@@ -14,4 +14,4 @@ const surveyApi = baseApi.injectEndpoints({
   }),
 });   
 
-export const {useCreateServeyMutation } = surveyApi;
+export const {usePlaceOrderMutation } = cartApi;

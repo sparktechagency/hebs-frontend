@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Input, Radio, Checkbox, Tooltip, Button } from "antd";
+import { Input, Radio, Checkbox, Tooltip, Button, message } from "antd";
 import { InfoCircleOutlined, LeftOutlined, LockOutlined, RightOutlined } from "@ant-design/icons";
 import Image from "next/image";
 import packaging from "@/assets/tinnymuslimBox.png";
@@ -12,7 +12,9 @@ import handShack from "@/assets/handshake-light-skin-tone_svgrepo.com.png";
 import Link from "next/link";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { useAppSelector } from "@/redux/hooks";
-import { orderedProductsSelector } from "@/redux/features/cart/cartSlice";
+import { orderedProductsSelector, subTotalSelector } from "@/redux/features/cart/cartSlice";
+import { selectCurrentUser } from "@/redux/features/auth/authSlice";
+import { usePlaceOrderMutation } from "@/redux/features/cart/cartApi";
 
 // Define TypeScript types for form data
 interface Shipping {
@@ -33,12 +35,18 @@ interface Payment {
 interface FormData {
   shipping: Shipping;
   payment: Payment;
-  agreed: boolean;
+  // agreed: boolean;
 }
 
 export default function PaymentPage() {
+  const [placeOrder]=usePlaceOrderMutation();
   const [paymentMethod, setPaymentMethod] = useState("credit");
   const [agreed, setAgreed] = useState(false);
+  const user = useAppSelector(selectCurrentUser)
+  const subTotal=useAppSelector(subTotalSelector)
+
+  console.log("subTotal=>",subTotal);
+  // console.log("ceck=>",agreed);
 const orderedProducts = useAppSelector(orderedProductsSelector)
 console.log("orderedProductsSelector==>",orderedProducts);
   // Initialize React Hook Form
@@ -58,15 +66,59 @@ console.log("orderedProductsSelector==>",orderedProducts);
         expireDate: "06/29",
         cvv: "729",
       },
-      agreed: false,
+      // agreed: agreed,
     },
   });
 
-  // Handle form submission
-  const onSubmit: SubmitHandler<FormData> = (data) => {
-    console.log("Form Data Submitted:", data);
-  };
+  const items = orderedProducts.map(product => ({
+    itemId: product._id,  // Use the _id or id to represent the item
+    quantity: product.orderQuantity,  // Use the orderQuantity directly
+  }));
 
+  // Handle form submission
+  const onSubmit: SubmitHandler<FormData> = async (data) => {
+    console.log("Form Data Submitted:", data);
+  
+    // Prepare the order data
+    const orderData = {
+      user: {
+        userId: user?.userId,
+        name: data.payment.cardHolderName,
+        email: user?.user?.email,
+      },
+      shippingAddress: data.shipping,
+      paymentInfo: {
+        tnxId: "txn_" + new Date().getTime(),
+      },
+      total: {
+        amount: subTotal, 
+        currency: "USD",
+      },
+      items, 
+    };
+  
+    // console.log("order data modified=>", orderData);
+  
+   
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const res = await placeOrder(orderData) as any;
+      console.log("response===>", res);
+      if(res?.data){
+
+        message.success(res?.data?.message )
+      }else{
+        message.error(res?.error?.data?.error  || 'An unknown error occurred');
+      }
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error:any) {
+      console.log(error);
+      message.error( error);
+  
+    }
+  };
+  
   return (
     <>
       <div className="max-w-6xl mx-auto p-6">
@@ -244,8 +296,10 @@ console.log("orderedProductsSelector==>",orderedProducts);
 
                 <div className="space-y-4">
                   <Checkbox
+                    // checked={agreed}
                     checked={agreed}
                     onChange={(e) => {
+                      console.log(e.target.checked);
                       setAgreed(e.target.checked);
                     }}
                   >
