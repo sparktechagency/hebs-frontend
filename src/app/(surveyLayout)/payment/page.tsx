@@ -2,19 +2,21 @@
 
 import { useState } from "react";
 import { Input, Radio, Checkbox, Tooltip, Button, message } from "antd";
-import { InfoCircleOutlined, LeftOutlined, LockOutlined, RightOutlined } from "@ant-design/icons";
+import { InfoCircleOutlined,  LockOutlined, } from "@ant-design/icons";
 import Image from "next/image";
 import packaging from "@/assets/tinnymuslimBox.png";
 import paypal from "@/assets/paypal.png";
 import visa from "@/assets/visa-4-logo_svgrepo.com.png";
 import master from "@/assets/master-card_svgrepo.com.png";
 import handShack from "@/assets/handshake-light-skin-tone_svgrepo.com.png";
-import Link from "next/link";
+
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { useAppSelector } from "@/redux/hooks";
 import { orderedProductsSelector, subTotalSelector } from "@/redux/features/cart/cartSlice";
 import { selectCurrentUser } from "@/redux/features/auth/authSlice";
 import { usePlaceOrderMutation } from "@/redux/features/cart/cartApi";
+import { useRouter } from "next/navigation";
+
 
 // Define TypeScript types for form data
 interface Shipping {
@@ -39,16 +41,17 @@ interface FormData {
 }
 
 export default function PaymentPage() {
+  // const [confirmPayment,setConfirmPayment]=useState(false)
   const [placeOrder]=usePlaceOrderMutation();
   const [paymentMethod, setPaymentMethod] = useState("credit");
   const [agreed, setAgreed] = useState(false);
   const user = useAppSelector(selectCurrentUser)
   const subTotal=useAppSelector(subTotalSelector)
-
-  console.log("subTotal=>",subTotal);
+const router = useRouter()
+  // console.log("subTotal=>",subTotal);
   // console.log("ceck=>",agreed);
 const orderedProducts = useAppSelector(orderedProductsSelector)
-console.log("orderedProductsSelector==>",orderedProducts);
+// console.log("orderedProductsSelector==>",orderedProducts);
   // Initialize React Hook Form
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { control, handleSubmit, formState: { errors } } = useForm<FormData>({
@@ -61,7 +64,7 @@ console.log("orderedProductsSelector==>",orderedProducts);
         country: "USA",
       },
       payment: {
-        cardHolderName: "MD Rayhan",
+        cardHolderName: "Heba",
         cardNumber: "1867 8362 3828 3672 3839",
         expireDate: "06/29",
         cvv: "729",
@@ -71,13 +74,13 @@ console.log("orderedProductsSelector==>",orderedProducts);
   });
 
   const items = orderedProducts.map(product => ({
-    itemId: product._id,  // Use the _id or id to represent the item
-    quantity: product.orderQuantity,  // Use the orderQuantity directly
+    itemId: product._id, 
+    quantity: product.orderQuantity,  
   }));
 
   // Handle form submission
   const onSubmit: SubmitHandler<FormData> = async (data) => {
-    console.log("Form Data Submitted:", data);
+    // console.log("Form Data Submitted:", data);
   
     // Prepare the order data
     const orderData = {
@@ -88,12 +91,15 @@ console.log("orderedProductsSelector==>",orderedProducts);
       },
       shippingAddress: data.shipping,
       paymentInfo: {
+        type:"card",
+        status:"paid",
         tnxId: "txn_" + new Date().getTime(),
       },
       total: {
         amount: subTotal, 
         currency: "USD",
       },
+  
       items, 
     };
   
@@ -107,6 +113,7 @@ console.log("orderedProductsSelector==>",orderedProducts);
       if(res?.data){
 
         message.success(res?.data?.message )
+        router.push("/my-profile")
       }else{
         message.error(res?.error?.data?.error  || 'An unknown error occurred');
       }
@@ -322,7 +329,7 @@ console.log("orderedProductsSelector==>",orderedProducts);
                   className="w-full mt-6"
                   disabled={!agreed} // Disable submit button if the checkbox is not checked
                 >
-                  Submit
+                 Confirm Payment
                 </Button>
               </form>
             </div>
@@ -399,22 +406,22 @@ console.log("orderedProductsSelector==>",orderedProducts);
 
       {/* button */}
       <div className=" bg-[#EDEBE6] shadow-lg p-5 w-full">
-        <div className="container mx-auto flex justify-between ">
+        <div className="container mx-auto flex justify-center ">
           {/* Back Button */}
-          <Link href="/sucess">
+          {/* <Link href="/sucess">
             <button className="border border-black text-black px-6 py-2 rounded-full inline-flex items-center justify-center space-x-2 hover:bg-gray-100 active:bg-gray-200 transition">
               <LeftOutlined />
               <span className="font-semibold">Skip</span>
             </button>
-          </Link>
+          </Link> */}
 
           {/* Next Button */}
-          <Link href={"/my-profile"}>
-            <button className="border border-black text-black px-6 py-2 rounded-full inline-flex items-center justify-center space-x-2 hover:bg-gray-100 active:bg-gray-200 transition disabled:opacity-50">
+          {/* <Link href={"/my-profile"}>
+            <button disabled={!confirmPayment} className="border border-black text-black px-6 py-2 rounded-full inline-flex items-center justify-center space-x-2 hover:bg-gray-100 active:bg-gray-200 transition disabled:opacity-50">
               <span className="font-semibold">Continue</span>
               <RightOutlined />
             </button>
-          </Link>
+          </Link> */}
         </div>
       </div>
     </>

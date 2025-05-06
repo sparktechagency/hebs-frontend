@@ -32,18 +32,8 @@ console.log("order details===>",order);
         router.push("/login");
         throw new Error("Please login first.");
       }
-      message.error("not implemented yet")
-    //   const res = await createOrder(order);
+    router.push("/payment")
 
-    //   if (res.success) {
-    //     message.success(res.message);
-    //     dispatch(clearCart());
-    //     router.push(res.data.paymentUrl);
-    //   }
-
-    //   if (!res.success) {
-    //     message.error(res.messag);
-    //   }
     } catch (error: any) {
       message.error(error.message);
     }
