@@ -28,7 +28,7 @@ const BirthYear = ({
   } = useForm();
 
   // Dynamic year options from 1980 to current year
-  const startYear = 1980;
+  const startYear = 2015;
   const currentYear = new Date().getFullYear();
   const birthYears = Array.from(
     { length: currentYear - startYear + 1 },

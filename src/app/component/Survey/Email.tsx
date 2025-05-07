@@ -57,12 +57,13 @@ const Email = ({
       favoriteCollection: data.favoriteCollection,
       interestInArabic: data.interestInArabic,
       lavelInArabic: data.lavelInArabic,
-      constSpend: {
+      costSpend: {
         statement: data.statement,
       },
     };
     console.log("surveyData from form inside email compo", surveyData);
 
+    // dispatch(resetSurveyData());
     dispatch(updateSurveyData(surveyData));
     router.push("/recomended")
     // You can now proceed to the final step or submit the collected data
