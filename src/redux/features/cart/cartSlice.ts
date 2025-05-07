@@ -1,6 +1,7 @@
 import { RootState } from "@/redux/store";
 import { createSlice } from "@reduxjs/toolkit";
 
+
 interface Price {
   amount: number;
   currency: string;
@@ -94,7 +95,7 @@ const cartSlice = createSlice({
 export const orderedProductsSelector = (state: RootState) => {
   return state.cart.products;
 };
-
+// select order
 export const orderSelector = (state: RootState) => {
   return {
     products: state.cart.products.map((product) => ({
@@ -102,10 +103,48 @@ export const orderSelector = (state: RootState) => {
       quantity: product.orderQuantity,
     })),
 
-    paymentMethod: "Online",
+    // paymentMethod: "Online",
   };
 };
+// total quantity
+export const totalQuantitySelector = (state: RootState) => {
+  return state.cart.products.reduce((acc, product) => acc + product.orderQuantity, 0);
+};
+// Total Discount Selector
+export const totalDiscountSelector = (state: RootState) => {
+  console.log("total discount===>",state);
+  return state.cart.products.reduce((acc, product) => {
+    if (product.discountPrice.amount) {
+      return acc + product.discountPrice.amount * product.orderQuantity;
+    }
+    return acc;
+  }, 0);
+};
 
+
+
+// Final Price After Discount Selector (with discount handling)
+export const finalPriceAfterDiscountSelector = (state: RootState) => {
+  return state.cart.products.reduce((acc, product) => {
+
+    const finalPrice = product.discountPrice.amount
+      ? product.price.amount - product.discountPrice.amount
+      : 0; 
+
+    return acc + finalPrice * product.orderQuantity;
+  }, 0);
+};
+
+
+
+
+
+
+
+// Total Products Selector (Total number of items in the cart)
+export const totalProductsSelector = (state: RootState) => {
+  return state.cart.products.reduce((acc, product) => acc + product.orderQuantity, 0);
+};
 //* Payment
 
 export const subTotalSelector = (state: RootState) => {
@@ -120,13 +159,11 @@ export const subTotalSelector = (state: RootState) => {
     }, 0);
   };
 
-
-export const {
-  addProduct,
-  incrementOrderQuantity,
-  decrementOrderQuantity,
-  removeProduct,
-
-  clearCart,
-} = cartSlice.actions;
-export default cartSlice.reducer;
+  export const {
+    addProduct,
+    incrementOrderQuantity,
+    decrementOrderQuantity,
+    removeProduct,
+    clearCart,
+  } = cartSlice.actions;
+  export default cartSlice.reducer;

@@ -23,7 +23,7 @@ const CartPage = () => {
             </p>
           </div>
         ) : (
-          <div className="grid grid-cols-12 gap-8 my-5 justify-center items-center w-full p-8">
+          <div className="grid grid-cols-12 gap-8 my-5 justify-center items-center w-full p-8 container mx-auto">
             <CartProducts />
             <PaymentDetails />
           </div>

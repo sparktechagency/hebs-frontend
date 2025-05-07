@@ -3,7 +3,7 @@
 
 
 import { selectCurrentUser } from "@/redux/features/auth/authSlice";
-import { orderedProductsSelector, orderSelector, subTotalSelector } from "@/redux/features/cart/cartSlice";
+import { finalPriceAfterDiscountSelector, orderedProductsSelector, orderSelector, subTotalSelector,  totalProductsSelector, totalQuantitySelector } from "@/redux/features/cart/cartSlice";
 import {  useAppSelector } from "@/redux/hooks";
 import { message } from "antd";
 import { useRouter } from "next/navigation";
@@ -11,6 +11,9 @@ import { useRouter } from "next/navigation";
 
 export default function PaymentDetails() {
   const subTotal = useAppSelector(subTotalSelector);
+  const totalDiscount= useAppSelector(finalPriceAfterDiscountSelector)
+  const totalProducts= useAppSelector(totalProductsSelector)
+  const totalQuantity=useAppSelector(totalQuantitySelector)
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const products = useAppSelector(orderedProductsSelector);
   const user = useAppSelector(selectCurrentUser)
@@ -44,18 +47,24 @@ console.log("order details===>",order);
 <div className=" ">
 <h1 className="text-2xl font-bold">Payment Details</h1>
       <div className="space-y-2 mt-4">
+   
+      
+        <div className="flex justify-between">
+          <p className="text-gray-500 ">Total Products</p>
+          <p className="font-semibold">{totalProducts}</p>
+        </div>
+        <div className="flex justify-between">
+          <p className="text-gray-500 ">Total Quantity</p>
+          <p className="font-semibold">{totalQuantity}</p>
+        </div>
+        <div className="flex justify-between">
+          <p className="text-gray-500 ">Total Discount</p>
+          <p className="font-semibold">${totalDiscount}</p>
+        </div>
         <div className="flex justify-between">
           <p className="text-gray-500 ">Subtotal</p>
           <p className="font-semibold">${subTotal}</p>
         </div>
-        {/* <div className="flex justify-between">
-          <p className="text-gray-500 ">Discount</p>
-          <p className="font-semibold">{}</p>
-        </div>
-        <div className="flex justify-between">
-          <p className="text-gray-500 ">Shipment Cost</p>
-          <p className="font-semibold">{}</p>
-        </div> */}
       </div>
       {/* <div className="flex justify-between mt-10 mb-5">
         <p className="text-gray-500 ">Grand Total</p>
