@@ -37,6 +37,7 @@ const surveySlice = createSlice({
       return { ...state, ...action.payload };
     },
     resetSurveyData: () => initialState,
+
   },
 });
 
