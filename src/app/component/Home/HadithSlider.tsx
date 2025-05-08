@@ -45,25 +45,38 @@ const  HadithSlider =() =>{
   }
 
   return (
-    <div className="mb-10">
+    <div className="mb-10 p-4">
 
-    <div className="relative max-w-4xl mx-auto px-4 py-8 ">
+    <div className="relative  mx-auto px-4 py-8 ">
       {/* Left quotation mark */}
-      <div className="absolute left-0 mb:-left-96 lg:-left-96 top-4 text-[#FAF39766] text-[200px] font-serif leading-none z-0 opacity-100 ">
+      {/* <div className="absolute  left-0  xl:-left-96 xl:-top-16  text-[#FAF39766] text-[300px] font-serif leading-none z-0 opacity-100  ">
         &ldquo;
-      </div>
+      </div> */}
 
       {/* Right quotation mark */}
-      <div className="absolute right-0 -bottom-36 mb:-right-96 lg:-right-96 mb:-bottom-36 lg:-bottom-36 text-[#F379754A] text-[200px] font-serif leading-none z-0 opacity-100">
+      {/* <div className="absolute right-0 xl:top-96 md:top-64  -bottom-36 mb:-right-36 xl:-right-96 mb:-bottom-36 lg:-bottom-64 text-[#F379754A] text-[300px] font-serif leading-none z-0 opacity-100">
         &rdquo;
-      </div>
+      </div> */}
+
+{/* Left quotation mark */}
+<div className="absolute -left-2 sm:left-4 md:left-8 lg:-left-6 xl:-left-2 -top-16 sm:-top-16 md:-top-16 lg:-top-20 xl:-top-28 2xl:-top-36 text-[#FAF39766] text-[60vw] sm:text-[30vw] md:text-[30vw] lg:text-[30vw] xl:text-[30vw] font-serif leading-none z-0 opacity-75 ">
+  &ldquo;
+</div>
+
+{/* Right quotation mark */}
+<div className="absolute right-2 sm:right-4 md:right-8 lg:-right-2 xl:-right-2 -bottom-36 sm:-bottom-60 md:-bottom-64 lg:-bottom-80  xl:-bottom-96 z-10  2xl:-bottom-[500px]  text-[#F379754A] text-[60vw] sm:text-[30vw] md:text-[30vw] lg:text-[30vw] xl:text-[30vw] font-serif leading-none  opacity-75 ">
+  &rdquo;
+</div>
+
+
+
 
       {/* Title */}
-      <h2 className={`text-center mt-16 mb:mt-8 lg:mt-8 text-[#F37975] text-4xl font-semibold mb-6 ${styles.fontRozha}`}>Duaa and Hadith</h2>
+      <h2 className={`text-center mt-16 mb:mt-8 lg:mt-8 text-[#F37975] text-4xl font-bold mb-6 ${styles.fontRozha}`}>Duaas and Hadith</h2>
 
       {/* Carousel */}
-      <div className="relative z-10">
-        <Carousel ref={setCarouselRef} dots={false} autoplay autoplaySpeed={5000} className="hadith-carousel">
+      <div className="relative max-w-4xl mx-auto z-10 flex flex-col justify-center ">
+        <Carousel ref={setCarouselRef} dots={false} autoplay autoplaySpeed={3000} className="hadith-carousel">
           {hadiths.map((hadith) => (
             <div key={hadith.id} className="px-12 py-4">
               <p className={`text-center text-lg md:text-xl font-medium max-w-2xl mx-auto ${styles.fontPoppins}`}>{hadith.text}</p>
@@ -90,7 +103,7 @@ const  HadithSlider =() =>{
       </div>
      
     </div>
-    <hr className="w-full border-b-1 border-black"/>
+    {/* <hr className="w-full border-b-1 border-black"/> */}
     </div>
   )
 }

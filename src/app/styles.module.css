@@ -16,3 +16,6 @@
 .fontInter {
   font-family: var(--font-inter), sans-serif; /* Use Jost font */
 }
+.fontJosefin {
+  font-family: var(--font-josefin-sans), sans-serif; /* Use Josefin Sans font */
+}

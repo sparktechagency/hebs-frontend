@@ -49,9 +49,9 @@ const BoxesPage=()=> {
       <h1 className={`${styles.fontInter} text-2xl font-bold`}>Boxes</h1>
       <p className={`${styles.fontInter}`}>Current Boxes</p>
       </div>
-        <div className="grid grid-cols-1  gap-8">
+        <div className="flex flex-col  gap-8">
           {/* First Box Card */}
-          <div className="bg-white rounded-2xl shadow-md overflow-hidden relative w-1/4">
+          <div className="bg-white rounded-2xl shadow-md  relative w-full md:w-1/2 xl:w-1/4">
             {/* Date Flag */}
             <div className="absolute top-10 left-0 w-32">
               <Image src={shape || ""} alt="flag" className="w-full h-full" priority />
@@ -80,7 +80,7 @@ const BoxesPage=()=> {
           </div>
 
           {/* Second Box Card */}
-          <div className="relative bg-[#FBD5D4] rounded-2xl shadow-md overflow-hidden w-1/2">
+          <div className="relative bg-[#FBD5D4] rounded-2xl shadow-md w-full md:w-1/2 py-5">
   {/* Header Section */}
   <div className="my-5 px-6">
     <h1 className={`${styles.fontInter} text-2xl font-bold`}>Boxes</h1>
@@ -95,19 +95,13 @@ const BoxesPage=()=> {
   </div>
 
   {/* Content Section */}
-  <div className="p-8 flex flex-col items-center">
-    <div className="w-64 h-64 relative mb-6">
-      <Image
-        src={shop || ""}
-        alt="Bookshop Illustration"
-        fill
-        className="object-contain"
-        priority
-      />
-    </div>
+  <div className="px-8 flex flex-col items-center">
+<div className="mb-3">
+  <Image src={shop} width={500} height={500} alt="shop"/>
+</div>
 
-    <h3 className="text-xl font-medium text-gray-800 text-center mb-6">
-      Eyasin&apos;s Book Shuffle
+    <h3 className="text-xl font-medium text-gray-800 text-center mb-3">
+      Rayhan&apos;s Book Shuffle
     </h3>
 
     <button className="w-full bg-white hover:bg-gray-50 text-gray-800 py-4 px-6 rounded-full font-medium shadow-sm transition-all hover:shadow-md">
@@ -123,3 +117,4 @@ const BoxesPage=()=> {
 }
 
 export default BoxesPage
+

@@ -4,7 +4,7 @@ import wild from '@/assets/wild.png'
 import color from '@/assets/colorMe.png'
 import animal from '@/assets/animals.png'
 import eid from '@/assets/eid.png'
-import songBook from '@/assets/songBook.png'
+import songBook from '@/assets/songBook2.png'
 const relatedBooks = [
   {
     id: 1,
@@ -41,9 +41,10 @@ const relatedBooks = [
 export default function RelatedBooks() {
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-      {relatedBooks.map((book) => (
+      {relatedBooks.map((book,index) => (
         <div key={book.id} className="flex flex-col">
-          <div className="bg-amber-50 rounded-md p-4 mb-2 flex items-center justify-center">
+   <Link href={`${book.id}-${index}`}>
+   <div className="bg-amber-50 rounded-md p-4 mb-2 flex items-center justify-center">
             <Image
               src={book.image || "/placeholder.svg"}
               alt={book.title}
@@ -52,8 +53,9 @@ export default function RelatedBooks() {
               className="object-contain"
             />
           </div>
+   </Link>
           <Link
-            href="#"
+            href="/cart"
             className="bg-red-100 text-red-800 text-center py-2 rounded-full hover:bg-red-200 transition-colors mb-2 uppercase"
           >
             Add to Bag

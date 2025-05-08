@@ -1,57 +1,55 @@
 
 import Image from "next/image";
-
-import bannerImg from '@/assets/BannerImage.png'
-import styles from "@/app/styles.module.css"
+import bannerImg from "@/assets/BannerImage.png";
+import styles from "@/app/styles.module.css";
 import Link from "next/link";
-const Banner = () => {
+import frame1 from "@/assets/tinyMuminsFrame1.png"
 
-    return (
-        <div className="w-full bg-[#FDFBDF] ">
-             <section className="relative min-h-[600px] w-full px-4 ">
-      <div className="container mx-auto">
-        <div className="grid items-center  lg:grid-cols-2">
+const Banner = () => {
+  // bg-[#FDFBDF]
+
+  return (
+<div className="w-full  px-4 py-20 lg:py-28"
+  style={{ backgroundImage: `url(${frame1.src})` }}   
+>
+      <section className=" max-w-7xl mx-auto">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-2">
           {/* Left Content */}
-          <div className="relative z-10 text-left ">
-            <h1 className={`font-cursive text-4xl text-[#F37975] sm:text-5xl md:text-7xl lg:text-7xl ${styles.fontHotel}`}>
-              The Muslim Book Club
+          <div className="w-full md:w-[55%] text-center md:text-left flex flex-col justify-center items-center md:items-start px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
+            <h1 className={`font-cursive text-4xl md:text-5xl lg:text-5xl xl:text-7xl text-[#F37975] ${styles.fontHotel}`}>
+              The Muslim Book Club 
             </h1>
-            <p
-             
-              className={`mt-4 md:mb-0 mb-8 text-[#1C1C1C] font-bold text-4xl h-[65.32px]  ${styles.fontRozha}`}
-             
-            >
+            <p className={`text-[#1C1C1C] text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl ${styles.fontRozha} border-b-4 border-[#F37975]  pb-2`}>
               for exceptional young readers.
             </p>
-            <p className={` mb-8 max-w-lg text-lg  ${styles.fontPoppins}` }>
-              Help your readers grow with a personalized book selection curated monthly by our team of experts and
-              shipped to your door.
+              {/* <div className="border-b-4 border-[#F37975] mt-3"></div> */}
+            <p className={`text-xm sm:text-sm md:text-base lg:text-lg xl:text-xl text-center md:text-left max-w-md lg:max-w-lg xl:max-w-xl ${styles.fontPoppins}`}>
+              Help your readers grow with a personalized book selection curated monthly by our team of experts and shipped to your door.
             </p>
- 
-         <Link href={"/name"}>
-         <button
-                
-                className="h-12 rounded-full bg-[#F37975] px-8 text-lg hover:bg-[#e57373] text-white"
-              >
+            <Link href="/name">
+             <div className="flex hidden  md:block  justify-center mt-1">
+        
+             <button className={` tracking-widest  rounded-full bg-[#F37975] p-2 md:p-3  text-base sm:text-lg md:text-xl hover:bg-[#e57373] text-white ${styles.fontPoppins}`}>
                 START TODAY
               </button>
-         </Link>
-       
+             </div>
+            </Link>
           </div>
-
+          
           {/* Right Content - Book Covers */}
-          <div className=" ">
-<Image src={bannerImg} alt="" width={700}
-                height={690}/>
+          <div className="w-full  md:mb-0 md:w-[48%] flex justify-center px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
+            <Image 
+              src={bannerImg} 
+              alt="Book Club Banner" 
+              width={500} 
+              height={500} 
+              className="max-w-xs md:max-w-sm lg:max-w-md xl:max-w-lg 2xl:max-w-xl"
+            />
           </div>
         </div>
-      </div>
-    </section>
-        </div>
-    );
+      </section>
+    </div>
+  );
 };
 
 export default Banner;
-
-
-

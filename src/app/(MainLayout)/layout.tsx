@@ -3,6 +3,7 @@
 import FooterPage from "../component/shared/Footer";
 import Navbar from "../component/shared/Navbar";
 
+
 const MainLayout = ({
   children,
 }: Readonly<{
@@ -10,6 +11,7 @@ const MainLayout = ({
 }>) => {
   return (
     <>
+
       <div>
         <div className="min-h-screen ">
           <Navbar />
@@ -19,6 +21,7 @@ const MainLayout = ({
           <FooterPage />
         </div>
       </div>
+  
     </>
   );
 };

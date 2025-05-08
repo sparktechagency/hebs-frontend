@@ -1,6 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client"
 
-import { useState } from "react"
 import { Input,  } from "antd"
 import { Package, User, FileText, Plus, ChevronRight, } from "lucide-react"
 import styles from "@/app/styles.module.css"
@@ -10,17 +10,57 @@ import Image from "next/image"
 import google from "@/assets/Social media logo.png"
 import right from "@/assets/right.png"
 import Link from "next/link"
+import { useAppSelector } from "@/redux/hooks"
+import { selectCurrentUser } from "@/redux/features/auth/authSlice"
+import { useGetSpecefiqUserQuery, useUpdateSpecefiqUserMutation } from "@/redux/features/auth/authApi"
+import { Controller, FieldValues, SubmitHandler, useForm } from "react-hook-form"
+interface FormValue {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+}
 const MyProfilePage=()=> {
-  const [accountInfo, setAccountInfo] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    phoneNumber: "",
-    password: "********",
-  })
+  const user = useAppSelector(selectCurrentUser)
+  const {data:singleUser,isLoading, error}=useGetSpecefiqUserQuery(user?.userId)
+  const [updateUser]= useUpdateSpecefiqUserMutation()
+console.log("single user===>",singleUser?.data);
+
+// console.log(user);
+const { control, handleSubmit, formState: { errors } } = useForm();
+const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+  try {
+    // Check if userId exists before calling updateUser
+    if (!user?.userId) {
+      console.error('User ID is missing');
+      return;
+    }
+
+    console.log(data);
+
+    // Pass userId and form data to the updateUser mutation
+    const res = await updateUser({
+      userId: user?.userId,
+      data: data,
+    });
+
+    // Check if the mutation was successful
+    console.log("res===>", res);
+
+    if (res.error) {
+      console.error('Failed to update user:', res.error);
+    } else {
+      console.log('User updated successfully:', res.data);
+    }
+  } catch (error) {
+    console.error('Error updating user:', error);
+  }
+};
+
+if (isLoading) return <div>Loading...</div>; // Show loading indicator while the query is fetching
 
   return (
-    <div className="flex flex-col md:flex-row min-h-screen bg-gray-50">
+    <div className="flex flex-col md:flex-row min-h-screen bg-gray-50 ">
       {/* Sidebar */}
       <aside className="w-full md:w-64 bg-white border-r border-gray-200">
         <nav className="p-4">
@@ -38,7 +78,7 @@ const MyProfilePage=()=> {
               </Link>
             </li>
             <li>
-              <Link href="#" className="flex items-center p-2 text-gray-600 hover:bg-gray-100 rounded-md">
+              <Link href="/billing" className="flex items-center p-2 text-gray-600 hover:bg-gray-100 rounded-md">
                 <FileText className="h-5 w-5 mr-3 text-gray-500" />
                 <span>Billing History</span>
               </Link>
@@ -56,10 +96,12 @@ const MyProfilePage=()=> {
             </div>
           </div>
 
-          <button className="mt-4 flex items-center text-[#f08080] p-2">
+        <Link href={"/name"}>
+        <button className="mt-4 flex items-center text-[#f08080] p-2" style={{ textShadow: "2px 2px 4px #00000040" }}>
             <Plus className="h-4 w-4 mr-1" />
             <span>Add Subscriptions</span>
           </button>
+        </Link>
         </nav>
       </aside>
 
@@ -67,63 +109,87 @@ const MyProfilePage=()=> {
       <main className="flex-1 p-4 md:p-8">
         {/* Account Information Card */}
         <h1 className={`text-2xl font-bold p-4 ${styles.fontInter}`}>My Profile</h1>
-        <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
-          <h2 className="text-xl font-semibold mb-6">Account Informations</h2>
-          <div className="border-t border-gray-200 pt-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-              <div>
-                <label className="block text-sm text-gray-500 mb-2">First Name</label>
-                <Input
-                  value={accountInfo.firstName}
-                  onChange={(e) => setAccountInfo({ ...accountInfo, firstName: e.target.value })}
-                  className="rounded-lg"
-                />
-              </div>
-              <div>
-                <label className="block text-sm text-gray-500 mb-2">Last Name</label>
-                <Input
-                  value={accountInfo.lastName}
-                  onChange={(e) => setAccountInfo({ ...accountInfo, lastName: e.target.value })}
-                  className="rounded-lg"
-                />
-              </div>
+        <div className="border-t border-gray-200 pt-6">
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div>
+              <label className="block text-sm text-gray-500 mb-2">First Name</label>
+              <Controller
+                name="firstName"
+                control={control}
+                defaultValue=""
+                render={({ field }) => (
+                  <Input {...field} className="rounded-lg" />
+                )}
+              />
+            </div>
+            <div>
+              <label className="block text-sm text-gray-500 mb-2">Last Name</label>
+              <Controller
+                name="lastName"
+                control={control}
+                defaultValue=""
+                render={({ field }) => (
+                  <Input {...field} className="rounded-lg" />
+                )}
+              />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div>
+              <label className="block text-sm text-gray-500 mb-2">Email Address</label>
+              <Controller
+                name="email"
+                
+                control={control}
+                defaultValue={singleUser?.data?.email }
+                render={({ field }) => (
+                  <Input {...field} className="rounded-lg" />
+                )}
+              />
+            </div>
+            <div>
+              <label className="block text-sm text-gray-500 mb-2">Phone Number</label>
+              <Controller
+                name="phone"
+                control={control}
+                defaultValue={singleUser?.data?.phone}
+                render={({ field }) => (
+                  <Input {...field} className="rounded-lg" />
+                )}
+              />
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-              <div>
-                <label className="block text-sm text-gray-500 mb-2">Email Address</label>
-                <Input
-                  value={accountInfo.email}
-                  onChange={(e) => setAccountInfo({ ...accountInfo, email: e.target.value })}
-                  className="rounded-lg"
-                />
-              </div>
-              <div>
-                <label className="block text-sm text-gray-500 mb-2">Phone Number</label>
-                <Input
-                  value={accountInfo.phoneNumber}
-                  onChange={(e) => setAccountInfo({ ...accountInfo, phoneNumber: e.target.value })}
-                  className="rounded-lg"
-                />
-              </div>
-              <div>
+            <div>
               <label className="block text-sm text-gray-500 mb-2">Password</label>
               <div className="relative">
-                <Input type="password" value={accountInfo.password} className="rounded-lg" readOnly />
-             
+                <Input
+                  type="password"
+                  value={"*****"}
+                  className="rounded-lg"
+                  readOnly
+                />
               </div>
             </div>
+
             <div className="mt-10">
-            <button className=" -translate-y-1/2 mr-3 text-[#ff0000] hover:text-[#ff0000]/90">
-                  Change Password
-                </button>
+              <button className="-translate-y-1/2 mr-3 text-[#ff0000] hover:text-[#ff0000]/90">
+                Change Password
+              </button>
             </div>
-            </div>
-
-          
           </div>
-        </div>
 
+          <div className="mt-6">
+            <button
+              type="submit"
+              className="text-white bg-blue-500 hover:bg-blue-700 rounded-lg p-2"
+            >
+              Save Changes
+            </button>
+          </div>
+        </form>
+      </div>
         {/* Connect Account Card */}
         <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
           <h2 className="text-xl font-semibold mb-2">Connect Account</h2>
@@ -150,21 +216,22 @@ const MyProfilePage=()=> {
         </div>
 
         {/* Billing Card */}
-        <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
+        {/* <div className={`${styles.fontInter} bg-white rounded-lg shadow-sm p-6 mb-8`}>
           <h2 className="text-xl font-semibold mb-6">Billing</h2>
           <div className="border-t border-gray-200 pt-6 ">
-            <div className=" p-4 rounded-lg mb-4 bg-[#FBD5D4] text-[#F37975]">Add a payment method</div>
+            <div className=" p-4 rounded-lg mb-4 bg-[#FBD5D4] text-[#F37975]">Billing Information</div>
+
             <div className="flex justify-end">
-            <button className={`border border-[#F37975] text-[#f08080] hover:text-[#f08080]/90 hover:border-[#f08080]/90 rounded-full px-4 py-2 ${styles.fontPoppins}`}>
+            <button className={`border border-[#F37975] text-[#f08080] hover:text-[#f08080]/90 hover:border-[#f08080]/90 rounded-full px-4 py-2 ${styles.fontPoppins}`} style={{ textShadow: "2px 2px 4px #00000040" }}>
   Add Payment Method
 </button>
 
             </div>
           </div>
-        </div>
+        </div> */}
 
         {/* Referrals Card */}
-        <div className="bg-white rounded-lg shadow-sm p-6">
+        {/* <div className="bg-white rounded-lg shadow-sm p-6">
           <h2 className="text-xl font-semibold mb-6">Referrals</h2>
           <div className="border-t border-gray-200 pt-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
@@ -182,7 +249,7 @@ const MyProfilePage=()=> {
               <div className="text-gray-600">Refer friends today!</div>
             </div>
           </div>
-        </div>
+        </div> */}
       </main>
     </div>
   )

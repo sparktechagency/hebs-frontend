@@ -1,10 +1,10 @@
 'use client'
 import styles from '@/app/styles.module.css'
 import Image from 'next/image';
-import img1 from '@/assets/work1.png'
-import img2 from '@/assets/work2.png'
-import img3 from '@/assets/work3.png'
-import img4 from '@/assets/work4.png'
+import img1 from '@/assets/work9 (2).png'
+import img2 from '@/assets/work10 (2).png'
+import img3 from '@/assets/donate2.png'
+import img4 from '@/assets/freeReturn.png'
 
 
 import React from 'react';
@@ -40,25 +40,23 @@ const features = [
   ]
 const Work = () => {
     return (
-        <div className="bg-[#FBD5D4] w-full py-5">
-        <h1 className={`text-center text-5xl  py-3 ${styles.fontRozha}`}>How it Works</h1>
-        <p className={`text-center text-2xl py-3 ${styles.fontPopins}`}>Receive five books. Only buy the ones you love.</p>
+        <div className="bg-[#FBD5D4] w-full p-5 md:p-0 py-2">
+<div className='container mx-auto'>
+<div className='py-8 relative z-10 '>
+<h1 className={`text-center text-3xl md:text-5xl   ${styles.fontRozha}`}>How it   <span className="relative inline-block mr-3">
+Works
+      <span className="absolute left-0 bottom-0 w-full h-4 sm:h-6 md:h-[25px] bg-[#FAF397] -z-10"></span>
+    </span></h1>
+<p className={`text-center text-xl md:text-2xl  ${styles.fontPopins}`}>Receive five books. Only buy the ones you love.</p>
+</div>
 
 
-        <section className="relative md:w-[1400px] lg:w-[1600px] container mx-auto border border-red-500 bg-[#FFFFFF] px-4 py-16 md:py-24">
-  <div className="container mx-auto">
-    {/* Header */}
-    <div className="mb-16 text-center">
-      <p className="mb-4 text-4xl font-bold md:text-5xl">
-        How it Works
-      </p>
-      <p className="m-0 text-xl font-normal text-gray-600 md:text-2xl">
-        Receive five books. Only buy the ones you love.
-      </p>
-    </div>
+        <section className="relative w-[100%]  mx-auto border-4 border-red-500 bg-[#FFFFFF] px-4 py-6">
+  <div className="">
 
+  
     {/* Features Grid */}
-    <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+    <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
       {features.map((feature, index) => (
         <div key={index} className="flex flex-col items-center text-center">
           <div className="mb-6 h-48 w-48">
@@ -70,7 +68,7 @@ const Work = () => {
               className="h-full w-full object-contain"
             />
           </div>
-          <p className={`mb-4 text-xl font-bold ${styles.fontRozha}`}>
+          <p className={`mb-4 text-2xl  ${styles.fontRozha}`}>
             {feature.title}
           </p>
           <p className={`text-gray-600 ${styles.fontPopins}`}>{feature.description}</p>
@@ -88,13 +86,14 @@ const Work = () => {
    <Link href={"/name"}>
    <button
          
-         className="h-12 rounded-full bg-[#f08080] px-8 text-lg hover:bg-[#e57373]"
+         className={`h-12 rounded-full text-white bg-[#f08080] px-8 text-lg hover:bg-[#e57373] ${styles.fontInter}`}
        >
          GET STARTED
        </button>
    </Link>
   
     </div>
+</div>
     </div>
     );
 };

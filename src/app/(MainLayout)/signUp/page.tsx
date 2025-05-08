@@ -1,50 +1,54 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 
-import type React from "react"
-
-import { useState } from "react"
+import { useForm, SubmitHandler } from "react-hook-form"
 import Link from "next/link"
 import styles from "@/app/styles.module.css"
-const SignUpPage=()=> {
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
-  })
+import { useSignUpMutation } from "@/redux/features/auth/authApi";
+import { message } from "antd";
+import { useRouter } from "next/navigation";
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }))
-  }
+interface SignUpFormInputs {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  password: string;
+}
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    // Handle form submission logic here
-    console.log("Form submitted:", formData)
-  }
-
+const SignUpPage = () => {
+  const { register, handleSubmit, formState: { errors } } = useForm<SignUpFormInputs>();
+  const [signUp] = useSignUpMutation();
+const router = useRouter()
+  const onSubmit: SubmitHandler<SignUpFormInputs> = async (data) => {
+    try {
+      const response = await signUp(data).unwrap();
+      
+     router.push("/login")
+      message.success(response.message )
+      // Redirect user or show success message
+    } catch (error:any) {
+      // console.error("Signup failed:", error);
+      message.error(error?.data?.message || error.data.error)
+      // Show error to user
+    }
+  };
+  
   return (
-    <div className="max-w-md mx-auto px-4 py-8">
+    <div className={`max-w-md mx-auto px-4 py-8 ${styles.fontInter}`}>
       <h1 className="text-2xl font-bold text-center mb-8">Create Your Account</h1>
 
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         <div className="space-y-2">
           <label htmlFor="firstName" className="block text-gray-500">
             First Name
           </label>
           <input
-            type="text"
             id="firstName"
-            name="firstName"
-            value={formData.firstName}
-            onChange={handleChange}
+            {...register("firstName", { required: "First name is required" })}
             className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-pink-200"
-            required
           />
+          {errors.firstName && <p className="text-red-500 text-sm">{errors.firstName.message}</p>}
         </div>
 
         <div className="space-y-2">
@@ -52,14 +56,11 @@ const SignUpPage=()=> {
             Last Name
           </label>
           <input
-            type="text"
             id="lastName"
-            name="lastName"
-            value={formData.lastName}
-            onChange={handleChange}
+            {...register("lastName", { required: "Last name is required" })}
             className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-pink-200"
-            required
           />
+          {errors.lastName && <p className="text-red-500 text-sm">{errors.lastName.message}</p>}
         </div>
 
         <div className="space-y-2">
@@ -67,14 +68,24 @@ const SignUpPage=()=> {
             Email Address
           </label>
           <input
-            type="email"
             id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
+            type="email"
+            {...register("email", { required: "Email is required" })}
             className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-pink-200"
-            required
           />
+          {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
+        </div>
+
+        <div className="space-y-2">
+          <label htmlFor="phone" className="block text-gray-500">
+            Phone Number
+          </label>
+          <input
+            id="phone"
+            {...register("phone", { required: "Phone number is required" })}
+            className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-pink-200"
+          />
+          {errors.phone && <p className="text-red-500 text-sm">{errors.phone.message}</p>}
         </div>
 
         <div className="space-y-2">
@@ -82,32 +93,24 @@ const SignUpPage=()=> {
             Password
           </label>
           <input
-            type="password"
             id="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
+            type="password"
+            {...register("password", { required: "Password is required" })}
             className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-pink-200"
-            required
           />
+          {errors.password && <p className="text-red-500 text-sm">{errors.password.message}</p>}
         </div>
 
         <div className={`text-sm text-gray-700 space-y-2 ${styles.fontInter}`}>
-          <p>Be sure to use the email address associated with your fair
-          <br/>Any questions? Contact your sales representative</p>
+          <p>Be sure to use the email address associated with your fair<br />Any questions? Contact your sales representative</p>
         </div>
 
         <div className={`text-sm ${styles.fontInter}`}>
           <p>
             By signing up, you&apos;re agreeing to our{" "}
-            <Link href="/terms" className="text-[#F37975] hover:underline">
-              Terms & Conditions
-            </Link>{" "}
+            <Link href="/terms" className="text-[#F37975] hover:underline">Terms & Conditions</Link>{" "}
             and{" "}
-            <Link href="/privacy" className="text-[#F37975] hover:underline">
-              Privacy Policy
-            </Link>
-            .
+            <Link href="/privacy" className="text-[#F37975] hover:underline">Privacy Policy</Link>.
           </p>
         </div>
 
@@ -122,13 +125,11 @@ const SignUpPage=()=> {
       <div className={`text-center mt-6 ${styles.fontInter}`}>
         <p>
           Already have an account?{" "}
-          <Link href="/login" className="text-[#F37975] hover:underline">
-            Log In
-          </Link>
+          <Link href="/login" className="text-[#F37975] hover:underline">Log In</Link>
         </p>
       </div>
     </div>
-  )
+  );
 }
 
-export default SignUpPage
+export default SignUpPage;

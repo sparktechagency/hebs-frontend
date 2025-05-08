@@ -1,49 +1,130 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+"use client";
+
 import frame1 from "@/assets/tinyMuminsFrame1.png";
-import style from "@/app/styles.module.css";
-import {  Input } from "antd";
-import { RightOutlined } from "@ant-design/icons";
-import Link from "next/link";
+
+import { useState } from "react";
+import Name from "@/app/component/Survey/Name";
+import Relation from "@/app/component/Survey/Relation";
+import BirthMonth from "@/app/component/Survey/BirthMonth";
+import BirthYear from "@/app/component/Survey/BirthYear";
+import Topics from "@/app/component/Survey/Topics";
+import Interested from "@/app/component/Survey/Interested";
+import BooksLevel from "@/app/component/Survey/BooksLevel";
+import Spend from "@/app/component/Survey/Spend";
+import Email from "@/app/component/Survey/Email";
+
+import Gender from "@/app/component/Survey/Gender";
+import { useAppSelector } from "@/redux/hooks";
+import { selectCurrentSurvey } from "@/redux/features/survey/surveySlice";
+import { selectCurrentUser } from "@/redux/features/auth/authSlice";
+
+
 const NamePage = () => {
+  const [data, setData] = useState<any>({});
+  const [isName, setIsName] = useState(true);
+  const [isRelation, setIsRelation] = useState(false);
+  const [isBirthMonth, setIsBirthMonth] = useState(false);
+  const [isBirthYear, setIsBirthYear] = useState(false);
+  const [isGender, setIsGender] = useState(false);
+  const [isBooksLevel, setIsBooksLevel] = useState(false);
+  const [isEmail, setIsEmail] = useState(false);
+  const [isInterested, setIsInterested] = useState(false);
+  const [isSpend, setIsSpend] = useState(false);
+  const [isTopics, setIsTopics] = useState(false);
+
+  // const [isRecomended, setIsRecomended] = useState(false);
+
+  console.log("surveyData from form", data);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+const surveyData = useAppSelector(selectCurrentSurvey)
+const user = useAppSelector(selectCurrentUser)
+console.log(user);
   return (
-    <div>
-
     <div
-      className="relative w-full  min-h-screen flex items-center justify-center bg-cover bg-no-repeat bg-center "
-      style={{ backgroundImage: `url(${frame1.src})` }}
+      className="fixed inset-0 flex items-center justify-center bg-cover bg-no-repeat bg-center mt-24"
+      style={{ backgroundImage: `url(${frame1.src})`, backgroundSize: "cover" }}
     >
-      {/* Content Wrapper */}
-      <div className="text-center max-w-md w-full  p-10 ">
-        <h3
-          className={`text-[#F37975] font-medium text-xl mb-2 ${style.fontInter}`}
-        >
-          What is your reader’s name?
-        </h3>
-
-        <h2 className="font-bold text-[#F37975] my-5">First and last name</h2>
-
-        {/* Input Field */}
-        <Input
-          placeholder="Type your name here"
-          type="text"
-          className="w-full  mt-5 py-5 focus:border-[#F37975] focus:ring-[#F37975]"
+      {isName && (
+        <Name
+          setIsName={setIsName}
+          setIsRelation={setIsRelation}
+          setData={setData}
         />
-      </div>
-    </div>
-
-{/* button */}
-<div className="flex items-end justify-end my-8">
-
-<Link href={"/relationship"}>
-<button
-      className="border mr-16 border-black text-black px-6 py-2 rounded-full inline-flex items-center justify-center space-x-2 hover:bg-gray-100 active:bg-gray-200 transition"
-    >
-      <span className="font-semibold">Continue</span>
-      <RightOutlined />
-    </button>
-</Link>
-</div>
-
-
+      )}
+      {isRelation && (
+        <Relation
+          setIsRelation={setIsRelation}
+          setData={setData}
+          setIsBirthMonth={setIsBirthMonth}
+        />
+      )}
+      {isBirthMonth && (
+        <BirthMonth
+          setIsBirthYear={setIsBirthYear}
+          setData={setData}
+          setIsBirthMonth={setIsBirthMonth}
+          setIsRelation={setIsRelation}
+        />
+      )}
+      {isBirthYear && (
+        <BirthYear
+          setIsBirthYear={setIsBirthYear}
+          setData={setData}
+          setIsBirthMonth={setIsBirthMonth}
+          setIsGender={setIsGender}
+        />
+      )}
+      {isGender && (
+        <Gender
+          setIsBirthYear={setIsBirthYear}
+          setData={setData}
+          setIsGender={setIsGender}
+          setIsTopics={setIsTopics}
+        />
+      )}
+      {isTopics && (
+        <Topics
+          setIsGender={setIsGender}
+          setData={setData}
+          setIsInterested={setIsInterested}
+          setIsTopics={setIsTopics}
+        />
+      )}
+      {isInterested && (
+        <Interested
+          setIsBooksLevel={setIsBooksLevel}
+          setData={setData}
+          setIsInterested={setIsInterested}
+          setIsTopics={setIsTopics}
+        />
+      )}
+      {isBooksLevel && (
+        <BooksLevel
+          setIsSpend={setIsSpend}
+          setData={setData}
+          setIsInterested={setIsInterested}
+          setIsBooksLevel={setIsBooksLevel}
+        />
+      )}
+      {isSpend && (
+        <Spend
+          setIsEmail={setIsEmail}
+          setData={setData}
+          setIsBooksLevel={setIsBooksLevel}
+          setIsSpend={setIsSpend}
+        />
+      )}
+      {isEmail && (
+        <Email
+          setIsEmail={setIsEmail}
+          setData={setData}
+          setIsSpend={setIsSpend}
+          data={data}
+          // setIsRecomended={setIsRecomended}
+        />
+      )}
+      {/* {isRecomended && <BookRecommendations setIsEmail={setIsEmail} setIsRecomended={setIsRecomended} />} */}
     </div>
   );
 };
