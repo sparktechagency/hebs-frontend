@@ -10,6 +10,7 @@ interface Price {
     price: Price;
     type: string;
     features: string[];
+    _id?:string
   }
   
 

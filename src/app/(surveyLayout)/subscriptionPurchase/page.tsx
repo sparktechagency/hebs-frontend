@@ -12,11 +12,13 @@ import handShack from "@/assets/handshake-light-skin-tone_svgrepo.com.png";
 
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { useAppSelector } from "@/redux/hooks";
-import { orderedProductsSelector, subTotalSelector } from "@/redux/features/cart/cartSlice";
+
 import { selectCurrentUser } from "@/redux/features/auth/authSlice";
-import { usePlaceOrderMutation } from "@/redux/features/cart/cartApi";
+
 import { useRouter } from "next/navigation";
 import { selectCurrentPlan } from "@/redux/features/subscription/subscriptionSlice";
+import { useCreateServeyMutation } from "@/redux/features/survey/surveyApi";
+import { useCreateSubscriptionMutation } from "@/redux/features/subscription/subscriptionApi";
 
 
 // Define TypeScript types for form data
@@ -41,18 +43,18 @@ interface FormData {
   // agreed: boolean;
 }
 
-export default function PaymentPage() {
+export default function SubscriptionPurchasePage() {
   // const [confirmPayment,setConfirmPayment]=useState(false)
-  const [placeOrder]=usePlaceOrderMutation();
+  const [createSubscription]=useCreateSubscriptionMutation();
   const [paymentMethod, setPaymentMethod] = useState("credit")
   const [agreed, setAgreed] = useState(false);
   const user = useAppSelector(selectCurrentUser)
-  const subTotal=useAppSelector(subTotalSelector)
+
 const router = useRouter()
   // console.log("subTotal=>",subTotal);
   // console.log("ceck=>",agreed);
-const orderedProducts = useAppSelector(orderedProductsSelector)
-// console.log("orderedProductsSelector==>",orderedProducts);
+
+
   // Initialize React Hook Form
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { control, handleSubmit, formState: { errors } } = useForm<FormData>({
@@ -73,11 +75,9 @@ const orderedProducts = useAppSelector(orderedProductsSelector)
       // agreed: agreed,
     },
   });
+  const plan = useAppSelector(selectCurrentPlan);
+//   console.log("plan------------->",plan);
 
-  const items = orderedProducts.map(product => ({
-    itemId: product._id, 
-    quantity: product.orderQuantity,  
-  }));
 
   // Handle form submission
   const onSubmit: SubmitHandler<FormData> = async (data) => {
@@ -85,31 +85,27 @@ const orderedProducts = useAppSelector(orderedProductsSelector)
   
     // Prepare the order data
     const orderData = {
-      user: {
-        userId: user?.userId,
-        name: data.payment.cardHolderName,
-        email: user?.user?.email,
-      },
-      shippingAddress: data.shipping,
-      paymentInfo: {
-        type:"card",
-        status:"paid",
-        tnxId: "txn_" + new Date().getTime(),
-      },
-      total: {
-        amount: subTotal, 
-        currency: "USD",
-      },
-  
-      items, 
+      user: user?.userId,
+   subscription:{
+id:plan?._id,
+type:plan?.type
+
+   },
+   paymentSource:{
+       number:data?.payment?.cardNumber,
+       //-------------TODO--------------------------------
+       type:data?.payment?.cardNumber ? "visa":"",
+    tnxId: "txn_" + new Date().getTime(),
+   },
+
     };
   
-    // console.log("order data modified=>", orderData);
+    console.log("order data modified=>", orderData);
   
    
     try {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const res = await placeOrder(orderData) as any;
+      const res = await createSubscription(orderData) as any;
       console.log("response===>", res);
       if(res?.data){
 
@@ -127,11 +123,11 @@ const orderedProducts = useAppSelector(orderedProductsSelector)
     }
   };
 
-    const plan = useAppSelector(selectCurrentPlan);
+ 
   return (
     <>
       <div className="max-w-6xl mx-auto p-6">
-        <h1 className="text-3xl font-bold text-center mb-8">Payment</h1>
+        <h1 className="text-3xl font-bold text-center mb-8">Purchase your Plan</h1>
 
         <div className="flex gap-6">
           {/* Left Column */}
@@ -396,21 +392,7 @@ const orderedProducts = useAppSelector(orderedProductsSelector)
       {/* button */}
       <div className=" bg-[#EDEBE6] shadow-lg p-5 w-full">
         <div className="container mx-auto flex justify-center ">
-          {/* Back Button */}
-          {/* <Link href="/sucess">
-            <button className="border border-black text-black px-6 py-2 rounded-full inline-flex items-center justify-center space-x-2 hover:bg-gray-100 active:bg-gray-200 transition">
-              <LeftOutlined />
-              <span className="font-semibold">Skip</span>
-            </button>
-          </Link> */}
-
-          {/* Next Button */}
-          {/* <Link href={"/my-profile"}>
-            <button disabled={!confirmPayment} className="border border-black text-black px-6 py-2 rounded-full inline-flex items-center justify-center space-x-2 hover:bg-gray-100 active:bg-gray-200 transition disabled:opacity-50">
-              <span className="font-semibold">Continue</span>
-              <RightOutlined />
-            </button>
-          </Link> */}
+ 
         </div>
       </div>
     </>

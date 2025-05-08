@@ -23,10 +23,10 @@ export default function CheckoutPage() {
 
   const onFinish = async (values: any) => {
     try {
-      console.log(values);
+      // console.log(values);
       // Handle login logic here
       const res = await login(values).unwrap();
-      console.log("response:", res)
+      // console.log("response:", res)
       setLoading(true);
       const user = verifyToken(res.data.accessToken) as TUser;
       const modifiedUser={userId:res?.data?._id,user:user}
@@ -38,7 +38,7 @@ export default function CheckoutPage() {
 
     } catch (error: any) {
       message.error(error?.data?.message || error.data.error);
-      console.error("Error:", error);
+      // console.error("Error:", error);
     } finally {
       setLoading(false);
     }
@@ -204,7 +204,7 @@ export default function CheckoutPage() {
       <div className=" bg-[#EDEBE6] shadow-lg p-5 w-full">
         <div className="container mx-auto flex justify-between">
           {/* Back Button */}
-          <Link href="/payment">
+          <Link href="/subscriptionPurchase">
             <button className="border border-black text-black px-6 py-2 rounded-full inline-flex items-center justify-center space-x-2 hover:bg-gray-100 active:bg-gray-200 transition">
               <LeftOutlined />
               <span className="font-semibold">Skip</span>
@@ -212,7 +212,7 @@ export default function CheckoutPage() {
           </Link>
 
           {/* Next Button */}
-          <Link href={"/payment"}>
+          <Link href={"/subscriptionPurchase"}>
             <button className="border border-black text-black px-6 py-2 rounded-full inline-flex items-center justify-center space-x-2 hover:bg-gray-100 active:bg-gray-200 transition disabled:opacity-50">
               <span className="font-semibold">Continue</span>
               <RightOutlined />
