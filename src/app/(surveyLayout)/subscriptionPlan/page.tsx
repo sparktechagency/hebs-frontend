@@ -6,10 +6,13 @@ import { InfoCircleOutlined, GiftOutlined, LeftOutlined, RightOutlined } from "@
 import Image from "next/image"
 import packaging from "@/assets/tinnymuslimBox.png";
 import Link from "next/link"
+import { useGetSubscriptionsQuery } from "@/redux/features/survey/surveyApi"
 export default function SubscriptionPlanPage() {
   const [selectedPlan, setSelectedPlan] = useState("monthly")
-
+const {data:plans}=useGetSubscriptionsQuery(undefined)
+console.log("plans>>>",plans?.data);
   return (
+
     <>
     
     <div className="max-w-2xl mx-auto p-6">
