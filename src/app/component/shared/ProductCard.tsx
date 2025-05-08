@@ -44,6 +44,9 @@ const ProductCard = ({ product,handleAddProduct}: { product: any ,handleAddProdu
       console.error("Error during mutation:", error);
     }
   };
+console.log("product id",product._id);
+console.log("fav book",favouriteBooks?.data?.books)
+;
 
   return (
     <div>
