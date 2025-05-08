@@ -1,8 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useState } from "react";
 import { Input, Radio, Checkbox, Tooltip, Button, message } from "antd";
-import { InfoCircleOutlined,  LockOutlined, } from "@ant-design/icons";
+import { InfoCircleOutlined, LockOutlined } from "@ant-design/icons";
 import Image from "next/image";
 import packaging from "@/assets/tinnymuslimBox.png";
 import paypal from "@/assets/paypal.png";
@@ -12,12 +14,18 @@ import handShack from "@/assets/handshake-light-skin-tone_svgrepo.com.png";
 
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { useAppSelector } from "@/redux/hooks";
-import { orderedProductsSelector, subTotalSelector } from "@/redux/features/cart/cartSlice";
+import {
+  finalPriceAfterDiscountSelector,
+  orderedProductsSelector,
+  subTotalSelector,
+  totalProductsSelector,
+  totalQuantitySelector,
+} from "@/redux/features/cart/cartSlice";
 import { selectCurrentUser } from "@/redux/features/auth/authSlice";
 import { usePlaceOrderMutation } from "@/redux/features/cart/cartApi";
 import { useRouter } from "next/navigation";
 import { selectCurrentPlan } from "@/redux/features/subscription/subscriptionSlice";
-
+import PaymentDetailsCard from "@/app/component/cart/PaymentDetailsCard";
 
 // Define TypeScript types for form data
 interface Shipping {
@@ -43,19 +51,20 @@ interface FormData {
 
 export default function PaymentPage() {
   // const [confirmPayment,setConfirmPayment]=useState(false)
-  const [placeOrder]=usePlaceOrderMutation();
-  const [paymentMethod, setPaymentMethod] = useState("credit")
+  const subTotal = useAppSelector(subTotalSelector);
+  const [placeOrder] = usePlaceOrderMutation();
+  const [paymentMethod, setPaymentMethod] = useState("credit");
   const [agreed, setAgreed] = useState(false);
-  const user = useAppSelector(selectCurrentUser)
-  const subTotal=useAppSelector(subTotalSelector)
-const router = useRouter()
-  // console.log("subTotal=>",subTotal);
-  // console.log("ceck=>",agreed);
-const orderedProducts = useAppSelector(orderedProductsSelector)
-// console.log("orderedProductsSelector==>",orderedProducts);
-  // Initialize React Hook Form
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { control, handleSubmit, formState: { errors } } = useForm<FormData>({
+  const user = useAppSelector(selectCurrentUser);
+
+  const router = useRouter();
+  const orderedProducts = useAppSelector(orderedProductsSelector);
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>({
     defaultValues: {
       shipping: {
         street: "123 Elm Street",
@@ -70,19 +79,21 @@ const orderedProducts = useAppSelector(orderedProductsSelector)
         expireDate: "06/29",
         cvv: "729",
       },
-      // agreed: agreed,
     },
   });
 
-  const items = orderedProducts.map(product => ({
-    itemId: product._id, 
-    quantity: product.orderQuantity,  
+  const totalDiscount= useAppSelector(finalPriceAfterDiscountSelector)
+  const totalProducts= useAppSelector(totalProductsSelector)
+  const totalQuantity=useAppSelector(totalQuantitySelector)
+  const items = orderedProducts.map((product) => ({
+    itemId: product._id,
+    quantity: product.orderQuantity,
   }));
 
   // Handle form submission
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     // console.log("Form Data Submitted:", data);
-  
+
     // Prepare the order data
     const orderData = {
       user: {
@@ -92,42 +103,48 @@ const orderedProducts = useAppSelector(orderedProductsSelector)
       },
       shippingAddress: data.shipping,
       paymentInfo: {
-        type:"card",
-        status:"paid",
+        type: "card",
+        status: "paid",
         tnxId: "txn_" + new Date().getTime(),
       },
       total: {
-        amount: subTotal, 
+        amount: subTotal,
         currency: "USD",
       },
-  
-      items, 
+
+      items,
     };
-  
+
     // console.log("order data modified=>", orderData);
-  
-   
+
     try {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const res = await placeOrder(orderData) as any;
+      const res = (await placeOrder(orderData)) as any;
       console.log("response===>", res);
-      if(res?.data){
-
-        message.success(res?.data?.message )
-        router.push("/my-profile")
-      }else{
-        message.error(res?.error?.data?.error  || 'An unknown error occurred');
+      if (res?.data) {
+        message.success(res?.data?.message);
+        router.push("/my-profile");
+      } else {
+        message.error(res?.error?.data?.error || "An unknown error occurred");
       }
-
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (error:any) {
+    } catch (error: any) {
       console.log(error);
-      message.error( error);
-  
+      message.error(error);
     }
   };
+  // handle purchase
+  // const handlePurchase = async () => {
 
-    const plan = useAppSelector(selectCurrentPlan);
+  //   try {
+  //     if (!user) {
+  //       router.push("/login");
+  //       throw new Error("Please login first.");
+  //     }
+  //   router.push("/payment")
+
+  //   } catch (error: any) {
+  //     message.error(error.message);
+  //   }
+  // };
   return (
     <>
       <div className="max-w-6xl mx-auto p-6">
@@ -140,7 +157,8 @@ const orderedProducts = useAppSelector(orderedProductsSelector)
             <div className="border rounded-2xl p-6 shadow-sm flex items-center justify-between bg-white">
               <div>
                 <p className="text-gray-700 text-lg">
-                  Order today to get your reader&apos;s first book box by <span className="font-bold">Feb 3</span>
+                  Order today to get your reader&apos;s first book box by{" "}
+                  <span className="font-bold">Feb 3</span>
                 </p>
               </div>
               <div className="w-24 h-16 relative">
@@ -156,13 +174,23 @@ const orderedProducts = useAppSelector(orderedProductsSelector)
 
             {/* Payment Methods */}
             <div className="border rounded-2xl p-6 shadow-sm bg-white">
-              <h2 className="text-xl font-semibold text-gray-700 mb-6">Payment Methods</h2>
+              <h2 className="text-xl font-semibold text-gray-700 mb-6">
+                Payment Methods
+              </h2>
 
               <div className="space-y-4">
-                <Radio.Group value={paymentMethod} onChange={(e) => setPaymentMethod(e.target.value)} className="w-full">
+                <Radio.Group
+                  value={paymentMethod}
+                  onChange={(e) => setPaymentMethod(e.target.value)}
+                  className="w-full"
+                >
                   <div className="space-y-3">
                     <div
-                      className={`border rounded-xl p-4 flex items-center justify-between ${paymentMethod === "paypal" ? "border-blue-500" : "border-gray-200"}`}
+                      className={`border rounded-xl p-4 flex items-center justify-between ${
+                        paymentMethod === "paypal"
+                          ? "border-blue-500"
+                          : "border-gray-200"
+                      }`}
                     >
                       <Radio value="paypal" className="w-full">
                         <span className="ml-2 text-gray-700">Paypal</span>
@@ -177,7 +205,11 @@ const orderedProducts = useAppSelector(orderedProductsSelector)
                     </div>
 
                     <div
-                      className={`border rounded-xl p-4 flex items-center justify-between ${paymentMethod === "credit" ? "border-blue-500" : "border-gray-200"}`}
+                      className={`border rounded-xl p-4 flex items-center justify-between ${
+                        paymentMethod === "credit"
+                          ? "border-blue-500"
+                          : "border-gray-200"
+                      }`}
                     >
                       <Radio value="credit" className="w-full">
                         <span className="ml-2 text-gray-700">Credit Card</span>
@@ -206,52 +238,74 @@ const orderedProducts = useAppSelector(orderedProductsSelector)
 
             {/* Shipping Address Form */}
             <div className="border rounded-2xl p-6 shadow-sm bg-white">
-              <h2 className="text-xl font-semibold text-gray-700 mb-6">Shipping Address</h2>
+              <h2 className="text-xl font-semibold text-gray-700 mb-6">
+                Shipping Address
+              </h2>
 
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                 <div>
-                  <label className="block text-sm text-gray-500 mb-1">Street Address</label>
+                  <label className="block text-sm text-gray-500 mb-1">
+                    Street Address
+                  </label>
                   <Controller
                     name="shipping.street"
                     control={control}
-                    render={({ field }) => <Input {...field} size="large" className="rounded-lg" />}
+                    render={({ field }) => (
+                      <Input {...field} size="large" className="rounded-lg" />
+                    )}
                   />
                 </div>
 
                 <div className="flex space-x-4">
                   <div className="flex-1">
-                    <label className="block text-sm text-gray-500 mb-1">City</label>
+                    <label className="block text-sm text-gray-500 mb-1">
+                      City
+                    </label>
                     <Controller
                       name="shipping.city"
                       control={control}
-                      render={({ field }) => <Input {...field} size="large" className="rounded-lg" />}
+                      render={({ field }) => (
+                        <Input {...field} size="large" className="rounded-lg" />
+                      )}
                     />
                   </div>
                   <div className="flex-1">
-                    <label className="block text-sm text-gray-500 mb-1">State</label>
+                    <label className="block text-sm text-gray-500 mb-1">
+                      State
+                    </label>
                     <Controller
                       name="shipping.state"
                       control={control}
-                      render={({ field }) => <Input {...field} size="large" className="rounded-lg" />}
+                      render={({ field }) => (
+                        <Input {...field} size="large" className="rounded-lg" />
+                      )}
                     />
                   </div>
                 </div>
 
                 <div className="flex space-x-4">
                   <div className="flex-1">
-                    <label className="block text-sm text-gray-500 mb-1">Zip Code</label>
+                    <label className="block text-sm text-gray-500 mb-1">
+                      Zip Code
+                    </label>
                     <Controller
                       name="shipping.zipCode"
                       control={control}
-                      render={({ field }) => <Input {...field} size="large" className="rounded-lg" />}
+                      render={({ field }) => (
+                        <Input {...field} size="large" className="rounded-lg" />
+                      )}
                     />
                   </div>
                   <div className="flex-1">
-                    <label className="block text-sm text-gray-500 mb-1">Country</label>
+                    <label className="block text-sm text-gray-500 mb-1">
+                      Country
+                    </label>
                     <Controller
                       name="shipping.country"
                       control={control}
-                      render={({ field }) => <Input {...field} size="large" className="rounded-lg" />}
+                      render={({ field }) => (
+                        <Input {...field} size="large" className="rounded-lg" />
+                      )}
                     />
                   </div>
                 </div>
@@ -260,41 +314,75 @@ const orderedProducts = useAppSelector(orderedProductsSelector)
                 {paymentMethod === "credit" && (
                   <>
                     <div className="border rounded-2xl p-6 shadow-sm bg-white mt-6">
-                      <h2 className="text-xl font-semibold text-gray-700 mb-6">Payment Details</h2>
+                      <h2 className="text-xl font-semibold text-gray-700 mb-6">
+                        Payment Details
+                      </h2>
                       <div className="space-y-4">
                         <div>
-                          <label className="block text-sm text-gray-500 mb-1">Card Holder Name</label>
+                          <label className="block text-sm text-gray-500 mb-1">
+                            Card Holder Name
+                          </label>
                           <Controller
                             name="payment.cardHolderName"
                             control={control}
-                            render={({ field }) => <Input {...field} size="large" className="rounded-lg" />}
+                            render={({ field }) => (
+                              <Input
+                                {...field}
+                                size="large"
+                                className="rounded-lg"
+                              />
+                            )}
                           />
                         </div>
 
                         <div>
-                          <label className="block text-sm text-gray-500 mb-1">Card Number</label>
+                          <label className="block text-sm text-gray-500 mb-1">
+                            Card Number
+                          </label>
                           <Controller
                             name="payment.cardNumber"
                             control={control}
-                            render={({ field }) => <Input {...field} size="large" className="rounded-lg" />}
+                            render={({ field }) => (
+                              <Input
+                                {...field}
+                                size="large"
+                                className="rounded-lg"
+                              />
+                            )}
                           />
                         </div>
 
                         <div className="grid grid-cols-2 gap-4">
                           <div>
-                            <label className="block text-sm text-gray-500 mb-1">Expire Date</label>
+                            <label className="block text-sm text-gray-500 mb-1">
+                              Expire Date
+                            </label>
                             <Controller
                               name="payment.expireDate"
                               control={control}
-                              render={({ field }) => <Input {...field} size="large" className="rounded-lg" />}
+                              render={({ field }) => (
+                                <Input
+                                  {...field}
+                                  size="large"
+                                  className="rounded-lg"
+                                />
+                              )}
                             />
                           </div>
                           <div>
-                            <label className="block text-sm text-gray-500 mb-1">CVV</label>
+                            <label className="block text-sm text-gray-500 mb-1">
+                              CVV
+                            </label>
                             <Controller
                               name="payment.cvv"
                               control={control}
-                              render={({ field }) => <Input {...field} size="large" className="rounded-lg" />}
+                              render={({ field }) => (
+                                <Input
+                                  {...field}
+                                  size="large"
+                                  className="rounded-lg"
+                                />
+                              )}
                             />
                           </div>
                         </div>
@@ -313,9 +401,11 @@ const orderedProducts = useAppSelector(orderedProductsSelector)
                     }}
                   >
                     <span className="text-sm text-gray-600">
-                      I agree to enroll in Illuminate Kids Book Club and authorize my membership to be on a yearly basis at
-                      $179.88, charged to the card above until I cancel. I understand I can cancel anytime by signing into my
-                      account and clicking cancel.
+                      I agree to enroll in Illuminate Kids Book Club and
+                      authorize my membership to be on a yearly basis at
+                      $179.88, charged to the card above until I cancel. I
+                      understand I can cancel anytime by signing into my account
+                      and clicking cancel.
                     </span>
                   </Checkbox>
 
@@ -331,7 +421,7 @@ const orderedProducts = useAppSelector(orderedProductsSelector)
                   className="w-full mt-6"
                   disabled={!agreed} // Disable submit button if the checkbox is not checked
                 >
-                 Confirm Payment
+                  Confirm Payment
                 </Button>
               </form>
             </div>
@@ -339,55 +429,38 @@ const orderedProducts = useAppSelector(orderedProductsSelector)
 
           {/* Right Column */}
           <div className="flex-1 border rounded-2xl p-6 shadow-sm bg-white">
-            <h2 className="text-xl font-semibold text-gray-700 mb-4">Your Reader&apos;s Membership</h2>
-
-            <div className="flex justify-center my-6">
-              <div className="w-64 h-48 relative">
-                <Image
-                  src={packaging}
-                  alt="Book subscription box"
-                  width={280}
-                  height={200}
-                  className="object-contain"
-                />
+      
+          <div className="  bg-background brightness-105 rounded-md col-span-4 h-fit p-5 mt-10 border-2 border-[#F37975] border-dotted">
+        <div className=" ">
+        <h1 className="text-2xl font-bold">Payment Details</h1>
+              <div className="space-y-2 mt-4">
+           
+              
+                <div className="flex justify-between">
+                  <p className="text-gray-500 ">Total Products</p>
+                  <p className="font-semibold">{totalProducts}</p>
+                </div>
+                <div className="flex justify-between">
+                  <p className="text-gray-500 ">Total Quantity</p>
+                  <p className="font-semibold">{totalQuantity}</p>
+                </div>
+                <div className="flex justify-between">
+                  <p className="text-gray-500 ">Total Discount</p>
+                  <p className="font-semibold">${totalDiscount}</p>
+                </div>
+                <div className="flex justify-between">
+                  <p className="text-gray-500 ">Subtotal</p>
+                  <p className="font-semibold">${subTotal}</p>
+                </div>
               </div>
-            </div>
-
-            <div className="flex justify-between items-start mb-4">
-              <div>
-                <span className="text-2xl font-semibold text-red-400">${plan?.price?.amount}</span>
-                <span className="text-gray-600 ml-1">per month</span>
-              </div>
-              <div className="text-gray-500 text-right">(paid yearly at $179.88)</div>
-            </div>
-
-            <p className="text-gray-700 mb-6">
-              Borrow or buy. Book prices shown in box. Prices beat Amazon. Check out return box to get a new one.
-            </p>
-
-            <div className="bg-red-50 rounded-xl p-4 flex items-center mb-6">
-              <span className="text-gray-700">Get $60 credit to spend on books</span>
-              <Tooltip title="Credit will be applied to your account after purchase">
-                <InfoCircleOutlined className="text-gray-400 ml-auto" />
-              </Tooltip>
-            </div>
-
-            <div className="flex items-center mb-8">
-              <div className="flex-1">
-                <p className="text-gray-700">With every plan purchased, we donate a book to a child.</p>
-              </div>
-              <div className="ml-4">
-                <Image src={handShack} alt="icon" />
-              </div>
-            </div>
-
-            <div className="border-t pt-4">
-              <div className="flex justify-between py-2">
-                <span className="text-gray-700">Subtotal</span>
-                <span className="font-medium">${plan?.price?.amount}</span>
-              </div>
-
-             
+  
+              {/* <button
+                onClick={handlePurchase}
+           className="w-full bg-[#F37975] md:px-8 p-4  md:h-12 flex items-center justify-center text-[#ffffff] hover:bg-red-500 border-none mb-4 my-5"
+              >
+                Proceed Payment
+              </button> */}
+        </div>
             </div>
           </div>
         </div>
