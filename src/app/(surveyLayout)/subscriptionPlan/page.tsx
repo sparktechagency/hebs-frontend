@@ -9,18 +9,21 @@ import packaging from "@/assets/tinnymuslimBox.png";
 import Link from "next/link"
 import { useGetSubscriptionsQuery } from "@/redux/features/survey/surveyApi"
 import { useAppDispatch } from "@/redux/hooks"
-import { subscriptionPlan } from "@/redux/features/subscription/subscriptionSlice"
+import { resetPlanData, subscriptionPlan } from "@/redux/features/subscription/subscriptionSlice"
+
 export default function SubscriptionPlanPage() {
   const [selectedPlan, setSelectedPlan] = useState("")
   const [subscribed, setSubscribed] = useState(false)
 const {data:plans}=useGetSubscriptionsQuery(undefined)
-console.log("plans>>>",plans?.data);
+// console.log("plans>>>",plans?.data);
 // Find the first plan where the name matches selectedPlan
 const selectedPlanObject = plans?.data?.find((plan: any) => plan.name === selectedPlan);
 const dispatch = useAppDispatch();
-console.log("Selected plan object>>>", selectedPlanObject);
+// console.log("Selected plan object>>>", selectedPlanObject);
+// handle plan submit
+
 const handleSubmitPlans=()=>{
-  console.log("click");
+  dispatch(resetPlanData())
   dispatch(subscriptionPlan(selectedPlanObject))
 }
   return (
@@ -30,7 +33,7 @@ const handleSubmitPlans=()=>{
       <h1 className="text-3xl font-bold text-center mb-8 mt-5">Choose your plan option:</h1>
     {
       plans?.data?.map((plan:any,idx:number)=>{
-        console.log(plan);
+        // console.log(plan);
       return  <div className="max-w-2xl mx-auto p-6 " key={idx}>
       
   
@@ -61,7 +64,7 @@ const handleSubmitPlans=()=>{
               <div className="w-2/3">
                 <h2 className="text-2xl font-medium text-gray-700">{plan.name} Membership</h2>
                 <div className="mt-2">
-                  <span className="text-3xl font-semibold text-red-400">{plan?.amount?.price}</span>
+                  <span className="text-3xl font-semibold text-red-400">{plan?.price?.amount}</span>
                   <span className="text-gray-500 ml-2">per month</span>
                 </div>
                 <p className="text-gray-600 mt-1">paid yearly- cart price $179.88</p>

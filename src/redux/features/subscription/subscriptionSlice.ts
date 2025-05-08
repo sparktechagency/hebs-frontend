@@ -27,10 +27,10 @@ const planSlice = createSlice({
       subscriptionPlan:(state,action: PayloadAction<Partial<TPlan>>)=>{
         return {...state,...action.payload}
       },
-    resetSurveyData: () => initialState,
+    resetPlanData: () => initialState,
   },
 });
 
-export const { subscriptionPlan, resetSurveyData } = planSlice.actions;
+export const { subscriptionPlan, resetPlanData } = planSlice.actions;
 export default planSlice.reducer;
 export const selectCurrentPlan = (state: RootState): TPlan => state.plan;
