@@ -39,14 +39,14 @@ const Topics = ({
 
   // ✅ Topics list from the image
   const topics = [
-    { value: "classics", label: "Classics" },
-    { value: "arabic", label: "Arabic" },
-    { value: "islam", label: "Islam" },
-    { value: "puzzles", label: "Puzzles" },
-    { value: "mazes", label: "Mazes" },
-    { value: "nature", label: "Nature" },
-    { value: "prophets", label: "Prophets" },
-    { value: "geography", label: "Geography" },
+    { value: "Classics", label: "Classics" },
+    { value: "Arabic", label: "Arabic" },
+    { value: "Islam", label: "Islam" },
+    { value: "Puzzles", label: "Puzzles" },
+    { value: "Mazes", label: "Mazes" },
+    { value: "Nature", label: "Nature" },
+    { value: "Prophets", label: "Prophets" },
+    { value: "Geography", label: "Geography" },
   ];
 
   return (

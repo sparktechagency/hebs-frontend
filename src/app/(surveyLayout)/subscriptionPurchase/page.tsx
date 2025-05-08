@@ -17,8 +17,10 @@ import { selectCurrentUser } from "@/redux/features/auth/authSlice";
 
 import { useRouter } from "next/navigation";
 import { selectCurrentPlan } from "@/redux/features/subscription/subscriptionSlice";
-import { useCreateServeyMutation } from "@/redux/features/survey/surveyApi";
+
 import { useCreateSubscriptionMutation } from "@/redux/features/subscription/subscriptionApi";
+import { useCreateServeyMutation } from "@/redux/features/survey/surveyApi";
+import { selectCurrentSurvey } from "@/redux/features/survey/surveySlice";
 
 
 // Define TypeScript types for form data
@@ -46,6 +48,7 @@ interface FormData {
 export default function SubscriptionPurchasePage() {
   // const [confirmPayment,setConfirmPayment]=useState(false)
   const [createSubscription]=useCreateSubscriptionMutation();
+  const [createSurvey]=useCreateServeyMutation();
   const [paymentMethod, setPaymentMethod] = useState("credit")
   const [agreed, setAgreed] = useState(false);
   const user = useAppSelector(selectCurrentUser)
@@ -54,7 +57,8 @@ const router = useRouter()
   // console.log("subTotal=>",subTotal);
   // console.log("ceck=>",agreed);
 
-
+  const surveyData = useAppSelector(selectCurrentSurvey)
+  console.log("survey from redux",surveyData);
   // Initialize React Hook Form
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { control, handleSubmit, formState: { errors } } = useForm<FormData>({
@@ -100,7 +104,7 @@ type:plan?.type
 
     };
   
-    console.log("order data modified=>", orderData);
+    // console.log("order data modified=>", orderData);
   
    
     try {
@@ -110,10 +114,22 @@ type:plan?.type
       if(res?.data){
 
         message.success(res?.data?.message )
-        router.push("/my-profile")
+
       }else{
         message.error(res?.error?.data?.error  || 'An unknown error occurred');
       }
+
+    //   post survey
+const response = await createSurvey(surveyData);
+if(response?.data){
+
+    message.success(response?.data?.message )
+    router.push("/my-profile")
+  }else{
+    message.error(res?.error?.data?.error  || 'An unknown error occurred');
+  }
+
+
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error:any) {
