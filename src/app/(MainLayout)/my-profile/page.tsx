@@ -22,7 +22,9 @@ interface FormValue {
 }
 const MyProfilePage=()=> {
   const user = useAppSelector(selectCurrentUser)
+  console.log("userId",user?.userId);
   const {data:singleUser,isLoading, error}=useGetSpecefiqUserQuery(user?.userId)
+  
   const [updateUser]= useUpdateSpecefiqUserMutation()
 console.log("single user===>",singleUser?.data);
 
@@ -40,7 +42,7 @@ const onSubmit: SubmitHandler<FieldValues> = async (data) => {
 
     // Pass userId and form data to the updateUser mutation
     const res = await updateUser({
-      userId: user?.userId,
+      id: user?.userId,
       data: data,
     });
 
@@ -180,12 +182,12 @@ if (isLoading) return <div>Loading...</div>; // Show loading indicator while the
             </div>
           </div>
 
-          <div className="mt-6">
+          <div className="mt-6 flex justify-center my-5">
             <button
               type="submit"
-              className="text-white bg-blue-500 hover:bg-blue-700 rounded-lg p-2"
+              className="text-white bg-[#ff8080] rounded-lg p-2"
             >
-              Save Changes
+              Update
             </button>
           </div>
         </form>

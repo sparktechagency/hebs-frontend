@@ -61,11 +61,11 @@ const Relation = ({
               filterSort={filterSort}
               options={[
                 { value: "Parent", label: "Parent" },
-                { value: "Grand Parent", label: "Grand Parent" },
+                { value: "Grandparent", label: "Grand Parent" },
                 { value: "Guardian", label: "Guardian" },
                 { value: "Teacher", label: "Teacher" },
-                { value: "Other Relative", label: "Other Relative" },
                 { value: "Friend", label: "Friend" },
+                { value: "Other Relative", label: "Other Relative" },
               ]}
             />
           )}

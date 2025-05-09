@@ -12,10 +12,15 @@ import handShack from "@/assets/handshake-light-skin-tone_svgrepo.com.png";
 
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { useAppSelector } from "@/redux/hooks";
-import { orderedProductsSelector, subTotalSelector } from "@/redux/features/cart/cartSlice";
+
 import { selectCurrentUser } from "@/redux/features/auth/authSlice";
-import { usePlaceOrderMutation } from "@/redux/features/cart/cartApi";
+
 import { useRouter } from "next/navigation";
+import { selectCurrentPlan } from "@/redux/features/subscription/subscriptionSlice";
+
+import { useCreateSubscriptionMutation } from "@/redux/features/subscription/subscriptionApi";
+import { useCreateServeyMutation } from "@/redux/features/survey/surveyApi";
+import { selectCurrentSurvey } from "@/redux/features/survey/surveySlice";
 
 
 // Define TypeScript types for form data
@@ -40,18 +45,20 @@ interface FormData {
   // agreed: boolean;
 }
 
-export default function PaymentPage() {
+export default function SubscriptionPurchasePage() {
   // const [confirmPayment,setConfirmPayment]=useState(false)
-  const [placeOrder]=usePlaceOrderMutation();
-  const [paymentMethod, setPaymentMethod] = useState("credit");
+  const [createSubscription]=useCreateSubscriptionMutation();
+  const [createSurvey]=useCreateServeyMutation();
+  const [paymentMethod, setPaymentMethod] = useState("credit")
   const [agreed, setAgreed] = useState(false);
   const user = useAppSelector(selectCurrentUser)
-  const subTotal=useAppSelector(subTotalSelector)
+
 const router = useRouter()
   // console.log("subTotal=>",subTotal);
   // console.log("ceck=>",agreed);
-const orderedProducts = useAppSelector(orderedProductsSelector)
-// console.log("orderedProductsSelector==>",orderedProducts);
+
+  const surveyData = useAppSelector(selectCurrentSurvey)
+  console.log("survey from redux",surveyData);
   // Initialize React Hook Form
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { control, handleSubmit, formState: { errors } } = useForm<FormData>({
@@ -72,11 +79,9 @@ const orderedProducts = useAppSelector(orderedProductsSelector)
       // agreed: agreed,
     },
   });
+  const plan = useAppSelector(selectCurrentPlan);
+//   console.log("plan------------->",plan);
 
-  const items = orderedProducts.map(product => ({
-    itemId: product._id, 
-    quantity: product.orderQuantity,  
-  }));
 
   // Handle form submission
   const onSubmit: SubmitHandler<FormData> = async (data) => {
@@ -84,23 +89,19 @@ const orderedProducts = useAppSelector(orderedProductsSelector)
   
     // Prepare the order data
     const orderData = {
-      user: {
-        userId: user?.userId,
-        name: data.payment.cardHolderName,
-        email: user?.user?.email,
-      },
-      shippingAddress: data.shipping,
-      paymentInfo: {
-        type:"card",
-        status:"paid",
-        tnxId: "txn_" + new Date().getTime(),
-      },
-      total: {
-        amount: subTotal, 
-        currency: "USD",
-      },
-  
-      items, 
+      user: user?.userId,
+   subscription:{
+id:plan?._id,
+type:plan?.type
+
+   },
+   paymentSource:{
+       number:data?.payment?.cardNumber,
+       //-------------TODO--------------------------------
+       type:data?.payment?.cardNumber ? "visa":"",
+    tnxId: "txn_" + new Date().getTime(),
+   },
+
     };
   
     // console.log("order data modified=>", orderData);
@@ -108,15 +109,27 @@ const orderedProducts = useAppSelector(orderedProductsSelector)
    
     try {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const res = await placeOrder(orderData) as any;
+      const res = await createSubscription(orderData) as any;
       console.log("response===>", res);
       if(res?.data){
 
         message.success(res?.data?.message )
-        router.push("/my-profile")
+
       }else{
         message.error(res?.error?.data?.error  || 'An unknown error occurred');
       }
+
+    //   post survey
+const response = await createSurvey(surveyData);
+if(response?.data){
+
+    message.success(response?.data?.message )
+    router.push("/my-profile")
+  }else{
+    message.error(res?.error?.data?.error  || 'An unknown error occurred');
+  }
+
+
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error:any) {
@@ -125,11 +138,12 @@ const orderedProducts = useAppSelector(orderedProductsSelector)
   
     }
   };
-  
+
+ 
   return (
     <>
       <div className="max-w-6xl mx-auto p-6">
-        <h1 className="text-3xl font-bold text-center mb-8">Payment</h1>
+        <h1 className="text-3xl font-bold text-center mb-8">Purchase your Plan</h1>
 
         <div className="flex gap-6">
           {/* Left Column */}
@@ -353,7 +367,7 @@ const orderedProducts = useAppSelector(orderedProductsSelector)
 
             <div className="flex justify-between items-start mb-4">
               <div>
-                <span className="text-2xl font-semibold text-red-400">$14.99</span>
+                <span className="text-2xl font-semibold text-red-400">${plan?.price?.amount}</span>
                 <span className="text-gray-600 ml-1">per month</span>
               </div>
               <div className="text-gray-500 text-right">(paid yearly at $179.88)</div>
@@ -382,23 +396,10 @@ const orderedProducts = useAppSelector(orderedProductsSelector)
             <div className="border-t pt-4">
               <div className="flex justify-between py-2">
                 <span className="text-gray-700">Subtotal</span>
-                <span className="font-medium">$179.88</span>
+                <span className="font-medium">${plan?.price?.amount}</span>
               </div>
 
-              <div className="flex justify-between py-2">
-                <span className="text-gray-700">Sales Tax</span>
-                <span>.....</span>
-              </div>
-
-              <div className="flex justify-between py-2">
-                <span className="text-gray-700">Shipping</span>
-                <span className="font-medium">Free</span>
-              </div>
-
-              <div className="flex justify-between py-2 border-t mt-2 pt-2">
-                <span className="text-gray-700 font-semibold">Today&apos;s Total</span>
-                <span className="font-bold">$179.88</span>
-              </div>
+             
             </div>
           </div>
         </div>
@@ -407,21 +408,7 @@ const orderedProducts = useAppSelector(orderedProductsSelector)
       {/* button */}
       <div className=" bg-[#EDEBE6] shadow-lg p-5 w-full">
         <div className="container mx-auto flex justify-center ">
-          {/* Back Button */}
-          {/* <Link href="/sucess">
-            <button className="border border-black text-black px-6 py-2 rounded-full inline-flex items-center justify-center space-x-2 hover:bg-gray-100 active:bg-gray-200 transition">
-              <LeftOutlined />
-              <span className="font-semibold">Skip</span>
-            </button>
-          </Link> */}
-
-          {/* Next Button */}
-          {/* <Link href={"/my-profile"}>
-            <button disabled={!confirmPayment} className="border border-black text-black px-6 py-2 rounded-full inline-flex items-center justify-center space-x-2 hover:bg-gray-100 active:bg-gray-200 transition disabled:opacity-50">
-              <span className="font-semibold">Continue</span>
-              <RightOutlined />
-            </button>
-          </Link> */}
+ 
         </div>
       </div>
     </>

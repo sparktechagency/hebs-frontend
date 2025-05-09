@@ -16,10 +16,17 @@ const surveyApi = baseApi.injectEndpoints({
         // body: info,
       }),
     }),
+    getSubscriptions: builder.query({
+      query: () => ({
+        url: "/subscription/retrieve",
+        method: "GET",
+        // body: info,
+      }),
+    }),
 
    
 
   }),
 });   
 
-export const {useCreateServeyMutation,useGetCollectionQuery } = surveyApi;
+export const {useCreateServeyMutation,useGetCollectionQuery,useGetSubscriptionsQuery } = surveyApi;

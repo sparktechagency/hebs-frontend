@@ -17,9 +17,9 @@ const BooksLevel = ({
   setData: any;
 }) => {
   const topics = [
-    { value: "begginers", label: "Beginners" },
-    { value: "intermediate", label: "Intermediate" },
-    { value: "advance", label: "Advanced" },
+    { value: "Beginner", label: "Beginners" },
+    { value: "Intermediate", label: "Intermediate" },
+    { value: "Advanced", label: "Advanced" },
   ];
 
   const {

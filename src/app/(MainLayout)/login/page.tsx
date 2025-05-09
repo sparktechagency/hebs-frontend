@@ -11,8 +11,10 @@ import { useLazyLoginWithFacebookQuery, useLazyLoginWithGoogleQuery, useLoginMut
 import { verifyToken } from "@/utils/VerifyToken";
 import { setUser, TUser } from "@/redux/features/auth/authSlice";
 import { useAppDispatch } from "@/redux/hooks";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { FcGoogle } from "react-icons/fc";
+import { setCookie } from "cookies-next";
+import { cookies } from "next/headers";
 const Login = () => {
 
   const [triggerGoogleLogin, { data, error, isLoading }] = useLazyLoginWithGoogleQuery();
@@ -23,6 +25,15 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const dispatch = useAppDispatch();
   const router = useRouter();
+  const setUserCookie = (userInfo:any) => {
+    setCookie("user", JSON.stringify(userInfo), {
+      maxAge: 60 * 60 * 24 * 7, // 7 days
+      path: "/",
+    });
+  };
+  const searchParams = useSearchParams();
+  const redirect = searchParams.get("redirectPath")
+  console.log("redirect path",redirect);
   const onFinish = async (values: any) => {
     try {
       console.log(values);
@@ -35,9 +46,17 @@ const Login = () => {
       // console.log(modifiedUser);
       // console.log("dispatchUser", user);
       dispatch(setUser({ user: modifiedUser, token: res.data.accessToken }));
-      setLoading(false);
-      message.success(res.message);
-      router.push("/");
+setUserCookie(res.data.accessToken)
+setLoading(false);
+
+message.success(res.message);
+
+if (redirect) {
+  router.replace(redirect); // Redirect without adding a new entry to history
+} else {
+  router.replace("/"); // Replace with home page
+}
+
     } catch (error: any) {
       message.error(error?.data?.message || error.data.error);
       console.error("Error:", error);

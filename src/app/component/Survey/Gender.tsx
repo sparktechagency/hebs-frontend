@@ -47,9 +47,9 @@ const Gender = ({
             <Select
               {...field}
               options={[
-                { label: "Male", value: "male" },
-                { label: "Female", value: "female" },
-                { label: "Other", value: "other" },
+                { label: "Male", value: "Male" },
+                { label: "Female", value: "Female" },
+                { label: "Other", value: "Other" },
               ]}
               placeholder="Select your gender"
               className="w-full mt-5"

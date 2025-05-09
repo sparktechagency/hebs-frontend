@@ -1,19 +1,48 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { Input, Tooltip } from "antd";
-import {
-  InfoCircleOutlined,
-  LeftOutlined,
-  RightOutlined,
-
-} from "@ant-design/icons";
+import { Button, Form, Input, message, Tooltip } from "antd";
+import { InfoCircleOutlined, LeftOutlined, MailOutlined, RightOutlined } from "@ant-design/icons";
 import Image from "next/image";
 import packaging from "@/assets/tinnymuslimBox.png";
 import Link from "next/link";
-import handShack from "@/assets/handshake-light-skin-tone_svgrepo.com.png"
+import handShack from "@/assets/handshake-light-skin-tone_svgrepo.com.png";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { selectCurrentPlan } from "@/redux/features/subscription/subscriptionSlice";
 
+import styles from "@/app/styles.module.css";
+import { useLoginMutation } from "@/redux/features/auth/authApi";
+import { useState } from "react";
+import { setUser, TUser } from "@/redux/features/auth/authSlice";
+import { verifyToken } from "@/utils/VerifyToken";
 export default function CheckoutPage() {
+    const [login] = useLoginMutation();
+    const [loading, setLoading] = useState(false);
+    const dispatch = useAppDispatch();
+  const plan = useAppSelector(selectCurrentPlan);
 
+  const onFinish = async (values: any) => {
+    try {
+      // console.log(values);
+      // Handle login logic here
+      const res = await login(values).unwrap();
+      // console.log("response:", res)
+      setLoading(true);
+      const user = verifyToken(res.data.accessToken) as TUser;
+      const modifiedUser={userId:res?.data?._id,user:user}
+      // console.log(modifiedUser);
+      // console.log("dispatchUser", user);
+      dispatch(setUser({ user: modifiedUser, token: res.data.accessToken }));
+      setLoading(false);
+      message.success(res.message);
+
+    } catch (error: any) {
+      message.error(error?.data?.message || error.data.error);
+      // console.error("Error:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <>
       <div className="max-w-6xl mx-auto p-6">
@@ -22,59 +51,87 @@ export default function CheckoutPage() {
         <div className="grid md:grid-cols-2 gap-6">
           {/* Left Column */}
           <div className="space-y-6">
-            {/* Order notification */}
-            <div className="border rounded-2xl p-6 shadow-sm flex items-center justify-between">
-              <div>
-                <p className="text-gray-700 text-lg">
-                  Order today to get your reader&apos;s first book box by{" "}
-                  <span className="font-bold">Feb 3</span>
-                </p>
-              </div>
-              <div className="w-24 h-16 relative">
-                <Image
-                  src={packaging}
-                  alt="Book box"
-                  width={120}
-                  height={80}
-                  className="object-contain"
-                />
-              </div>
-            </div>
-
             {/* Sign in section */}
             <div className="border rounded-2xl p-6 shadow-sm">
               <h2 className="text-xl font-semibold text-gray-700 mb-6">
                 Sign in or create an account
               </h2>
 
-              <div className="space-y-4">
-                <div>
-                  <Input
-                    placeholder="Enter Email"
-                    defaultValue="eyasinislam28742@gmail.com"
-                    size="large"
-                    className="rounded-lg p-3 h-14"
-                  />
-                </div>
+            
+        <Form
+          name="login"
+          onFinish={onFinish}
+          layout="vertical"
+          className="mt-8 space-y-6"
+        >
+          <div className="space-y-4 rounded-md">
+            <Form.Item
+              name="email"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your email!",
+                  type: "email",
+                },
+              ]}
+            >
+              <Input
+                prefix={<MailOutlined className="text-gray-400" />}
+                placeholder="Enter Email"
+                size="large"
+                className="rounded-xl"
+              />
+            </Form.Item>
 
-                <div>
-                  <Input.Password
-                    placeholder="Password"
-                    defaultValue="password123"
-                    size="large"
-                    className="rounded-lg p-3 h-14"
-                  />
-                </div>
+            <Form.Item
+              name="password"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your password!",
+                },
+              ]}
+            >
+              <Input.Password
+                placeholder="Enter your password"
+                size="large"
+                className="rounded-xl"
+              />
+            </Form.Item>
+          </div>
 
-                <div className="border-t my-6 pt-4 text-center">
-                  <p className="text-gray-700">
-                    Already have an account?{" "}
-                    <a href="#" className="text-red-400 hover:text-red-500">
-                      Log In
-                    </a>
-                  </p>
-                </div>
-              </div>
+          <div className="flex items-center justify-end">
+            <Link
+              href="/forgot-password"
+              className={`text-sm text-gray-500 hover:text-gray-700 ${styles.fontInter}`}
+            >
+              Forget Password?
+            </Link>
+          </div>
+
+          <Button
+            htmlType="submit"
+            loading={loading}
+            className="w-full h-12 bg- hover:bg-gray-800 rounded-xl"
+          >
+            Log In
+          </Button>
+
+
+      
+
+          <div className="text-center mt-6">
+            <p className="text-sm text-gray-600">
+              Already have an account?{" "}
+              <Link
+                href="/signUp"
+                className="text-[#FF4444] hover:text-[#FF6666]"
+              >
+                Sign Up
+              </Link>
+            </p>
+          </div>
+        </Form>
             </div>
           </div>
 
@@ -99,7 +156,7 @@ export default function CheckoutPage() {
             <div className="flex justify-between items-start mb-4">
               <div>
                 <span className="text-2xl font-semibold text-red-400">
-                  $14.99
+                  ${plan?.price?.amount ?? 0}
                 </span>
                 <span className="text-gray-600 ml-1">per month</span>
               </div>
@@ -129,42 +186,25 @@ export default function CheckoutPage() {
                 </p>
               </div>
               <div className="ml-4">
-              <Image src={handShack} alt="icon" />
+                <Image src={handShack} alt="icon" />
               </div>
             </div>
 
             <div className="border-t pt-4">
               <div className="flex justify-between py-2">
                 <span className="text-gray-700">Subtotal</span>
-                <span className="font-medium">$179.88</span>
-              </div>
-
-              <div className="flex justify-between py-2">
-                <span className="text-gray-700">Sales Tax</span>
-                <span>.....</span>
-              </div>
-
-              <div className="flex justify-between py-2">
-                <span className="text-gray-700">Shipping</span>
-                <span className="font-medium">Free</span>
-              </div>
-
-              <div className="flex justify-between py-2 border-t mt-2 pt-2">
-                <span className="text-gray-700 font-semibold">
-                  Today&apos;s Total
-                </span>
-                <span className="font-bold">$179.88</span>
+                <span className="font-medium">${plan?.price?.amount ?? 0}</span>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* button */}
+      {/* Button */}
       <div className=" bg-[#EDEBE6] shadow-lg p-5 w-full">
-        <div className="container mx-auto flex justify-between ">
+        <div className="container mx-auto flex justify-between">
           {/* Back Button */}
-          <Link href="/payment">
+          <Link href="/subscriptionPurchase">
             <button className="border border-black text-black px-6 py-2 rounded-full inline-flex items-center justify-center space-x-2 hover:bg-gray-100 active:bg-gray-200 transition">
               <LeftOutlined />
               <span className="font-semibold">Skip</span>
@@ -172,7 +212,7 @@ export default function CheckoutPage() {
           </Link>
 
           {/* Next Button */}
-          <Link href={"/payment"}>
+          <Link href={"/subscriptionPurchase"}>
             <button className="border border-black text-black px-6 py-2 rounded-full inline-flex items-center justify-center space-x-2 hover:bg-gray-100 active:bg-gray-200 transition disabled:opacity-50">
               <span className="font-semibold">Continue</span>
               <RightOutlined />
