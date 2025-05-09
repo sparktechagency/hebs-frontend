@@ -52,7 +52,7 @@ const checkIfProductIdExists=(productId:string)=> {
 }
 const result = checkIfProductIdExists(product._id);
 // console.log(result);
-  return (
+  return ( 
     <div>
       <div
         className="rounded-lg p-3 flex flex-col cursor-pointer"
