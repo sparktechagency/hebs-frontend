@@ -14,6 +14,8 @@ import style from "@/app/styles.module.css";
 import { usePathname, useRouter } from "next/navigation";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { logout, selectCurrentUser } from "@/redux/features/auth/authSlice";
+import { protectedRoutes } from "@/constants";
+import { setCookie } from "nookies";
 export default function Navbar() {
   const user = useAppSelector(selectCurrentUser);
   const dispatch = useAppDispatch();
@@ -49,8 +51,14 @@ export default function Navbar() {
   // logout
   const handleLogout = () => {
     dispatch(logout());
+    // Delete cookie manually
     router.push("/login");
+    setCookie(null, 'user', '', { path: '/', maxAge: -1 });
     message.success("Logout Success");
+    if(protectedRoutes.some((route)=>pathname.match(route))){
+      router.push("/")
+    }
+   
   };
   interface AgeCategory {
     name: string;
