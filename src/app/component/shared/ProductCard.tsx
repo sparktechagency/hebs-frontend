@@ -45,14 +45,18 @@ const ProductCard = ({ product,handleAddProduct}: { product: any ,handleAddProdu
     }
   };
 console.log("product id",product._id);
-console.log("fav book",favouriteBooks?.data?.books)
-;
+console.log("fav book",favouriteBooks?.data?.books);
 
+const checkIfProductIdExists=(productId:string)=> {
+  return favouriteBooks?.data?.books?.some((product:any) => product._id === productId);
+}
+const result = checkIfProductIdExists(product._id);
+// console.log(result);
   return (
     <div>
       <div
         className="rounded-lg p-3 flex flex-col cursor-pointer"
-        // onClick={() => router.push(`/bookStore/${product.id}`)}
+        // onClick={() => router.push(`/bookStore/${product.id}`)}  
       >
         <div className="relative h-48 mb-3 rounded-md bg-[#fffbeb]">
           <Link href={`/bookStore/${product._id}`}>
@@ -71,7 +75,8 @@ console.log("fav book",favouriteBooks?.data?.books)
             <HeartIcon
               size={20}
               className={
-                favouriteBooks?.data?.books?.includes(product._id)
+                // favouriteBooks?.data?.books?.includes(product._id)
+                result
                   ? "fill-red-500 text-red-500"
                   : "text-gray-500"
               }

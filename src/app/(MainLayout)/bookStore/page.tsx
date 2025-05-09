@@ -25,12 +25,12 @@ function BookStore() {
   >();
   const dispatch = useAppDispatch();
 
-// add product to cart
+  // add product to cart
   const handleAddProduct = (product: CartProduct) => {
     dispatch(addProduct(product));
-    message.success("Product Added ")
+    message.success("Product Added ");
   };
-  
+
   const [selectedGrade, setSelectedGrade] = useState<string | undefined>();
   const [selectedCollection, setSelectedCollection] = useState<
     string | undefined
@@ -70,12 +70,15 @@ function BookStore() {
     }
   }, [error]);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <div className="">Loading...</div>;
 
   const totalData = data?.meta?.totalData;
   const currentPageNo = data?.meta?.currentPage;
   const limit = data?.meta?.limit;
 
+
+
+  
   return (
     <div className="container mx-auto px-4">
       {/* Filter Section */}
@@ -160,7 +163,6 @@ function BookStore() {
             <span className="text-gray-600">Sort by:</span>
             <Select
               value={sortOrder}
-              
               className="w-48"
               size="middle"
               onChange={(value) => setSortOrder(value)}
@@ -181,7 +183,11 @@ function BookStore() {
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-1 md:gap-6">
           {data?.data?.map((product: any, index: number) => (
-            <ProductCard key={`${product.id}-${index}`} product={product} handleAddProduct={handleAddProduct}/>
+            <ProductCard
+              key={`${product.id}-${index}`}
+              product={product}
+              handleAddProduct={handleAddProduct}
+            />
           ))}
         </div>
 
