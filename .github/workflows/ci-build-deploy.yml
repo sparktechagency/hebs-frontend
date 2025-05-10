@@ -48,3 +48,4 @@ jobs:
             npm install --omit=dev
             pkill -f "next start" || true
             nohup npm run start &> nextjs.log &
+            
