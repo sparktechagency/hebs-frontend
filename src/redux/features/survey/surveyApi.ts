@@ -23,10 +23,17 @@ const surveyApi = baseApi.injectEndpoints({
         // body: info,
       }),
     }),
+    getRecommendation: builder.query({
+      query: (dob) => ({
+        url: `/recommendation/retrieve/${dob}`,
+        method: "GET",
+        // body: info,
+      }),
+    }),
 
    
 
   }),
 });   
 
-export const {useCreateServeyMutation,useGetCollectionQuery,useGetSubscriptionsQuery } = surveyApi;
+export const {useCreateServeyMutation,useGetCollectionQuery,useGetSubscriptionsQuery,useGetRecommendationQuery } = surveyApi;

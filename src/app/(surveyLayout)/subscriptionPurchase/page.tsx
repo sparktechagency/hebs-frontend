@@ -58,7 +58,7 @@ const router = useRouter()
   // console.log("ceck=>",agreed);
 
   const surveyData = useAppSelector(selectCurrentSurvey)
-  console.log("survey from redux",surveyData);
+  // console.log("survey from redux",surveyData);
   // Initialize React Hook Form
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { control, handleSubmit, formState: { errors } } = useForm<FormData>({
