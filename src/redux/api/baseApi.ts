@@ -4,7 +4,7 @@ import { RootState } from "../store";
      
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: "http://13.48.93.57:5003/v1",
+  baseUrl: "http://10.0.60.55:5003/v1",
   prepareHeaders: (headers, { getState }) => {
     headers.set('Accept', 'application/json');
 
@@ -25,7 +25,7 @@ const baseQuery = fetchBaseQuery({
 export const baseApi = createApi({
     reducerPath:"baseApi",
     baseQuery:baseQuery,
-    tagTypes:["books","user","cart"],
+    tagTypes:["books","user","cart","favourite","order"],
     endpoints:()=>({})
 })
 

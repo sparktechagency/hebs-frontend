@@ -43,6 +43,7 @@ const bookApi = baseApi.injectEndpoints({
         url: `/favorite-book/retrieve/user/${id}`,
         method: "GET",
       }),
+       providesTags: ["favourite"],
     }),
     favouriteBooks: builder.mutation({
       query: ({userId,bookId}) => ({
@@ -50,6 +51,7 @@ const bookApi = baseApi.injectEndpoints({
         method: "POST",
         body: bookId,
       }),
+       invalidatesTags: ['favourite'],
     }),
     getCategories: builder.query({
       query: () => ({
