@@ -6,7 +6,7 @@ on:
       - main # or change to your deploy branch
 
 env:
-  DEPLOY_PATH: /var/www/hebs-frontend
+  DEPLOY_PATH: /var/www/hebs-frontend 
 
 jobs:
   deploy:
