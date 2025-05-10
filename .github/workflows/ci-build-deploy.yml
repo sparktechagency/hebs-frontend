@@ -1,35 +1,50 @@
-name: Deploy Next.js Frontend to EC2
+name: Deploy Next.js to EC2
 
 on:
   push:
     branches:
-      - main # or change to your deploy branch
+      - main
 
 env:
-  DEPLOY_PATH: /var/www/hebs-frontend 
+  DEPLOY_PATH: /var/www/hebs-frontend
 
 jobs:
   deploy:
-    name: Deploy to EC2
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Setup SSH
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
 
-      - name: Deploy and Restart with PM2
-        run: |
-          ssh ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << EOF
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Next.js app
+        run: npm run build
+
+      - name: Upload app to EC2
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          source: "." # you can refine this to upload only necessary files
+          target: ${{ env.DEPLOY_PATH }}
+          strip_components: 1
+
+      - name: Start/Restart Next.js app on EC2
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
             cd ${{ env.DEPLOY_PATH }}
-            git pull origin main
-            yarn install
-            yarn build
-            pm2 restart ecosystem.config.json || pm2 start ecosystem.config.json
-          EOF
+            npm install --omit=dev
+            pkill -f "next start" || true
+            nohup npm run start &> nextjs.log &
