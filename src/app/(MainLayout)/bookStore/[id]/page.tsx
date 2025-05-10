@@ -19,8 +19,8 @@ import RelatedBooks from "@/app/component/RelatedBooks";
 import styles from "@/app/styles.module.css";
 import { useParams } from "next/navigation";
 import { useGetSingleBooksQuery } from "@/redux/features/books/bookApi";
-import { useAppDispatch } from "@/redux/hooks";
-import { addProduct, CartProduct } from "@/redux/features/cart/cartSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { addProduct, CartProduct, decrementOrderQuantity, incrementOrderQuantity, orderedProductsSelector } from "@/redux/features/cart/cartSlice";
 
 export default function DetailsPage() {
   const params = useParams();
@@ -30,7 +30,7 @@ export default function DetailsPage() {
   const {data}=useGetSingleBooksQuery(id)
   console.log("single book=>",data?.data);
 
-const {name,description,price,author,level,weight,format,coverImage,}=data?.data ||{};
+const {name,description,price,author,level,weight,format,coverImage,_id}=data?.data ||{};
 
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -42,7 +42,18 @@ const {name,description,price,author,level,weight,format,coverImage,}=data?.data
       message.success("Product Added ")
     };
 
+   const products = useAppSelector(orderedProductsSelector);
+   const orderQuantity=products.find(product => product._id === _id)?.orderQuantity
+// console.log(products.find(product => product._id === _id)?.orderQuantity);
 
+
+  const handleIncrementQuantity = (id: string) => {
+    dispatch(incrementOrderQuantity(id));
+  };
+
+  const handleDecrementQuantity = (id: string) => {
+    dispatch(decrementOrderQuantity(id));
+  };
   const showModal = () => {
     setIsModalVisible(true); 
   };
@@ -216,19 +227,21 @@ const {name,description,price,author,level,weight,format,coverImage,}=data?.data
                       icon={<MinusOutlined />}
                       // onClick={decreaseQuantity}
                       className="border border-gray-300 text-gray-600"
+                      onClick={()=>handleDecrementQuantity(_id)}
                     />
                     <InputNumber
                       min={1}
                       // onChange={handleQuantityChange}
-                      value={1}
+                      value={orderQuantity}
                       // value={quantity}
                       controls={false}
                       className="mx-2 w-16 text-center"
                     />
                     <Button
-                      icon={<PlusOutlined />}
+                      icon={<PlusOutlined  />}
                       // onClick={increaseQuantity}
                       className="border border-gray-300 text-gray-600"
+                      onClick={()=>handleIncrementQuantity(_id)}
                     />
                   </div>
                   <div>
