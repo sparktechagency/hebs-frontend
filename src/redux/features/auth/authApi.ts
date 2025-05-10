@@ -43,6 +43,7 @@ const authApi = baseApi.injectEndpoints({
         method: "PATCH",  
         body: userInfo,
       }),
+        invalidatesTags: ['user'],
     }),
 
 

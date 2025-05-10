@@ -16,7 +16,7 @@ const FavouritePage = () => {
 
   return (
     <>
-      <div className="grid grid-cols-5 gap-5 container mx-auto">
+      <div className="grid grid-cols-5 gap-5 container mx-auto my-8">
         {favouriteBooks?.data?.books?.map((book: any, _id: string) => {
           return (
             <div

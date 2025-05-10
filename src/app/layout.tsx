@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { Grand_Hotel, Rozha_One, Poppins, Jost, Inter, Josefin_Sans } from "next/font/google";
 import "@/app/globals.css";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
-import ReduxProvider from "@/Provider/ReduxProvider";
+
+import Providers from "@/Provider/Providers";
 
 // Import fonts
 const jost = Jost({ weight: ["300", "400", "500", "700"], subsets: ["latin"], variable: "--font-jost" });
@@ -27,10 +28,10 @@ export default function RootLayout({
       <body
         className={`${grandHotel.variable} ${rozhaOne.variable} ${poppins.variable} ${jost.variable} ${inter.variable} ${josefinSans.variable} antialiased`}
       >
-             <ReduxProvider>
+             <Providers>
 
         <AntdRegistry>{children}</AntdRegistry>
-             </ReduxProvider>
+             </Providers>
       
       </body>
     </html>

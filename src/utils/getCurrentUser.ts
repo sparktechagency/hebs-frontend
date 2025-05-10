@@ -1,4 +1,4 @@
-// import { cookies } from "next/headers";
+"use server";
 
 import { jwtDecode } from "jwt-decode";
 import { cookies } from "next/headers";
@@ -16,6 +16,7 @@ import { cookies } from "next/headers";
 //   };
 export const getCurrentUser = async () => {
     const accessToken = (await cookies()).get("user")?.value;
+    if (!accessToken) return null;
     let decodedData = null;
   
     if (accessToken) {

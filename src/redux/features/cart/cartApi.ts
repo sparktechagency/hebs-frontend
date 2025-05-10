@@ -8,6 +8,7 @@ const cartApi = baseApi.injectEndpoints({
         method: "POST",
         body: info,
       }),
+       invalidatesTags: ['order'],
     }),
    
 

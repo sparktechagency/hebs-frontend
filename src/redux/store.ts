@@ -33,8 +33,9 @@ const persistedAuthReducer=persistReducer(persistConfig,authReducer)
 const persistedCartReducer = persistReducer(persistConfigCart, cartSlice);
 const persistedSurveyReducer = persistReducer(persistConfigSurvey, surveyReducer);
 const persistedPlanReducer = persistReducer(persistConfigPlan, planReducer);
-export const store = configureStore({
-    reducer:{
+export const makeStore = () =>{
+  return configureStore({
+        reducer:{
         [baseApi.reducerPath]:baseApi.reducer,
         auth:persistedAuthReducer,
         survey: persistedSurveyReducer,
@@ -44,10 +45,13 @@ export const store = configureStore({
     middleware:getDefaultMiddleware=>getDefaultMiddleware( {serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },}).concat(baseApi.middleware)
-})
+  })
+
+}
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
-export type RootState = ReturnType<typeof store.getState>
+export type AppStore = ReturnType<typeof makeStore>;
+export type RootState = ReturnType<AppStore["getState"]>;
 // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
-export type AppDispatch = typeof store.dispatch
-export const persistor = persistStore(store)
+export type AppDispatch = AppStore["dispatch"];
+export const persistor = persistStore(makeStore());

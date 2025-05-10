@@ -23,6 +23,7 @@ const ProductCard = ({ product,handleAddProduct}: { product: any ,handleAddProdu
 
   // add favrt book
   const handleFavourite = async (bookId: string) => {
+    console.log("clicked");
     if (!user?.userId || !bookId) {
       console.error("User or Book ID is missing");
       return;

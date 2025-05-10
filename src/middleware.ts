@@ -7,12 +7,12 @@ type Role = keyof typeof roleBasedPrivateRoutes;
 const authRoutes = ["/login", "/signUp"];
 
 const roleBasedPrivateRoutes = {
-  user: [ /^\/subscriptionPurchase/], // Routes accessible by the user role
+  user: [ /^\/subscriptionPurchase/,/^\/cart/], // Routes accessible by the user role
 };
 
 export const middleware = async (request: NextRequest) => {
   const { pathname } = request.nextUrl;
-
+console.log("pathname===>>",pathname);
   // Correct way to access cookies from the request
 //   const cookies = parseCookies({ req: request });
 //   const userInfo = cookies.user ? JSON.parse(cookies?.user) : null;
@@ -52,5 +52,6 @@ export const config = {
     "/login",
     "/signUp",
     "/subscriptionPurchase",
+    "/cart"
   ],
 };

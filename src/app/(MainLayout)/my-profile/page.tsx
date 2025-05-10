@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 "use client"
 
-import { Input,  } from "antd"
+import { Input, message,  } from "antd"
 import { Package, User, FileText, Plus, ChevronRight, } from "lucide-react"
 import styles from "@/app/styles.module.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -21,46 +21,50 @@ interface FormValue {
   phone: string;
 }
 const MyProfilePage=()=> {
-  const user = useAppSelector(selectCurrentUser)
-  console.log("userId",user?.userId);
-  const {data:singleUser,isLoading, error}=useGetSpecefiqUserQuery(user?.userId)
-  
-  const [updateUser]= useUpdateSpecefiqUserMutation()
-console.log("single user===>",singleUser?.data);
+  const user = useAppSelector(selectCurrentUser);
+  const { data: singleUser, isLoading, error } = useGetSpecefiqUserQuery(user?.userId);
+  // console.log(singleUser);
+  const [updateUser] = useUpdateSpecefiqUserMutation();
 
-// console.log(user);
-const { control, handleSubmit, formState: { errors } } = useForm();
-const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-  try {
-    // Check if userId exists before calling updateUser
-    if (!user?.userId) {
-      console.error('User ID is missing');
-      return;
+  const { control, handleSubmit, formState: { errors } } = useForm<FormValue>();
+
+  const onSubmit: SubmitHandler<FormValue> = async (data) => {
+    try {
+      // Ensure userId exists
+      if (!user?.userId) {
+        console.error("User ID is missing");
+        return;
+      }
+
+      // Prepare modified data for the mutation
+      const modifiedData = {
+        firstName: data.firstName,
+        lastName: data.lastName,
+        phone: data.phone,
+      };
+      
+      console.log("Data for update", modifiedData);
+
+      // Call the mutation to update the user
+      const res = await updateUser({
+        id: user?.userId,
+        userInfo: modifiedData,
+      });
+
+      // Check if the mutation was successful
+      if (res.error) {
+        console.error("Failed to update user:", res.error);
+        message.error("Failed to update user")
+      } else {
+        console.log("User updated successfully:", res.data);
+        message.success(res?.data?.message)
+      }
+    } catch (error) {
+      console.error("Error updating user:", error);
     }
+  };
 
-    console.log(data);
-
-    // Pass userId and form data to the updateUser mutation
-    const res = await updateUser({
-      id: user?.userId,
-      data: data,
-    });
-
-    // Check if the mutation was successful
-    console.log("res===>", res);
-
-    if (res.error) {
-      console.error('Failed to update user:', res.error);
-    } else {
-      console.log('User updated successfully:', res.data);
-    }
-  } catch (error) {
-    console.error('Error updating user:', error);
-  }
-};
-
-if (isLoading) return <div>Loading...</div>; // Show loading indicator while the query is fetching
-
+  if (isLoading) return <div>Loading...</div>; // Show loading indicator while fetching user data
   return (
     <div className="flex flex-col md:flex-row min-h-screen bg-gray-50 ">
       {/* Sidebar */}
@@ -89,6 +93,8 @@ if (isLoading) return <div>Loading...</div>; // Show loading indicator while the
 
           <div className="mt-8 border-t border-gray-200 pt-4">
             <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">SUBSCRIPTION SETTINGS</h3>
+             <Link href={"/subscription"}>
+              
             <div className="flex items-center justify-between p-2 text-gray-600 hover:bg-gray-100 rounded-md">
               <div className="flex flex-col">
                 <span className="text-[#f08080]">Ahmed</span>
@@ -96,6 +102,7 @@ if (isLoading) return <div>Loading...</div>; // Show loading indicator while the
               </div>
               <ChevronRight className="h-5 w-5 text-[#f08080]" />
             </div>
+              </Link>
           </div>
 
         <Link href={"/name"}>
@@ -119,7 +126,7 @@ if (isLoading) return <div>Loading...</div>; // Show loading indicator while the
               <Controller
                 name="firstName"
                 control={control}
-                defaultValue=""
+                defaultValue={singleUser?.data?.firstName || ""}
                 render={({ field }) => (
                   <Input {...field} className="rounded-lg" />
                 )}
@@ -130,7 +137,7 @@ if (isLoading) return <div>Loading...</div>; // Show loading indicator while the
               <Controller
                 name="lastName"
                 control={control}
-                defaultValue=""
+                defaultValue={singleUser?.data?.lastName || ""}
                 render={({ field }) => (
                   <Input {...field} className="rounded-lg" />
                 )}

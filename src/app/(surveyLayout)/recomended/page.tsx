@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import Image from "next/image";
@@ -7,39 +8,21 @@ import Link from "next/link";
 import { RightOutlined } from "@ant-design/icons";
 import { useAppSelector } from "@/redux/hooks";
 import { selectCurrentSurvey } from "@/redux/features/survey/surveySlice";
+import { useGetRecommendationQuery } from "@/redux/features/survey/surveyApi";
 // {setIsEmail,setIsRecomended}:{  setIsEmail: (value: boolean) => void,setIsRecomended: (value: boolean) => void} 
 export default function BookRecommendations() {
   const surveyData = useAppSelector(selectCurrentSurvey)
-  console.log("survey from redux",surveyData);
+  // console.log("survey from redux",surveyData);
   // const handleBack = () => {
   //   setIsEmail(true);
   //   setIsRecomended(false);
   // };
-  const text = [
-    {
-      id:"1",
-      title:"Focusing on high-contrast images"
-    },
-    {
-      id:"2",
-      title:"Touching pictures with textures"
-    },
-    {
-      id:"3",
-      title:"Opening peek-a-boo flaps"
-    },
-  ]
-  const bookType = [
-    {
-      id:"1",
-      title:"Board Books"
-    },
-    {
-      id:"2",
-      title:"Picture Books"
-    },
- 
-  ]
+  const {data:recommended,isLoading}=useGetRecommendationQuery(surveyData?.dateOfBirth)
+  // console.log("recommended==>",recommended?.data);
+  if(isLoading){
+    return <p>Loading from recommended</p>
+  }
+
   return (
     <>
     
@@ -47,7 +30,7 @@ export default function BookRecommendations() {
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <h1 className="text-3xl text-center md:text-4xl font-bold mb-12">
-          Here&apos;s what we recommend for eyasin!
+          Here&apos;s what we recommend for <span className="uppercase text-[#FF7171]">{surveyData?.readerName}!</span>
         </h1>
 
         {/* Books */}
@@ -68,9 +51,9 @@ export default function BookRecommendations() {
             <p className="text-2xl text-black   mb-4">Current Reading Level</p>
           <h2 className="text-2xl text-black  font-semibold mb-4">Legend</h2>
           <div className="inline-block bg-[#ff7171] text-black px-4 py-1.5 rounded-full text-sm font-medium">
-            Birth- 13 years
+            {recommended?.data?.category?.ageGroup}
           </div>
-          <p className="py-3">Reading together boosts your baby&apos;s sensory development and growth. High-contrast images and textured pages sharpen visual and tactile skills. Interactive books for toddlers enhance motor skills and object recognition.</p>
+          <p className="py-3">{recommended?.data?.description}</p>
         </div>
 
         {/* Content Container */}
@@ -78,11 +61,11 @@ export default function BookRecommendations() {
           <div className="space-y-6">
             <h1 className="text-start font-bold">Key skills to practice</h1>
             {/* Content items with sparkle icons */}
-            {text.map((item,id) => (
+            {recommended?.data?.skillSuggestions?.map((item:string,id:string) => (
               <div key={id} className="flex items-start gap-3">
                 <Sparkles className="w-5 h-5 text-[#ff7171] flex-shrink-0 mt-1" />
                 <p className="">
-               {item.title}
+               {item}
                 </p>
               </div>
             ))}
@@ -93,8 +76,8 @@ export default function BookRecommendations() {
    <div className="p-8  border-t border-black">
    <div className="space-y-6 mb-12">
         <h1 className="text-start font-bold py-3">Recommended book types</h1>
-          {bookType.map((item,id) => (
-            <div key={id} className="flex items-start gap-3">
+          {recommended?.data?.bookCategorySuggestions?.map((item:any,_id:string) => (
+            <div key={_id} className="flex items-start gap-3">
               <Sparkles className="w-5 h-5 text-[#ff7171] flex-shrink-0 mt-1" />
               <p className="">
           {item.title}

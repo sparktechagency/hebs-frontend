@@ -49,6 +49,8 @@ const SubscriptionPage=()=> {
 
           <div className="mt-8 border-t border-gray-200 pt-4">
             <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">SUBSCRIPTION SETTINGS</h3>
+                     <Link href={"/subscription"}>
+              
             <div className="flex items-center justify-between p-2 text-gray-600 hover:bg-gray-100 rounded-md">
               <div className="flex flex-col">
                 <span className="text-[#f08080]">Ahmed</span>
@@ -56,6 +58,7 @@ const SubscriptionPage=()=> {
               </div>
               <ChevronRight className="h-5 w-5 text-[#f08080]" />
             </div>
+              </Link>
           </div>
 
           <button className="mt-4 flex items-center text-[#f08080] p-2">
