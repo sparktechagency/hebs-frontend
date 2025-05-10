@@ -22,7 +22,7 @@ jobs:
           node-version: 20
 
       - name: Install dependencies
-        run: npm install
+        run: npm install --legacy-peer-deps
 
       - name: Build Next.js app
         run: npm run build
@@ -48,4 +48,4 @@ jobs:
             npm install --omit=dev
             pkill -f "next start" || true
             nohup npm run start &> nextjs.log &
-            
+
