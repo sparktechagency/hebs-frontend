@@ -1,8 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-'use client'
+"use client";
+
 import { selectCurrentUser } from "@/redux/features/auth/authSlice";
 import { finalPriceAfterDiscountSelector, subTotalSelector, totalProductsSelector, totalQuantitySelector } from "@/redux/features/cart/cartSlice";
 import { useAppSelector } from "@/redux/hooks";
+import { currencyFormatter } from "@/utils/currencyFormatter";
 import { message } from "antd";
 import { useRouter } from "next/navigation";
 
@@ -22,7 +24,7 @@ const router = useRouter()
             try {
               if (!user) {
                 router.push("/login");
-                throw new Error("Please login first.");
+                message.error("Please login first.");
               }
             router.push("/payment")
         
@@ -48,11 +50,11 @@ const router = useRouter()
                 </div>
                 <div className="flex justify-between">
                   <p className="text-gray-500 ">Total Discount</p>
-                  <p className="font-semibold">${totalDiscount}</p>
+                  <p className="font-semibold">{currencyFormatter(totalDiscount)}</p>
                 </div>
                 <div className="flex justify-between">
                   <p className="text-gray-500 ">Subtotal</p>
-                  <p className="font-semibold">${subTotal}</p>
+                  <p className="font-semibold">{currencyFormatter(subTotal)}</p>
                 </div>
               </div>
               {/* <div className="flex justify-between mt-10 mb-5">

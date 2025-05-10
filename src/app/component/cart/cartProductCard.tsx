@@ -1,5 +1,6 @@
 import { CartProduct, decrementOrderQuantity, incrementOrderQuantity, removeProduct } from "@/redux/features/cart/cartSlice";
 import { useAppDispatch } from "@/redux/hooks";
+import { currencyFormatter } from "@/utils/currencyFormatter";
 import { Minus, Plus, Trash } from "lucide-react";
 import Image from "next/image";
 
@@ -38,7 +39,7 @@ export default function CartProductCard({ product }: { product: CartProduct }) {
         <hr className="my-2 border-t-2 border-gray-200" />
         <div className="flex items-center justify-between mt-2">
           <h2 className="font-semibold text-lg">
-            Price: ${product.discountPrice ? product.discountPrice.amount : product.price.amount}
+            Price: {currencyFormatter(product.discountPrice ? product.discountPrice.amount : product.price.amount)}
           </h2>
           <div className="flex items-center gap-3">
             <p className="text-gray-500 font-semibold">Quantity</p>
