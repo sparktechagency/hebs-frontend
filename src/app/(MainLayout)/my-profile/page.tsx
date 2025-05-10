@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 "use client"
 
-import { Input,  } from "antd"
+import { Input, message,  } from "antd"
 import { Package, User, FileText, Plus, ChevronRight, } from "lucide-react"
 import styles from "@/app/styles.module.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -54,8 +54,10 @@ const MyProfilePage=()=> {
       // Check if the mutation was successful
       if (res.error) {
         console.error("Failed to update user:", res.error);
+        message.error("Failed to update user")
       } else {
         console.log("User updated successfully:", res.data);
+        message.success(res?.data?.message)
       }
     } catch (error) {
       console.error("Error updating user:", error);
@@ -91,6 +93,8 @@ const MyProfilePage=()=> {
 
           <div className="mt-8 border-t border-gray-200 pt-4">
             <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">SUBSCRIPTION SETTINGS</h3>
+             <Link href={"/subscription"}>
+              
             <div className="flex items-center justify-between p-2 text-gray-600 hover:bg-gray-100 rounded-md">
               <div className="flex flex-col">
                 <span className="text-[#f08080]">Ahmed</span>
@@ -98,6 +102,7 @@ const MyProfilePage=()=> {
               </div>
               <ChevronRight className="h-5 w-5 text-[#f08080]" />
             </div>
+              </Link>
           </div>
 
         <Link href={"/name"}>
