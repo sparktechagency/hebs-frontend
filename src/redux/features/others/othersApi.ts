@@ -9,9 +9,30 @@ const othersApi = baseApi.injectEndpoints({
 
       }),
     }),
+    getPrivacyPolicy: builder.query({
+      query: () => ({
+        url: "/privacy-policy/retrive",
+        method: "GET",
+
+      }),
+    }),
+    getTerms: builder.query({
+      query: () => ({
+        url: "/terms-condition/retrive",
+        method: "GET",
+
+      }),
+    }),
+    getContact: builder.query({
+      query: () => ({
+        url: "/contact-us/retrive",
+        method: "GET",
+
+      }),
+    }),
    
 
   }),
 });   
 
-export const {useGetAboutQuery } = othersApi;
+export const {useGetAboutQuery,useGetContactQuery,useGetPrivacyPolicyQuery,useGetTermsQuery } = othersApi;
