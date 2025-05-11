@@ -1,7 +1,16 @@
+'use client'
 import FeatureBook from '@/app/component/Home/FeatureBook';
+import LoadingPage from '@/app/loading';
+import { useGetTermsQuery } from '@/redux/features/others/othersApi';
 import React from 'react';
 /* eslint-disable react/no-unescaped-entities */
 const TermsPage = () => {
+    const {data:termsData,isLoading}=useGetTermsQuery(undefined)
+    console.log("about data",termsData);
+    
+    if(isLoading){
+      return <LoadingPage/>
+    }
     return (
   <div className="min-h-screen  text-black">
         <div className="max-w-4xl mx-auto px-4 py-12 sm:px-6 lg:px-8">

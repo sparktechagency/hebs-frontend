@@ -13,7 +13,14 @@ import {
   TikTokFilled,
 } from "@ant-design/icons";
 
+
 const ContactPage = () => {
+//   const {data:contactData,isLoading}=useGetContactQuery(undefined)
+// console.log("contact data",contactData);
+
+// if(isLoading){
+//   return <LoadingPage/>
+// }
   return (
     <div>
       <div className="flex justify-center bg-[#FEECDE]">
