@@ -23,14 +23,14 @@ const ProductCard = ({ product,handleAddProduct}: { product: any ,handleAddProdu
 
   // add favrt book
   const handleFavourite = async (bookId: string) => {
-    console.log("clicked",bookId);
+    // console.log("clicked",bookId);
 
     if (!user?.userId || !bookId) {
-      console.error("User or Book ID is missing");
+      message.error("User or Book ID is missing");
       return;
     }
 const userId = user?.userId
-console.log("user id:",user?.userId);
+// console.log("user id:",user?.userId);
     try {
       // Call the mutation and wait for the response
       const res = await favouriteBook({ userId:userId, bookId:bookId });
@@ -43,14 +43,14 @@ console.log("user id:",user?.userId);
         refetch()
         // setFavorites(true)
       } else {
-        console.error("Message not found in the response");
+        message.error("Message not found in the response");
       }
-    } catch (error) {
-      console.error("Error during mutation:", error);
+    } catch (error:any) {
+      message.error(error);
     }
   };
-console.log("product id",product._id);
-console.log("fav book",favouriteBooks?.data?.books);
+// console.log("product id",product._id);
+// console.log("fav book",favouriteBooks?.data?.books);
 
 const checkIfProductIdExists=(productId:string)=> {
   return favouriteBooks?.data?.books?.some((product:any) => product._id === productId);  

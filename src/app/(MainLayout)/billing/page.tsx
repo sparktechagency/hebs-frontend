@@ -71,13 +71,13 @@ const BillingHistory=()=> {
               </Link>
             </li>
             <li>
-              <Link href="/my-profile" className="flex items-center p-2 text-gray-600  rounded-md">
+              <Link href="/my-profile" className="flex items-center p-2 text-gray-600 hover:bg-gray-100  rounded-md">
                 <User className="h-5 w-5 mr-3" />
                 <span>Account Details</span>
               </Link>
             </li>
             <li>
-              <Link href="/billing" className="flex items-center p-2 bg-[#f08080] text-white hover:bg-gray-100 rounded-md">
+              <Link href="/billing" className="flex items-center p-2 bg-[#f08080] text-white  rounded-md">
                 <FileText className="h-5 w-5 mr-3 text-white" />
                 <span>Billing History</span>
               </Link>

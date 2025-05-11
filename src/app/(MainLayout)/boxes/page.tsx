@@ -15,7 +15,7 @@ const BoxesPage=()=> {
         <nav className="p-4">
           <ul className="space-y-2">
             <li>
-              <Link href="/boxes" className="flex items-center p-2 bg-[#f08080] text-white hover:bg-gray-100 rounded-md">
+              <Link href="/boxes" className="flex items-center p-2 bg-[#f08080] text-white  rounded-md">
                 <Package className="h-5 w-5 mr-3 text-white" />
                 <span>Boxes</span>  
               </Link>
