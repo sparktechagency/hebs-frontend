@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { InputNumber, Button, Collapse, Modal, message } from "antd";
+import { Button, Collapse, Modal, message } from "antd";
 import {
   FacebookOutlined,
   TwitterOutlined,
@@ -11,16 +11,15 @@ import {
   PinterestOutlined,
   MailOutlined,
   LinkOutlined,
-  PlusOutlined,
-  MinusOutlined,
+
 } from "@ant-design/icons";
 
 import RelatedBooks from "@/app/component/RelatedBooks";
 import styles from "@/app/styles.module.css";
 import { useParams } from "next/navigation";
 import { useGetSingleBooksQuery } from "@/redux/features/books/bookApi";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { addProduct, CartProduct, decrementOrderQuantity, incrementOrderQuantity, orderedProductsSelector } from "@/redux/features/cart/cartSlice";
+import { useAppDispatch } from "@/redux/hooks";
+import { addProduct, CartProduct } from "@/redux/features/cart/cartSlice";
 
 export default function DetailsPage() {
   const params = useParams();
@@ -30,7 +29,7 @@ export default function DetailsPage() {
   const {data}=useGetSingleBooksQuery(id)
   console.log("single book=>",data?.data);
 
-const {name,description,price,author,level,weight,format,coverImage,_id}=data?.data ||{};
+const {name,description,price,author,level,weight,format,coverImage,}=data?.data ||{};
 
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -42,18 +41,19 @@ const {name,description,price,author,level,weight,format,coverImage,_id}=data?.d
       message.success("Product Added ")
     };
 
-   const products = useAppSelector(orderedProductsSelector);
-   const orderQuantity=products.find(product => product._id === _id)?.orderQuantity
-// console.log(products.find(product => product._id === _id)?.orderQuantity);
+//    const products = useAppSelector(orderedProductsSelector);
+//    console.log("products =>",products);
+//    const orderQuantity=products.find(product => product._id === _id)?.orderQuantity
+// console.log(products.find(product => product._id === _id));
 
 
-  const handleIncrementQuantity = (id: string) => {
-    dispatch(incrementOrderQuantity(id));
-  };
+  // const handleIncrementQuantity = (id: string) => {
+  //   dispatch(incrementOrderQuantity(id));
+  // };
 
-  const handleDecrementQuantity = (id: string) => {
-    dispatch(decrementOrderQuantity(id));
-  };
+  // const handleDecrementQuantity = (id: string) => {
+  //   dispatch(decrementOrderQuantity(id));
+  // };
   const showModal = () => {
     setIsModalVisible(true); 
   };
@@ -219,10 +219,10 @@ const {name,description,price,author,level,weight,format,coverImage,_id}=data?.d
             </div>
 
             <div className="mb-6">
-              <h3 className="text-gray-700 font-medium mb-2">Quantity</h3>
+              {/* <h3 className="text-gray-700 font-medium mb-2">Quantity</h3> */}
               <div>
                 <div className="flex justify-between">
-                  <div className="inline-flex items-center bg-[#FEF2F1] p-1 rounded-md">
+                  {/* <div className="inline-flex items-center bg-[#FEF2F1] p-1 rounded-md">
                     <Button
                       icon={<MinusOutlined />}
                       // onClick={decreaseQuantity}
@@ -243,7 +243,7 @@ const {name,description,price,author,level,weight,format,coverImage,_id}=data?.d
                       className="border border-gray-300 text-gray-600"
                       onClick={()=>handleIncrementQuantity(_id)}
                     />
-                  </div>
+                  </div> */}
                   <div>
                     {/* <Link href={"/cart"} > */}
                       <button className="w-full bg-[#F37975] md:px-8 p-4  md:h-12 flex items-center justify-center text-[#ffffff] hover:bg-red-500 border-none mb-4" onClick={()=>handleAddProduct(data?.data)}>

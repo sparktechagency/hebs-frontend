@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { selectCurrentUser } from "@/redux/features/auth/authSlice";
@@ -6,14 +7,20 @@ import { useAppSelector } from "@/redux/hooks";
 
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
 
 const FavouritePage = () => {
   const user = useAppSelector(selectCurrentUser);
   //   console.log("user id",user?.userId);
-  const { data: favouriteBooks } = useGetAllFavouritesBooksQuery(user?.userId);
-  console.log("favrt books", favouriteBooks);
+  const { data: favouriteBooks ,refetch} = useGetAllFavouritesBooksQuery(user?.userId);
+  // console.log("favrt books", favouriteBooks);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      refetch();
+    }, 5000); // Refetch every 5 seconds
 
+    return () => clearInterval(interval); // Cleanup the interval when the component unmounts
+  }, [refetch]);
   return (
     <>
       <div className="grid grid-cols-5 gap-5 container mx-auto my-8">

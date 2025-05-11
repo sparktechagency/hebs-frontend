@@ -137,9 +137,15 @@ const FooterPage = () => {
               reserved.
             </p>
             <Space className="">
+              <Link href={"/terms"}>
+              
               <p className="text-white">Terms of Service</p>
+              </Link>
               <p className="text-white">|</p>
+                    <Link href={"/privacy"}>
+                    
               <p className="text-white">Privacy Policy</p>
+                    </Link>
             </Space>
           </div>
         </div>

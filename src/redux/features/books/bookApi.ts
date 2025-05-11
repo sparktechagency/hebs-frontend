@@ -49,7 +49,7 @@ const bookApi = baseApi.injectEndpoints({
       query: ({userId,bookId}) => ({
         url: `/favorite-book/add/new/${userId}`,
         method: "POST",
-        body: bookId,
+        body: {bookId},
       }),
        invalidatesTags: ['favourite'],
     }),
