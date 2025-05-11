@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { selectCurrentUser } from "@/redux/features/auth/authSlice";
@@ -11,7 +12,7 @@ import React from "react";
 const FavouritePage = () => {
   const user = useAppSelector(selectCurrentUser);
   //   console.log("user id",user?.userId);
-  const { data: favouriteBooks } = useGetAllFavouritesBooksQuery(user?.userId);
+  const { data: favouriteBooks ,refetch} = useGetAllFavouritesBooksQuery(user?.userId);
   console.log("favrt books", favouriteBooks);
 
   return (

@@ -18,25 +18,29 @@ const ProductCard = ({ product,handleAddProduct}: { product: any ,handleAddProdu
   const user = useAppSelector(selectCurrentUser);
   // const router = useRouter();
   // get fav books
-  const { data: favouriteBooks } = useGetAllFavouritesBooksQuery(user?.userId);
+  const { data: favouriteBooks,refetch } = useGetAllFavouritesBooksQuery(user?.userId);
 
 
   // add favrt book
   const handleFavourite = async (bookId: string) => {
-    console.log("clicked");
+    console.log("clicked",bookId);
+
     if (!user?.userId || !bookId) {
       console.error("User or Book ID is missing");
       return;
     }
-
+const userId = user?.userId
+console.log("user id:",user?.userId);
     try {
       // Call the mutation and wait for the response
-      const res = await favouriteBook({ userId: user.userId, bookId });
-      console.log("Mutation Response:", res);
+      const res = await favouriteBook({ userId:userId, bookId:bookId });
+      // console.log("Mutation Response:", res);
+   
 
       // Assuming the message is inside `res.data` based on your mutation
       if (res?.data?.message) {
         message.success(res.data.message);
+        refetch()
         // setFavorites(true)
       } else {
         console.error("Message not found in the response");
@@ -49,7 +53,7 @@ console.log("product id",product._id);
 console.log("fav book",favouriteBooks?.data?.books);
 
 const checkIfProductIdExists=(productId:string)=> {
-  return favouriteBooks?.data?.books?.some((product:any) => product._id === productId);
+  return favouriteBooks?.data?.books?.some((product:any) => product._id === productId);  
 }
 const result = checkIfProductIdExists(product._id);
 // console.log(result);
@@ -72,6 +76,7 @@ const result = checkIfProductIdExists(product._id);
           <button
             onClick={() => handleFavourite(product._id)}
             className="absolute top-2 right-2 p-1.5 bg-white/80 rounded-full hover:bg-white transition-colors z-10"
+            disabled={result}
           >
             <HeartIcon
               size={20}
