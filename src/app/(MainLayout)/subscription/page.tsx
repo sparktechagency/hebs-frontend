@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { ChevronDown, ChevronRight, Package, User, FileText, Plus } from "lucide-react"
+import { ChevronDown, ChevronRight, Package, User, FileText } from "lucide-react"
 import { Form, Input, Modal, Select } from "antd"
 import Link from "next/link";
 const { Option } = Select;
@@ -51,20 +51,17 @@ const SubscriptionPage=()=> {
             <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">SUBSCRIPTION SETTINGS</h3>
                      <Link href={"/subscription"}>
               
-            <div className="flex items-center justify-between p-2 text-gray-600 hover:bg-gray-100 rounded-md">
+            <div className="flex items-center justify-between p-2  bg-[#f08080]   rounded-md">
               <div className="flex flex-col">
-                <span className="text-[#f08080]">Ahmed</span>
-                <span className="text-xs text-[#f08080]/70">Inactive</span>
+                <span className="text-white">Ahmed</span>
+                <span className="text-xs text-white">Inactive</span>
               </div>
               <ChevronRight className="h-5 w-5 text-[#f08080]" />
             </div>
               </Link>
           </div>
 
-          <button className="mt-4 flex items-center text-[#f08080] p-2">
-            <Plus className="h-4 w-4 mr-1" />
-            <span>Add Subscriptions</span>
-          </button>
+      
         </nav>
       </aside>
 

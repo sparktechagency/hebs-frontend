@@ -13,7 +13,7 @@ const roleBasedPrivateRoutes = {
 export const middleware = async (request: NextRequest) => {
   const { pathname } = request.nextUrl;
 console.log("pathname===>>",pathname);
-  // Correct way to access cookies from the request
+  // Correct way to access cookies from the request 
 //   const cookies = parseCookies({ req: request });
 //   const userInfo = cookies.user ? JSON.parse(cookies?.user) : null;
 const userInfo = await getCurrentUser();
@@ -23,6 +23,7 @@ const userInfo = await getCurrentUser();
     if (authRoutes.includes(pathname)) {
       return NextResponse.next(); // Allow access to login or register pages
     } else {
+      console.log("from middleware");
       return NextResponse.redirect(
         new URL(
           `http://localhost:3000/login?redirectPath=${pathname}`,

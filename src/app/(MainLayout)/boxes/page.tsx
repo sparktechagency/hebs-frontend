@@ -1,6 +1,6 @@
 "use client"
 
-import { Package, User, FileText, Plus, Check, ChevronRight } from "lucide-react"
+import { Package, User, FileText,  Check, ChevronRight } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import shape from "@/assets/shape.png"
@@ -38,7 +38,7 @@ const BoxesPage=()=> {
             <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">SUBSCRIPTION SETTINGS</h3>
               <Link href={"/subscription"}>
               
-            <div className="flex items-center justify-between p-2 text-gray-600 hover:bg-gray-100 rounded-md">
+           <div className="flex items-center justify-between p-2 text-gray-600 hover:bg-gray-100 rounded-md">
               <div className="flex flex-col">
                 <span className="text-[#f08080]">Ahmed</span>
                 <span className="text-xs text-[#f08080]/70">Inactive</span>
@@ -48,12 +48,6 @@ const BoxesPage=()=> {
               </Link>
           </div>
 
-        <Link href={"/name"}>
-        <button className="mt-4 flex items-center text-[#f08080] p-2" style={{ textShadow: "2px 2px 4px #00000040" }}>
-            <Plus className="h-4 w-4 mr-1" />
-            <span>Add Subscriptions</span>
-          </button>
-        </Link>
         </nav>
       </aside>   
 
@@ -65,6 +59,13 @@ const BoxesPage=()=> {
       </div>
         <div className="flex flex-col  gap-8">
           {/* First Box Card */}
+
+
+
+
+
+
+
           <div className="bg-white rounded-2xl shadow-md  relative w-full md:w-1/2 xl:w-1/4">
             {/* Date Flag */}
             <div className="absolute top-10 left-0 w-32">
@@ -93,6 +94,11 @@ const BoxesPage=()=> {
            
           </div>
 
+
+
+
+
+
           {/* Second Box Card */}
           <div className="relative bg-[#FBD5D4] rounded-2xl shadow-md w-full md:w-1/2 py-5">
   {/* Header Section */}
@@ -118,9 +124,9 @@ const BoxesPage=()=> {
       Rayhan&apos;s Book Shuffle
     </h3>
 
-    <button className="w-full bg-white hover:bg-gray-50 text-gray-800 py-4 px-6 rounded-full font-medium shadow-sm transition-all hover:shadow-md">
+    {/* <button className="w-full bg-white hover:bg-gray-50 text-gray-800 py-4 px-6 rounded-full font-medium shadow-sm transition-all hover:shadow-md">
       See Details
-    </button>
+    </button> */}
   </div>
 </div>
 

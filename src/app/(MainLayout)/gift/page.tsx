@@ -1,60 +1,79 @@
-import { Select } from 'antd';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+'use client'
+import { message, Select } from 'antd';
 import React from 'react';
 import styles from "@/app/styles.module.css"
 import Image from 'next/image';
-import Link from 'next/link';
-import gift from "@/assets/gift.png"
+
+import { useGetAllBoxesQuery } from '@/redux/features/boxes/boxesApi';
+import LoadingPage from '@/app/loading';
+import { useAppDispatch } from '@/redux/hooks';
+import { addProduct, CartProduct } from '@/redux/features/cart/cartSlice';
+
 const GiftPage = () => {
-    return (
-        <div className='container mx-auto'>
-<div className="flex flex-col sm:flex-row justify-between items-center p-4 bg-white border-b border-black py-8">
-  {/* Filter Section */}
-  <div className="flex items-center space-x-2 mb-4 sm:mb-0">
-    <span className="text-gray-600">Filter:</span>
-    <Select defaultValue="Availability" className="w-40" />
-    <Select defaultValue="Price" className="w-32" />
-  </div>
+  const dispatch = useAppDispatch();
+  const { data: boxes, isLoading } = useGetAllBoxesQuery(undefined);
 
-  {/* Sort By Section */}
-  <div className="flex items-center space-x-2">
-    <span className="text-gray-600">Sort by:</span>
-    <Select defaultValue="Alphabetically, A-Z" className="w-52" />
-  </div>
-</div>
-
-{/* cart */}
-
-<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <h1 className={`text-xl font-bold mb-6  ${styles.fontRozha}`}> Products</h1>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-      <div className="rounded-lg p-3 flex flex-col cursor-pointer">
-        <div className="relative h-48 mb-3 rounded-md bg-[#fffbeb]">
-          <Image
-            src={gift}
-            alt={"gift"}
-          
-            className="object-cover rounded-md"
-            sizes="(max-width: 640px) 100vw, 20vw"
-          />
+  if (isLoading) {
+ return <LoadingPage/>
+  }
+  const giftBoxes = boxes?.data?.filter((box:any) => box.type === 'gift');
+  console.log("gift box",giftBoxes);
+  
+    // add product to cart
+    const handleAddProduct = (product: CartProduct) => {
+      dispatch(addProduct(product));
+      message.success("Product Added ");
+    };
+  return (
+    <div className='container mx-auto'>
+      <div className="flex flex-col sm:flex-row justify-between items-center p-4 bg-white border-b border-black py-8">
+        {/* Filter Section */}
+        <div className="flex items-center space-x-2 mb-4 sm:mb-0">
+          <span className="text-gray-600">Filter:</span>
+          <Select defaultValue="Availability" className="w-40" />
+          <Select defaultValue="Price" className="w-32" />
         </div>
-   <Link href={"/checkout"}>
-   <button className="w-full rounded-full py-2 bg-[#ffd6d6] text-black  text-sm font-medium mb-2 hover:bg-[#ffbdbd] transition-colors">
-          Add to Bag
-        </button>
-   </Link>
-        <h3 className="text-sm font-medium line-clamp-2 mb-1 text-center">Gift Card</h3>
 
+        {/* Sort By Section */}
+        <div className="flex items-center space-x-2">
+          <span className="text-gray-600">Sort by:</span>
+          <Select defaultValue="Alphabetically, A-Z" className="w-52" />
+        </div>
       </div>
 
+      {/* Products */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <h1 className={`text-xl font-bold mb-6 ${styles.fontRozha}`}>Products</h1>
 
-</div>
-
-
-    </div>
-
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+          {giftBoxes.map((box:any, index:number) => (
+            <div key={index} className="rounded-lg p-3 flex flex-col cursor-pointer">
+              <div className="relative h-48 mb-3 rounded-md bg-[#fffbeb]">
+                <Image
+                  src={`/${box?.image}`}
+                  alt={box.title}
+                  className="object-cover rounded-md"
+                  sizes="(max-width: 640px) 100vw, 20vw"
+                  width={500}
+                  height={500}
+                />
+              </div>
+          
+                <button className="w-full rounded-full py-2 bg-[#ffd6d6] text-black text-sm font-medium mb-2 hover:bg-[#ffbdbd] transition-colors"
+                onClick={() => handleAddProduct(box)}
+                >
+                  Add to Bag
+                </button>
+         
+              <h3 className="text-sm font-medium line-clamp-2 mb-1 text-center">{box.title}</h3>
+              <p className="text-center text-gray-600">${box.price?.amount}</p> {/* Price display */}
+            </div>
+          ))}
         </div>
-    );
+      </div>
+    </div>
+  );
 };
 
 export default GiftPage;

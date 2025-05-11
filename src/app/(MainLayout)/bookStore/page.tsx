@@ -17,6 +17,7 @@ import {
 import ProductCard from "@/app/component/shared/ProductCard";
 import { useAppDispatch } from "@/redux/hooks";
 import { addProduct, CartProduct } from "@/redux/features/cart/cartSlice";
+import LoadingPage from "@/app/loading";
 
 function BookStore() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -51,13 +52,11 @@ function BookStore() {
     collection: selectedCollection || undefined,
     sortBy: sortBy || undefined,
     sortOrder: sortOrder || undefined,
-    // minPrice: priceRange?.[0] || undefined,
-    // maxPrice: priceRange?.[1] || undefined,
-    // availability: availability || undefined,
+ 
     page: currentPage,
   };
   console.log(queryParams);
-  const { data, isLoading, error } = useGetAllBooksQuery(queryParams);
+  const { data, isLoading, error ,refetch} = useGetAllBooksQuery(queryParams);
   const { data: categories } = useGetCategoriesQuery(undefined);
   const { data: grades } = useGetGradeQuery(undefined);
   const { data: collections } = useGetCollectionQuery(undefined);
@@ -70,7 +69,15 @@ function BookStore() {
     }
   }, [error]);
 
-  if (isLoading) return <div className="">Loading...</div>;
+  useEffect(() => {
+    const interval = setInterval(() => {
+      refetch();
+    }, 5000); // Refetch every 5 seconds
+
+    return () => clearInterval(interval); // Cleanup the interval when the component unmounts
+  }, [refetch]);
+
+  if (isLoading) return <div className=""><LoadingPage/></div>;
 
   const totalData = data?.meta?.totalData;
   const currentPageNo = data?.meta?.currentPage;

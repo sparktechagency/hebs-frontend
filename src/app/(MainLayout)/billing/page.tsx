@@ -1,5 +1,5 @@
 "use client"
-import { Package, User, FileText, Plus, ChevronRight } from "lucide-react"
+import { Package, User, FileText,  ChevronRight } from "lucide-react"
 import { useState } from "react"
 import { ChevronDown } from "lucide-react"
 import Link from "next/link"
@@ -98,12 +98,7 @@ const BillingHistory=()=> {
               </Link>
           </div>
 
-        <Link href={"/name"}>
-        <button className="mt-4 flex items-center text-[#f08080] p-2" style={{ textShadow: "2px 2px 4px #00000040" }}>
-            <Plus className="h-4 w-4 mr-1" />
-            <span>Add Subscriptions</span>
-          </button>
-        </Link>
+
         </nav>
       </aside>   
 

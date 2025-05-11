@@ -127,11 +127,11 @@ export const totalDiscountSelector = (state: RootState) => {
 export const finalPriceAfterDiscountSelector = (state: RootState) => {
   return state.cart.products.reduce((acc, product) => {
 
-    const finalPrice = product.discountPrice.amount
-      ? product.price.amount - product.discountPrice.amount
+    const finalPrice = product?.discountPrice?.amount
+      ? product?.price?.amount - product?.discountPrice?.amount
       : 0; 
 
-    return acc + finalPrice * product.orderQuantity;
+    return acc + finalPrice * product?.orderQuantity;
   }, 0);
 };
 
@@ -149,8 +149,8 @@ export const totalProductsSelector = (state: RootState) => {
 
 export const subTotalSelector = (state: RootState) => {
     return state.cart.products.reduce((acc, product) => {
-      if (product.discountPrice.amount) {
-        console.log(product.discountPrice.amount);
+      if (product?.discountPrice?.amount) {
+        console.log("discount price ",product.discountPrice.amount);
         return acc + product.discountPrice.amount * product.orderQuantity;
       } else {
         console.log(product.price, "Price");

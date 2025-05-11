@@ -34,7 +34,7 @@ const Email = ({
   const router = useRouter();
   const dispatch = useDispatch();
   const onSubmit: SubmitHandler<FieldValues> = (d) => {
-    console.log("Email entered:", d.email);
+    // console.log("Email entered:", d.email);
     setData((prev: any) => ({ ...prev, email: d.email }));
 
     const year = data?.birthYear;
@@ -61,7 +61,7 @@ const Email = ({
         statement: data.statement,
       },
     };
-    console.log("surveyData from form inside email compo", surveyData);
+    // console.log("surveyData from form inside email compo", surveyData);
 
     // dispatch(resetSurveyData());
     dispatch(updateSurveyData(surveyData));
