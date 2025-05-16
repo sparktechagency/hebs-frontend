@@ -8,7 +8,7 @@ const { Option } = Select;
 
 const SubscriptionPage=()=> {
   const [showBooks1, setShowBooks1] = useState(false)
-  const [showBooks2, setShowBooks2] = useState(false)
+
   const [showUpdateModal, setShowUpdateModal] = useState(false)
   // Add form state
   const [readerDetails, setReaderDetails] = useState({
@@ -92,11 +92,11 @@ const SubscriptionPage=()=> {
         <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
             <h2 className="text-xl font-semibold">Reader Details</h2>
-            <button className="mt-4 md:mt-0 border border-[#f08080] text-[#f08080] hover:bg-[#f08080]/5 px-6 py-2 rounded-full"
+            {/* <button className="mt-4 md:mt-0 border border-[#f08080] text-[#f08080] hover:bg-[#f08080]/5 px-6 py-2 rounded-full"
              onClick={() => setShowUpdateModal(true)}
             >
               Update Details
-            </button>
+            </button> */}
           </div>
 
           <div className="border-t border-gray-200 pt-6">
@@ -157,31 +157,7 @@ const SubscriptionPage=()=> {
           </div>
         </div>
 
-        {/* Books Section 2 */}
-        <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
-            <h3 className="font-medium">Reader&apos;s Allah made me</h3>
-            <button className="mt-4 md:mt-0 bg-[#f08080] hover:bg-[#f08080]/90 text-white px-6 py-2 rounded-full">
-              Review Books
-            </button>
-          </div>
-
-          <div className="border-t border-gray-200 pt-4">
-            <button
-              className="w-full bg-gray-400 hover:bg-gray-500 text-white py-3 rounded-md flex items-center justify-center"
-              onClick={() => setShowBooks2(!showBooks2)}
-            >
-              <span className="mr-2">Show Books</span>
-              <ChevronDown className="h-5 w-5" />
-            </button>
-
-            {showBooks2 && (
-              <div className="mt-4 p-4 bg-gray-50 rounded-md">
-                <p>Book details would appear here</p>
-              </div>
-            )}
-          </div>
-        </div>
+       
          {/* Update Details Modal */}
          <Modal
         title="Reader Details"

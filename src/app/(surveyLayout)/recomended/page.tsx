@@ -9,6 +9,7 @@ import { RightOutlined } from "@ant-design/icons";
 import { useAppSelector } from "@/redux/hooks";
 import { selectCurrentSurvey } from "@/redux/features/survey/surveySlice";
 import { useGetRecommendationQuery } from "@/redux/features/survey/surveyApi";
+import LoadingPage from "@/app/loading";
 // {setIsEmail,setIsRecomended}:{  setIsEmail: (value: boolean) => void,setIsRecomended: (value: boolean) => void} 
 export default function BookRecommendations() {
   const surveyData = useAppSelector(selectCurrentSurvey)
@@ -20,7 +21,7 @@ export default function BookRecommendations() {
   const {data:recommended,isLoading}=useGetRecommendationQuery(surveyData?.dateOfBirth)
   // console.log("recommended==>",recommended?.data);
   if(isLoading){
-    return <p>Loading from recommended</p>
+    return <LoadingPage/>
   }
 
   return (

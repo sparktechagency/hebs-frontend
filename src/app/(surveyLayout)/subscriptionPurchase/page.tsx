@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Input, Radio, Checkbox, Tooltip, Button, message } from "antd";
-import { InfoCircleOutlined,  LockOutlined, } from "@ant-design/icons";
+import { InfoCircleOutlined, LockOutlined } from "@ant-design/icons";
 import Image from "next/image";
 import packaging from "@/assets/tinnymuslimBox.png";
 import paypal from "@/assets/paypal.png";
@@ -21,7 +21,6 @@ import { selectCurrentPlan } from "@/redux/features/subscription/subscriptionSli
 import { useCreateSubscriptionMutation } from "@/redux/features/subscription/subscriptionApi";
 import { useCreateServeyMutation } from "@/redux/features/survey/surveyApi";
 import { selectCurrentSurvey } from "@/redux/features/survey/surveySlice";
-
 
 // Define TypeScript types for form data
 interface Shipping {
@@ -47,21 +46,26 @@ interface FormData {
 
 export default function SubscriptionPurchasePage() {
   // const [confirmPayment,setConfirmPayment]=useState(false)
-  const [createSubscription]=useCreateSubscriptionMutation();
-  const [createSurvey]=useCreateServeyMutation();
-  const [paymentMethod, setPaymentMethod] = useState("credit")
+  const [createSubscription] = useCreateSubscriptionMutation();
+  const [createSurvey] = useCreateServeyMutation();
+  const [paymentMethod, setPaymentMethod] = useState("credit");
   const [agreed, setAgreed] = useState(false);
-  const user = useAppSelector(selectCurrentUser)
+  const user = useAppSelector(selectCurrentUser);
 
-const router = useRouter()
+  const router = useRouter();
   // console.log("subTotal=>",subTotal);
   // console.log("ceck=>",agreed);
 
-  const surveyData = useAppSelector(selectCurrentSurvey)
+  const surveyData = useAppSelector(selectCurrentSurvey);
   // console.log("survey from redux",surveyData);
   // Initialize React Hook Form
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { control, handleSubmit, formState: { errors } } = useForm<FormData>({
+  const {
+    control,
+    handleSubmit,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    formState: { errors },
+  } = useForm<FormData>({
     defaultValues: {
       shipping: {
         street: "123 Elm Street",
@@ -80,70 +84,69 @@ const router = useRouter()
     },
   });
   const plan = useAppSelector(selectCurrentPlan);
-//   console.log("plan------------->",plan);
-
+  //   console.log("plan------------->",plan);
 
   // Handle form submission
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     // console.log("Form Data Submitted:", data);
-  
+
     // Prepare the order data
     const orderData = {
       user: user?.userId,
-   subscription:{
-id:plan?._id,
-type:plan?.type
-
-   },
-   paymentSource:{
-       number:data?.payment?.cardNumber,
-       //-------------TODO--------------------------------
-       type:data?.payment?.cardNumber ? "visa":"",
-    tnxId: "txn_" + new Date().getTime(),
-   },
-
+      subscription: {
+        id: plan?._id,
+        type: plan?.type,
+      },
+      paymentType:"card",
+       paymentStatus: "paid",
+      paymentSource: {
+        number: data?.payment?.cardNumber,
+        //-------------TODO--------------------------------
+        type: data?.payment?.cardNumber ? "visa" : "",
+        tnxId: "txn_" + new Date().getTime(),
+            isSaved: true
+      },
     };
-  
+console.log("order data",orderData);
     // console.log("order data modified=>", orderData);
-  
-   
+
     try {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const res = await createSubscription(orderData) as any;
+      const res = (await createSubscription(orderData)) as any;
       console.log("response===>", res);
-      if(res?.data){
-
-        message.success(res?.data?.message )
-
-      }else{
-        message.error(res?.error?.data?.error  || 'An unknown error occurred');
+      if (res?.data) {
+        message.success(res?.data?.message);
+        router.push("/my-profile");
+      } else {
+        message.error(res?.error?.data?.error || "An unknown error occurred");
       }
 
-    //   post survey
-const response = await createSurvey(surveyData);
-if(response?.data){
+      //   post survey
+      const response = await createSurvey(surveyData);
+      if (response?.data) {
+        message.success(response?.data?.message);
+        
+      } else {
+        message.error(res?.error?.data?.error || "An unknown error occurred");
+      }
 
-    message.success(response?.data?.message )
-    router.push("/my-profile")
-  }else{
-    message.error(res?.error?.data?.error  || 'An unknown error occurred');
-  }
-
-
-
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (error:any) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
       console.log(error);
-      message.error( error);
-  
+      message.error(error);
     }
   };
+  const today = new Date();
+  const options: Intl.DateTimeFormatOptions = { month: "long", day: "numeric" };
 
- 
+  const formattedDate = today.toLocaleDateString("en-US", options);
+
   return (
     <>
       <div className="max-w-6xl mx-auto p-6">
-        <h1 className="text-3xl font-bold text-center mb-8">Purchase your Plan</h1>
+        <h1 className="text-3xl font-bold text-center mb-8">
+          Purchase your Plan
+        </h1>
 
         <div className="flex gap-6">
           {/* Left Column */}
@@ -152,7 +155,8 @@ if(response?.data){
             <div className="border rounded-2xl p-6 shadow-sm flex items-center justify-between bg-white">
               <div>
                 <p className="text-gray-700 text-lg">
-                  Order today to get your reader&apos;s first book box by <span className="font-bold">Feb 3</span>
+                  Order today to get your reader&apos;s first book box by{" "}
+                  <span className="font-bold">{formattedDate}</span>
                 </p>
               </div>
               <div className="w-24 h-16 relative">
@@ -168,13 +172,23 @@ if(response?.data){
 
             {/* Payment Methods */}
             <div className="border rounded-2xl p-6 shadow-sm bg-white">
-              <h2 className="text-xl font-semibold text-gray-700 mb-6">Payment Methods</h2>
+              <h2 className="text-xl font-semibold text-gray-700 mb-6">
+                Payment Methods
+              </h2>
 
               <div className="space-y-4">
-                <Radio.Group value={paymentMethod} onChange={(e) => setPaymentMethod(e.target.value)} className="w-full">
+                <Radio.Group
+                  value={paymentMethod}
+                  onChange={(e) => setPaymentMethod(e.target.value)}
+                  className="w-full"
+                >
                   <div className="space-y-3">
                     <div
-                      className={`border rounded-xl p-4 flex items-center justify-between ${paymentMethod === "paypal" ? "border-blue-500" : "border-gray-200"}`}
+                      className={`border rounded-xl p-4 flex items-center justify-between ${
+                        paymentMethod === "paypal"
+                          ? "border-blue-500"
+                          : "border-gray-200"
+                      }`}
                     >
                       <Radio value="paypal" className="w-full">
                         <span className="ml-2 text-gray-700">Paypal</span>
@@ -189,7 +203,11 @@ if(response?.data){
                     </div>
 
                     <div
-                      className={`border rounded-xl p-4 flex items-center justify-between ${paymentMethod === "credit" ? "border-blue-500" : "border-gray-200"}`}
+                      className={`border rounded-xl p-4 flex items-center justify-between ${
+                        paymentMethod === "credit"
+                          ? "border-blue-500"
+                          : "border-gray-200"
+                      }`}
                     >
                       <Radio value="credit" className="w-full">
                         <span className="ml-2 text-gray-700">Credit Card</span>
@@ -218,52 +236,74 @@ if(response?.data){
 
             {/* Shipping Address Form */}
             <div className="border rounded-2xl p-6 shadow-sm bg-white">
-              <h2 className="text-xl font-semibold text-gray-700 mb-6">Shipping Address</h2>
+              <h2 className="text-xl font-semibold text-gray-700 mb-6">
+                Shipping Address
+              </h2>
 
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                 <div>
-                  <label className="block text-sm text-gray-500 mb-1">Street Address</label>
+                  <label className="block text-sm text-gray-500 mb-1">
+                    Street Address
+                  </label>
                   <Controller
                     name="shipping.street"
                     control={control}
-                    render={({ field }) => <Input {...field} size="large" className="rounded-lg" />}
+                    render={({ field }) => (
+                      <Input {...field} size="large" className="rounded-lg" />
+                    )}
                   />
                 </div>
 
                 <div className="flex space-x-4">
                   <div className="flex-1">
-                    <label className="block text-sm text-gray-500 mb-1">City</label>
+                    <label className="block text-sm text-gray-500 mb-1">
+                      City
+                    </label>
                     <Controller
                       name="shipping.city"
                       control={control}
-                      render={({ field }) => <Input {...field} size="large" className="rounded-lg" />}
+                      render={({ field }) => (
+                        <Input {...field} size="large" className="rounded-lg" />
+                      )}
                     />
                   </div>
                   <div className="flex-1">
-                    <label className="block text-sm text-gray-500 mb-1">State</label>
+                    <label className="block text-sm text-gray-500 mb-1">
+                      State
+                    </label>
                     <Controller
                       name="shipping.state"
                       control={control}
-                      render={({ field }) => <Input {...field} size="large" className="rounded-lg" />}
+                      render={({ field }) => (
+                        <Input {...field} size="large" className="rounded-lg" />
+                      )}
                     />
                   </div>
                 </div>
 
                 <div className="flex space-x-4">
                   <div className="flex-1">
-                    <label className="block text-sm text-gray-500 mb-1">Zip Code</label>
+                    <label className="block text-sm text-gray-500 mb-1">
+                      Zip Code
+                    </label>
                     <Controller
                       name="shipping.zipCode"
                       control={control}
-                      render={({ field }) => <Input {...field} size="large" className="rounded-lg" />}
+                      render={({ field }) => (
+                        <Input {...field} size="large" className="rounded-lg" />
+                      )}
                     />
                   </div>
                   <div className="flex-1">
-                    <label className="block text-sm text-gray-500 mb-1">Country</label>
+                    <label className="block text-sm text-gray-500 mb-1">
+                      Country
+                    </label>
                     <Controller
                       name="shipping.country"
                       control={control}
-                      render={({ field }) => <Input {...field} size="large" className="rounded-lg" />}
+                      render={({ field }) => (
+                        <Input {...field} size="large" className="rounded-lg" />
+                      )}
                     />
                   </div>
                 </div>
@@ -272,41 +312,75 @@ if(response?.data){
                 {paymentMethod === "credit" && (
                   <>
                     <div className="border rounded-2xl p-6 shadow-sm bg-white mt-6">
-                      <h2 className="text-xl font-semibold text-gray-700 mb-6">Payment Details</h2>
+                      <h2 className="text-xl font-semibold text-gray-700 mb-6">
+                        Payment Details
+                      </h2>
                       <div className="space-y-4">
                         <div>
-                          <label className="block text-sm text-gray-500 mb-1">Card Holder Name</label>
+                          <label className="block text-sm text-gray-500 mb-1">
+                            Card Holder Name
+                          </label>
                           <Controller
                             name="payment.cardHolderName"
                             control={control}
-                            render={({ field }) => <Input {...field} size="large" className="rounded-lg" />}
+                            render={({ field }) => (
+                              <Input
+                                {...field}
+                                size="large"
+                                className="rounded-lg"
+                              />
+                            )}
                           />
                         </div>
 
                         <div>
-                          <label className="block text-sm text-gray-500 mb-1">Card Number</label>
+                          <label className="block text-sm text-gray-500 mb-1">
+                            Card Number
+                          </label>
                           <Controller
                             name="payment.cardNumber"
                             control={control}
-                            render={({ field }) => <Input {...field} size="large" className="rounded-lg" />}
+                            render={({ field }) => (
+                              <Input
+                                {...field}
+                                size="large"
+                                className="rounded-lg"
+                              />
+                            )}
                           />
                         </div>
 
                         <div className="grid grid-cols-2 gap-4">
                           <div>
-                            <label className="block text-sm text-gray-500 mb-1">Expire Date</label>
+                            <label className="block text-sm text-gray-500 mb-1">
+                              Expire Date
+                            </label>
                             <Controller
                               name="payment.expireDate"
                               control={control}
-                              render={({ field }) => <Input {...field} size="large" className="rounded-lg" />}
+                              render={({ field }) => (
+                                <Input
+                                  {...field}
+                                  size="large"
+                                  className="rounded-lg"
+                                />
+                              )}
                             />
                           </div>
                           <div>
-                            <label className="block text-sm text-gray-500 mb-1">CVV</label>
+                            <label className="block text-sm text-gray-500 mb-1">
+                              CVV
+                            </label>
                             <Controller
                               name="payment.cvv"
                               control={control}
-                              render={({ field }) => <Input {...field} size="large" className="rounded-lg" />}
+                              render={({ field }) => (
+                                <Input
+                                  {...field}
+                                  size="large"
+                                  className="rounded-lg"
+                                />
+                              )}
                             />
                           </div>
                         </div>
@@ -325,9 +399,11 @@ if(response?.data){
                     }}
                   >
                     <span className="text-sm text-gray-600">
-                      I agree to enroll in Illuminate Kids Book Club and authorize my membership to be on a yearly basis at
-                      $179.88, charged to the card above until I cancel. I understand I can cancel anytime by signing into my
-                      account and clicking cancel.
+                      I agree to enroll in Illuminate Kids Book Club and
+                      authorize my membership to be on a yearly basis at
+                      $179.88, charged to the card above until I cancel. I
+                      understand I can cancel anytime by signing into my account
+                      and clicking cancel.
                     </span>
                   </Checkbox>
 
@@ -343,7 +419,7 @@ if(response?.data){
                   className="w-full mt-6"
                   disabled={!agreed} // Disable submit button if the checkbox is not checked
                 >
-                 Confirm Payment
+                  Confirm Payment
                 </Button>
               </form>
             </div>
@@ -351,7 +427,9 @@ if(response?.data){
 
           {/* Right Column */}
           <div className="flex-1 border rounded-2xl p-6 shadow-sm bg-white">
-            <h2 className="text-xl font-semibold text-gray-700 mb-4">Your Reader&apos;s Membership</h2>
+            <h2 className="text-xl font-semibold text-gray-700 mb-4">
+              Your Reader&apos;s Membership
+            </h2>
 
             <div className="flex justify-center my-6">
               <div className="w-64 h-48 relative">
@@ -367,18 +445,25 @@ if(response?.data){
 
             <div className="flex justify-between items-start mb-4">
               <div>
-                <span className="text-2xl font-semibold text-red-400">${plan?.price?.amount}</span>
+                <span className="text-2xl font-semibold text-red-400">
+                  ${plan?.price?.amount}
+                </span>
                 <span className="text-gray-600 ml-1">per month</span>
               </div>
-              <div className="text-gray-500 text-right">(paid yearly at $179.88)</div>
+              <div className="text-gray-500 text-right">
+                (paid yearly at $179.88)
+              </div>
             </div>
 
             <p className="text-gray-700 mb-6">
-              Borrow or buy. Book prices shown in box. Prices beat Amazon. Check out return box to get a new one.
+              Borrow or buy. Book prices shown in box. Prices beat Amazon. Check
+              out return box to get a new one.
             </p>
 
             <div className="bg-red-50 rounded-xl p-4 flex items-center mb-6">
-              <span className="text-gray-700">Get $60 credit to spend on books</span>
+              <span className="text-gray-700">
+                Get $60 credit to spend on books
+              </span>
               <Tooltip title="Credit will be applied to your account after purchase">
                 <InfoCircleOutlined className="text-gray-400 ml-auto" />
               </Tooltip>
@@ -386,7 +471,9 @@ if(response?.data){
 
             <div className="flex items-center mb-8">
               <div className="flex-1">
-                <p className="text-gray-700">With every plan purchased, we donate a book to a child.</p>
+                <p className="text-gray-700">
+                  With every plan purchased, we donate a book to a child.
+                </p>
               </div>
               <div className="ml-4">
                 <Image src={handShack} alt="icon" />
@@ -398,8 +485,6 @@ if(response?.data){
                 <span className="text-gray-700">Subtotal</span>
                 <span className="font-medium">${plan?.price?.amount}</span>
               </div>
-
-             
             </div>
           </div>
         </div>
@@ -407,9 +492,7 @@ if(response?.data){
 
       {/* button */}
       <div className=" bg-[#EDEBE6] shadow-lg p-5 w-full">
-        <div className="container mx-auto flex justify-center ">
- 
-        </div>
+        <div className="container mx-auto flex justify-center "></div>
       </div>
     </>
   );
