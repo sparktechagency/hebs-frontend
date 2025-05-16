@@ -4,6 +4,10 @@ import { useState } from "react"
 import { ChevronDown } from "lucide-react"
 import Link from "next/link"
 import styles from "@/app/styles.module.css"
+import { useGetBillingQuery } from "@/redux/features/survey/surveyApi"
+import { useAppSelector } from "@/redux/hooks"
+import { selectCurrentUser } from "@/redux/features/auth/authSlice"
+import LoadingPage from "@/app/loading"
 interface BillingItem {
   id: string
   status: "PAID" | "INVOICE"
@@ -14,8 +18,14 @@ interface BillingItem {
 }
 
 const BillingHistory=()=> {
+  const user = useAppSelector(selectCurrentUser)
+  console.log(user);
+  const {data:billing,isLoading}=useGetBillingQuery(user?.userId)
   const [expandedItems, setExpandedItems] = useState<Record<string, boolean>>({})
-
+if(isLoading){
+  return <LoadingPage/>
+}
+console.log("billing",billing);
   const billingData: BillingItem[] = [
     {
       id: "1",

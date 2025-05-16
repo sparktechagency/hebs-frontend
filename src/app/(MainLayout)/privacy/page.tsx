@@ -2,15 +2,22 @@
 import FeatureBook from "@/app/component/Home/FeatureBook";
 import LoadingPage from "@/app/loading";
 import { useGetPrivacyPolicyQuery } from "@/redux/features/others/othersApi";
+import { useEffect } from "react";
 
 export default function PrivacyPolicy() {
-  const { data: privacyData, isLoading } = useGetPrivacyPolicyQuery(undefined);
+  const { data: privacyData, isLoading,refetch } = useGetPrivacyPolicyQuery(undefined);
   console.log("privacy data", privacyData);
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      refetch();
+    }, 5000); // Refetch every 5 seconds
+
+    return () => clearInterval(interval); // Cleanup the interval when the component unmounts
+  }, [refetch]);
   if (isLoading) {
     return <LoadingPage />;
   }
-
   return (
     <>
       <div className="min-h-screen text-black">
@@ -29,3 +36,11 @@ export default function PrivacyPolicy() {
     </>
   );
 }
+
+
+
+
+
+
+
+
