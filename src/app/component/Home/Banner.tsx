@@ -1,13 +1,26 @@
-
+'use client'
 import Image from "next/image";
 import bannerImg from "@/assets/BannerImage.png";
 import styles from "@/app/styles.module.css";
-import Link from "next/link";
 import frame1 from "@/assets/tinyMuminsFrame1.png"
+import { useAppSelector } from "@/redux/hooks";
+import { IsSurveyComplete } from "@/redux/features/others/surveyCompletedSlice";
+import { message } from "antd";
+import { useRouter } from "next/navigation";
 
 const Banner = () => {
   // bg-[#FDFBDF]
-
+  const router = useRouter();
+const isSurveyComplete = useAppSelector(IsSurveyComplete)
+console.log("IsSurveyComplete",isSurveyComplete?.isCompleted);
+const isSurveyCompleted=isSurveyComplete?.isCompleted
+const handleSurvey=()=>{
+  if(isSurveyCompleted){
+    message.success("You have already done our survey.Thank you for stay with us")
+  }else{
+    router.push("/name")
+  }
+}
   return (
 <div className="w-full  px-4 py-20 lg:py-28"
   style={{ backgroundImage: `url(${frame1.src})` }}   
@@ -26,14 +39,14 @@ const Banner = () => {
             <p className={`text-xm sm:text-sm md:text-base lg:text-lg xl:text-xl text-center md:text-left max-w-md lg:max-w-lg xl:max-w-xl ${styles.fontPoppins}`}>
               Help your readers grow with a personalized book selection curated monthly by our team of experts and shipped to your door.
             </p>
-            <Link href="/name">
+            {/* <Link href="/name"> */}
              <div className="flex hidden  md:block  justify-center mt-1">
         
-             <button className={` tracking-widest  rounded-full bg-[#F37975] p-2 md:p-3  text-base sm:text-lg md:text-xl hover:bg-[#e57373] text-white ${styles.fontPoppins}`}>
+             <button onClick={()=>handleSurvey()}  className={` tracking-widest  rounded-full bg-[#F37975] p-2 md:p-3  text-base sm:text-lg md:text-xl hover:bg-[#e57373] text-white ${styles.fontPoppins}`}>
                 START TODAY
               </button>
              </div>
-            </Link>
+            {/* </Link> */}
           </div>
           
           {/* Right Content - Book Covers */}

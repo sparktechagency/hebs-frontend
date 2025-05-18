@@ -1,13 +1,13 @@
 "use client";
 
-import {  Tooltip, Button, message } from "antd";
-import { InfoCircleOutlined, } from "@ant-design/icons";
+import { Tooltip, Button, message } from "antd";
+import { InfoCircleOutlined } from "@ant-design/icons";
 import Image from "next/image";
 import packaging from "@/assets/tinnymuslimBox.png";
 
 import handShack from "@/assets/handshake-light-skin-tone_svgrepo.com.png";
 
-import { useAppSelector } from "@/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 
 import { selectCurrentUser } from "@/redux/features/auth/authSlice";
 
@@ -17,8 +17,7 @@ import { selectCurrentPlan } from "@/redux/features/subscription/subscriptionSli
 import { useCreateSubscriptionMutation } from "@/redux/features/subscription/subscriptionApi";
 import { useCreateServeyMutation } from "@/redux/features/survey/surveyApi";
 import { selectCurrentSurvey } from "@/redux/features/survey/surveySlice";
-
-
+import { setSurveyComplete } from "@/redux/features/others/surveyCompletedSlice";
 
 export default function SubscriptionPurchasePage() {
   // const [confirmPayment,setConfirmPayment]=useState(false)
@@ -27,7 +26,7 @@ export default function SubscriptionPurchasePage() {
   // const [paymentMethod, setPaymentMethod] = useState("credit");
   // const [agreed, setAgreed] = useState(false);
   const user = useAppSelector(selectCurrentUser);
-
+  const dispatch = useAppDispatch();
 
   const router = useRouter();
   // console.log("subTotal=>",subTotal);
@@ -37,39 +36,49 @@ export default function SubscriptionPurchasePage() {
   // console.log("survey from redux",surveyData);
   // Initialize React Hook Form
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-//   const {
-//     control,
-//     handleSubmit,
+  //   const {
+  //     control,
+  //     handleSubmit,
 
-//     formState: { errors },
-//   } = useForm<FormData>({
-// });
+  //     formState: { errors },
+  //   } = useForm<FormData>({
+  // });
   const plan = useAppSelector(selectCurrentPlan);
-console.log("current plan get purchase id...=>",plan);
+  console.log("current plan get purchase id...=>", plan);
 
-const handlePlanPurchase=async()=>{
-  const orderData={
-    userId:user?.userId,
-    priceId:plan?.priceId
-  }
+  const handlePlanPurchase = async () => {
+    const orderData = {
+      userId: user?.userId,
+      priceId: plan?.priceId,
+    };
     try {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const res = (await createSubscription(orderData)) as any;
       console.log("response===>", res);
       if (res?.data) {
         message.success(res?.data?.message);
+        dispatch(setSurveyComplete(true));
+
         router.push(res?.data?.data?.checkoutUrl);
       } else {
-        message.error(res?.error?.data?.error || "An unknown error occurred");
+        message.error(
+          res?.error?.data?.message || "An unknown error occurred for purchase"
+        );
       }
-
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      console.log(error);
+      message.error(error);
+    }
+    try {
       //   post survey
       const response = await createSurvey(surveyData);
       if (response?.data) {
         message.success(response?.data?.message);
-        
       } else {
-        message.error(res?.error?.data?.error || "An unknown error occurred");
+        message.error(
+          response?.data?.error || "An unknown error occurred for survey"
+        );
       }
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -77,14 +86,10 @@ const handlePlanPurchase=async()=>{
       console.log(error);
       message.error(error);
     }
-}
+  };
 
   // Handle form submission
   // const onSubmit: SubmitHandler<FormData> = async (data) => {
-
-
-
-
 
   // };
   // const today = new Date();
@@ -436,15 +441,15 @@ const handlePlanPurchase=async()=>{
                 <span className="font-medium">${plan?.price?.amount}</span>
               </div>
             </div>
-            
-                <Button
-                  type="primary"
-                  htmlType="submit"
-                  className="flex mx-auto mt-6"
-                  onClick={()=>handlePlanPurchase()}
-                >
-                  Confirm Payment
-                </Button>
+
+            <Button
+              type="primary"
+              htmlType="submit"
+              className="flex mx-auto mt-6"
+              onClick={() => handlePlanPurchase()}
+            >
+              Confirm Payment
+            </Button>
           </div>
         </div>
       </div>
