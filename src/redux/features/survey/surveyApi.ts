@@ -8,6 +8,7 @@ const surveyApi = baseApi.injectEndpoints({
         method: "POST",
         body: info,
       }),
+        invalidatesTags: ['survey'],
     }),
     getCollection: builder.query({
       query: () => ({
@@ -15,6 +16,7 @@ const surveyApi = baseApi.injectEndpoints({
         method: "GET",
         // body: info,
       }),
+        providesTags: ["survey"],
     }),
     getSubscriptions: builder.query({
       query: () => ({
@@ -22,6 +24,7 @@ const surveyApi = baseApi.injectEndpoints({
         method: "GET",
         // body: info,
       }),
+        providesTags: ["subscription"],
     }),
     getRecommendation: builder.query({
       query: (dob) => ({

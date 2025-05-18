@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 
-import { useState } from "react"
+import {  useState } from "react"
 import { Radio } from "antd"
 import {  LeftOutlined, RightOutlined } from "@ant-design/icons"
 import Image from "next/image"
@@ -9,23 +9,53 @@ import packaging from "@/assets/tinnymuslimBox.png";
 import Link from "next/link"
 import { useGetSubscriptionsQuery } from "@/redux/features/survey/surveyApi"
 import { useAppDispatch } from "@/redux/hooks"
-import { resetPlanData, subscriptionPlan } from "@/redux/features/subscription/subscriptionSlice"
+import { subscriptionPlan } from "@/redux/features/subscription/subscriptionSlice"
+export interface Plan {
+  _id: string;
+  name: string;
+  priceId: string;
+  type: string;
+  createdAt: string;
+  features: string[];
+  price: {
+    amount: number;
+    currency: string;
+    priceId: string;
+    type: string;
+  };
+
+  updatedAt: string;
+  __v: number;
+}
+
+
 
 export default function SubscriptionPlanPage() {
   const [selectedPlan, setSelectedPlan] = useState("")
+  const [selectedPlanData, setSelectedPlanData] = useState<Plan | null>(null);
+  // console.log("current plan get purchase plan=>",selectedPlanData);
   const [subscribed, setSubscribed] = useState(false)
 const {data:plans}=useGetSubscriptionsQuery(undefined)
-// console.log("plans>>>",plans?.data);
+console.log("plans>>>",plans?.data);
 // Find the first plan where the name matches selectedPlan
-const selectedPlanObject = plans?.data?.find((plan: any) => plan.name === selectedPlan);
+const selectedPlanObject = plans?.data?.find((plan: any) => plan._id === selectedPlanData?._id);
+  // console.log("current plan get purchase plan=>",selectedPlanObject);
 const dispatch = useAppDispatch();
 // console.log("Selected plan object>>>", selectedPlanObject);
 // handle plan submit
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     refetch();
+  //   }, 5000); 
 
+  //   return () => clearInterval(interval);
+  // }, [refetch]);
 const handleSubmitPlans=()=>{
-  dispatch(resetPlanData())
+  // dispatch(resetPlanData())
   dispatch(subscriptionPlan(selectedPlanObject))
 }
+
+
   return (
 
     <>
@@ -40,12 +70,13 @@ const handleSubmitPlans=()=>{
         <div className="space-y-6">
           {/* Monthly Plan */}
           <div
-            className={`border rounded-3xl p-6 shadow-sm relative ${selectedPlan === plan.name ? "border-blue-300" : "border-gray-200"}`}
+            className={`border rounded-3xl p-6 shadow-sm relative ${selectedPlan === plan._id ? "border-blue-300" : "border-gray-200"}`}
           >
             <Radio
-              checked={selectedPlan === plan.name}
+              checked={selectedPlan === plan._id}
               onChange={() => {
-                setSelectedPlan(plan.name);
+                setSelectedPlan(plan._id);
+                setSelectedPlanData(plan)
                 setSubscribed(true);
               }}
               className="absolute top-6 right-6"

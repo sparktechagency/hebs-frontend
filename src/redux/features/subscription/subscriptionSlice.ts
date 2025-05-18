@@ -8,6 +8,7 @@ interface Price {
   interface TPlan {
     name: string;
     price: Price;
+    priceId:string,
     type: string;
     features: string[];
     _id?:string
@@ -17,6 +18,7 @@ interface Price {
   const initialState: TPlan = {
     name: "",           
     price: { amount: 0 }, 
+    priceId:"",
     type: "",           
     features: [],       
   };

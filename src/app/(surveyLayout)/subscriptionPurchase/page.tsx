@@ -1,16 +1,12 @@
 "use client";
 
-import { useState } from "react";
-import { Input, Radio, Checkbox, Tooltip, Button, message } from "antd";
-import { InfoCircleOutlined, LockOutlined } from "@ant-design/icons";
+import {  Tooltip, Button, message } from "antd";
+import { InfoCircleOutlined, } from "@ant-design/icons";
 import Image from "next/image";
 import packaging from "@/assets/tinnymuslimBox.png";
-import paypal from "@/assets/paypal.png";
-import visa from "@/assets/visa-4-logo_svgrepo.com.png";
-import master from "@/assets/master-card_svgrepo.com.png";
+
 import handShack from "@/assets/handshake-light-skin-tone_svgrepo.com.png";
 
-import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { useAppSelector } from "@/redux/hooks";
 
 import { selectCurrentUser } from "@/redux/features/auth/authSlice";
@@ -22,35 +18,16 @@ import { useCreateSubscriptionMutation } from "@/redux/features/subscription/sub
 import { useCreateServeyMutation } from "@/redux/features/survey/surveyApi";
 import { selectCurrentSurvey } from "@/redux/features/survey/surveySlice";
 
-// Define TypeScript types for form data
-interface Shipping {
-  street: string;
-  city: string;
-  state: string;
-  zipCode: string;
-  country: string;
-}
 
-interface Payment {
-  cardHolderName: string;
-  cardNumber: string;
-  expireDate: string;
-  cvv: string;
-}
-
-interface FormData {
-  shipping: Shipping;
-  payment: Payment;
-  // agreed: boolean;
-}
 
 export default function SubscriptionPurchasePage() {
   // const [confirmPayment,setConfirmPayment]=useState(false)
   const [createSubscription] = useCreateSubscriptionMutation();
   const [createSurvey] = useCreateServeyMutation();
-  const [paymentMethod, setPaymentMethod] = useState("credit");
-  const [agreed, setAgreed] = useState(false);
+  // const [paymentMethod, setPaymentMethod] = useState("credit");
+  // const [agreed, setAgreed] = useState(false);
   const user = useAppSelector(selectCurrentUser);
+
 
   const router = useRouter();
   // console.log("subTotal=>",subTotal);
@@ -60,63 +37,28 @@ export default function SubscriptionPurchasePage() {
   // console.log("survey from redux",surveyData);
   // Initialize React Hook Form
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const {
-    control,
-    handleSubmit,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    formState: { errors },
-  } = useForm<FormData>({
-    defaultValues: {
-      shipping: {
-        street: "123 Elm Street",
-        city: "Los Angeles",
-        state: "California",
-        zipCode: "90001",
-        country: "USA",
-      },
-      payment: {
-        cardHolderName: "Heba",
-        cardNumber: "1867 8362 3828 3672 3839",
-        expireDate: "06/29",
-        cvv: "729",
-      },
-      // agreed: agreed,
-    },
-  });
+//   const {
+//     control,
+//     handleSubmit,
+
+//     formState: { errors },
+//   } = useForm<FormData>({
+// });
   const plan = useAppSelector(selectCurrentPlan);
-  //   console.log("plan------------->",plan);
+console.log("current plan get purchase id...=>",plan);
 
-  // Handle form submission
-  const onSubmit: SubmitHandler<FormData> = async (data) => {
-    // console.log("Form Data Submitted:", data);
-
-    // Prepare the order data
-    const orderData = {
-      user: user?.userId,
-      subscription: {
-        id: plan?._id,
-        type: plan?.type,
-      },
-      paymentType:"card",
-       paymentStatus: "paid",
-      paymentSource: {
-        number: data?.payment?.cardNumber,
-        //-------------TODO--------------------------------
-        type: data?.payment?.cardNumber ? "visa" : "",
-        tnxId: "txn_" + new Date().getTime(),
-            isSaved: true
-      },
-    };
-console.log("order data",orderData);
-    // console.log("order data modified=>", orderData);
-
+const handlePlanPurchase=async()=>{
+  const orderData={
+    userId:user?.userId,
+    priceId:plan?.priceId
+  }
     try {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const res = (await createSubscription(orderData)) as any;
       console.log("response===>", res);
       if (res?.data) {
         message.success(res?.data?.message);
-        router.push("/my-profile");
+        router.push(res?.data?.data?.checkoutUrl);
       } else {
         message.error(res?.error?.data?.error || "An unknown error occurred");
       }
@@ -135,23 +77,32 @@ console.log("order data",orderData);
       console.log(error);
       message.error(error);
     }
-  };
-  const today = new Date();
-  const options: Intl.DateTimeFormatOptions = { month: "long", day: "numeric" };
+}
 
-  const formattedDate = today.toLocaleDateString("en-US", options);
+  // Handle form submission
+  // const onSubmit: SubmitHandler<FormData> = async (data) => {
+
+
+
+
+
+  // };
+  // const today = new Date();
+  // const options: Intl.DateTimeFormatOptions = { month: "long", day: "numeric" };
+
+  // const formattedDate = today.toLocaleDateString("en-US", options);
 
   return (
     <>
-      <div className="max-w-6xl mx-auto p-6">
+      <div className="max-w-2xl mx-auto p-8">
         <h1 className="text-3xl font-bold text-center mb-8">
           Purchase your Plan
         </h1>
 
         <div className="flex gap-6">
           {/* Left Column */}
-          <div className="flex-1 space-y-6">
-            {/* Order notification */}
+          {/* <div className="flex-1 space-y-6">
+   
             <div className="border rounded-2xl p-6 shadow-sm flex items-center justify-between bg-white">
               <div>
                 <p className="text-gray-700 text-lg">
@@ -170,7 +121,6 @@ console.log("order data",orderData);
               </div>
             </div>
 
-            {/* Payment Methods */}
             <div className="border rounded-2xl p-6 shadow-sm bg-white">
               <h2 className="text-xl font-semibold text-gray-700 mb-6">
                 Payment Methods
@@ -234,7 +184,7 @@ console.log("order data",orderData);
               </div>
             </div>
 
-            {/* Shipping Address Form */}
+        
             <div className="border rounded-2xl p-6 shadow-sm bg-white">
               <h2 className="text-xl font-semibold text-gray-700 mb-6">
                 Shipping Address
@@ -308,7 +258,7 @@ console.log("order data",orderData);
                   </div>
                 </div>
 
-                {/* Payment Details (only for Credit card method) */}
+       
                 {paymentMethod === "credit" && (
                   <>
                     <div className="border rounded-2xl p-6 shadow-sm bg-white mt-6">
@@ -391,7 +341,7 @@ console.log("order data",orderData);
 
                 <div className="space-y-4">
                   <Checkbox
-                    // checked={agreed}
+         
                     checked={agreed}
                     onChange={(e) => {
                       console.log(e.target.checked);
@@ -417,13 +367,13 @@ console.log("order data",orderData);
                   type="primary"
                   htmlType="submit"
                   className="w-full mt-6"
-                  disabled={!agreed} // Disable submit button if the checkbox is not checked
+                  disabled={!agreed}
                 >
                   Confirm Payment
                 </Button>
               </form>
             </div>
-          </div>
+          </div> */}
 
           {/* Right Column */}
           <div className="flex-1 border rounded-2xl p-6 shadow-sm bg-white">
@@ -486,6 +436,15 @@ console.log("order data",orderData);
                 <span className="font-medium">${plan?.price?.amount}</span>
               </div>
             </div>
+            
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  className="flex mx-auto mt-6"
+                  onClick={()=>handlePlanPurchase()}
+                >
+                  Confirm Payment
+                </Button>
           </div>
         </div>
       </div>
