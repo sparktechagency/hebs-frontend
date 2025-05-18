@@ -3,24 +3,44 @@ import Image from "next/image";
 import bannerImg from "@/assets/BannerImage.png";
 import styles from "@/app/styles.module.css";
 import frame1 from "@/assets/tinyMuminsFrame1.png"
-import { useAppSelector } from "@/redux/hooks";
-import { IsSurveyComplete } from "@/redux/features/others/surveyCompletedSlice";
+
 import { message } from "antd";
 import { useRouter } from "next/navigation";
+import { useAppSelector } from "@/redux/hooks";
+import { selectCurrentUser } from "@/redux/features/auth/authSlice";
+import { selectCurrentPlan } from "@/redux/features/subscription/subscriptionSlice";
+import { useCreateSubscriptionMutation } from "@/redux/features/subscription/subscriptionApi";
 
 const Banner = () => {
   // bg-[#FDFBDF]
+    const [createSubscription] = useCreateSubscriptionMutation();
   const router = useRouter();
-const isSurveyComplete = useAppSelector(IsSurveyComplete)
-console.log("IsSurveyComplete",isSurveyComplete?.isCompleted);
-const isSurveyCompleted=isSurveyComplete?.isCompleted
-const handleSurvey=()=>{
-  if(isSurveyCompleted){
-    message.success("You have already done our survey.Thank you for stay with us")
-  }else{
+  const user = useAppSelector(selectCurrentUser);
+    const plan = useAppSelector(selectCurrentPlan);
+const handleSurvey=async()=>{
+   const orderData = {
+      userId: user?.userId,
+      priceId: plan?.priceId,
+    };
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const res = (await createSubscription(orderData)) as any;
+      console.log("response===>", res);
+      if (res?.error) {
+        message.success("You have already done our survey.Thank you for stay with us")
+   
+      }else{
     router.push("/name")
   }
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      console.log(error);
+      message.error(error);
+    }
+
 }
+ 
+   
   return (
 <div className="w-full  px-4 py-20 lg:py-28"
   style={{ backgroundImage: `url(${frame1.src})` }}   

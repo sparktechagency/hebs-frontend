@@ -3,7 +3,7 @@ import authReducer from "./features/auth/authSlice"
 import cartSlice from "./features/cart/cartSlice";
 import surveyReducer from "./features/survey/surveySlice"
 import planReducer from "./features/subscription/subscriptionSlice"
-import isSurveyCompleteReducer from "./features/others/surveyCompletedSlice"
+
 import { baseApi } from "./api/baseApi";
 import storage from "redux-persist/lib/storage";
 import { persistReducer,FLUSH,
@@ -30,15 +30,12 @@ const persistConfigCart = {
     key: "plan",
     storage,
   };
-  const persistConfigIsSurveyComplete = {
-    key: "IsSurveyComplete",
-    storage,
-  };
+
 const persistedAuthReducer=persistReducer(persistConfig,authReducer)
 const persistedCartReducer = persistReducer(persistConfigCart, cartSlice);
 const persistedSurveyReducer = persistReducer(persistConfigSurvey, surveyReducer);
 const persistedPlanReducer = persistReducer(persistConfigPlan, planReducer);
-const persistedIsSurveyCompleteReducer = persistReducer(persistConfigIsSurveyComplete, isSurveyCompleteReducer);
+
 export const makeStore = () =>{
   return configureStore({
         reducer:{
@@ -47,7 +44,7 @@ export const makeStore = () =>{
         survey: persistedSurveyReducer,
     cart: persistedCartReducer,
     plan:persistedPlanReducer,
-    IsSurveyComplete:persistedIsSurveyCompleteReducer
+
     },
     middleware:getDefaultMiddleware=>getDefaultMiddleware( {serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],

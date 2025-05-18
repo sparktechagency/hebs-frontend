@@ -7,7 +7,7 @@ import packaging from "@/assets/tinnymuslimBox.png";
 
 import handShack from "@/assets/handshake-light-skin-tone_svgrepo.com.png";
 
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import {  useAppSelector } from "@/redux/hooks";
 
 import { selectCurrentUser } from "@/redux/features/auth/authSlice";
 
@@ -17,7 +17,7 @@ import { selectCurrentPlan } from "@/redux/features/subscription/subscriptionSli
 import { useCreateSubscriptionMutation } from "@/redux/features/subscription/subscriptionApi";
 import { useCreateServeyMutation } from "@/redux/features/survey/surveyApi";
 import { selectCurrentSurvey } from "@/redux/features/survey/surveySlice";
-import { setSurveyComplete } from "@/redux/features/others/surveyCompletedSlice";
+
 
 export default function SubscriptionPurchasePage() {
   // const [confirmPayment,setConfirmPayment]=useState(false)
@@ -26,7 +26,7 @@ export default function SubscriptionPurchasePage() {
   // const [paymentMethod, setPaymentMethod] = useState("credit");
   // const [agreed, setAgreed] = useState(false);
   const user = useAppSelector(selectCurrentUser);
-  const dispatch = useAppDispatch();
+
 
   const router = useRouter();
   // console.log("subTotal=>",subTotal);
@@ -57,7 +57,7 @@ export default function SubscriptionPurchasePage() {
       console.log("response===>", res);
       if (res?.data) {
         message.success(res?.data?.message);
-        dispatch(setSurveyComplete(true));
+   
 
         router.push(res?.data?.data?.checkoutUrl);
       } else {
