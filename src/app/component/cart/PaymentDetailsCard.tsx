@@ -2,7 +2,7 @@
 "use client";
 
 import { selectCurrentUser } from "@/redux/features/auth/authSlice";
-import { finalPriceAfterDiscountSelector, subTotalSelector, totalProductsSelector, totalQuantitySelector } from "@/redux/features/cart/cartSlice";
+import { subTotalSelector, totalActualPriceSelector, totalDiscountSelector, totalProductsSelector, totalQuantitySelector } from "@/redux/features/cart/cartSlice";
 import { useAppSelector } from "@/redux/hooks";
 import { currencyFormatter } from "@/utils/currencyFormatter";
 import { message } from "antd";
@@ -16,9 +16,11 @@ const PaymentDetailsCard = () => {
 const router = useRouter()
 
         const subTotal = useAppSelector(subTotalSelector);
-        const totalDiscount= useAppSelector(finalPriceAfterDiscountSelector)
+   const totalDiscount = useAppSelector(totalDiscountSelector)
+
         const totalProducts= useAppSelector(totalProductsSelector)
         const totalQuantity=useAppSelector(totalQuantitySelector)
+        const totalActualPrice=useAppSelector(totalActualPriceSelector)
         const handleOrder = async () => {
             // const orderLoading = message.loading("Order is being placed");
             try {
@@ -47,6 +49,10 @@ const router = useRouter()
                 <div className="flex justify-between">
                   <p className="text-gray-500 ">Total Quantity</p>
                   <p className="font-semibold">{totalQuantity}</p>
+                </div>
+                <div className="flex justify-between">
+                  <p className="text-gray-500 ">Total Price</p>
+                  <p className="font-semibold">{currencyFormatter(totalActualPrice)}</p>
                 </div>
                 <div className="flex justify-between">
                   <p className="text-gray-500 ">Total Discount</p>
