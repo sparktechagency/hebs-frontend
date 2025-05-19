@@ -18,14 +18,17 @@ import {
   finalPriceAfterDiscountSelector,
   orderedProductsSelector,
   subTotalSelector,
+  totalActualPriceSelector,
+  totalDiscountSelector,
   totalProductsSelector,
   totalQuantitySelector,
 } from "@/redux/features/cart/cartSlice";
 import { selectCurrentUser } from "@/redux/features/auth/authSlice";
-import { usePlaceOrderMutation } from "@/redux/features/cart/cartApi";
+import { usePlaceOrderMutation, useShippingInfoMutation } from "@/redux/features/cart/cartApi";
 import { useRouter } from "next/navigation";
 import { selectCurrentPlan } from "@/redux/features/subscription/subscriptionSlice";
 import PaymentDetailsCard from "@/app/component/cart/PaymentDetailsCard";
+import { currencyFormatter } from "@/utils/currencyFormatter";
 
 // Define TypeScript types for form data
 interface Shipping {
@@ -52,77 +55,65 @@ interface FormData {
 export default function PaymentPage() {
   // const [confirmPayment,setConfirmPayment]=useState(false)
   const subTotal = useAppSelector(subTotalSelector);
-  const [placeOrder] = usePlaceOrderMutation();
+  // const [placeOrder] = usePlaceOrderMutation();
+  const [shippingInfo]= useShippingInfoMutation()
   const [paymentMethod, setPaymentMethod] = useState("credit");
   const [agreed, setAgreed] = useState(false);
   const user = useAppSelector(selectCurrentUser);
-
+const [rates,setRates]=useState([]);
+console.log("rates===>",rates);
   const router = useRouter();
   const orderedProducts = useAppSelector(orderedProductsSelector);
+const KG_TO_OZ = 35.274;
+// Calculate total weight in ounces
+const totalWeightOz = orderedProducts.reduce((total, product) => {
+  // product.weight is in kg, convert to oz and multiply by quantity
+  return total + product.weight * KG_TO_OZ * product.orderQuantity;
+}, 0);
 
+console.log("Total Weight in ounces (oz):", totalWeightOz.toFixed(2));
   const {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormData>({
-    defaultValues: {
-      shipping: {
-        street: "123 Elm Street",
-        city: "Los Angeles",
-        state: "California",
-        zipCode: "90001",
-        country: "USA",
-      },
-      payment: {
-        cardHolderName: "Heba",
-        cardNumber: "1867 8362 3828 3672 3839",
-        expireDate: "06/29",
-        cvv: "729",
-      },
-    },
-  });
+  } = useForm<FormData>(
 
-  const totalDiscount= useAppSelector(finalPriceAfterDiscountSelector)
-  const totalProducts= useAppSelector(totalProductsSelector)
-  const totalQuantity=useAppSelector(totalQuantitySelector)
-  const items = orderedProducts.map((product) => ({
-    itemId: product._id,
-    quantity: product.orderQuantity,
-  }));
+);
+
+   const totalDiscount = useAppSelector(totalDiscountSelector)
+       const totalProducts= useAppSelector(totalProductsSelector)
+        const totalQuantity=useAppSelector(totalQuantitySelector)
+        const totalActualPrice=useAppSelector(totalActualPriceSelector)
+
+
 
   // Handle form submission
   const onSubmit: SubmitHandler<FormData> = async (data) => {
-    // console.log("Form Data Submitted:", data);
+    console.log("Form Data Submitted:", data);
 
     // Prepare the order data
     const orderData = {
-      user: {
-        userId: user?.userId,
-        name: data.payment.cardHolderName,
-        email: user?.user?.email,
-      },
-      shippingAddress: data.shipping,
-      paymentInfo: {
-        type: "card",
-        status: "paid",
-        tnxId: "txn_" + new Date().getTime(),
-      },
-      total: {
-        amount: subTotal,
-        currency: "USD",
-      },
-
-      items,
+toAddress:{
+     street: data?.shipping?.street,
+        city: data?.shipping?.city,
+        state: data?.shipping?.state,
+        zip:data?.shipping?.zipCode,
+        country: data?.shipping?.country
+},
+    parcelDetails: {
+        weight:totalWeightOz.toFixed(2) 
+    }
     };
 
-    // console.log("order data modified=>", orderData);
+    console.log("order data modified=>", orderData);
 
     try {
-      const res = (await placeOrder(orderData)) as any;
+      const res = (await shippingInfo(orderData)) as any;
       console.log("response===>", res);
       if (res?.data) {
         message.success(res?.data?.message);
-        router.push("/my-profile");
+        setRates(res?.data?.data?.rates)
+        // router.push("/my-profile");
       } else {
         message.error(res?.error?.data?.error || "An unknown error occurred");
       }
@@ -131,20 +122,7 @@ export default function PaymentPage() {
       message.error(error);
     }
   };
-  // handle purchase
-  // const handlePurchase = async () => {
 
-  //   try {
-  //     if (!user) {
-  //       router.push("/login");
-  //       throw new Error("Please login first.");
-  //     }
-  //   router.push("/payment")
-
-  //   } catch (error: any) {
-  //     message.error(error.message);
-  //   }
-  // };
   return (
     <>
       <div className="max-w-6xl mx-auto p-6">
@@ -310,88 +288,9 @@ export default function PaymentPage() {
                   </div>
                 </div>
 
-                {/* Payment Details (only for Credit card method) */}
-                {paymentMethod === "credit" && (
-                  <>
-                    <div className="border rounded-2xl p-6 shadow-sm bg-white mt-6">
-                      <h2 className="text-xl font-semibold text-gray-700 mb-6">
-                        Payment Details
-                      </h2>
-                      <div className="space-y-4">
-                        <div>
-                          <label className="block text-sm text-gray-500 mb-1">
-                            Card Holder Name
-                          </label>
-                          <Controller
-                            name="payment.cardHolderName"
-                            control={control}
-                            render={({ field }) => (
-                              <Input
-                                {...field}
-                                size="large"
-                                className="rounded-lg"
-                              />
-                            )}
-                          />
-                        </div>
+               
 
-                        <div>
-                          <label className="block text-sm text-gray-500 mb-1">
-                            Card Number
-                          </label>
-                          <Controller
-                            name="payment.cardNumber"
-                            control={control}
-                            render={({ field }) => (
-                              <Input
-                                {...field}
-                                size="large"
-                                className="rounded-lg"
-                              />
-                            )}
-                          />
-                        </div>
-
-                        <div className="grid grid-cols-2 gap-4">
-                          <div>
-                            <label className="block text-sm text-gray-500 mb-1">
-                              Expire Date
-                            </label>
-                            <Controller
-                              name="payment.expireDate"
-                              control={control}
-                              render={({ field }) => (
-                                <Input
-                                  {...field}
-                                  size="large"
-                                  className="rounded-lg"
-                                />
-                              )}
-                            />
-                          </div>
-                          <div>
-                            <label className="block text-sm text-gray-500 mb-1">
-                              CVV
-                            </label>
-                            <Controller
-                              name="payment.cvv"
-                              control={control}
-                              render={({ field }) => (
-                                <Input
-                                  {...field}
-                                  size="large"
-                                  className="rounded-lg"
-                                />
-                              )}
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </>
-                )}
-
-                <div className="space-y-4">
+                <div className="space-y-4">  
                   <Checkbox
                     // checked={agreed}
                     checked={agreed}
@@ -445,47 +344,36 @@ export default function PaymentPage() {
                   <p className="font-semibold">{totalQuantity}</p>
                 </div>
                 <div className="flex justify-between">
+                  <p className="text-gray-500 ">Total Price</p>
+                  <p className="font-semibold">{currencyFormatter(totalActualPrice)}</p>
+                </div>
+                <div className="flex justify-between">
                   <p className="text-gray-500 ">Total Discount</p>
-                  <p className="font-semibold">${totalDiscount}</p>
+                  <p className="font-semibold">{currencyFormatter(totalDiscount)}</p>
                 </div>
                 <div className="flex justify-between">
                   <p className="text-gray-500 ">Subtotal</p>
-                  <p className="font-semibold">${subTotal}</p>
+                  <p className="font-semibold">{currencyFormatter(subTotal)}</p>
                 </div>
               </div>
   
-              {/* <button
-                onClick={handlePurchase}
-           className="w-full bg-[#F37975] md:px-8 p-4  md:h-12 flex items-center justify-center text-[#ffffff] hover:bg-red-500 border-none mb-4 my-5"
-              >
-                Proceed Payment
-              </button> */}
         </div>
-            </div>
+ <div className="mt-5">
+  {rates && rates.length > 0 ? (
+    rates.map((rate, idx) => (
+      <p key={idx} style={{ color: "blue" }}>
+        {`Service: ${rate?.service}, Carrier: ${rate?.carrier}, Rate: ${rate?.rate}`}
+      </p>
+    ))
+  ) : (
+    <p>No rates available</p>
+  )}
+</div>      </div>
           </div>
         </div>
       </div>
 
-      {/* button */}
-      <div className=" bg-[#EDEBE6] shadow-lg p-5 w-full">
-        <div className="container mx-auto flex justify-center ">
-          {/* Back Button */}
-          {/* <Link href="/sucess">
-            <button className="border border-black text-black px-6 py-2 rounded-full inline-flex items-center justify-center space-x-2 hover:bg-gray-100 active:bg-gray-200 transition">
-              <LeftOutlined />
-              <span className="font-semibold">Skip</span>
-            </button>
-          </Link> */}
-
-          {/* Next Button */}
-          {/* <Link href={"/my-profile"}>
-            <button disabled={!confirmPayment} className="border border-black text-black px-6 py-2 rounded-full inline-flex items-center justify-center space-x-2 hover:bg-gray-100 active:bg-gray-200 transition disabled:opacity-50">
-              <span className="font-semibold">Continue</span>
-              <RightOutlined />
-            </button>
-          </Link> */}
-        </div>
-      </div>
+ 
     </>
   );
 }

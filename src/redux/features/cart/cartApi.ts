@@ -10,9 +10,17 @@ const cartApi = baseApi.injectEndpoints({
       }),
        invalidatesTags: ['order'],
     }),
+    shippingInfo: builder.mutation({
+      query: (info) => ({
+        url: "/order/get-shipping-rates",
+        method: "POST",
+        body: info,
+      }),
+       invalidatesTags: ['order'],
+    }),
    
 
   }),
 });   
 
-export const {usePlaceOrderMutation } = cartApi;
+export const {usePlaceOrderMutation,useShippingInfoMutation } = cartApi;
