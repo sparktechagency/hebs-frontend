@@ -3,8 +3,8 @@
 "use client";
 
 import { useState } from "react";
-import { Input, Radio, Checkbox, Tooltip, Button, message } from "antd";
-import { InfoCircleOutlined, LockOutlined } from "@ant-design/icons";
+import { Input, Radio, Checkbox, Tooltip, Button, message, Menu, Dropdown } from "antd";
+import { DownOutlined, InfoCircleOutlined, LockOutlined } from "@ant-design/icons";
 import Image from "next/image";
 import packaging from "@/assets/tinnymuslimBox.png";
 import paypal from "@/assets/paypal.png";
@@ -122,7 +122,19 @@ toAddress:{
       message.error(error);
     }
   };
-
+  const menu = (
+    <Menu>
+      {rates && rates.length > 0 ? (
+        rates.map((rate:any, idx) => (
+          <Menu.Item key={idx} style={{ color: 'blue' }}>
+            {`Service: ${rate?.service}, Carrier: ${rate?.carrier}, Rate: ${rate?.rate}`}
+          </Menu.Item>
+        ))
+      ) : (
+        <Menu.Item disabled>No rates available</Menu.Item>
+      )}
+    </Menu>
+  );
   return (
     <>
       <div className="max-w-6xl mx-auto p-6">
@@ -300,11 +312,7 @@ toAddress:{
                     }}
                   >
                     <span className="text-sm text-gray-600">
-                      I agree to enroll in Illuminate Kids Book Club and
-                      authorize my membership to be on a yearly basis at
-                      $179.88, charged to the card above until I cancel. I
-                      understand I can cancel anytime by signing into my account
-                      and clicking cancel.
+                     Agree with our terms and condition
                     </span>
                   </Checkbox>
 
@@ -320,7 +328,7 @@ toAddress:{
                   className="w-full mt-6"
                   disabled={!agreed} // Disable submit button if the checkbox is not checked
                 >
-                  Confirm Payment
+                  Continue
                 </Button>
               </form>
             </div>
@@ -358,17 +366,17 @@ toAddress:{
               </div>
   
         </div>
- <div className="mt-5">
-  {rates && rates.length > 0 ? (
-    rates.map((rate, idx) => (
-      <p key={idx} style={{ color: "blue" }}>
-        {`Service: ${rate?.service}, Carrier: ${rate?.carrier}, Rate: ${rate?.rate}`}
-      </p>
-    ))
-  ) : (
-    <p>No rates available</p>
-  )}
-</div>      </div>
+<div className="mt-12">
+  
+  <h1 className="mb-3 font-bold">Select Your Rates</h1>
+     <Dropdown overlay={menu} trigger={['click']}>
+      <Button className="w-1/2">
+        Select Rate <DownOutlined />
+      </Button>
+    </Dropdown>  
+  </div>    
+
+    </div>
           </div>
         </div>
       </div>
