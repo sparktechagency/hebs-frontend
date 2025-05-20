@@ -130,13 +130,13 @@ export const totalActualPriceSelector = (state: RootState) => {
 // };
 export const totalDiscountSelector = (state: RootState) => {
   return state.cart.products.reduce((acc, product) => {
-    console.log("Product:", product.name);
-    console.log("isDiscount:", product.isDiscount);
-    console.log("discountPrice.amount:", product.discountPrice.amount);
+    // console.log("Product:", product.name);
+    // console.log("isDiscount:", product.isDiscount);
+    // console.log("discountPrice.amount:", product.discountPrice.amount);
 
     if (product.isDiscount && product.discountPrice.amount > 0) {
       const discount = (product.price.amount * product.discountPrice.amount) / 100;
-      console.log("Calculated discount per unit:", discount);
+      // console.log("Calculated discount per unit:", discount);
       return acc + discount * product.orderQuantity;
     }
     return acc;
