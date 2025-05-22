@@ -5,15 +5,32 @@ import Image from "next/image"
 import { Slider, Input } from "antd"
 import wild from "@/assets/wild.png"
 import Link from "next/link"
+import { useAppSelector } from "@/redux/hooks"
+import { selectCurrentCategoryId } from "@/redux/features/boxes/boxesSlice"
+import { useGetSpecefiqBoxesQuery } from "@/redux/features/boxes/boxesApi"
+import LoadingPage from "@/app/loading"
+import { currencyFormatter } from "@/utils/currencyFormatter"
 const { TextArea } = Input
 
 const BookReview=()=> {
-  const [selectedEmoji, setSelectedEmoji] = useState<number | null>(null)
+    const [selectedEmoji, setSelectedEmoji] = useState<number | null>(null)
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [difficultyLevel, setDifficultyLevel] = useState(3)
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [topicRating, setTopicRating] = useState(2)
   const [thoughts, setThoughts] = useState("")
+
+    const currentCategory = useAppSelector(selectCurrentCategoryId)
+    const categoryId = currentCategory?.categoryID
+    const  {data:specifiqBox,isLoading}=useGetSpecefiqBoxesQuery(categoryId,{
+      skip: !categoryId,  // skip if empty
+    })  
+    const boxs = specifiqBox?.data
+      console.log("current  box ",specifiqBox?.data);
+       if(isLoading){
+        return <LoadingPage/>
+      }
+
 
   const emojis = [
     { emoji: "😵", label: "Dizzy" },
@@ -48,6 +65,7 @@ const BookReview=()=> {
         <div className="flex-shrink-0">
           <Image
             src={wild}
+            // src={boxs?.image}
             alt="Book cover"
             width={80}
             height={100}
@@ -55,9 +73,9 @@ const BookReview=()=> {
           />
         </div>
         <div>
-          <h2 className="text-xl font-medium">Tiny Mu&apos;mins</h2>
+          <h2 className="text-xl font-medium">{boxs?.title}</h2>
           <p className="text-gray-600">By Islam</p>
-          <p className="text-lg font-semibold mt-1">$14.59</p>
+          <p className="text-lg font-semibold mt-1">{currencyFormatter(boxs?.price?.amount)}</p>
         </div>
       </div>
 

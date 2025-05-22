@@ -1,48 +1,28 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 
 import { Check } from "lucide-react"
 import Image from "next/image"
-import wild from '@/assets/wild.png'
-import color from '@/assets/colorMe.png'
-import animal from '@/assets/animals.png'
-import eid from '@/assets/eid.png'
-import songBook from '@/assets/songBook.png'
+
 import shape from "@/assets/shape.png"
 import Link from "next/link"
-const books = [
-  {
-    id: 1,
-    title: "Wild Feelings",
-    image: wild,
-    series: "1001 Inventions And Awesome Facts Form Muslim Civilization",
-  },
-  {
-    id: 2,
-    title: "Color Me",
-    image: color,
-    series: "1001 Inventions And Awesome Facts Form Muslim Civilization",
-  },
-  {
-    id: 3,
-    title: "Animals in the Quran",
-    image: animal,
-    series: "1001 Inventions And Awesome Facts Form Muslim Civilization",
-  },
-  {
-    id: 4,
-    title: "Looking for the Eid Moon",
-    image: eid,
-    series: "1001 Inventions And Awesome Facts Form Muslim Civilization",
-  },
-  {
-    id: 5,
-    title: "Allah Made Everything",
-    image: songBook,
-    series: "1001 Inventions And Awesome Facts Form Muslim Civilization",
-  },
-]
+import LoadingPage from "@/app/loading"
+import { useAppSelector } from "@/redux/hooks"
+import { selectCurrentCategoryId } from "@/redux/features/boxes/boxesSlice"
+import { useGetSpecefiqBoxesQuery } from "@/redux/features/boxes/boxesApi"
 
 export default function BookReview() {
+  const currentCategory = useAppSelector(selectCurrentCategoryId)
+  const categoryId = currentCategory?.categoryID
+  const  {data:specifiqBox,isLoading}=useGetSpecefiqBoxesQuery(categoryId,{
+    skip: !categoryId,  // skip if empty
+  })  
+  const books = specifiqBox?.data?.books
+    console.log("current  box ",specifiqBox?.data?.books);
+     if(isLoading){
+      return <LoadingPage/>
+    }
+  
   return (
 
 
@@ -95,13 +75,13 @@ export default function BookReview() {
         <h2 className="text-xl font-semibold mb-6 text-gray-800">Keeping</h2>
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 overflow-x-auto">
-          {books.map((book) => (
-            <div key={book.id} className="flex flex-col space-y-2">
+          {books.map((book:any,idx:number) => (
+            <div key={idx} className="flex flex-col space-y-2">
               <div className="aspect-[3/4] relative rounded-lg overflow-hidden shadow-sm">
-                <Image src={book.image || "/placeholder.svg"} alt={book.title} fill className="object-cover" />
+                <Image src={book.coverImage || "/placeholder.svg"} alt={book.name} fill className="object-cover" />
               </div>
-              <h3 className="text-sm font-medium text-gray-800 line-clamp-2">{book.title}</h3>
-              <p className="text-xs text-gray-500 line-clamp-2">{book.series}</p>
+              <h3 className="text-sm font-medium text-gray-800 line-clamp-2">{book.name}</h3>
+              <p className="text-xs text-gray-500 line-clamp-2">{book.summary}</p>
             </div>
           ))}
         </div>
