@@ -3,6 +3,7 @@ import authReducer from "./features/auth/authSlice"
 import cartSlice from "./features/cart/cartSlice";
 import surveyReducer from "./features/survey/surveySlice"
 import planReducer from "./features/subscription/subscriptionSlice"
+import boxesReducer from "./features/boxes/boxesSlice"
 
 import { baseApi } from "./api/baseApi";
 import storage from "redux-persist/lib/storage";
@@ -30,11 +31,16 @@ const persistConfigCart = {
     key: "plan",
     storage,
   };
+  const persistBox = {
+    key: "box",
+    storage,
+  };
 
 const persistedAuthReducer=persistReducer(persistConfig,authReducer)
 const persistedCartReducer = persistReducer(persistConfigCart, cartSlice);
 const persistedSurveyReducer = persistReducer(persistConfigSurvey, surveyReducer);
 const persistedPlanReducer = persistReducer(persistConfigPlan, planReducer);
+const persistedBoxReducer = persistReducer(persistBox, boxesReducer);
 
 export const makeStore = () =>{
   return configureStore({
@@ -44,6 +50,7 @@ export const makeStore = () =>{
         survey: persistedSurveyReducer,
     cart: persistedCartReducer,
     plan:persistedPlanReducer,
+    box:persistedBoxReducer
 
     },
     middleware:getDefaultMiddleware=>getDefaultMiddleware( {serializableCheck: {

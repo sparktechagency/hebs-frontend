@@ -9,9 +9,16 @@ const boxesApi = baseApi.injectEndpoints({
 
       }),
     }),
+    getSpecefiqBoxes: builder.query({
+      query: (id) => ({
+        url: `/box/retrieve/category/${id}`,
+        method: "GET",
+
+      }),
+    }),
    
 
   }),
 });   
 
-export const {useGetAllBoxesQuery } = boxesApi;
+export const {useGetAllBoxesQuery ,useGetSpecefiqBoxesQuery} = boxesApi;

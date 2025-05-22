@@ -10,6 +10,9 @@ import { useAppSelector } from "@/redux/hooks";
 import { selectCurrentSurvey } from "@/redux/features/survey/surveySlice";
 import { useGetRecommendationQuery } from "@/redux/features/survey/surveyApi";
 import LoadingPage from "@/app/loading";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { addCategory } from "@/redux/features/boxes/boxesSlice";
 // {setIsEmail,setIsRecomended}:{  setIsEmail: (value: boolean) => void,setIsRecomended: (value: boolean) => void} 
 export default function BookRecommendations() {
   const surveyData = useAppSelector(selectCurrentSurvey)
@@ -18,8 +21,16 @@ export default function BookRecommendations() {
   //   setIsEmail(true);
   //   setIsRecomended(false);
   // };
+  const dispatch = useDispatch();
   const {data:recommended,isLoading}=useGetRecommendationQuery(surveyData?.dateOfBirth)
-  // console.log("recommended==>",recommended?.data);
+  console.log("recommended==>",recommended?.data?.category?._id);
+  useEffect(() => {
+    if (recommended?.data?.category?._id) {
+      dispatch(addCategory(recommended.data.category._id));
+    }
+  }, [recommended, dispatch]);
+
+
   if(isLoading){
     return <LoadingPage/>
   }

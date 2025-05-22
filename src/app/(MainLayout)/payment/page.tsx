@@ -82,8 +82,9 @@ const router = useRouter();
     }
   };
 
+const [proceed,setProceed]=useState(false)
 
-
+console.log(proceed);
 
 
   return (
@@ -125,6 +126,8 @@ const router = useRouter();
                     (method) => method.service === e.target.value
                   );
                   setSelectedShippingMethod(selected);
+                setProceed(!!selected);
+
                   console.log("Selected shipping method object:", selected);
                 }}
                 className="w-full"
@@ -139,7 +142,7 @@ const router = useRouter();
                           : "border-gray-200"
                       }`}
                     >
-                      <Radio value={rate.service} className="w-full">
+                      <Radio value={rate.service} className="w-full"  >
                         <span className="ml-2 text-gray-700">{rate.service}</span>
                       </Radio>
                       {/* Optional: add carrier, rate, etc here */}
@@ -254,6 +257,7 @@ const router = useRouter();
                   </p>
                 </div>
                 <button
+                disabled={!proceed}
                   onClick={handleOrder}
                   className="w-full bg-[#F37975] md:px-8 p-4 md:h-12 flex items-center justify-center text-white hover:bg-red-500 border-none mb-4 my-5"
                 >

@@ -1,19 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { selectCurrentUser } from "@/redux/features/auth/authSlice";
 import { subTotalSelector, totalActualPriceSelector, totalDiscountSelector, totalProductsSelector, totalQuantitySelector } from "@/redux/features/cart/cartSlice";
 import { useAppSelector } from "@/redux/hooks";
 import { currencyFormatter } from "@/utils/currencyFormatter";
-import { message } from "antd";
-import { useRouter } from "next/navigation";
+;
 
 
 
 const PaymentDetailsCard = () => {
-  const user = useAppSelector(selectCurrentUser)
+//   const user = useAppSelector(selectCurrentUser)
 
-const router = useRouter()
+// const router = useRouter()
 
         const subTotal = useAppSelector(subTotalSelector);
    const totalDiscount = useAppSelector(totalDiscountSelector)
@@ -21,19 +19,19 @@ const router = useRouter()
         const totalProducts= useAppSelector(totalProductsSelector)
         const totalQuantity=useAppSelector(totalQuantitySelector)
         const totalActualPrice=useAppSelector(totalActualPriceSelector)
-        const handleOrder = async () => {
-            // const orderLoading = message.loading("Order is being placed");
-            try {
-              if (!user) {
-                router.push("/login");
-                message.error("Please login first.");
-              }
-            router.push("/payment")
+        // const handleOrder = async () => {
+      
+        //     try {
+        //       if (!user) {
+        //         router.push("/login");
+        //         message.error("Please login first.");
+        //       }
+        //     router.push("/payment")
         
-            } catch (error: any) {
-              message.error(error.message);
-            }
-          };
+        //     } catch (error: any) {
+        //       message.error(error.message);
+        //     }
+        //   };
         
     return (
         <div className="  bg-background brightness-105 rounded-md col-span-4 h-fit p-5 mt-10 border-2 border-[#F37975] border-dotted">
@@ -67,12 +65,12 @@ const router = useRouter()
                 <p className="text-gray-500 ">Grand Total</p>
                 <p className="font-semibold">{}</p>
               </div> */}
-              <button
+              {/* <button
                 onClick={handleOrder}
            className="w-full bg-[#F37975] md:px-8 p-4  md:h-12 flex items-center justify-center text-[#ffffff] hover:bg-red-500 border-none mb-4 my-5"
               >
                 Order Now
-              </button>
+              </button> */}
         </div>
             </div>
     );
