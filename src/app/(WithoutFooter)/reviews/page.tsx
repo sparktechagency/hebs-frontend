@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+
 import Image from "next/image"
 import { Slider, Input } from "antd"
 import wild from "@/assets/wild.png"
@@ -10,27 +10,38 @@ import { selectCurrentCategoryId } from "@/redux/features/boxes/boxesSlice"
 import { useGetSpecefiqBoxesQuery } from "@/redux/features/boxes/boxesApi"
 import LoadingPage from "@/app/loading"
 import { currencyFormatter } from "@/utils/currencyFormatter"
+import { useForm, Controller } from "react-hook-form"
+
 const { TextArea } = Input
 
-const BookReview=()=> {
-    const [selectedEmoji, setSelectedEmoji] = useState<number | null>(null)
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [difficultyLevel, setDifficultyLevel] = useState(3)
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [topicRating, setTopicRating] = useState(2)
-  const [thoughts, setThoughts] = useState("")
+type FormData = {
+  selectedEmoji:string
+  difficultyLevel: number
+  topicRating: number
+  comments: string
+}
 
-    const currentCategory = useAppSelector(selectCurrentCategoryId)
-    const categoryId = currentCategory?.categoryID
-    const  {data:specifiqBox,isLoading}=useGetSpecefiqBoxesQuery(categoryId,{
-      skip: !categoryId,  // skip if empty
-    })  
-    const boxs = specifiqBox?.data
-      console.log("current  box ",specifiqBox?.data);
-       if(isLoading){
-        return <LoadingPage/>
-      }
+const BookReview = () => {
+    const {
+    register,
+    handleSubmit,
+    watch,
+    setValue,
+    control,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    formState: { errors },
+  } = useForm<FormData>({
 
+  })
+  const currentCategory = useAppSelector(selectCurrentCategoryId)
+  const categoryId = currentCategory?.categoryID
+  const { data: specifiqBox, isLoading } = useGetSpecefiqBoxesQuery(categoryId, {
+    skip: !categoryId,
+  })
+  const boxs = specifiqBox?.data
+  if (isLoading) {
+    return <LoadingPage />
+  }
 
   const emojis = [
     { emoji: "😵", label: "Dizzy" },
@@ -52,113 +63,146 @@ const BookReview=()=> {
     5: "Loved",
   }
 
+
+
+  const selectedEmoji = watch("selectedEmoji")
+
+  const onSubmit = (data: FormData) => {
+    console.log("Form data:", data)
+  }
+
   return (
- <div className="w-full bg-[#EDEBE6] pt-3">
-
- <div className="max-w-4xl min-h-screen mx-auto bg-[#FFFFFF] rounded-lg shadow-2xl pt-3 px-12 ">
-      <div className="flex justify-between items-center mb-3">
-        <h1 className="text-2xl font-semibold">Your Book Reviews</h1>
-        <span className="text-lg">1/5</span>
-      </div>
-
-      <div className="flex gap-4 pb-6 border-b">
-        <div className="flex-shrink-0">
-          <Image
-            src={wild}
-            // src={boxs?.image}
-            alt="Book cover"
-            width={80}
-            height={100}
-            className="object-cover rounded-md"
-          />
+    <div className="w-full bg-[#EDEBE6] pt-3">
+      <form onSubmit={handleSubmit(onSubmit)} className="max-w-4xl min-h-screen mx-auto bg-[#FFFFFF] rounded-lg shadow-2xl pt-3 px-12 ">
+        <div className="flex justify-between items-center mb-3">
+          <h1 className="text-2xl font-semibold">Your Book Reviews</h1>
+          <span className="text-lg">1/5</span>
         </div>
-        <div>
-          <h2 className="text-xl font-medium">{boxs?.title}</h2>
-          <p className="text-gray-600">By Islam</p>
-          <p className="text-lg font-semibold mt-1">{currencyFormatter(boxs?.price?.amount)}</p>
-        </div>
-      </div>
 
-      <div className="py-2">
-        <h3 className="text-xl font-medium text-center mb-3">What did your reader think?</h3>
-        <div className="flex justify-center gap-6 mb-5">
-          {emojis.map((item, index) => (
+        <div className="flex gap-4 pb-6 border-b">
+          <div className="flex-shrink-0">
+            <Image
+              src={wild}
+              alt="Book cover"
+              width={80}
+              height={100}
+              className="object-cover rounded-md"
+            />
+          </div>
+          <div>
+            <h2 className="text-xl font-medium">{boxs?.title}</h2>
+            <p className="text-gray-600">By Islam</p>
+            <p className="text-lg font-semibold mt-1">{currencyFormatter(boxs?.price?.amount)}</p>
+          </div>
+        </div>
+
+        <div className="py-2">
+          <h3 className="text-xl font-medium text-center mb-3">What did your reader think?</h3>
+          {/* <div className="flex justify-center gap-6 mb-5">
+            {emojis.map((item, index) => (
+              <button
+                key={index}
+                type="button"
+                onClick={() => setValue("selectedEmoji", index)}
+                className={`text-4xl transition-transform ${
+                  selectedEmoji === index ? "scale-125" : "hover:scale-110"
+                }`}
+                aria-label={item.label}
+              >
+                {item.emoji}
+              </button>
+            ))}
+          </div> */}
+<div className="flex justify-center gap-6 mb-5">
+  {emojis.map((item, index) => (
+    <button
+      key={index}
+      type="button"
+      onClick={() => setValue("selectedEmoji", item?.label)}  
+      className={`text-4xl transition-transform ${
+        selectedEmoji === item?.label ? "scale-125" : "hover:scale-110"
+      }`}
+      aria-label={item.label}
+    >
+      {item.emoji}
+    </button>
+  ))}
+</div>
+
+          <div className="mb-2">
+            <h3 className="text-xl font-medium text-center mb-2">Difficulty Level</h3>
+            <Controller
+              control={control}
+              name="difficultyLevel"
+              render={({ field }) => (
+                <Slider
+                  {...field}
+                  marks={difficultyMarks}
+                  step={1}
+                  min={1}
+                  max={3}
+                  className="mx-4"
+                  onChange={(value) => field.onChange(value)}
+                />
+              )}
+            />
+          </div>
+
+          <div className="mb-2">
+            <h3 className="text-xl font-medium text-center mb-2">Topic & Themes</h3>
+            <Controller
+              control={control}
+              name="topicRating"
+              render={({ field }) => (
+                <Slider
+                  {...field}
+                  marks={topicMarks}
+                  step={1}
+                  min={1}
+                  max={5}
+                  className="mx-4"
+                  onChange={(value) => field.onChange(value)}
+                />
+              )}
+            />
+          </div>
+
+          <div className="text-center text-gray-500 text-sm mb-2">OPTIONAL</div>
+
+          <div>
+            <h3 className="text-xl font-medium mb-2">Share your thoughts</h3>
+            <p className="text-gray-600 mb-4">
+              Help other parents by letting them know what your reader thought about this book.
+            </p>
+            <TextArea
+              {...register("comments")}
+              placeholder="Write your review here..."
+              maxLength={300}
+              showCount
+              rows={3}
+              className="bg-gray-100 rounded-md"
+            />
+          </div>
+
+          <div className="flex justify-center gap-8 pt-4">
+            <Link href={"/reviews-second"}>
+              <button
+                type="button"
+                className="h-10 w-36 rounded-full bg-white border border-black hover:bg-[#FF7F7F] hover:text-white hover:border-[#FF7F7F] transition-all uppercase"
+              >
+                Skip Book
+              </button>
+            </Link>
             <button
-              key={index}
-              onClick={() => setSelectedEmoji(index)}
-              className={`text-4xl transition-transform ${selectedEmoji === index ? "scale-125" : "hover:scale-110"}`}
-              aria-label={item.label}
+              type="submit"
+              className="h-10 w-36 rounded-full bg-[#F37975] px-8 text-lg hover:bg-[#e57373] text-white"
             >
-              {item.emoji}
+              SUBMIT
             </button>
-          ))}
+          </div>
         </div>
-
-        <div className="mb-2">
-          <h3 className="text-xl font-medium text-center mb-2">Difficulty Level</h3>
-          <Slider
-            marks={difficultyMarks}
-            step={1}
-            min={1}
-            max={5}
-            defaultValue={3}
-            onChange={setDifficultyLevel}
-            className="mx-4"
-          />
-        </div>
-
-        <div className="mb-2">
-          <h3 className="text-xl font-medium text-center mb-">Topic & Themes</h3>
-          <Slider
-            marks={topicMarks}
-            step={1}
-            min={1}
-            max={5}
-            defaultValue={2}
-            onChange={setTopicRating}
-            className="mx-4"
-          />
-        </div>
-
-        <div className="text-center text-gray-500 text-sm mb-2">OPTIONAL</div>
-
-        <div className="mb-">
-          <h3 className="text-xl font-medium mb-2">Share your thoughts</h3>
-          <p className="text-gray-600 mb-4">
-            Help other parents by letting them know what your reader thought about this book.
-          </p>
-          <TextArea
-            value={thoughts}
-            onChange={(e) => setThoughts(e.target.value)}
-            placeholder="Write your review here..."
-            maxLength={300}
-            showCount
-            rows={3}
-            className="bg-gray-100 rounded-md"
-          />
-        </div>
-
-        <div className="flex justify-center gap-8 pt-4">
-        <Link href={"/reviews-second"}>
-          <button className="h-10 w-36 rounded-full bg-white border border-black hover:bg-[#FF7F7F] hover:text-white hover:border-[#FF7F7F] transition-all uppercase">
-            Skip Book
-          </button>
-        </Link>
-        <Link href={"/reviews-second"}>
-          <button className="h-10 w-36 rounded-full bg-[#F37975] px-8 text-lg hover:bg-[#e57373] text-white">
-            SUBMIT
-          </button>
-        </Link>
-      </div>
-
-
-      </div>
+      </form>
     </div>
-    {/* <div className="flex justify-center gap-8 bg-[#FFFFFF] rounded-lg shadow-2xl p-4 mt-8">
-
-        </div> */}
-
- </div>
   )
 }
 
