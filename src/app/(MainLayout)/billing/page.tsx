@@ -1,9 +1,14 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 import { Package, User, FileText,  ChevronRight } from "lucide-react"
 import { useState } from "react"
 import { ChevronDown } from "lucide-react"
 import Link from "next/link"
 import styles from "@/app/styles.module.css"
+import { useGetBillingQuery } from "@/redux/features/survey/surveyApi"
+import { useAppSelector } from "@/redux/hooks"
+import { selectCurrentUser } from "@/redux/features/auth/authSlice"
+import LoadingPage from "@/app/loading"
 interface BillingItem {
   id: string
   status: "PAID" | "INVOICE"
@@ -14,8 +19,14 @@ interface BillingItem {
 }
 
 const BillingHistory=()=> {
+  const user = useAppSelector(selectCurrentUser)
+  console.log(user);
+  const {data:billing,isLoading}=useGetBillingQuery(user?.userId)
   const [expandedItems, setExpandedItems] = useState<Record<string, boolean>>({})
-
+if(isLoading){
+  return <LoadingPage/>
+}
+console.log("billing",billing);
   const billingData: BillingItem[] = [
     {
       id: "1",
@@ -108,8 +119,8 @@ const BillingHistory=()=> {
       <h1 className="text-3xl font-bold mb-8">Billing History</h1>
 
       <div className="space-y-6">
-        {billingData.map((item) => (
-          <div key={item.id} className="rounded-lg shadow-sm border border-gray-100">
+        {billingData?.map((item:any) => (
+          <div key={item._id} className="rounded-lg shadow-sm border border-gray-100">
             <div className="p-4 flex justify-between items-center">
               <div className="flex items-center gap-4">
                 <span className="bg-gray-200 text-gray-800 px-3 py-1 rounded-md text-sm font-medium">
@@ -135,7 +146,7 @@ const BillingHistory=()=> {
 
                 {expandedItems[item.id] && item.details && (
                   <div className="px-4 pb-4">
-                    {item.details.map((detail, index) => (
+                    {item.details.map((detail:any, index:number) => (
                       <p key={index} className="text-gray-700">
                         {detail}
                       </p>

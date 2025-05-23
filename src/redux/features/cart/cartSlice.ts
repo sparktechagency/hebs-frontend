@@ -110,28 +110,36 @@ export const orderSelector = (state: RootState) => {
 export const totalQuantitySelector = (state: RootState) => {
   return state.cart.products.reduce((acc, product) => acc + product.orderQuantity, 0);
 };
-// Total Discount Selector
-export const totalDiscountSelector = (state: RootState) => {
-  console.log("total discount===>",state);
+
+export const totalActualPriceSelector = (state: RootState) => {
   return state.cart.products.reduce((acc, product) => {
-    if (product.discountPrice.amount) {
-      return acc + product.discountPrice.amount * product.orderQuantity;
+    return acc + product.price.amount * product.orderQuantity;
+  }, 0);
+};
+
+
+
+export const totalDiscountSelector = (state: RootState) => {
+  return state.cart.products.reduce((acc, product) => {
+    // console.log("Product:", product.name);
+    // console.log("isDiscount:", product.isDiscount);
+    // console.log("discountPrice.amount:", product.discountPrice.amount);
+
+    if (product.isDiscount && product.discountPrice.amount > 0) {
+      const discount = (product.price.amount * product.discountPrice.amount) / 100;
+      // console.log("Calculated discount per unit:", discount);
+      return acc + discount * product.orderQuantity;
     }
     return acc;
   }, 0);
 };
 
 
-
-// Final Price After Discount Selector (with discount handling)
 export const finalPriceAfterDiscountSelector = (state: RootState) => {
   return state.cart.products.reduce((acc, product) => {
-
-    const finalPrice = product?.discountPrice?.amount
-      ? product?.price?.amount - product?.discountPrice?.amount
-      : 0; 
-
-    return acc + finalPrice * product?.orderQuantity;
+    const discount = product.isDiscount ? (product.price.amount * product.discountPrice.amount) / 100 : 0;
+    const finalPrice = product.price.amount - discount;
+    return acc + finalPrice * product.orderQuantity;
   }, 0);
 };
 
@@ -148,16 +156,15 @@ export const totalProductsSelector = (state: RootState) => {
 //* Payment
 
 export const subTotalSelector = (state: RootState) => {
-    return state.cart.products.reduce((acc, product) => {
-      if (product?.discountPrice?.amount) {
-        console.log("discount price ",product.discountPrice.amount);
-        return acc + product.discountPrice.amount * product.orderQuantity;
-      } else {
-        console.log(product.price, "Price");
-        return acc + product.price.amount * product.orderQuantity;
-      }
-    }, 0);
-  };
+  const total = state.cart.products.reduce((acc, product) => {
+    return acc + product.price.amount * product.orderQuantity;
+  }, 0);
+
+  const discount = totalDiscountSelector(state);
+
+  return total - discount;
+};
+
 
   export const {
     addProduct,

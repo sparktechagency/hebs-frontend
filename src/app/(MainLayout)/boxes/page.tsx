@@ -7,7 +7,38 @@ import shape from "@/assets/shape.png"
 import shop from "@/assets/shop.png"
 import styles from "@/app/styles.module.css"
 
+import { useAppSelector } from "@/redux/hooks"
+import { selectCurrentCategoryId } from "@/redux/features/boxes/boxesSlice"
+import { useGetSpecefiqBoxesQuery } from "@/redux/features/boxes/boxesApi"
+import LoadingPage from "@/app/loading"
+import { useEffect } from "react"
+
+
 const BoxesPage=()=> {
+  const currentCategory = useAppSelector(selectCurrentCategoryId)
+  const categoryId = currentCategory?.categoryID
+  const  {data:specifiqBox,isLoading,refetch}=useGetSpecefiqBoxesQuery(categoryId,{
+    skip: !categoryId,  // skip if empty
+  })  
+  console.log("current  box ",specifiqBox);
+    useEffect(() => {
+      const interval = setInterval(() => {
+        refetch();
+      }, 5000);
+  
+      return () => clearInterval(interval);
+    }, [refetch]);
+   if(isLoading){
+    return <LoadingPage/>
+  }
+  const now = new Date();
+const monthNames = [
+  "JAN", "FEB", "MAR", "APR", "MAY", "JUN",
+  "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"
+];
+
+const currentMonth = monthNames[now.getMonth()];  // getMonth() returns 0-based index
+const currentYear = now.getFullYear();
   return (
     <div className="flex flex-col md:flex-row min-h-screen bg-gray-50">
         {/* Sidebar */}
@@ -28,7 +59,7 @@ const BoxesPage=()=> {
             </li>
             <li>
               <Link href="/billing" className="flex items-center p-2 text-gray-600 hover:bg-gray-100 rounded-md">
-                <FileText className="h-5 w-5 mr-3 text-gray-500" />
+                <FileText className="h-5 w-5 mr-3 text-gray-500"/>
                 <span>Billing History</span>
               </Link>
             </li>
@@ -70,7 +101,7 @@ const BoxesPage=()=> {
             {/* Date Flag */}
             <div className="absolute top-10 left-0 w-32">
               <Image src={shape || ""} alt="flag" className="w-full h-full" priority />
-              <span className="absolute top-0 left-4 text-gray-600 font-medium">FEB 2025</span>
+              <span className="absolute top-0 left-4 text-gray-600 font-medium">  {currentMonth} {currentYear}</span>
             </div>
 
             <div className="p-8 pt-20">

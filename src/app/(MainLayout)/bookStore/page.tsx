@@ -74,7 +74,7 @@ function BookStore() {
       refetch();
     }, 5000); // Refetch every 5 seconds
 
-    return () => clearInterval(interval); // Cleanup the interval when the component unmounts
+    return () => clearInterval(interval);
   }, [refetch]);
 
   if (isLoading) return <div className=""><LoadingPage/></div>;

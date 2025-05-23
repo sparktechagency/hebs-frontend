@@ -13,6 +13,7 @@ export type TSurveyData = {
   costSpend: {
     statement: string;
   };
+
 };
 
 const initialState: TSurveyData = {
