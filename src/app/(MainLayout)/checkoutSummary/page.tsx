@@ -26,7 +26,14 @@ export default function BookReview() {
   if (isLoading) {
     return <LoadingPage />;
   }
+  const now = new Date();
+const monthNames = [
+  "JAN", "FEB", "MAR", "APR", "MAY", "JUN",
+  "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"
+];
 
+const currentMonth = monthNames[now.getMonth()];  // getMonth() returns 0-based index
+const currentYear = now.getFullYear();
   return (
     <div className="w-full max-w-6xl mx-auto  space-y-6 bg-white shadow-lg p-10 my-8">
       {/* Header Section */}
@@ -46,7 +53,7 @@ export default function BookReview() {
               </div>
 
               <span className="text-gray-600 font-medium  absolute top-16 left-6">
-                FEB 2025
+          {currentMonth} {currentYear}
               </span>
             </div>
           </div>

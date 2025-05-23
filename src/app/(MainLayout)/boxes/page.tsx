@@ -11,22 +11,23 @@ import { useAppSelector } from "@/redux/hooks"
 import { selectCurrentCategoryId } from "@/redux/features/boxes/boxesSlice"
 import { useGetSpecefiqBoxesQuery } from "@/redux/features/boxes/boxesApi"
 import LoadingPage from "@/app/loading"
+import { useEffect } from "react"
 
 
 const BoxesPage=()=> {
   const currentCategory = useAppSelector(selectCurrentCategoryId)
   const categoryId = currentCategory?.categoryID
-  const  {data:specifiqBox,isLoading}=useGetSpecefiqBoxesQuery(categoryId,{
+  const  {data:specifiqBox,isLoading,refetch}=useGetSpecefiqBoxesQuery(categoryId,{
     skip: !categoryId,  // skip if empty
   })  
   console.log("current  box ",specifiqBox);
-    // useEffect(() => {
-    //   const interval = setInterval(() => {
-    //     refetch();
-    //   }, 5000);
+    useEffect(() => {
+      const interval = setInterval(() => {
+        refetch();
+      }, 5000);
   
-    //   return () => clearInterval(interval);
-    // }, [refetch]);
+      return () => clearInterval(interval);
+    }, [refetch]);
    if(isLoading){
     return <LoadingPage/>
   }
