@@ -45,7 +45,7 @@ const BookReview = () => {
     }
   );
   const boxs = specifiqBox?.data;
-  // console.log("box===>", boxs?._id);
+  // console.log("box===>", boxs);
   if (isLoading) {
     return <LoadingPage />;
   }
@@ -90,16 +90,16 @@ const BookReview = () => {
       comment: data.comments,
     };
     try {
-      console.log("data", review);
+      // console.log("data", review);
       const res = await createReview(review);
-      console.log("res==>", res);
+      // console.log("res==>", res);
       if (res?.data) {
         message.success(res?.data?.message);
       } else {
         message.error("An unknown error occurred");
       }
     } catch (error: any) {
-      console.log(error);
+      console.log("from review",error);
     }
   };
 
@@ -110,14 +110,15 @@ const BookReview = () => {
         className="max-w-4xl min-h-screen mx-auto bg-[#FFFFFF] rounded-lg shadow-2xl pt-3 px-12 "
       >
         <div className="flex justify-between items-center mb-3">
-          <h1 className="text-2xl font-semibold">Your Book Reviews</h1>
-          <span className="text-lg">1/5</span>
+          <h1 className="text-2xl font-semibold">Give Your Reviews</h1>
+          {/* <span className="text-lg">1/5</span> */}
         </div>
 
         <div className="flex gap-4 pb-6 border-b">
           <div className="flex-shrink-0">
             <Image
               src={wild}
+              // src={box?.image}
               alt="Book cover"
               width={80}
               height={100}

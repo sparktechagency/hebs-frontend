@@ -22,7 +22,14 @@ const BoxesPage=()=> {
    if(isLoading){
     return <LoadingPage/>
   }
+  const now = new Date();
+const monthNames = [
+  "JAN", "FEB", "MAR", "APR", "MAY", "JUN",
+  "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"
+];
 
+const currentMonth = monthNames[now.getMonth()];  // getMonth() returns 0-based index
+const currentYear = now.getFullYear();
   return (
     <div className="flex flex-col md:flex-row min-h-screen bg-gray-50">
         {/* Sidebar */}
@@ -85,7 +92,7 @@ const BoxesPage=()=> {
             {/* Date Flag */}
             <div className="absolute top-10 left-0 w-32">
               <Image src={shape || ""} alt="flag" className="w-full h-full" priority />
-              <span className="absolute top-0 left-4 text-gray-600 font-medium">FEB 2025</span>
+              <span className="absolute top-0 left-4 text-gray-600 font-medium">  {currentMonth} {currentYear}</span>
             </div>
 
             <div className="p-8 pt-20">
