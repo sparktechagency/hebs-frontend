@@ -16,9 +16,16 @@ const boxesApi = baseApi.injectEndpoints({
 
       }),
     }),
+    reviewBoxes: builder.mutation({
+      query: (info) => ({
+        url: `/review/create`,
+        method: "POST",
+body:info
+      }),
+    }),
    
 
   }),
 });   
 
-export const {useGetAllBoxesQuery ,useGetSpecefiqBoxesQuery} = boxesApi;
+export const {useGetAllBoxesQuery ,useGetSpecefiqBoxesQuery,useReviewBoxesMutation} = boxesApi;
