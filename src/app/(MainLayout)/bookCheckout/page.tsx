@@ -1,200 +1,297 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+'use client'
 import wild from "@/assets/wild.png";
-import { Card, Col, Row } from "antd";
 import { CreditCardOutlined } from "@ant-design/icons";
 import Image from "next/image";
 import style from "@/app/styles.module.css";
+import { useAppSelector } from "@/redux/hooks";
+import { selectCurrentCategoryId } from "@/redux/features/boxes/boxesSlice";
+import { useGetSpecefiqBoxesQuery } from "@/redux/features/boxes/boxesApi";
+import React, { useEffect, useState } from "react";
+import LoadingPage from "@/app/loading";
+import { currencyFormatter } from "@/utils/currencyFormatter";
+import { Minus, Plus} from "lucide-react";
+import { selectCurrentUser } from "@/redux/features/auth/authSlice";
+
+import { usePlaceCartOrderMutation } from "@/redux/features/cart/cartApi";
+import { message } from "antd";
+import { useRouter } from "next/navigation";
+
+const QUANTITIES_STORAGE_KEY = "bookQuantities";
 
 const BookCheckoutPage = () => {
+  const router = useRouter();
+  const currentCategory = useAppSelector(selectCurrentCategoryId);
+  const categoryId = currentCategory?.categoryID;
+  const { data: specifiqBox, isLoading, refetch } = useGetSpecefiqBoxesQuery(categoryId, {
+    skip: !categoryId, // skip if empty
+  });
+  const books = specifiqBox?.data?.books;
+  // console.log("current box books", books);
+const user = useAppSelector(selectCurrentUser)
+  // Store selected books IDs
+  const [selectedBooks, setSelectedBooks] = useState<string[]>([]);
+  const [selectedBooksWithQuantity, setSelectedBooksWithQuantity] = useState<string[]>([]);
+
+  // Store quantity per bookId, default 1, load from localStorage if available
+  const [quantities, setQuantities] = useState<{ [key: string]: number }>({});
+
+  // Load quantities from localStorage on mount
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem(QUANTITIES_STORAGE_KEY);
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          setQuantities(parsed);
+        } catch {
+          // If parse error, ignore
+        }
+      }
+    }
+  }, []);
+
+  // Save quantities to localStorage whenever they change
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem(QUANTITIES_STORAGE_KEY, JSON.stringify(quantities));
+    }
+  }, [quantities]);
+
+  const handleCheckboxChange = (bookId: string, checked: boolean) => {
+    setSelectedBooks(prev => {
+      if (checked) {
+        // Add bookId if checked
+        // Also initialize quantity to 1 if not already set
+        setQuantities(q => ({ ...q, [bookId]: q[bookId] || 1 }));
+        return [...prev, bookId];
+      } else {
+        // Remove bookId and remove quantity entry
+        setQuantities(q => {
+          const copy = { ...q };
+          delete copy[bookId];
+          return copy;
+        });
+        return prev.filter(id => id !== bookId);
+      }
+    });
+  };
+
+  const increaseQuantity = (bookId: string) => {
+    setQuantities(prev => ({
+      ...prev,
+      [bookId]: (prev[bookId] || 1) + 1,
+    }));
+  };
+
+  const decreaseQuantity = (bookId: string) => {
+    setQuantities(prev => {
+      const currentQty = prev[bookId] || 1;
+      if (currentQty <= 1) return prev; // prevent less than 1
+      return {
+        ...prev,
+        [bookId]: currentQty - 1,
+      };
+    });
+  };
+
+  // Whenever selectedBooks or quantities update, log corresponding book data with quantity
+  React.useEffect(() => {
+    const selectedBookData = books
+      ?.filter((book: any) => selectedBooks.includes(book._id))
+      .map((book: any) => ({
+        ...book,
+        quantity: quantities[book._id] || 1,
+      }));
+    console.log("Selected Books Data with quantities:", selectedBookData);
+    setSelectedBooksWithQuantity(selectedBookData)
+  }, [selectedBooks, quantities, books]);
+// total discount
+// total discount calculation
+const totalDiscountSelector = (products: any[]) => {
+  return products?.reduce((acc: number, product: any) => {
+    if (product.isDiscount && product.discountPrice?.amount > 0) {
+      const discountPerUnit = (product.price.amount * product.discountPrice.amount) / 100;
+      return acc + discountPerUnit * (product.quantity || 1);
+    }
+    return acc;
+  }, 0);
+};
+
+// console.log("discount",currencyFormatter(totalDiscountSelector(selectedBooksWithQuantity)));
+
+
+
+
+  const [placeOrder]=usePlaceCartOrderMutation();
+  const handleOrder = async() => {
+    // Implement your order logic here
+  const items = selectedBooksWithQuantity.map((product:any) => ({
+    itemId: product._id, 
+    quantity: product.quantity,
+  }));
+    const order = {
+          items,
+    shippingCost: 0,
+    customerEmail: user?.user?.email
+    }
+    console.log("order",order);
+    try{
+      const res =await placeOrder(order)
+      console.log("response",res);
+      message.success(res.data.message)
+      router.push(res?.data?.data?.url)
+
+    }catch(error:any){
+      console.log(error);
+    }
+  };
+
+
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      refetch();
+    }, 5000); // Refetch every 5 seconds
+
+    return () => clearInterval(interval);
+  }, [refetch]);
+
+  if (isLoading) {
+    return <LoadingPage />;
+  }
+
   return (
     <div className="container mx-auto px-4 py-10">
-      <Row gutter={[24, 24]} justify="center">
-        {/* Left Section */}
-        <Col xs={24} md={12} className="flex flex-col">
-          <h1 className={`text-2xl font-bold ${style.fontInter}`}>
-            Book Checkout Summary
-          </h1>
-          <p className={`${style.fontInter} text-gray-600`}>Kept Books</p>
+      <div className="flex flex-wrap justify-between gap-6">
+   <div className="w-full md:w-7/12 px-2">
+  <h1 className={`text-2xl font-bold ${style.fontInter}`}>Book Checkout Summary</h1>
+  <p className={`${style.fontInter} text-gray-600`}>Kept Books</p>
 
-          {/* Book Card */}
-          <Card className="w-full mt-3 shadow-md rounded-lg overflow-hidden border">
-            <Row align="middle" gutter={16} className="w-full">
-              {/* Book Image */}
-              <Col xs={6} sm={4} md={3} lg={2}>
-                <div className="relative w-16 h-16">
-                  <Image
-                    src={wild} 
-                    alt="Book Cover"
-                    fill
-                    className="object-cover rounded-md"
-                  />
-                </div>
-              </Col>
+  {/* Render Books Dynamically */}
+  {books?.map((book: any) => (
+    <div key={book._id} className="bg-white shadow-md rounded-lg mt-5 p-4">
+      <div className="flex flex-wrap items-center gap-4">
+        {/* Checkbox */}
+        <input
+          type="checkbox"
+          checked={selectedBooks.includes(book._id)}
+          
+          onChange={(e) => handleCheckboxChange(book._id, e.target.checked)}
+          className="w-5 h-5 flex-shrink-0"
+        />
 
-              {/* Book Details */}
-              <Col xs={12} sm={16} md={17} className="px-2">
-                <h3 className="text-lg font-semibold">Tiny Muslims</h3>
-                <p className="text-gray-500 text-sm">By Islam</p>
-              </Col>
+        <div className="relative w-20 h-20 sm:w-24 sm:h-24 flex-shrink-0">
+          <Image
+            src={book.coverImage || wild}
+            alt="Book Cover"
+            fill
+            className="object-cover rounded-md"
+          />
+        </div>
 
-              {/* Price */}
-              <Col xs={6} sm={4} md={3} className="text-right">
-                <p className="text-black font-bold">$14.59</p>
-              </Col>
-            </Row>
-          </Card>
-          <Card className="w-full mt-3 shadow-md rounded-lg overflow-hidden border">
-            <Row align="middle" gutter={16} className="w-full">
-              {/* Book Image */}
-              <Col xs={6} sm={4} md={3} lg={2}>
-                <div className="relative w-16 h-16">
-                  <Image
-                    src={wild} 
-                    alt="Book Cover"
-                    fill
-                    className="object-cover rounded-md"
-                  />
-                </div>
-              </Col>
+        <div className="flex-1 min-w-[150px]">
+          <h3 className="text-base sm:text-lg font-semibold">{book.name}</h3>
+          <p className="text-gray-500 text-xs sm:text-sm">By {book.author}</p>
+        </div>
 
-              {/* Book Details */}
-              <Col xs={12} sm={16} md={17} className="px-2">
-                <h3 className="text-lg font-semibold">Tiny Muslims</h3>
-                <p className="text-gray-500 text-sm">By Islam</p>
-              </Col>
-
-              {/* Price */}
-              <Col xs={6} sm={4} md={3} className="text-right">
-                <p className="text-black font-bold">$14.59</p>
-              </Col>
-            </Row>
-          </Card>
-          <Card className="w-full mt-3 shadow-md rounded-lg overflow-hidden border">
-            <Row align="middle" gutter={16} className="w-full">
-              {/* Book Image */}
-              <Col xs={6} sm={4} md={3} lg={2}>
-                <div className="relative w-16 h-16">
-                  <Image
-                    src={wild} 
-                    alt="Book Cover"
-                    fill
-                    className="object-cover rounded-md"
-                  />
-                </div>
-              </Col>
-
-              {/* Book Details */}
-              <Col xs={12} sm={16} md={17} className="px-2">
-                <h3 className="text-lg font-semibold">Tiny Muslims</h3>
-                <p className="text-gray-500 text-sm">By Islam</p>
-              </Col>
-
-              {/* Price */}
-              <Col xs={6} sm={4} md={3} className="text-right">
-                <p className="text-black font-bold">$14.59</p>
-              </Col>
-            </Row>
-          </Card>
-          <Card className="w-full mt-3 shadow-md rounded-lg overflow-hidden border">
-            <Row align="middle" gutter={16} className="w-full">
-              {/* Book Image */}
-              <Col xs={6} sm={4} md={3} lg={2}>
-                <div className="relative w-16 h-16">
-                  <Image
-                    src={wild} 
-                    alt="Book Cover"
-                    fill
-                    className="object-cover rounded-md"
-                  />
-                </div>
-              </Col>
-
-              {/* Book Details */}
-              <Col xs={12} sm={16} md={17} className="px-2">
-                <h3 className="text-lg font-semibold">Tiny Muslims</h3>
-                <p className="text-gray-500 text-sm">By Islam</p>
-              </Col>
-
-              {/* Price */}
-              <Col xs={6} sm={4} md={3} className="text-right">
-                <p className="text-black font-bold">$14.59</p>
-              </Col>
-            </Row>
-          </Card>
-          <Card className="w-full mt-3 shadow-md rounded-lg overflow-hidden border">
-            <Row align="middle" gutter={16} className="w-full">
-              {/* Book Image */}
-              <Col xs={6} sm={4} md={3} lg={2}>
-                <div className="relative w-16 h-16">
-                  <Image
-                    src={wild} 
-                    alt="Book Cover"
-                    fill
-                    className="object-cover rounded-md"
-                  />
-                </div>
-              </Col>
-
-              {/* Book Details */}
-              <Col xs={12} sm={16} md={17} className="px-2">
-                <h3 className="text-lg font-semibold">Tiny Muslims</h3>
-                <p className="text-gray-500 text-sm">By Islam</p>
-              </Col>
-
-              {/* Price */}
-              <Col xs={6} sm={4} md={3} className="text-right">
-                <p className="text-black font-bold">$14.59</p>
-              </Col>
-            </Row>
-          </Card>
-        </Col>
+        <div className="text-right min-w-[140px]">
+          <p className="text-black font-bold text-sm sm:text-base">
+            <span className="mr-2">Price:</span>
+            {currencyFormatter(book.price?.amount)}
+          </p>
+          <div className="flex items-center gap-2 mt-3 justify-end">
+            <p className="text-gray-500 font-semibold text-xs sm:text-sm">Quantity</p>
+            <button
+              onClick={() => decreaseQuantity(book._id)}
+              className="bg-gray-100 text-xs hover:bg-gray-200 rounded-full p-1 transition-all duration-200"
+              // disabled={!selectedBooks.includes(book._id)}
+              aria-label="Decrease quantity"
+            >
+              <Minus />
+            </button>
+            <p className="font-semibold text-xs sm:text-sm px-3 py-1 rounded-md border border-gray-300 min-w-[24px] text-center">
+              {quantities[book._id] || 1}
+            </p>
+            <button
+              onClick={() => increaseQuantity(book._id)}
+              className="bg-gray-100 hover:bg-gray-200 rounded-full p-1 transition-all duration-200"
+              // disabled={!selectedBooks.includes(book._id)}
+              aria-label="Increase quantity"
+            >
+              <Plus />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  ))}
+</div>
 
         {/* Right Section */}
-        <Col xs={24} md={12}>
-          {/* Payment Details */}
-          <Card className="w-full rounded-2xl shadow-md border">
-            <h3 className="text-lg font-semibold mb-3">Payment Details</h3>
+        <div className="w-full md:w-4/12 mt-10 md:mt-0">
+          <div className="bg-white shadow-md rounded-lg p-6">
+            <h3 className="text-lg font-semibold mb-4">Payment Details</h3>
             <div className="border-b mb-4"></div>
 
-            <Row justify="space-between" className="mb-2">
-              <Col>Book Subtotal</Col>
-              <Col className="font-medium">$179.88</Col>
-            </Row>
+            {/* Book Subtotal */}
+            <div className="flex justify-between mb-2">
+              <span>Book Subtotal</span>
+              {/* Calculate subtotal from selected books and quantities */}
+              <span className="font-medium">
+                {currencyFormatter(
+                  books
+                    ?.filter((book: any) => selectedBooks.includes(book._id))
+                    .reduce((acc:any, book:any) => acc + (book.price?.amount || 0) * (quantities[book._id] || 1), 0) || 0
+                )}
+              </span>
+            </div>
 
-            <Row justify="space-between" className="mb-2">
-              <Col>Illuminate Discount</Col>
-              <Col className="font-medium">$3.59</Col>
-            </Row>
+            {/* Illuminate Discount */}
+            <div className="flex justify-between mb-2">
+              <span>Illuminate Discount</span>
+              <span className="font-medium">{currencyFormatter(totalDiscountSelector(selectedBooksWithQuantity))}</span>
+            </div>
 
-            <Row justify="space-between" className="mb-4">
-              <Col>Taxes</Col>
-              <Col className="font-medium">$5.99</Col>
-            </Row>
+            {/* Taxes */}
+            {/* <div className="flex justify-between mb-4">
+              <span>Taxes</span>
+              <span className="font-medium">$5.99</span>
+            </div> */}
 
             {/* Order Total */}
-            <Row justify="space-between" className="mb-4">
-              <Col className="font-semibold text-lg">Order Total</Col>
-              <Col className="font-semibold text-lg">$179.88</Col>
-            </Row>
+            <div className="flex justify-between mb-4">
+              <span className="font-semibold text-lg">Order Total</span>
+              {/* subtotal - discount + taxes */}
+              <span className="font-semibold text-lg">
+                {currencyFormatter(
+                  (books
+                    ?.filter((book: any) => selectedBooks.includes(book._id))
+                    .reduce((acc:any, book:any) => acc + (book.price?.amount || 0) * (quantities[book._id] || 1), 0) || 0)
+                  - totalDiscountSelector(selectedBooksWithQuantity)
+                 
+                )}
+              </span>
+            </div>
 
             {/* Payment Method */}
-            <Row justify="space-between" align="middle">
-              <Col className="font-semibold">Payment</Col>
-              <Col className="flex items-center space-x-2">
-                <CreditCardOutlined className="text-red-500 text-xl" />
-                <span className="font-medium">Visa *7384</span>
-              </Col>
-            </Row>
-          </Card>
+            <div className="flex justify-between items-center">
+                  <button
+                // disabled={!proceed}
+                  onClick={handleOrder}
 
-          {/* Support Message */}
-          <div className="mt-4 text-sm">
-            <p className={`${style.fontInter} text-gray-600`}>
-              If you&apos;ve changed your mind on which books you&apos;d like to keep and return, we can get you in touch with our support team.
-            </p>
-            <p className={`${style.fontInter} font-bold mt-2`}>Make a Change</p>
+                  className="w-full bg-[#F37975] md:px-8 p-4 md:h-12 flex items-center justify-center text-white hover:bg-red-500 border-none mb-4 my-5"
+                >
+                  <CreditCardOutlined className="text-white text-xl mr-3" />
+                  Proceed Checkout
+                </button>
+           
+            </div>
           </div>
-        </Col>
-      </Row>
+
+  
+        </div>
+      </div>
     </div>
   );
 };

@@ -118,16 +118,7 @@ export const totalActualPriceSelector = (state: RootState) => {
 };
 
 
-// Total Discount Selector
-// export const totalDiscountSelector = (state: RootState) => {
-//   console.log("total discount===>",state);
-//   return state.cart.products.reduce((acc, product) => {
-//     if (product.discountPrice.amount) {
-//       return acc + product.discountPrice.amount * product.orderQuantity;
-//     }
-//     return acc;
-//   }, 0);
-// };
+
 export const totalDiscountSelector = (state: RootState) => {
   return state.cart.products.reduce((acc, product) => {
     // console.log("Product:", product.name);
@@ -144,20 +135,6 @@ export const totalDiscountSelector = (state: RootState) => {
 };
 
 
-
-
-
-// Final Price After Discount Selector (with discount handling)
-// export const finalPriceAfterDiscountSelector = (state: RootState) => {
-//   return state.cart.products.reduce((acc, product) => {
-
-//     const finalPrice = product?.discountPrice?.amount
-//       ? product?.price?.amount - product?.discountPrice?.amount
-//       : 0; 
-
-//     return acc + finalPrice * product?.orderQuantity;
-//   }, 0);
-// };
 export const finalPriceAfterDiscountSelector = (state: RootState) => {
   return state.cart.products.reduce((acc, product) => {
     const discount = product.isDiscount ? (product.price.amount * product.discountPrice.amount) / 100 : 0;
@@ -178,17 +155,6 @@ export const totalProductsSelector = (state: RootState) => {
 };
 //* Payment
 
-// export const subTotalSelector = (state: RootState) => {
-//     return state.cart.products.reduce((acc, product) => {
-//       if (product?.discountPrice?.amount) {
-//         console.log("discount price ",product.discountPrice.amount);
-//         return acc + product.discountPrice.amount * product.orderQuantity;
-//       } else {
-//         console.log(product.price, "Price");
-//         return acc + product.price.amount * product.orderQuantity;
-//       }
-//     }, 0);
-//   };
 export const subTotalSelector = (state: RootState) => {
   const total = state.cart.products.reduce((acc, product) => {
     return acc + product.price.amount * product.orderQuantity;

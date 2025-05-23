@@ -11,6 +11,7 @@ import { selectCurrentUser } from "@/redux/features/auth/authSlice";
 import { selectCurrentPlan } from "@/redux/features/subscription/subscriptionSlice";
 import { useCreateSubscriptionMutation } from "@/redux/features/subscription/subscriptionApi";
 
+
 const Banner = () => {
   // bg-[#FDFBDF]
     const [createSubscription] = useCreateSubscriptionMutation();
@@ -62,7 +63,9 @@ const handleSurvey=async()=>{
             {/* <Link href="/name"> */}
              <div className="flex hidden  md:block  justify-center mt-1">
         
-             <button onClick={()=>handleSurvey()}  className={` tracking-widest  rounded-full bg-[#F37975] p-2 md:p-3  text-base sm:text-lg md:text-xl hover:bg-[#e57373] text-white ${styles.fontPoppins}`}>
+             <button
+              onClick={()=>handleSurvey()} 
+               className={` tracking-widest  rounded-full bg-[#F37975] p-2 md:p-3  text-base sm:text-lg md:text-xl hover:bg-[#e57373] text-white ${styles.fontPoppins}`}>
                 START TODAY
               </button>
              </div>
