@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 import { Package, User, FileText,  ChevronRight } from "lucide-react"
 import { useState } from "react"
@@ -118,8 +119,8 @@ console.log("billing",billing);
       <h1 className="text-3xl font-bold mb-8">Billing History</h1>
 
       <div className="space-y-6">
-        {billingData.map((item) => (
-          <div key={item.id} className="rounded-lg shadow-sm border border-gray-100">
+        {billingData?.map((item:any) => (
+          <div key={item._id} className="rounded-lg shadow-sm border border-gray-100">
             <div className="p-4 flex justify-between items-center">
               <div className="flex items-center gap-4">
                 <span className="bg-gray-200 text-gray-800 px-3 py-1 rounded-md text-sm font-medium">
@@ -145,7 +146,7 @@ console.log("billing",billing);
 
                 {expandedItems[item.id] && item.details && (
                   <div className="px-4 pb-4">
-                    {item.details.map((detail, index) => (
+                    {item.details.map((detail:any, index:number) => (
                       <p key={index} className="text-gray-700">
                         {detail}
                       </p>
