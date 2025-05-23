@@ -53,6 +53,14 @@ const bookApi = baseApi.injectEndpoints({
       }),
        invalidatesTags: ['favourite'],
     }),
+    removeFavouriteBooks: builder.mutation({
+      query: ({userId,bookId}) => ({
+        url: `favorite-book/remove/${userId}`,
+        method: "POST",
+        body: {bookId},
+      }),
+       invalidatesTags: ['favourite'],
+    }),
     getCategories: builder.query({
       query: () => ({
         url: `/category/retrieve`,
@@ -75,4 +83,4 @@ const bookApi = baseApi.injectEndpoints({
   }),
 });
 
-export const {useGetAllBooksQuery,useGetSingleBooksQuery ,useGetAllFavouritesBooksQuery,useFavouriteBooksMutation,useGetCategoriesQuery,useGetGradeQuery,useGetCollectionQuery} = bookApi;
+export const {useGetAllBooksQuery,useGetSingleBooksQuery ,useGetAllFavouritesBooksQuery,useFavouriteBooksMutation,useGetCategoriesQuery,useGetGradeQuery,useGetCollectionQuery,useRemoveFavouriteBooksMutation} = bookApi;

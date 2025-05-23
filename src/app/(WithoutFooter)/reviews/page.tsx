@@ -15,6 +15,7 @@ import LoadingPage from "@/app/loading";
 import { currencyFormatter } from "@/utils/currencyFormatter";
 import { useForm, Controller } from "react-hook-form";
 import { selectCurrentUser } from "@/redux/features/auth/authSlice";
+import { useEffect } from "react";
 
 const { TextArea } = Input;
 
@@ -38,7 +39,7 @@ const BookReview = () => {
   } = useForm<FormData>({});
   const currentCategory = useAppSelector(selectCurrentCategoryId);
   const categoryId = currentCategory?.categoryID;
-  const { data: specifiqBox, isLoading } = useGetSpecefiqBoxesQuery(
+  const { data: specifiqBox, isLoading,refetch } = useGetSpecefiqBoxesQuery(
     categoryId,
     {
       skip: !categoryId,
@@ -46,6 +47,13 @@ const BookReview = () => {
   );
   const boxs = specifiqBox?.data;
   // console.log("box===>", boxs);
+    useEffect(() => {
+      const interval = setInterval(() => {
+        refetch();
+      }, 5000); // Refetch every 5 seconds
+  
+      return () => clearInterval(interval);
+    }, [refetch]);
   if (isLoading) {
     return <LoadingPage />;
   }

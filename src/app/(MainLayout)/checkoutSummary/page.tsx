@@ -10,15 +10,23 @@ import LoadingPage from "@/app/loading"
 import { useAppSelector } from "@/redux/hooks"
 import { selectCurrentCategoryId } from "@/redux/features/boxes/boxesSlice"
 import { useGetSpecefiqBoxesQuery } from "@/redux/features/boxes/boxesApi"
+import { useEffect } from "react"
 
 export default function BookReview() {
   const currentCategory = useAppSelector(selectCurrentCategoryId)
   const categoryId = currentCategory?.categoryID
-  const  {data:specifiqBox,isLoading}=useGetSpecefiqBoxesQuery(categoryId,{
+  const  {data:specifiqBox,isLoading,refetch}=useGetSpecefiqBoxesQuery(categoryId,{
     skip: !categoryId,  // skip if empty
   })  
   const books = specifiqBox?.data?.books
-    console.log("current  box ",specifiqBox?.data?.books);
+    // console.log("current  box ",specifiqBox?.data?.books);
+      useEffect(() => {
+        const interval = setInterval(() => {
+          refetch();
+        }, 5000); // Refetch every 5 seconds
+    
+        return () => clearInterval(interval);
+      }, [refetch]);
      if(isLoading){
       return <LoadingPage/>
     }

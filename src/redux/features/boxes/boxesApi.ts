@@ -6,26 +6,29 @@ const boxesApi = baseApi.injectEndpoints({
       query: () => ({
         url: "/box/retrieve",
         method: "GET",
-
       }),
+         providesTags: ["box"],
     }),
     getSpecefiqBoxes: builder.query({
       query: (id) => ({
         url: `/box/retrieve/category/${id}`,
         method: "GET",
-
+        providesTags: ["box"],
       }),
     }),
     reviewBoxes: builder.mutation({
       query: (info) => ({
         url: `/review/create`,
         method: "POST",
-body:info
+        body: info,
       }),
+          invalidatesTags: ['box'],
     }),
-   
-
   }),
-});   
+});
 
-export const {useGetAllBoxesQuery ,useGetSpecefiqBoxesQuery,useReviewBoxesMutation} = boxesApi;
+export const {
+  useGetAllBoxesQuery,
+  useGetSpecefiqBoxesQuery,
+  useReviewBoxesMutation,
+} = boxesApi;

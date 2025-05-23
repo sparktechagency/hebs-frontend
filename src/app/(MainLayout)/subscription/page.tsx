@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   ChevronDown,
   ChevronRight,
@@ -37,10 +37,17 @@ const SubscriptionPage = () => {
   // console.log("survey===>",survey);
     const currentCategory = useAppSelector(selectCurrentCategoryId)
     const categoryId = currentCategory?.categoryID
-    const  {data:specifiqBox}=useGetSpecefiqBoxesQuery(categoryId,{
+    const  {data:specifiqBox,refetch}=useGetSpecefiqBoxesQuery(categoryId,{
       skip: !categoryId,  // skip if empty
     })  
       // console.log("box===>",specifiqBox?.data);
+        useEffect(() => {
+          const interval = setInterval(() => {
+            refetch();
+          }, 5000); // Refetch every 5 seconds
+      
+          return () => clearInterval(interval);
+        }, [refetch]);
     const books = specifiqBox?.data?.books
     const boxs = specifiqBox?.data
   const [showBooks1, setShowBooks1] = useState(false);
