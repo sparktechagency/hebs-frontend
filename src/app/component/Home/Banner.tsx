@@ -12,6 +12,7 @@ import { selectCurrentUser } from "@/redux/features/auth/authSlice";
 import { selectCurrentPlan } from "@/redux/features/subscription/subscriptionSlice";
 import { message } from "antd";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 
 const Banner = () => {
@@ -63,16 +64,16 @@ const handleSurvey=async()=>{
             <p className={`text-xm sm:text-sm md:text-base lg:text-lg xl:text-xl text-center md:text-left max-w-md lg:max-w-lg xl:max-w-xl ${styles.fontPoppins}`}>
               Help your readers grow with a personalized book selection curated monthly by our team of experts and shipped to your door.
             </p>
-            {/* <Link href="/name"> */}
+            <Link href="/name">
              <div className="flex hidden  md:block  justify-center mt-1">
         
              <button
-              onClick={()=>handleSurvey()} 
+              // onClick={()=>handleSurvey()} 
                className={` tracking-widest  rounded-full bg-[#F37975] p-2 md:p-3  text-base sm:text-lg md:text-xl hover:bg-[#e57373] text-white ${styles.fontPoppins}`}>
                 START TODAY
               </button>
              </div>
-            {/* </Link> */}
+            </Link>
           </div>
           
           {/* Right Content - Book Covers */}

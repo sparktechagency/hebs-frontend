@@ -16,40 +16,53 @@ import { useAppSelector } from "@/redux/hooks";
 import { selectCurrentUser } from "@/redux/features/auth/authSlice";
 import { useGetSpecefiqUserQuery } from "@/redux/features/auth/authApi";
 import LoadingPage from "@/app/loading";
-import { selectCurrentCategoryId } from "@/redux/features/boxes/boxesSlice";
+
 import { useGetSpecefiqBoxesQuery } from "@/redux/features/boxes/boxesApi";
 import Image from "next/image";
 import { selectCurrentSurvey } from "@/redux/features/survey/surveySlice";
+import { useGetRecommendationQuery } from "@/redux/features/survey/surveyApi";
+// import { selectCurrentPlan } from "@/redux/features/subscription/subscriptionSlice";
+import { useSpecefiqSubscriptionQuery } from "@/redux/features/subscription/subscriptionApi";
 const { Option } = Select;
 
 const SubscriptionPage = () => {
   // const plan = useAppSelector(selectCurrentPlan);
   const user = useAppSelector(selectCurrentUser);
+  const userId = user?.userId
+  console.log(userId);
+  const {data:purchaseSubscription}=useSpecefiqSubscriptionQuery(userId)
+console.log("purchasd subscription",purchaseSubscription);
   const survey = useAppSelector(selectCurrentSurvey);
-    const {
-      data: singleUser,
-      isLoading,
- 
-    } = useGetSpecefiqUserQuery(user?.userId);
-    // console.log(singleUser);
+  const { data: singleUser, isLoading } = useGetSpecefiqUserQuery(userId);
+  // console.log(singleUser);
   // console.log("plan===>",plan);
   // console.log("user===>",singleUser);
   // console.log("survey===>",survey);
-    const currentCategory = useAppSelector(selectCurrentCategoryId)
-    const categoryId = currentCategory?.categoryID
-    const  {data:specifiqBox,refetch}=useGetSpecefiqBoxesQuery(categoryId,{
-      skip: !categoryId,  // skip if empty
-    })  
-      // console.log("box===>",specifiqBox?.data);
-        useEffect(() => {
-          const interval = setInterval(() => {
-            refetch();
-          }, 5000); // Refetch every 5 seconds
-      
-          return () => clearInterval(interval);
-        }, [refetch]);
-    const books = specifiqBox?.data?.books
-    const boxs = specifiqBox?.data
+  const { data: specefiqUser} = useGetSpecefiqUserQuery(
+    user?.userId
+  );
+  const dob = specefiqUser?.data?.survey?.dateOfBirth;
+  const formattedDOB = dob ? dob.split("T")[0] : null;
+  const { data: recommendation } = useGetRecommendationQuery(formattedDOB);
+  // console.log("Formatted DOB:", recommendation?.data?.category?._id);
+  const categoryId = recommendation?.data?.category?._id;
+  const { data: specifiqBox, refetch } = useGetSpecefiqBoxesQuery(categoryId, {
+    skip: !categoryId,
+  });
+  console.log("current  box ", specifiqBox);
+  // console.log("box===>",specifiqBox?.data);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      refetch();
+    }, 5000); // Refetch every 5 seconds
+
+    return () => clearInterval(interval);
+  }, [refetch]);
+
+
+
+  const books = specifiqBox?.data?.books;
+  const boxs = specifiqBox?.data;
   const [showBooks1, setShowBooks1] = useState(false);
 
   const [showUpdateModal, setShowUpdateModal] = useState(false);
@@ -64,15 +77,33 @@ const SubscriptionPage = () => {
     console.log("Saving:", readerDetails);
     setShowUpdateModal(false);
   };
-  const DOB=survey?.dateOfBirth;
-   console.log("Dob===>",DOB);
-    const date = new Date(DOB);  
-  const monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+  const DOB = survey?.dateOfBirth;
+  console.log("Dob===>", DOB);
+  const date = new Date(DOB);
+  const monthNames = [
+    "JAN",
+    "FEB",
+    "MAR",
+    "APR",
+    "MAY",
+    "JUN",
+    "JUL",
+    "AUG",
+    "SEP",
+    "OCT",
+    "NOV",
+    "DEC",
+  ];
   const month = monthNames[date.getMonth()];
   const year = date.getFullYear();
 
-  console.log("Month & Year:", month, year); 
-   if (isLoading) return <div><LoadingPage/></div>; 
+  console.log("Month & Year:", month, year);
+  if (isLoading)
+    return (
+      <div>
+        <LoadingPage />
+      </div>
+    );
   return (
     <div className="flex flex-col md:flex-row min-h-screen bg-gray-50">
       {/* Sidebar */}
@@ -115,8 +146,12 @@ const SubscriptionPage = () => {
             <Link href={"/subscription"}>
               <div className="flex items-center justify-between p-2  bg-[#f08080]   rounded-md">
                 <div className="flex flex-col">
-                  <span className="text-white">{singleUser?.data?.firstName}</span>
-                  <span className="text-xs text-white">{singleUser?.data?.status}</span>
+                  <span className="text-white">
+                    {singleUser?.data?.firstName}
+                  </span>
+                  <span className="text-xs text-white">
+                    {singleUser?.data?.status}
+                  </span>
                 </div>
                 <ChevronRight className="h-5 w-5 text-[#f08080]" />
               </div>
@@ -127,7 +162,7 @@ const SubscriptionPage = () => {
 
       {/* Main Content */}
       <main className="flex-1 p-4 md:p-8">
-        <h1 className="text-2xl font-bold mb-8">Ahmed&apos;s Subscription</h1>
+        <h1 className="text-2xl font-bold mb-8"> {singleUser?.data?.firstName}</h1>
 
         {/* Plan Section */}
         <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
@@ -169,7 +204,9 @@ const SubscriptionPage = () => {
               </div>
               <div>
                 <h3 className="text-gray-500 mb-1">Birth Month</h3>
-                <p className="font-medium">{month} {year}</p>
+                <p className="font-medium">
+                  {month} {year}
+                </p>
               </div>
             </div>
 
@@ -181,13 +218,13 @@ const SubscriptionPage = () => {
         </div>
 
         {/* Shipping Address Section */}
-        <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
+        {/* <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
           <h2 className="text-xl font-semibold mb-6">Shipping Address</h2>
 
           <div className="border-t border-gray-200 pt-6">
             <p className="font-medium">Los Angelas, east 92st, USA</p>
           </div>
-        </div>
+        </div> */}
 
         {/* Books Section 1 */}
         <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
@@ -201,29 +238,36 @@ const SubscriptionPage = () => {
           </div>
 
           <div className="border-t border-gray-200 pt-4">
-
-              <button
-                className="w-full bg-gray-400 hover:bg-gray-500 text-white py-3 rounded-md flex items-center justify-center"
-                onClick={() => setShowBooks1(!showBooks1)}
-              >
-                <span className="mr-2">Show Books</span>
-                <ChevronDown className="h-5 w-5" />
-              </button>
-          
+            <button
+              className="w-full bg-gray-400 hover:bg-gray-500 text-white py-3 rounded-md flex items-center justify-center"
+              onClick={() => setShowBooks1(!showBooks1)}
+            >
+              <span className="mr-2">Show Books</span>
+              <ChevronDown className="h-5 w-5" />
+            </button>
 
             {showBooks1 && (
               <div className="mt-4 p-4 bg-gray-50 rounded-md">
-                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 overflow-x-auto">
-                        {books.map((book:any,idx:number) => (
-                          <div key={idx} className="flex flex-col space-y-2">
-                            <div className="aspect-[3/4] relative rounded-lg overflow-hidden shadow-sm">
-                              <Image src={book.coverImage || "/placeholder.svg"} alt={book.name} fill className="object-cover" />
-                            </div>
-                            <h3 className="text-sm font-medium text-gray-800 line-clamp-2">{book.name}</h3>
-                            <p className="text-xs text-gray-500 line-clamp-2">{book.summary}</p>
-                          </div>
-                        ))}
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 overflow-x-auto">
+                  {books?.map((book: any, idx: number) => (
+                    <div key={idx} className="flex flex-col space-y-2">
+                      <div className="aspect-[3/4] relative rounded-lg overflow-hidden shadow-sm">
+                        <Image
+                          src={book.coverImage || "/placeholder.svg"}
+                          alt={book.name}
+                          fill
+                          className="object-cover"
+                        />
                       </div>
+                      <h3 className="text-sm font-medium text-gray-800 line-clamp-2">
+                        {book.name}
+                      </h3>
+                      <p className="text-xs text-gray-500 line-clamp-2">
+                        {book.summary}
+                      </p>
+                    </div>
+                  ))}
+                </div>
               </div>
             )}
           </div>

@@ -3,7 +3,7 @@
 
 import Image from "next/image";
 import { Slider, Input, message } from "antd";
-import wild from "@/assets/wild.png";
+
 
 import { useAppSelector } from "@/redux/hooks";
 import { selectCurrentCategoryId } from "@/redux/features/boxes/boxesSlice";
@@ -138,8 +138,8 @@ const BookReview = () => {
     <div className="flex flex-col sm:flex-row gap-4 pb-6 border-b">
       <div className="flex-shrink-0 mx-auto sm:mx-0">
         <Image
-          src={wild}
-          // src={box?.image }
+          // src={wild}
+          src={boxs?.image }
           alt="Book cover"
           width={80}
           height={100}

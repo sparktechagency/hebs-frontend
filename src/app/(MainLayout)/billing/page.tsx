@@ -9,6 +9,7 @@ import { useGetBillingQuery } from "@/redux/features/survey/surveyApi"
 import { useAppSelector } from "@/redux/hooks"
 import { selectCurrentUser } from "@/redux/features/auth/authSlice"
 import LoadingPage from "@/app/loading"
+import { useGetSpecefiqUserQuery } from "@/redux/features/auth/authApi"
 interface BillingItem {
   id: string
   status: "PAID" | "INVOICE"
@@ -21,6 +22,7 @@ interface BillingItem {
 const BillingHistory=()=> {
   const user = useAppSelector(selectCurrentUser)
   console.log(user);
+    const { data: singleUser } = useGetSpecefiqUserQuery(user?.userId);
   const {data:billing,isLoading}=useGetBillingQuery(user?.userId)
   const [expandedItems, setExpandedItems] = useState<Record<string, boolean>>({})
 if(isLoading){
@@ -99,13 +101,17 @@ console.log("billing",billing);
             <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">SUBSCRIPTION SETTINGS</h3>
                      <Link href={"/subscription"}>
               
-            <div className="flex items-center justify-between p-2 text-gray-600 hover:bg-gray-100 rounded-md">
-              <div className="flex flex-col">
-                <span className="text-[#f08080]">Ahmed</span>
-                <span className="text-xs text-[#f08080]/70">Inactive</span>
+           <div className="flex items-center justify-between p-2  hover:bg-gray-100   rounded-md">
+                <div className="flex flex-col">
+                  <span className="text-gray-600 ">
+                    {singleUser?.data?.firstName}
+                  </span>
+                  <span className="text-xs text-gray-600 ">
+                    {singleUser?.data?.status} 
+                  </span>
+                </div>
+                <ChevronRight className="h-5 w-5 text-gray-600 " />
               </div>
-              <ChevronRight className="h-5 w-5 text-[#f08080]" />
-            </div>
               </Link>
           </div>
 
