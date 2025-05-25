@@ -36,6 +36,7 @@ const handleSurvey=async()=>{
     router.push("/name")
   }
   
+
     } catch (error: any) {
       console.log(error);
       message.error(error);
@@ -43,7 +44,7 @@ const handleSurvey=async()=>{
 
 }
  
-   
+  //  h
   return (
 <div className="w-full  px-4 py-20 lg:py-28"
   style={{ backgroundImage: `url(${frame1.src})` }}   
