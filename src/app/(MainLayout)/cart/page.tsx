@@ -14,7 +14,7 @@ import { useState } from "react";
 import { LockOutlined } from "@ant-design/icons";
 import { useRouter } from "next/navigation";
 
-interface FormData {
+export interface FormData {
   shipping: {
     street: string;
     city: string;
