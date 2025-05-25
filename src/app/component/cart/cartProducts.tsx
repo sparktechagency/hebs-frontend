@@ -11,6 +11,7 @@ import { CartProduct, orderedProductsSelector } from "@/redux/features/cart/cart
 export default function CartProducts() {
   const products = useAppSelector(orderedProductsSelector);
 
+
   return (
     <div className="border-2 border-white bg-background brightness-105 rounded-md col-span-8 h-full row-span-3 p-10 space-y-5">
 
