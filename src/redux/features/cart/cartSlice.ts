@@ -81,7 +81,7 @@ const cartSlice = createSlice({
     },
     removeProduct: (state, action) => {
       state.products = state.products.filter(
-        (product) => product._id !== action.payload
+        (product) => product?._id !== action?.payload
       );
     },
     clearCart: (state) => {
@@ -100,7 +100,7 @@ export const orderSelector = (state: RootState) => {
   return {
     products: state.cart.products.map((product) => ({
       product: product._id,
-      quantity: product.orderQuantity,
+      quantity: product?.orderQuantity,
     })),
 
     // paymentMethod: "Online",
@@ -108,12 +108,12 @@ export const orderSelector = (state: RootState) => {
 };
 // total quantity
 export const totalQuantitySelector = (state: RootState) => {
-  return state.cart.products.reduce((acc, product) => acc + product.orderQuantity, 0);
+  return state.cart.products.reduce((acc, product) => acc + product?.orderQuantity, 0);
 };
 
 export const totalActualPriceSelector = (state: RootState) => {
   return state.cart.products.reduce((acc, product) => {
-    return acc + product.price.amount * product.orderQuantity;
+    return acc + product?.price?.amount * product?.orderQuantity;
   }, 0);
 };
 
@@ -137,8 +137,8 @@ export const totalDiscountSelector = (state: RootState) => {
 
 export const finalPriceAfterDiscountSelector = (state: RootState) => {
   return state.cart.products.reduce((acc, product) => {
-    const discount = product.isDiscount ? (product.price.amount * product.discountPrice.amount) / 100 : 0;
-    const finalPrice = product.price.amount - discount;
+    const discount = product.isDiscount ? (product?.price?.amount * product?.discountPrice?.amount) / 100 : 0;
+    const finalPrice = product?.price.amount - discount;
     return acc + finalPrice * product.orderQuantity;
   }, 0);
 };
@@ -151,13 +151,13 @@ export const finalPriceAfterDiscountSelector = (state: RootState) => {
 
 // Total Products Selector (Total number of items in the cart)
 export const totalProductsSelector = (state: RootState) => {
-  return state.cart.products.reduce((acc, product) => acc + product.orderQuantity, 0);
+  return state.cart.products.reduce((acc, product) => acc + product?.orderQuantity, 0);
 };
 //* Payment
 
 export const subTotalSelector = (state: RootState) => {
-  const total = state.cart.products.reduce((acc, product) => {
-    return acc + product.price.amount * product.orderQuantity;
+  const total = state?.cart?.products.reduce((acc, product) => {
+    return acc + product?.price?.amount * product?.orderQuantity;
   }, 0);
 
   const discount = totalDiscountSelector(state);

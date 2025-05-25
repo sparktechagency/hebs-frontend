@@ -4,7 +4,7 @@ import { currencyFormatter } from "@/utils/currencyFormatter";
 import { Minus, Plus, Trash } from "lucide-react";
 import Image from "next/image";
 
-export default function CartProductCard({ product }: { product: CartProduct }) {
+export default function CartProductCard({ product }: { product: CartProduct }) { 
   const dispatch = useAppDispatch();
   console.log("product==>", product);
 
@@ -17,9 +17,10 @@ export default function CartProductCard({ product }: { product: CartProduct }) {
   };
 
   const handleRemoveProduct = (id: string) => {
+    
     dispatch(removeProduct(id));
   };
-
+  console.log("order prod",product);
   return (
     <div className="bg-white rounded-lg flex p-5 gap-5 shadow-lg hover:shadow-2xl transition-shadow duration-300">
       <div className="h-full w-32 rounded-md overflow-hidden border border-gray-200">
@@ -39,12 +40,12 @@ export default function CartProductCard({ product }: { product: CartProduct }) {
         <hr className="my-2 border-t-2 border-gray-200" />
         <div className="flex items-center justify-between mt-2">
           <h2 className="font-semibold text-lg">
-            Price: {currencyFormatter( product.price.amount)}
+            Price: {currencyFormatter( product?.price?.amount)}
           </h2>
           <div className="flex items-center gap-3">
             <p className="text-gray-500 font-semibold">Quantity</p>
             <button
-              onClick={() => handleDecrementQuantity(product._id)}
+              onClick={() => handleDecrementQuantity(product?._id)}
               className="bg-gray-100 hover:bg-gray-200 rounded-full p-2 transition-all duration-200"
             >
               <Minus />
@@ -53,13 +54,13 @@ export default function CartProductCard({ product }: { product: CartProduct }) {
               {product?.orderQuantity}
             </p>
             <button
-              onClick={() => handleIncrementQuantity(product._id)}
+              onClick={() => handleIncrementQuantity(product?._id)}
               className="bg-gray-100 hover:bg-gray-200 rounded-full p-2 transition-all duration-200"
             >
               <Plus />
             </button>
             <button
-              onClick={() => handleRemoveProduct(product._id)}
+              onClick={() => handleRemoveProduct(product?._id)}
               className="bg-red-100 hover:bg-red-200 rounded-full p-2 transition-all duration-200"
             >
               <Trash className="text-red-500" />
@@ -68,5 +69,6 @@ export default function CartProductCard({ product }: { product: CartProduct }) {
         </div>
       </div>
     </div>
+
   );
 }

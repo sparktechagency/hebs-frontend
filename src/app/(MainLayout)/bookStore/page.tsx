@@ -19,18 +19,26 @@ import { useAppDispatch } from "@/redux/hooks";
 import { addProduct, CartProduct } from "@/redux/features/cart/cartSlice";
 import LoadingPage from "@/app/loading";
 
+
 function BookStore() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<
     string | undefined
   >();
+  // const [product,setProduct]=useState([])
   const dispatch = useAppDispatch();
 
+
+
+
+
   // add product to cart
-  const handleAddProduct = (product: CartProduct) => {
-    dispatch(addProduct(product));
-    message.success("Product Added ");
-  };
+    const handleAddProduct = (product: CartProduct) => {
+      dispatch(addProduct(product));
+      message.success("Product Added ")
+    };
+
+
 
   const [selectedGrade, setSelectedGrade] = useState<string | undefined>();
   const [selectedCollection, setSelectedCollection] = useState<
@@ -194,6 +202,7 @@ function BookStore() {
               key={`${product.id}-${index}`}
               product={product}
               handleAddProduct={handleAddProduct}
+              // setProduct={setProduct}
             />
           ))}
         </div>

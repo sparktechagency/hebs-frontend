@@ -92,7 +92,11 @@ const result = checkIfProductIdExists(product._id);
 
         {/* Add to Bag Button */}
         <button
-          onClick={() => handleAddProduct(product)}
+      onClick={() => {
+  handleAddProduct(product);
+  // setProduct(product);
+}}
+
           className="w-full py-2 bg-[#ffd6d6] text-black rounded-md text-sm font-medium mb-2 hover:bg-[#ffbdbd] transition-colors"
         >
           Add to Bag
