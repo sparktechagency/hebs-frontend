@@ -16,7 +16,7 @@ import { addCategory } from "@/redux/features/boxes/boxesSlice";
 // {setIsEmail,setIsRecomended}:{  setIsEmail: (value: boolean) => void,setIsRecomended: (value: boolean) => void} 
 export default function BookRecommendations() {
   const surveyData = useAppSelector(selectCurrentSurvey)
-  // console.log("survey from redux",surveyData);
+  // console.log("survey from redux",surveyData?.dateOfBirth);
   // const handleBack = () => {
   //   setIsEmail(true);
   //   setIsRecomended(false);

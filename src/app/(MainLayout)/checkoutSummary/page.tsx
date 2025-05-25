@@ -8,21 +8,26 @@ import shape from "@/assets/shape.png";
 import Link from "next/link";
 import LoadingPage from "@/app/loading";
 import { useAppSelector } from "@/redux/hooks";
-import { selectCurrentCategoryId } from "@/redux/features/boxes/boxesSlice";
+
 import { useGetSpecefiqBoxesQuery } from "@/redux/features/boxes/boxesApi";
+import { selectCurrentUser } from "@/redux/features/auth/authSlice";
+import { useGetSpecefiqUserQuery } from "@/redux/features/auth/authApi";
+import { useGetRecommendationQuery } from "@/redux/features/survey/surveyApi";
 
 export default function BookReview() {
-  const currentCategory = useAppSelector(selectCurrentCategoryId);
-  const categoryId = currentCategory?.categoryID;
-  console.log("catid",categoryId);
-  const { data: specifiqBox, isLoading } = useGetSpecefiqBoxesQuery(
-    categoryId,
-    {
-      skip: !categoryId, // skip if empty
-    }
-  );
-  const books = specifiqBox?.data?.books;
-  console.log("current  box ", specifiqBox?.data?.books);
+  const user= useAppSelector(selectCurrentUser)
+
+  const {data:specefiqUser,isLoading}=useGetSpecefiqUserQuery(user?.userId)
+  const dob = specefiqUser?.data?.survey?.dateOfBirth;
+const formattedDOB = dob ? dob.split('T')[0] : null;
+const {data:recommendation}=useGetRecommendationQuery(formattedDOB)
+// console.log("Formatted DOB:", recommendation?.data?.category?._id);
+const categoryId = recommendation?.data?.category?._id
+  const  {data:specifiqBox}=useGetSpecefiqBoxesQuery(categoryId,{
+    skip: !categoryId, 
+  })  
+  // console.log("current  box ",specifiqBox?.data?.books);
+  const books= specifiqBox?.data?.books
   if (isLoading) {
     return <LoadingPage />;
   }
