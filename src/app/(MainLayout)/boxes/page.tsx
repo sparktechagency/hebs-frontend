@@ -8,17 +8,26 @@ import shop from "@/assets/shop.png"
 import styles from "@/app/styles.module.css"
 
 import { useAppSelector } from "@/redux/hooks"
-import { selectCurrentCategoryId } from "@/redux/features/boxes/boxesSlice"
+
 import { useGetSpecefiqBoxesQuery } from "@/redux/features/boxes/boxesApi"
 import LoadingPage from "@/app/loading"
 import { useEffect } from "react"
+import { useGetSpecefiqUserQuery } from "@/redux/features/auth/authApi"
+import { selectCurrentUser } from "@/redux/features/auth/authSlice"
+import { useGetRecommendationQuery } from "@/redux/features/survey/surveyApi"
 
 
 const BoxesPage=()=> {
-  const currentCategory = useAppSelector(selectCurrentCategoryId)
-  const categoryId = currentCategory?.categoryID
-  const  {data:specifiqBox,isLoading,refetch}=useGetSpecefiqBoxesQuery(categoryId,{
-    skip: !categoryId,  // skip if empty
+  const user= useAppSelector(selectCurrentUser)
+
+  const {data:specefiqUser,isLoading}=useGetSpecefiqUserQuery(user?.userId)
+  const dob = specefiqUser?.data?.survey?.dateOfBirth;
+const formattedDOB = dob ? dob.split('T')[0] : null;
+const {data:recommendation}=useGetRecommendationQuery(formattedDOB)
+// console.log("Formatted DOB:", recommendation?.data?.category?._id);
+const categoryId = recommendation?.data?.category?._id
+  const  {data:specifiqBox,refetch}=useGetSpecefiqBoxesQuery(categoryId,{
+    skip: !categoryId, 
   })  
   console.log("current  box ",specifiqBox);
     useEffect(() => {

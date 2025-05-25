@@ -1,15 +1,16 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 import Image from "next/image";
 import bannerImg from "@/assets/BannerImage.png";
 import styles from "@/app/styles.module.css";
 import frame1 from "@/assets/tinyMuminsFrame1.png"
 
-import { message } from "antd";
-import { useRouter } from "next/navigation";
+import { useCreateSubscriptionMutation } from "@/redux/features/subscription/subscriptionApi";
+import { useRouter } from "next/router";
 import { useAppSelector } from "@/redux/hooks";
 import { selectCurrentUser } from "@/redux/features/auth/authSlice";
 import { selectCurrentPlan } from "@/redux/features/subscription/subscriptionSlice";
-import { useCreateSubscriptionMutation } from "@/redux/features/subscription/subscriptionApi";
+import { message } from "antd";
 
 
 const Banner = () => {
@@ -24,7 +25,7 @@ const handleSurvey=async()=>{
       priceId: plan?.priceId,
     };
     try {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    
       const res = (await createSubscription(orderData)) as any;
       console.log("response===>", res);
       if (res?.error) {
@@ -33,7 +34,7 @@ const handleSurvey=async()=>{
       }else{
     router.push("/name")
   }
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  
     } catch (error: any) {
       console.log(error);
       message.error(error);
