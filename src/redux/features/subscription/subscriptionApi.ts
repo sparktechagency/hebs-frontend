@@ -9,6 +9,13 @@ const subscriptionApi = baseApi.injectEndpoints({
         body: info,
       }),
     }),
+    specefiqSubscription: builder.query({
+      query: (userId) => ({
+        url: `subscription-purchase/retrieve/user/${userId}`,
+        method: "GET",
+        // body: info,
+      }),
+    }),
 
 
    
@@ -16,4 +23,4 @@ const subscriptionApi = baseApi.injectEndpoints({
   }),
 });   
 
-export const {useCreateSubscriptionMutation} = subscriptionApi;
+export const {useCreateSubscriptionMutation,useSpecefiqSubscriptionQuery} = subscriptionApi;

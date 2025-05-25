@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
-import { message, Select } from 'antd';
+import { message, } from 'antd';
 import React from 'react';
 import styles from "@/app/styles.module.css"
 import Image from 'next/image';
@@ -27,20 +27,19 @@ const GiftPage = () => {
     };
   return (
     <div className='container mx-auto'>
-      <div className="flex flex-col sm:flex-row justify-between items-center p-4 bg-white border-b border-black py-8">
-        {/* Filter Section */}
+      {/* <div className="flex flex-col sm:flex-row justify-between items-center p-4 bg-white border-b border-black py-8">
+    
         <div className="flex items-center space-x-2 mb-4 sm:mb-0">
           <span className="text-gray-600">Filter:</span>
           <Select defaultValue="Availability" className="w-40" />
           <Select defaultValue="Price" className="w-32" />
         </div>
 
-        {/* Sort By Section */}
         <div className="flex items-center space-x-2">
           <span className="text-gray-600">Sort by:</span>
           <Select defaultValue="Alphabetically, A-Z" className="w-52" />
         </div>
-      </div>
+      </div> */}
 
       {/* Products */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -51,7 +50,7 @@ const GiftPage = () => {
             <div key={index} className="rounded-lg p-3 flex flex-col cursor-pointer">
               <div className="relative h-48 mb-3 rounded-md bg-[#fffbeb]">
                 <Image
-                  src={`/${box?.image}`}
+                  src={`${box?.image}`}
                   alt={box.title}
                   className="object-cover rounded-md"
                   sizes="(max-width: 640px) 100vw, 20vw"

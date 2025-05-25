@@ -24,6 +24,14 @@ const boxesApi = baseApi.injectEndpoints({
       }),
           invalidatesTags: ['box'],
     }),
+    createInvoice: builder.mutation({
+      query: ({info,id}) => ({
+        url: `/invoice/update/${id}`,
+        method: "PATCH",
+        body: info,
+      }),
+          invalidatesTags: ['box'],
+    }),
   }),
 });
 
@@ -31,4 +39,5 @@ export const {
   useGetAllBoxesQuery,
   useGetSpecefiqBoxesQuery,
   useReviewBoxesMutation,
+  useCreateInvoiceMutation
 } = boxesApi;

@@ -26,6 +26,12 @@ const categoryId = recommendation?.data?.category?._id
   const  {data:specifiqBox}=useGetSpecefiqBoxesQuery(categoryId,{
     skip: !categoryId, 
   })  
+    const process = specifiqBox?.data?.category?.createdAt;
+  const formattedProccessed = process ? process.split("T")[0] : null;
+  const formattedDate = new Date(formattedProccessed).toLocaleDateString(
+    "en-US",
+    { month: "short", day: "numeric" }
+  );
   // console.log("current  box ",specifiqBox?.data?.books);
   const books= specifiqBox?.data?.books
   if (isLoading) {
@@ -65,7 +71,7 @@ const currentYear = now.getFullYear();
           <div className="flex gap-3 mt-10 ml-3">
             <Check className="h-8 w-8 mt-3  text-[#f08080]" />
             <h1 className={`text-2xl font-bold my-3`}>
-              Box processed on may 11
+              Box processed on {formattedDate}
             </h1>
           </div>
           <p className={`mb-3 pl-10`}>Thanks for reading! </p>

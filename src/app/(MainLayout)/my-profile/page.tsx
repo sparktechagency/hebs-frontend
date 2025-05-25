@@ -123,12 +123,16 @@ const MyProfilePage = () => {
               SUBSCRIPTION SETTINGS
             </h3>
             <Link href={"/subscription"}>
-              <div className="flex items-center justify-between p-2 text-gray-600 hover:bg-gray-100 rounded-md">
+                <div className="flex items-center justify-between p-2  hover:bg-gray-100   rounded-md">
                 <div className="flex flex-col">
-                  <span className="text-[#f08080]">Ahmed</span>
-                  <span className="text-xs text-[#f08080]/70">Inactive</span>
+                  <span className="text-gray-600 ">
+                    {singleUser?.data?.firstName}
+                  </span>
+                  <span className="text-xs text-gray-600 ">
+                    {singleUser?.data?.status}
+                  </span>
                 </div>
-                <ChevronRight className="h-5 w-5 text-[#f08080]" />
+                <ChevronRight className="h-5 w-5 text-gray-600 " />
               </div>
             </Link>
           </div>

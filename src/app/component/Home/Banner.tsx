@@ -14,6 +14,7 @@ import { message } from "antd";
 import { useRouter } from "next/navigation";
 
 
+
 const Banner = () => {
   // bg-[#FDFBDF]
   const router = useRouter();
@@ -44,7 +45,7 @@ const handleSurvey=async()=>{
 
 }
  
-  //  h
+  
   return (
 <div className="w-full  px-4 py-20 lg:py-28"
   style={{ backgroundImage: `url(${frame1.src})` }}   

@@ -43,6 +43,7 @@ export default function SubscriptionPurchasePage() {
   //     formState: { errors },
   //   } = useForm<FormData>({
   // });
+  console.log("survey data",surveyData);
   const plan = useAppSelector(selectCurrentPlan);
   console.log("current plan get purchase id...=>", plan);
 
@@ -73,6 +74,7 @@ export default function SubscriptionPurchasePage() {
     try {
       //   post survey
       const response = await createSurvey(surveyData);
+      console.log("sur res",response);
       if (response?.data) {
         message.success(response?.data?.message);
       } else {
