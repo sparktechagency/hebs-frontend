@@ -29,7 +29,7 @@ const SubscriptionPage = () => {
   // const plan = useAppSelector(selectCurrentPlan);
   const user = useAppSelector(selectCurrentUser);
   const userId = user?.userId
-  console.log(userId);
+
   const {data:purchaseSubscription}=useSpecefiqSubscriptionQuery(userId)
 console.log("purchasd subscription",purchaseSubscription);
   const survey = useAppSelector(selectCurrentSurvey);
@@ -41,15 +41,17 @@ console.log("purchasd subscription",purchaseSubscription);
   const { data: specefiqUser} = useGetSpecefiqUserQuery(
     user?.userId
   );
+  // console.log("userid",specefiqUser);
   const dob = specefiqUser?.data?.survey?.dateOfBirth;
   const formattedDOB = dob ? dob.split("T")[0] : null;
+  //  console.log("Formatted DOB:", formattedDOB);
   const { data: recommendation } = useGetRecommendationQuery(formattedDOB);
-  // console.log("Formatted DOB:", recommendation?.data?.category?._id);
   const categoryId = recommendation?.data?.category?._id;
-  const { data: specifiqBox, refetch } = useGetSpecefiqBoxesQuery(categoryId, {
+  // console.log("cat id:", recommendation?.data?.category?._id);
+  const { data: specifiqBox ,refetch} = useGetSpecefiqBoxesQuery(categoryId, {
     skip: !categoryId,
   });
-  console.log("current  box ", specifiqBox);
+  // console.log("current  box ", specifiqBox);
   // console.log("box===>",specifiqBox?.data);
   useEffect(() => {
     const interval = setInterval(() => {
@@ -78,7 +80,7 @@ console.log("purchasd subscription",purchaseSubscription);
     setShowUpdateModal(false);
   };
   const DOB = survey?.dateOfBirth;
-  console.log("Dob===>", DOB);
+  // console.log("Dob===>", DOB);
   const date = new Date(DOB);
   const monthNames = [
     "JAN",
