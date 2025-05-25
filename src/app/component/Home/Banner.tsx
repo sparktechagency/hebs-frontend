@@ -6,17 +6,18 @@ import styles from "@/app/styles.module.css";
 import frame1 from "@/assets/tinyMuminsFrame1.png"
 
 import { useCreateSubscriptionMutation } from "@/redux/features/subscription/subscriptionApi";
-import { useRouter } from "next/router";
+
 import { useAppSelector } from "@/redux/hooks";
 import { selectCurrentUser } from "@/redux/features/auth/authSlice";
 import { selectCurrentPlan } from "@/redux/features/subscription/subscriptionSlice";
 import { message } from "antd";
+import { useRouter } from "next/navigation";
 
 
 const Banner = () => {
   // bg-[#FDFBDF]
-    const [createSubscription] = useCreateSubscriptionMutation();
   const router = useRouter();
+    const [createSubscription] = useCreateSubscriptionMutation();
   const user = useAppSelector(selectCurrentUser);
     const plan = useAppSelector(selectCurrentPlan);
 const handleSurvey=async()=>{
@@ -35,6 +36,7 @@ const handleSurvey=async()=>{
     router.push("/name")
   }
   
+
     } catch (error: any) {
       console.log(error);
       message.error(error);
@@ -42,7 +44,7 @@ const handleSurvey=async()=>{
 
 }
  
-   
+  //  h
   return (
 <div className="w-full  px-4 py-20 lg:py-28"
   style={{ backgroundImage: `url(${frame1.src})` }}   
