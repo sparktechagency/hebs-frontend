@@ -18,7 +18,8 @@ import { Minus, Plus } from "lucide-react";
 import { selectCurrentUser } from "@/redux/features/auth/authSlice";
 
 import {
-  usePlaceCartOrderMutation,
+  usePlaceBoxOrderMutation,
+
   useShippingInfoMutation,
 } from "@/redux/features/cart/cartApi";
 import { Button, Input, message } from "antd";
@@ -36,7 +37,7 @@ const BookCheckoutPage = () => {
   // console.log("userId",user?.userId);
   const {data:userInvoiceData}=useGetSpecefiqInvoiceQuery(user?.userId,{skip:!user})
   const invoiceId = userInvoiceData?.data?._id
-  // console.log("user invoice",invoiceId);
+  console.log("user invoice",invoiceId);
   const router = useRouter();
   const currentCategory = useAppSelector(selectCurrentCategoryId);
   const categoryId = currentCategory?.categoryID;
@@ -165,10 +166,11 @@ const BookCheckoutPage = () => {
       ) || 0) - totalDiscountSelector(selectedBooksWithQuantity)
   );
 
-  const [placeOrder] = usePlaceCartOrderMutation();
+  const [placeOrder] = usePlaceBoxOrderMutation();
   // console.log("se track det", selectedBooksWithQuantity);
     //  console.log("invoice outside",invoiceId);
   // handle invoice 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleInvoice = async (id:string) => {
     const soldBooks = books.map((book: any) => ({
       bookId: book._id,
@@ -195,7 +197,7 @@ const BookCheckoutPage = () => {
       // console.log("invoice update response===>",res);
       if (res?.data) {
         message.success(res?.data?.message)
-        handleOrder();
+       
       } else {
         message.error("something went wrong!try again");
       }
@@ -213,8 +215,25 @@ const BookCheckoutPage = () => {
       shippingCost: 0,
       customerEmail: user?.user?.email,
     };
+       const soldBooks = books.map((book: any) => ({
+      bookId: book._id,
+      quantity: book.quantity,
+    }));
+        const invoiceData = {
+      soldBooks: [soldBooks],
+      extraBooks: [],
+      status: "kept",
+      paymentStatus: selectPaymentMethod === "payNow" ? "paid" : "unpaid",
+      paymentType: selectPaymentMethod === "payNow" ? "card" : "cash",
+      totalAmount: Number(total),
+      dueAmount: selectPaymentMethod === "payNow" ? 0 : total,
+      currency: "USD",
+      returnLabelUrl: trackingDetails?.returnLabelUrl,
+      returnTrackingCode: trackingDetails?.returnTrackingCode,
+      trackingUrl: trackingDetails?.trackingUrl,
+    };
     try {
-      const res = await placeOrder(order);
+      const res = await placeOrder({order,data:invoiceData});
       message.success(res.data.message);
 
       router.push(res?.data?.data?.url);
@@ -545,7 +564,7 @@ const BookCheckoutPage = () => {
               <div className="flex justify-between items-center">
                 <button
                   disabled={selectPaymentMethod !== "payNow" && enable}
-                  onClick={() => handleInvoice(invoiceId)}
+                  onClick={() => handleOrder()}
                   className={`w-full md:px-8 p-4 md:h-12 flex items-center justify-center text-white border-none mb-4 my-5
               ${
          (       selectPaymentMethod === "payNow" && enable)

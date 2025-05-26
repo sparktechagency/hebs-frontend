@@ -61,7 +61,7 @@ const router = useRouter();
       const res = (await shippingInfo(orderData)) as any;
       if (res?.data) {
         message.success(res.data.message);
-        localStorage.setItem("shippingMethod", JSON.stringify(res.data.data.rates));
+        localStorage.setItem("shippingMethod", JSON.stringify(res.data.data));
         router.push('/payment')
 
       } else {

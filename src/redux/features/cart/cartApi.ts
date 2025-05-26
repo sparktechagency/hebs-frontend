@@ -10,9 +10,17 @@ const cartApi = baseApi.injectEndpoints({
       }),
        invalidatesTags: ['order'],
     }),
+    placeBoxOrder: builder.mutation({
+      query: ({info,data}) => ({
+        url: `/order/order-checkout?purpose=${data}`,
+        method: "POST",
+        body: info,
+      }),
+       invalidatesTags: ['order'],
+    }),
     placeCartOrder: builder.mutation({
       query: (info) => ({
-        url: "/order/order-checkout",
+        url: `/order/order-checkout`,
         method: "POST",
         body: info,
       }),
@@ -31,4 +39,4 @@ const cartApi = baseApi.injectEndpoints({
   }),
 });   
 
-export const {usePlaceOrderMutation,useShippingInfoMutation,usePlaceCartOrderMutation } = cartApi;
+export const {usePlaceOrderMutation,useShippingInfoMutation,usePlaceCartOrderMutation,usePlaceBoxOrderMutation } = cartApi;
