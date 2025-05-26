@@ -9,6 +9,7 @@ import { selectCurrentCategoryId } from "@/redux/features/boxes/boxesSlice";
 import {
   useCreateInvoiceMutation,
   useGetSpecefiqBoxesQuery,
+  useGetSpecefiqInvoiceQuery,
 } from "@/redux/features/boxes/boxesApi";
 import React, { useEffect, useState } from "react";
 import LoadingPage from "@/app/loading";
@@ -30,6 +31,12 @@ const QUANTITIES_STORAGE_KEY = "bookQuantities";
 const BookCheckoutPage = () => {
   const [shippingInfo] = useShippingInfoMutation();
   const [createInvoice] = useCreateInvoiceMutation();
+    const user = useAppSelector(selectCurrentUser);
+    const [enable,setEnable]=useState(false)
+  // console.log("userId",user?.userId);
+  const {data:userInvoiceData}=useGetSpecefiqInvoiceQuery(user?.userId,{skip:!user})
+  const invoiceId = userInvoiceData?.data?._id
+  // console.log("user invoice",invoiceId);
   const router = useRouter();
   const currentCategory = useAppSelector(selectCurrentCategoryId);
   const categoryId = currentCategory?.categoryID;
@@ -41,7 +48,7 @@ const BookCheckoutPage = () => {
     skip: !categoryId,
   });
   const books = specifiqBox?.data?.books;
-  const user = useAppSelector(selectCurrentUser);
+
   const [trackingDetails, setTrackingDetails] = useState<any>({});
 
   // Store selected books IDs
@@ -159,8 +166,10 @@ const BookCheckoutPage = () => {
   );
 
   const [placeOrder] = usePlaceCartOrderMutation();
-  console.log("se track det", selectedBooksWithQuantity);
-  const handleInvoice = async () => {
+  // console.log("se track det", selectedBooksWithQuantity);
+    //  console.log("invoice outside",invoiceId);
+  // handle invoice 
+  const handleInvoice = async (id:string) => {
     const soldBooks = books.map((book: any) => ({
       bookId: book._id,
       quantity: book.quantity,
@@ -172,7 +181,7 @@ const BookCheckoutPage = () => {
       status: "kept",
       paymentStatus: selectPaymentMethod === "payNow" ? "paid" : "unpaid",
       paymentType: selectPaymentMethod === "payNow" ? "card" : "cash",
-      totalAmount: total,
+      totalAmount: Number(total),
       dueAmount: selectPaymentMethod === "payNow" ? 0 : total,
       currency: "USD",
       returnLabelUrl: trackingDetails?.returnLabelUrl,
@@ -180,9 +189,12 @@ const BookCheckoutPage = () => {
       trackingUrl: trackingDetails?.trackingUrl,
     };
     // console.log("invoice",invoiceData);
+    // console.log("invoice",invoiceId);
     try {
-      const res = await createInvoice({ invoiceData });
+      const res = await createInvoice({ info:invoiceData,invoiceId:id });
+      // console.log("invoice update response===>",res);
       if (res?.data) {
+        message.success(res?.data?.message)
         handleOrder();
       } else {
         message.error("something went wrong!try again");
@@ -245,6 +257,7 @@ const BookCheckoutPage = () => {
         //   "shippingMethod",
         //   JSON.stringify(res.data.data.rates)
         // );
+        setEnable(true)
         setTrackingDetails(res.data.data);
       } else {
         message.error(res?.error?.data?.error || "An unknown error occurred");
@@ -531,11 +544,11 @@ const BookCheckoutPage = () => {
               {/* Proceed Checkout Button */}
               <div className="flex justify-between items-center">
                 <button
-                  disabled={selectPaymentMethod !== "payNow"}
-                  onClick={() => handleInvoice()}
+                  disabled={selectPaymentMethod !== "payNow" && enable}
+                  onClick={() => handleInvoice(invoiceId)}
                   className={`w-full md:px-8 p-4 md:h-12 flex items-center justify-center text-white border-none mb-4 my-5
               ${
-                selectPaymentMethod === "payNow"
+         (       selectPaymentMethod === "payNow" && enable)
                   ? "bg-[#F37975] hover:bg-red-500 cursor-pointer"
                   : "bg-gray-400 cursor-not-allowed"
               }`}
