@@ -1,9 +1,15 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-'use client'
+"use client";
+
 import LoadingPage from "@/app/loading";
 import sucess from "@/assets/sucess.png";
 import { useGetSpecefiqUserQuery } from "@/redux/features/auth/authApi";
 import { selectCurrentUser } from "@/redux/features/auth/authSlice";
+import {
+  useCreateInvoiceMutation,
+  useGetSpecefiqInvoiceQuery,
+} from "@/redux/features/boxes/boxesApi";
 import { usePlaceOrderMutation } from "@/redux/features/cart/cartApi";
 import { orderedProductsSelector } from "@/redux/features/cart/cartSlice";
 import { useAppSelector } from "@/redux/hooks";
@@ -16,26 +22,41 @@ const SucessPage = () => {
   const user = useAppSelector(selectCurrentUser);
   const { data: userData, isLoading } = useGetSpecefiqUserQuery(user?.userId);
   const [createOrder] = usePlaceOrderMutation();
-const router = useRouter()
+  const [createInvoice] = useCreateInvoiceMutation();
+  const router = useRouter();
   const searchParams = useSearchParams();
+  const { data: userInvoiceData } = useGetSpecefiqInvoiceQuery(user?.userId, {
+    skip: !user,
+  });
+  const invoiceId = userInvoiceData?.data?._id;
   const sessionId = searchParams.get("session_id");
+  const rawPurpose = searchParams.get("purpose");
+
+  // Memoize purpose to prevent infinite loop
+  const purpose = useMemo(() => {
+    if (!rawPurpose) return null;
+    try {
+      return JSON.parse(rawPurpose);
+    } catch {
+      return null;
+    }
+  }, [rawPurpose]);
 
   const [shippingMethods, setShippingMethods] = useState<any>({});
   const orderedProducts = useAppSelector(orderedProductsSelector);
 
-  // Memoize items so the array reference is stable
   const items = useMemo(() => {
-    return orderedProducts?.map((product: any) => ({
-      itemId: product._id,
-      quantity: product.quantity,
-    })) || [];
+    return (
+      orderedProducts?.map((product: any) => ({
+        itemId: product._id,
+        quantity: product.quantity,
+      })) || []
+    );
   }, [orderedProducts]);
 
-  // Memoize shippingMethods object for stable reference
-  const shippingMethodsMemo = useMemo(() => shippingMethods, [shippingMethods]);
-
-  // Flag to prevent multiple API calls
+  // Ref flags to prevent infinite calls
   const hasCreatedOrder = useRef(false);
+  const hasCreatedInvoice = useRef(false);
 
   useEffect(() => {
     const methods = localStorage.getItem("shippingMethod");
@@ -49,14 +70,52 @@ const router = useRouter()
     }
   }, []);
 
+  // Invoice creation effect (runs only once if purpose exists)
   useEffect(() => {
+    if (!purpose || !user?.userId) return;
+    if (hasCreatedInvoice.current) return;
+
+    hasCreatedInvoice.current = true;
+
+    const invoiceData = {
+      soldBooks: purpose.soldBooks,
+      extraBooks: [],
+      status: "kept",
+      paymentStatus: "paid",
+      paymentType: "card",
+      totalAmount: purpose.totalAmount,
+      currency: "USD",
+      returnLabelUrl: purpose.returnLabelUrl,
+      returnTrackingCode: purpose.returnTrackingCode,
+      trackingUrl: purpose.trackingUrl,
+    };
+
+    createInvoice({ info: invoiceData, invoiceId })
+      .unwrap()
+      .then((res) => {
+        console.log("invoice res", res);
+        message.success(res.message || "Invoice created successfully");
+          router.push("/");
+      })
+      .catch(() => {
+        hasCreatedInvoice.current = false; // reset flag on failure
+        message.error("Something went wrong! Try again.");
+      });
+  }, [purpose, user?.userId, createInvoice,invoiceId]);
+
+  // Order creation effect (runs only once if purpose does NOT exist)
+  useEffect(() => {
+    if (purpose) return;
     if (
       hasCreatedOrder.current ||
       !sessionId ||
       !user?.userId ||
       !items.length ||
       !userData
-    ) return;
+    )
+      return;
+
+    hasCreatedOrder.current = true;
 
     const orderData = {
       sessionId,
@@ -66,24 +125,34 @@ const router = useRouter()
         email: userData.data?.email,
       },
       items,
-      returnLabelUrl: shippingMethodsMemo?.returnLabelUrl,
-      returnTrackingCode: shippingMethodsMemo?.returnTrackingCode,
-      trackingUrl: shippingMethodsMemo?.trackingUrl,
+      returnLabelUrl: shippingMethods?.returnLabelUrl,
+      returnTrackingCode: shippingMethods?.returnTrackingCode,
+      trackingUrl: shippingMethods?.trackingUrl,
     };
 
     createOrder(orderData)
       .unwrap()
       .then((response) => {
-        console.log("Order created successfully:", response);
-        hasCreatedOrder.current = true;
-        message.success(response?.message)
-        router.push("/bookStore")
+        console.log("order res", response);
+        message.success(response?.message);
+        router.push("/bookStore");
       })
       .catch((err) => {
-        console.error("Failed to create order:", err);
-        message.error(err?.data?.error)
+        hasCreatedOrder.current = false; // reset flag on failure
+        message.error(err?.data?.error || "Failed to create order");
       });
-  }, [sessionId, user?.userId, userData, items, shippingMethodsMemo, createOrder]);
+  }, [
+    purpose,
+    sessionId,
+    user?.userId,
+    userData,
+    items,
+    shippingMethods.returnLabelUrl,
+    shippingMethods.returnTrackingCode,
+    shippingMethods.trackingUrl,
+    createOrder,
+    router,
+  ]);
 
   if (isLoading) {
     return <LoadingPage />;
