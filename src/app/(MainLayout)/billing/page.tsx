@@ -11,14 +11,6 @@ import { selectCurrentUser } from "@/redux/features/auth/authSlice"
 import LoadingPage from "@/app/loading"
 import { useGetSpecefiqUserQuery } from "@/redux/features/auth/authApi"
 import { currencyFormatter } from "@/utils/currencyFormatter"
-interface BillingItem {
-  id: string
-  status: "PAID" | "INVOICE"
-  date: string
-  amount: string
-  title?: string
-  details?: string[]
-}
 
 const BillingHistory=()=> {
   const user = useAppSelector(selectCurrentUser)
@@ -30,40 +22,7 @@ if(isLoading){
   return <LoadingPage/>
 }
 console.log("billing",billing);
-  const billingData: BillingItem[] = [
-    {
-      id: "1",
-      status: "PAID",
-      date: "May 11, 2025",
-      amount: "$14.59",
-      title: "Bought 5 Books For Ahmed",
-      details: ["MAY: ALLAH MADE ME"],
-    },
-    {
-      id: "2",
-      status: "INVOICE",
-      date: "May 11, 2025",
-      amount: "$14.59",
-      title: "Bought 5 Books For Ahmed",
-      details: ["MAY: ALLAH MADE ME"],
-    },
-    {
-      id: "3",
-      status: "PAID",
-      date: "May 11, 2025",
-      amount: "$14.59",
-      title: "Bought 5 Books For Ahmed",
-      details: ["MAY: ALLAH MADE ME"],
-    },
-    {
-      id: "4",
-      status: "INVOICE",
-      date: "May 11, 2025",
-      amount: "$14.59",
-      title: "Bought 5 Books For Ahmed",
-      details: ["MAY: ALLAH MADE ME"],
-    },
-  ]
+
 
   const toggleExpand = (id: string) => {
     setExpandedItems((prev) => ({
