@@ -9,6 +9,13 @@ const othersApi = baseApi.injectEndpoints({
 
       }),
     }),
+    getTeams: builder.query({
+      query: () => ({
+        url: "/team/retrieve/all",
+        method: "GET",
+
+      }),
+    }),
     getPrivacyPolicy: builder.query({
       query: () => ({
         url: "/privacy-policy/retrive",
@@ -42,4 +49,4 @@ const othersApi = baseApi.injectEndpoints({
   }),
 });   
 
-export const {useGetAboutQuery,useGetContactQuery,useGetPrivacyPolicyQuery,useGetTermsQuery,useCreteContactMutation } = othersApi;
+export const {useGetAboutQuery,useGetContactQuery,useGetPrivacyPolicyQuery,useGetTermsQuery,useCreteContactMutation,useGetTeamsQuery } = othersApi;

@@ -12,6 +12,7 @@ import { selectCurrentUser } from "@/redux/features/auth/authSlice";
 import { selectCurrentPlan } from "@/redux/features/subscription/subscriptionSlice";
 import { message } from "antd";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 
 
@@ -64,7 +65,7 @@ const handleSurvey=async()=>{
             <p className={`text-xm sm:text-sm md:text-base lg:text-lg xl:text-xl text-center md:text-left max-w-md lg:max-w-lg xl:max-w-xl ${styles.fontPoppins}`}>
               Help your readers grow with a personalized book selection curated monthly by our team of experts and shipped to your door.
             </p>
-            {/* <Link href="/name"> */}
+            <Link href="/name">
              <div className="flex hidden  md:block  justify-center mt-1">
         
              <button
@@ -73,7 +74,7 @@ const handleSurvey=async()=>{
                 START TODAY
               </button>
              </div>
-            {/* </Link> */}
+            </Link>
           </div>
           
           {/* Right Content - Book Covers */}
