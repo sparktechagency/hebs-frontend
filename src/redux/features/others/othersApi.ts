@@ -30,9 +30,16 @@ const othersApi = baseApi.injectEndpoints({
 
       }),
     }),
+    creteContact: builder.mutation({
+      query: () => ({
+        url:`/contact-us/send-email`,
+        method: "POST",
+
+      }),
+    }),
    
 
   }),
 });   
 
-export const {useGetAboutQuery,useGetContactQuery,useGetPrivacyPolicyQuery,useGetTermsQuery } = othersApi;
+export const {useGetAboutQuery,useGetContactQuery,useGetPrivacyPolicyQuery,useGetTermsQuery,useCreteContactMutation } = othersApi;
