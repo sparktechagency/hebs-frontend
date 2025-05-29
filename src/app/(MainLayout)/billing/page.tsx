@@ -106,15 +106,15 @@ const formattedDate = formattedProccessed
           </span>
           <span className="text-gray-700">{formattedDate}</span>
         </div>
-        <span className="font-medium">{currencyFormatter(item.contentId.total.amount)}</span>
+        <span className="font-medium">{currencyFormatter(item?.contentId?.total?.amount)}</span>
       </div>
 
-      {item.title && (
+      {item?.title && (
         <>
           <div className="border-t border-gray-200"></div>
           <div
             className="p-4 flex justify-between items-center cursor-pointer"
-            onClick={() => toggleExpand(item.id)}
+            onClick={() => toggleExpand(item?.id)}
           >
             <h3 className="font-medium">{item.title}</h3>
             <ChevronDown

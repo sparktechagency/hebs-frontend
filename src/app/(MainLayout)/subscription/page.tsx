@@ -39,11 +39,9 @@ const [cancelSubscription]=useCancelSubscriptionMutation();
   // console.log("plan===>",plan);
   // console.log("user===>",singleUser);
   // console.log("survey===>",survey);
-  const { data: specefiqUser} = useGetSpecefiqUserQuery(
-    user?.userId
-  );
+
   // console.log("userid",specefiqUser);
-  const dob = specefiqUser?.data?.survey?.dateOfBirth;
+  const dob = singleUser?.data?.survey?.dateOfBirth;
   const formattedDOB = dob ? dob.split("T")[0] : null;
   //  console.log("Formatted DOB:", formattedDOB);
   const { data: recommendation } = useGetRecommendationQuery(formattedDOB);
@@ -80,7 +78,7 @@ const [cancelSubscription]=useCancelSubscriptionMutation();
     // console.log("Saving:", readerDetails);
     setShowUpdateModal(false);
   };
-  const DOB = specefiqUser?.data?.survey?.dateOfBirth;
+  const DOB = singleUser?.data?.survey?.dateOfBirth;
   // console.log("Dob===>", DOB);
   const date = new Date(DOB);
   const monthNames = [

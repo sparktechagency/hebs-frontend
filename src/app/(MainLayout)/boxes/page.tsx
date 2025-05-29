@@ -22,6 +22,9 @@ const BoxesPage = () => {
   const { data: specefiqUser, isLoading } = useGetSpecefiqUserQuery(
     user?.userId
   );
+  const subscription = specefiqUser?.data?.subscription;
+  console.log("singleUser",subscription);
+  
   const dob = specefiqUser?.data?.survey?.dateOfBirth;
   const formattedDOB = dob ? dob.split("T")[0] : null;
   const { data: recommendation } = useGetRecommendationQuery(formattedDOB);
