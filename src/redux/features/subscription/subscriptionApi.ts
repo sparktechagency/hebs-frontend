@@ -11,8 +11,8 @@ const subscriptionApi = baseApi.injectEndpoints({
     }),
     cancelSubscription: builder.mutation({
       query: (id) => ({
-        url: `/subscription-purchase/cancel/subscription-purchase/${id}`,
-        method: "PATCH",
+        url: `/subscription-purchase/send-subscription-disable-request/${id}`,
+        method: "POST",
      
       }),
     }),

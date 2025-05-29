@@ -32,7 +32,7 @@ const SubscriptionPage = () => {
 
 const [cancelSubscription]=useCancelSubscriptionMutation();
   const {data:purchaseSubscription}=useSpecefiqSubscriptionQuery(userId,{skip:!user})
-console.log("purchasd subscription",purchaseSubscription);
+// console.log("purchasd subscription",purchaseSubscription);
 
   const { data: singleUser, isLoading } = useGetSpecefiqUserQuery(userId,{skip:!user});
 //  console.log("user",singleUser);

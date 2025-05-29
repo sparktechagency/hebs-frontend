@@ -26,6 +26,7 @@ import { Button, Input, message } from "antd";
 import { useRouter } from "next/navigation";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { FormData } from "../cart/page";
+import { useSpecefiqSubscriptionQuery } from "@/redux/features/subscription/subscriptionApi";
 
 const QUANTITIES_STORAGE_KEY = "bookQuantities";
 
@@ -33,6 +34,11 @@ const BookCheckoutPage = () => {
   const [shippingInfo] = useShippingInfoMutation();
   const [createInvoice] = useCreateInvoiceMutation();
     const user = useAppSelector(selectCurrentUser);
+    const userId = user?.userId
+
+    const {data:purchaseSubscription}=useSpecefiqSubscriptionQuery(userId,{skip:!user})
+  console.log("purchasd subscription",purchaseSubscription);
+ 
     const [enable,setEnable]=useState(false)
     const [enableCashon,setEnableCashon]=useState(false)
   // console.log("userId",user?.userId);
