@@ -23,6 +23,7 @@ import Image from "next/image";
 import { useGetRecommendationQuery } from "@/redux/features/survey/surveyApi";
 // import { selectCurrentPlan } from "@/redux/features/subscription/subscriptionSlice";
 import { useCancelSubscriptionMutation, useSpecefiqSubscriptionQuery } from "@/redux/features/subscription/subscriptionApi";
+import { useRouter } from "next/navigation";
 const { Option } = Select;
 
 const SubscriptionPage = () => {
@@ -60,7 +61,7 @@ const [cancelSubscription]=useCancelSubscriptionMutation();
     return () => clearInterval(interval);
   }, [refetch]);
 
-
+const router = useRouter()
 
   const books = specifiqBox?.data?.books;
   const boxs = specifiqBox?.data;
@@ -95,6 +96,17 @@ const [cancelSubscription]=useCancelSubscriptionMutation();
     "NOV",
     "DEC",
   ];
+
+
+
+  const subscription = singleUser?.data?.subscription;
+  console.log("singleUser",subscription);
+  if(subscription?.isActive=== false){
+    message.error("You havent Subscribe yet!Please Subscribe and try again")
+   router.push("/name")
+  }
+
+
   const month = monthNames[date.getMonth()];
   const year = date.getFullYear();
 

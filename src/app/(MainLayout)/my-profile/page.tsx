@@ -47,6 +47,7 @@ const MyProfilePage = () => {
   } = useForm<FormValue>();
 
   const onSubmit: SubmitHandler<FormValue> = async (data) => {
+    console.log(data);
     try {
       // Ensure userId exists
       if (!user?.userId) {
@@ -204,25 +205,13 @@ const MyProfilePage = () => {
                 />
               </div>
 
-              <div>
-                <label className="block text-sm text-gray-500 mb-2">
-                  Password
-                </label>
-                <div className="relative">
-                  <Input
-                    type="password"
-                    value={"*****"}
-                    className="rounded-lg"
-                    readOnly
-                  />
-                </div>
-              </div>
+      
 
-              <div className="mt-10">
+          <Link href={"/changePass"}>    <div className="mt-10">
                 <button className="-translate-y-1/2 mr-3 text-[#ff0000] hover:text-[#ff0000]/90">
                   Change Password
                 </button>
-              </div>
+              </div></Link>
             </div>
 
             <div className="mt-6 flex justify-center my-5">
