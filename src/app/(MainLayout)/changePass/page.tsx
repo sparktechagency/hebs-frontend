@@ -21,8 +21,12 @@ const router = useRouter()
     console.log("Password change data:", info);
     try {
         const res = await changePass(info)
-        message.success(res?.data?.message);
-router.push("/my-profile")
+        console.log(res);
+        message.success(res?.data?.message );
+        if(res?.data){
+
+            router.push("/my-profile")
+        }
     } catch (error) {
     console.log(error);
     }

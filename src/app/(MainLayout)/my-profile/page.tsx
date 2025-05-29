@@ -24,6 +24,7 @@ import {
   useForm,
 } from "react-hook-form";
 import LoadingPage from "@/app/loading";
+import { useRouter } from "next/navigation";
 interface FormValue {
   firstName: string;
   lastName: string;
@@ -32,6 +33,7 @@ interface FormValue {
 }
 const MyProfilePage = () => {
   const user = useAppSelector(selectCurrentUser);
+  const router = useRouter()
   const {
     data: singleUser,
     isLoading,
@@ -47,7 +49,7 @@ const MyProfilePage = () => {
   } = useForm<FormValue>();
 
   const onSubmit: SubmitHandler<FormValue> = async (data) => {
-    console.log(data);
+    // console.log(data);
     try {
       // Ensure userId exists
       if (!user?.userId) {
@@ -82,6 +84,14 @@ const MyProfilePage = () => {
       message.error( error);
     }
   };
+
+
+  // if(!singleUser){
+  //        message.error(
+  //       "Please Login into your account"
+  //     );
+  //     router.push("/login")
+  // }
 
   if (isLoading) return <div><LoadingPage/></div>; // Show loading indicator while fetching user data
   return (
