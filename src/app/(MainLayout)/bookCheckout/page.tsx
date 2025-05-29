@@ -167,6 +167,8 @@ const BookCheckoutPage = () => {
   }, 0);
 };
 
+const subscriptionPrice =    purchaseSubscription?.data?.priceAmount;
+
   const total =
   (books
     ?.filter((book: any) => selectedBooks.includes(book._id))
@@ -528,6 +530,14 @@ console.log("total price",isNaN(total));
                   )}
                 </span>
               </div>
+              <div className="flex justify-between mb-2">
+                <span>Subscription Discount</span>
+                <span className="font-medium">
+                  {currencyFormatter(
+                   subscriptionPrice
+                  )}
+                </span>
+              </div>
 
               {/* Order Total */}
               <div className="flex justify-between mb-4">
@@ -542,7 +552,7 @@ console.log("total price",isNaN(total));
                           (book.price?.amount || 0) *
                             (quantities[book._id] || 1),
                         0
-                      ) || 0) - totalDiscountSelector(selectedBooksWithQuantity)
+                      ) || 0) - totalDiscountSelector(selectedBooksWithQuantity) -subscriptionPrice
                   )}
                 </span>
               </div>
