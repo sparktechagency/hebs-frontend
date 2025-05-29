@@ -36,7 +36,7 @@ export default function PaymentPage() {
   const [paymentMethod, setPaymentMethod] = useState("credit");
   const [selectedShippingMethod, setSelectedShippingMethod] = useState<any>(null);
   const [shippingMethods, setShippingMethods] = useState<any[]>([]);
-
+// console.log("shippingmethods",shippingMethods);
   // Convert rate to number safely
   const deliveryCost = Number(selectedShippingMethod?.rate) || 0;
   const subTotalAfterSelectDeliveryCost = subTotal + deliveryCost;
@@ -51,7 +51,8 @@ const user = useAppSelector(selectCurrentUser)
     if (methods) {
       try {
         const parsedMethods = JSON.parse(methods);
-        setShippingMethods(parsedMethods);
+        // console.log("parsed method",parsedMethods?.rates);
+        setShippingMethods(parsedMethods?.rates);
       } catch {
         setShippingMethods([]);
       }
@@ -132,7 +133,7 @@ console.log(proceed);
                 }}
                 className="w-full"
               >
-                {shippingMethods.length > 0 ? (
+                {shippingMethods?.length > 0 ? (
                   shippingMethods.slice(0, 3).map((rate: any, idx: number) => (
                     <div
                       key={idx}

@@ -1,16 +1,26 @@
 "use client";
-import { Form, Input } from "antd";
+import { Form, Input, message } from "antd";
 import Image from "next/image";
 import group1 from "@/assets/Group1.png";
 import fun1 from "@/assets/fun1.png";
 import fun2 from "@/assets/fun2.png";
 import fun3 from "@/assets/fun3.png";
 import style from "@/app/styles.module.css";
+import { useCreteNewsletterMutation } from "@/redux/features/others/othersApi";
 const FunFact = () => {
   const [form] = Form.useForm();
-
-  const onFinish = (values: FormDataEntryValue) => {
-    console.log(values);
+  const [createSubscription]=useCreteNewsletterMutation()
+  const onFinish = async(data: FormDataEntryValue) => {
+    // console.log(data);
+      try {
+      const res = await createSubscription(data).unwrap()
+      // console.log("res",res);
+      message.success(res?.message)
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error:any) {
+      // console.log(error);
+      message.error(error?.message)
+    }
   };
   return (
     <div className="bg-[#FFFFFF] mt-6">
@@ -129,7 +139,7 @@ const FunFact = () => {
                         <span className="text-[#f08080]">*</span>
                       </span>
                     }
-                    name="firstName"
+                    name="name"
                   >
                     <Input size="large" className="rounded border-gray-200" />
                   </Form.Item>

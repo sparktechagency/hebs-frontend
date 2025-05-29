@@ -24,6 +24,7 @@ import {
   useForm,
 } from "react-hook-form";
 import LoadingPage from "@/app/loading";
+import { useRouter } from "next/navigation";
 interface FormValue {
   firstName: string;
   lastName: string;
@@ -32,6 +33,7 @@ interface FormValue {
 }
 const MyProfilePage = () => {
   const user = useAppSelector(selectCurrentUser);
+  const router = useRouter()
   const {
     data: singleUser,
     isLoading,
@@ -47,6 +49,7 @@ const MyProfilePage = () => {
   } = useForm<FormValue>();
 
   const onSubmit: SubmitHandler<FormValue> = async (data) => {
+    // console.log(data);
     try {
       // Ensure userId exists
       if (!user?.userId) {
@@ -81,6 +84,14 @@ const MyProfilePage = () => {
       message.error( error);
     }
   };
+
+
+  // if(!singleUser){
+  //        message.error(
+  //       "Please Login into your account"
+  //     );
+  //     router.push("/login")
+  // }
 
   if (isLoading) return <div><LoadingPage/></div>; // Show loading indicator while fetching user data
   return (
@@ -204,25 +215,13 @@ const MyProfilePage = () => {
                 />
               </div>
 
-              <div>
-                <label className="block text-sm text-gray-500 mb-2">
-                  Password
-                </label>
-                <div className="relative">
-                  <Input
-                    type="password"
-                    value={"*****"}
-                    className="rounded-lg"
-                    readOnly
-                  />
-                </div>
-              </div>
+      
 
-              <div className="mt-10">
+          <Link href={"/changePass"}>    <div className="mt-10">
                 <button className="-translate-y-1/2 mr-3 text-[#ff0000] hover:text-[#ff0000]/90">
                   Change Password
                 </button>
-              </div>
+              </div></Link>
             </div>
 
             <div className="mt-6 flex justify-center my-5">

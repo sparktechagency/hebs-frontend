@@ -53,6 +53,14 @@ const bookApi = baseApi.injectEndpoints({
       }),
        invalidatesTags: ['favourite'],
     }),
+    orderCreate: builder.mutation({
+      query: () => ({
+        url: `/order/create`,
+        method: "POST",
+        // body: {bookId},
+      }),
+       invalidatesTags: ['books'],
+    }),
     removeFavouriteBooks: builder.mutation({
       query: ({userId,bookId}) => ({
         url: `favorite-book/remove/${userId}`,
@@ -83,4 +91,4 @@ const bookApi = baseApi.injectEndpoints({
   }),
 });
 
-export const {useGetAllBooksQuery,useGetSingleBooksQuery ,useGetAllFavouritesBooksQuery,useFavouriteBooksMutation,useGetCategoriesQuery,useGetGradeQuery,useGetCollectionQuery,useRemoveFavouriteBooksMutation} = bookApi;
+export const {useGetAllBooksQuery,useGetSingleBooksQuery ,useGetAllFavouritesBooksQuery,useFavouriteBooksMutation,useGetCategoriesQuery,useGetGradeQuery,useGetCollectionQuery,useRemoveFavouriteBooksMutation,useOrderCreateMutation} = bookApi;

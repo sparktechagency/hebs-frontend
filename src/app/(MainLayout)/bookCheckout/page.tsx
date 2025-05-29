@@ -9,6 +9,7 @@ import { selectCurrentCategoryId } from "@/redux/features/boxes/boxesSlice";
 import {
   useCreateInvoiceMutation,
   useGetSpecefiqBoxesQuery,
+  useGetSpecefiqInvoiceQuery,
 } from "@/redux/features/boxes/boxesApi";
 import React, { useEffect, useState } from "react";
 import LoadingPage from "@/app/loading";
@@ -17,19 +18,33 @@ import { Minus, Plus } from "lucide-react";
 import { selectCurrentUser } from "@/redux/features/auth/authSlice";
 
 import {
-  usePlaceCartOrderMutation,
+  usePlaceBoxOrderMutation,
+
   useShippingInfoMutation,
 } from "@/redux/features/cart/cartApi";
 import { Button, Input, message } from "antd";
 import { useRouter } from "next/navigation";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { FormData } from "../cart/page";
+import { useSpecefiqSubscriptionQuery } from "@/redux/features/subscription/subscriptionApi";
 
 const QUANTITIES_STORAGE_KEY = "bookQuantities";
 
 const BookCheckoutPage = () => {
   const [shippingInfo] = useShippingInfoMutation();
   const [createInvoice] = useCreateInvoiceMutation();
+    const user = useAppSelector(selectCurrentUser);
+    const userId = user?.userId
+
+    const {data:purchaseSubscription}=useSpecefiqSubscriptionQuery(userId,{skip:!user})
+  console.log("purchasd subscription",purchaseSubscription);
+ 
+    const [enable,setEnable]=useState(false)
+    const [enableCashon,setEnableCashon]=useState(false)
+  // console.log("userId",user?.userId);
+  const {data:userInvoiceData}=useGetSpecefiqInvoiceQuery(user?.userId,{skip:!user})
+  const invoiceId = userInvoiceData?.data?._id
+  console.log("user invoice",invoiceId);
   const router = useRouter();
   const currentCategory = useAppSelector(selectCurrentCategoryId);
   const categoryId = currentCategory?.categoryID;
@@ -41,7 +56,7 @@ const BookCheckoutPage = () => {
     skip: !categoryId,
   });
   const books = specifiqBox?.data?.books;
-  const user = useAppSelector(selectCurrentUser);
+
   const [trackingDetails, setTrackingDetails] = useState<any>({});
 
   // Store selected books IDs
@@ -137,31 +152,41 @@ const BookCheckoutPage = () => {
     return total + weightKg * KG_TO_OZ * orderQty;
   }, 0);
   const [selectPaymentMethod, setPaymentMethod] = useState("payNow");
-  // total discount calculation
-  const totalDiscountSelector = (products: any[]) => {
-    return products?.reduce((acc: number, product: any) => {
-      if (product.isDiscount && product.discountPrice?.amount > 0) {
-        const discountPerUnit =
-          (product.price.amount * product.discountPrice.amount) / 100;
-        return acc + discountPerUnit * (product.quantity || 1);
-      }
-      return acc;
-    }, 0);
-  };
-  const total = currencyFormatter(
-    (books
-      ?.filter((book: any) => selectedBooks.includes(book._id))
-      .reduce(
-        (acc: any, book: any) =>
-          acc + (book.price?.amount || 0) * (quantities[book._id] || 1),
-        0
-      ) || 0) - totalDiscountSelector(selectedBooksWithQuantity)
-  );
 
-  const [placeOrder] = usePlaceCartOrderMutation();
-  console.log("se track det", selectedBooksWithQuantity);
-  const handleInvoice = async () => {
-    const soldBooks = books.map((book: any) => ({
+  const totalDiscountSelector = (products: any[] = []) => {
+  return products?.reduce((acc: number, product: any) => {
+    const discount = Number(product.discountPrice?.amount);
+    const price = Number(product.price?.amount);
+    const qty = Number(product.quantity || 1);
+
+    if (product.isDiscount && !isNaN(discount) && discount > 0 && !isNaN(price)) {
+      const discountPerUnit = (price * discount) / 100;
+      return acc + discountPerUnit * qty;
+    }
+    return acc;
+  }, 0);
+};
+
+const subscriptionPrice =    purchaseSubscription?.data?.priceAmount;
+
+  const total =
+  (books
+    ?.filter((book: any) => selectedBooks.includes(book._id))
+    .reduce(
+      (acc: any, book: any) =>
+        acc + (Number(book.price?.amount) || 0) * (quantities[book._id] || 1),
+      0
+    ) || 0) - (totalDiscountSelector(selectedBooksWithQuantity) || 0);
+
+// const totalD = currencyFormatter(total);
+console.log("total price",isNaN(total));
+  const [placeOrder] = usePlaceBoxOrderMutation();
+  // console.log("se track det", selectedBooksWithQuantity);
+    //  console.log("invoice outside",invoiceId);
+  // handle invoice 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const handleInvoice = async (id:string) => {
+    const soldBooks = selectedBooksWithQuantity?.map((book: any) => ({
       bookId: book._id,
       quantity: book.quantity,
     }));
@@ -170,20 +195,23 @@ const BookCheckoutPage = () => {
       soldBooks: [soldBooks],
       extraBooks: [],
       status: "kept",
-      paymentStatus: selectPaymentMethod === "payNow" ? "paid" : "unpaid",
-      paymentType: selectPaymentMethod === "payNow" ? "card" : "cash",
+      paymentStatus: "unpaid",
+      paymentType: "cash",
       totalAmount: total,
-      dueAmount: selectPaymentMethod === "payNow" ? 0 : total,
+      dueAmount: total,
       currency: "USD",
       returnLabelUrl: trackingDetails?.returnLabelUrl,
       returnTrackingCode: trackingDetails?.returnTrackingCode,
       trackingUrl: trackingDetails?.trackingUrl,
     };
     // console.log("invoice",invoiceData);
+    // console.log("invoice",invoiceId);
     try {
-      const res = await createInvoice({ invoiceData });
+      const res = await createInvoice({ info:invoiceData,invoiceId:id });
+      // console.log("invoice update response===>",res);
       if (res?.data) {
-        handleOrder();
+        message.success(res?.data?.message)
+       
       } else {
         message.error("something went wrong!try again");
       }
@@ -191,18 +219,39 @@ const BookCheckoutPage = () => {
       console.log(err);
     }
   };
+  console.log("selectedBooksWithQuantity",selectedBooksWithQuantity);
   const handleOrder = async () => {
     const items = selectedBooksWithQuantity.map((product: any) => ({
       itemId: product._id,
-      quantity: product.quantity,
+      quantity: product?.quantity,
     }));
     const order = {
       items,
       shippingCost: 0,
       customerEmail: user?.user?.email,
     };
+       const soldBooks = selectedBooksWithQuantity.map((book: any) => ({
+      bookId: book._id,
+      quantity: book.quantity,
+    }));
+        const invoiceData = {
+      soldBooks: [soldBooks],
+      extraBooks: [],
+      status: "kept",
+      // paymentStatus: selectPaymentMethod === "payNow" ? "paid" : "unpaid",
+      // paymentType: selectPaymentMethod === "payNow" ? "card" : "cash",
+      totalAmount: total,
+      // dueAmount: selectPaymentMethod === "payNow" ? 0 : total,
+      currency: "USD",
+      returnLabelUrl: trackingDetails?.returnLabelUrl,
+      returnTrackingCode: trackingDetails?.returnTrackingCode,
+      trackingUrl: trackingDetails?.trackingUrl,
+    };
+
+    const data = encodeURIComponent(JSON.stringify(invoiceData))
+    console.log("data",invoiceData);
     try {
-      const res = await placeOrder(order);
+      const res = await placeOrder({ info: order, data });
       message.success(res.data.message);
 
       router.push(res?.data?.data?.url);
@@ -245,6 +294,8 @@ const BookCheckoutPage = () => {
         //   "shippingMethod",
         //   JSON.stringify(res.data.data.rates)
         // );
+        setEnableCashon(true)
+        setEnable(true)
         setTrackingDetails(res.data.data);
       } else {
         message.error(res?.error?.data?.error || "An unknown error occurred");
@@ -479,6 +530,14 @@ const BookCheckoutPage = () => {
                   )}
                 </span>
               </div>
+              <div className="flex justify-between mb-2">
+                <span>Subscription Discount</span>
+                <span className="font-medium">
+                  {currencyFormatter(
+                   subscriptionPrice
+                  )}
+                </span>
+              </div>
 
               {/* Order Total */}
               <div className="flex justify-between mb-4">
@@ -493,7 +552,7 @@ const BookCheckoutPage = () => {
                           (book.price?.amount || 0) *
                             (quantities[book._id] || 1),
                         0
-                      ) || 0) - totalDiscountSelector(selectedBooksWithQuantity)
+                      ) || 0) - totalDiscountSelector(selectedBooksWithQuantity) -subscriptionPrice
                   )}
                 </span>
               </div>
@@ -526,16 +585,17 @@ const BookCheckoutPage = () => {
                     <span>Pay Now</span>
                   </label>
                 </div>
+                <button disabled={!enableCashon} onClick={()=>handleInvoice(invoiceId)} className="my-2 py-2 px-4 rounded-xl bg-orange-600 text-white">Proceed CashOn Delivery</button>
               </div>
 
               {/* Proceed Checkout Button */}
               <div className="flex justify-between items-center">
                 <button
-                  disabled={selectPaymentMethod !== "payNow"}
-                  onClick={() => handleInvoice()}
+                  disabled={selectPaymentMethod !== "payNow" && enable}
+                  onClick={() => handleOrder()}
                   className={`w-full md:px-8 p-4 md:h-12 flex items-center justify-center text-white border-none mb-4 my-5
               ${
-                selectPaymentMethod === "payNow"
+         (       selectPaymentMethod === "payNow" && enable)
                   ? "bg-[#F37975] hover:bg-red-500 cursor-pointer"
                   : "bg-gray-400 cursor-not-allowed"
               }`}

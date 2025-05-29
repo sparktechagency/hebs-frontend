@@ -18,6 +18,9 @@ import Gender from "@/app/component/Survey/Gender";
 import { useAppSelector } from "@/redux/hooks";
 import { selectCurrentSurvey } from "@/redux/features/survey/surveySlice";
 import { selectCurrentUser } from "@/redux/features/auth/authSlice";
+import { useGetSpecefiqUserQuery } from "@/redux/features/auth/authApi";
+import { message } from "antd";
+import { useRouter } from "next/navigation";
 
 
 const NamePage = () => {
@@ -35,11 +38,26 @@ const NamePage = () => {
 
   // const [isRecomended, setIsRecomended] = useState(false);
 
-  console.log("surveyData from form", data);
+  // console.log("surveyData from form", data);
+  const router = useRouter()
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const surveyData = useAppSelector(selectCurrentSurvey)
 const user = useAppSelector(selectCurrentUser)
-console.log(user);
+// console.log(user);
+
+const { data: specefiqUser,} = useGetSpecefiqUserQuery(
+    user?.userId
+  );
+  const survey = specefiqUser?.data?.survey;
+  console.log("singleUser",survey);
+  if(survey){
+         message.success(
+        "You have already done our survey.Thank you for stay with us"
+      );
+   router.push("/")
+  }
+
+
   return (
     <div
       className="fixed inset-0 flex items-center justify-center bg-cover bg-no-repeat bg-center mt-24"

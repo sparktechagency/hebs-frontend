@@ -10,14 +10,7 @@ import { useAppSelector } from "@/redux/hooks"
 import { selectCurrentUser } from "@/redux/features/auth/authSlice"
 import LoadingPage from "@/app/loading"
 import { useGetSpecefiqUserQuery } from "@/redux/features/auth/authApi"
-interface BillingItem {
-  id: string
-  status: "PAID" | "INVOICE"
-  date: string
-  amount: string
-  title?: string
-  details?: string[]
-}
+import { currencyFormatter } from "@/utils/currencyFormatter"
 
 const BillingHistory=()=> {
   const user = useAppSelector(selectCurrentUser)
@@ -29,40 +22,7 @@ if(isLoading){
   return <LoadingPage/>
 }
 console.log("billing",billing);
-  const billingData: BillingItem[] = [
-    {
-      id: "1",
-      status: "PAID",
-      date: "May 11, 2025",
-      amount: "$14.59",
-      title: "Bought 5 Books For Ahmed",
-      details: ["MAY: ALLAH MADE ME"],
-    },
-    {
-      id: "2",
-      status: "INVOICE",
-      date: "May 11, 2025",
-      amount: "$14.59",
-      title: "Bought 5 Books For Ahmed",
-      details: ["MAY: ALLAH MADE ME"],
-    },
-    {
-      id: "3",
-      status: "PAID",
-      date: "May 11, 2025",
-      amount: "$14.59",
-      title: "Bought 5 Books For Ahmed",
-      details: ["MAY: ALLAH MADE ME"],
-    },
-    {
-      id: "4",
-      status: "INVOICE",
-      date: "May 11, 2025",
-      amount: "$14.59",
-      title: "Bought 5 Books For Ahmed",
-      details: ["MAY: ALLAH MADE ME"],
-    },
-  ]
+
 
   const toggleExpand = (id: string) => {
     setExpandedItems((prev) => ({
@@ -125,44 +85,60 @@ console.log("billing",billing);
       <h1 className="text-3xl font-bold mb-8">Billing History</h1>
 
       <div className="space-y-6">
-        {billingData?.map((item:any) => (
-          <div key={item._id} className="rounded-lg shadow-sm border border-gray-100">
-            <div className="p-4 flex justify-between items-center">
-              <div className="flex items-center gap-4">
-                <span className="bg-gray-200 text-gray-800 px-3 py-1 rounded-md text-sm font-medium">
-                  {item.status}
-                </span>
-                <span className="text-gray-700">{item.date}</span>
-              </div>
-              <span className="font-medium">{item.amount}</span>
-            </div>
+   {billing?.data?.map((item: any) => {
+  console.log("Billing item:", item);
+const process = item?.createdAt;
+const formattedProccessed = process ? process.split("T")[0] : null;
+const formattedDate = formattedProccessed
+  ? new Date(formattedProccessed).toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric", 
+    })
+  : null;
 
-            {item.title && (
-              <>
-                <div className="border-t border-gray-200"></div>
-                <div
-                  className="p-4 flex justify-between items-center cursor-pointer"
-                  onClick={() => toggleExpand(item.id)}
-                >
-                  <h3 className="font-medium">{item.title}</h3>
-                  <ChevronDown
-                    className={`w-5 h-5 transition-transform ${expandedItems[item.id] ? "transform rotate-180" : ""}`}
-                  />
-                </div>
+  return (
+    <div key={item._id} className="rounded-lg shadow-sm border border-gray-100">
+      <div className="p-4 flex justify-between items-center">
+        <div className="flex items-center gap-4">
+          <span className="bg-gray-200 text-gray-800 px-3 py-1 rounded-md text-sm font-medium">
+            {item.contentId.status}
+          </span>
+          <span className="text-gray-700">{formattedDate}</span>
+        </div>
+        <span className="font-medium">{currencyFormatter(item?.contentId?.total?.amount)}</span>
+      </div>
 
-                {expandedItems[item.id] && item.details && (
-                  <div className="px-4 pb-4">
-                    {item.details.map((detail:any, index:number) => (
-                      <p key={index} className="text-gray-700">
-                        {detail}
-                      </p>
-                    ))}
-                  </div>
-                )}
-              </>
-            )}
+      {item?.title && (
+        <>
+          <div className="border-t border-gray-200"></div>
+          <div
+            className="p-4 flex justify-between items-center cursor-pointer"
+            onClick={() => toggleExpand(item?.id)}
+          >
+            <h3 className="font-medium">{item.title}</h3>
+            <ChevronDown
+              className={`w-5 h-5 transition-transform ${
+                expandedItems[item.id] ? "transform rotate-180" : ""
+              }`}
+            />
           </div>
-        ))}
+
+          {expandedItems[item.id] && item.details && (
+            <div className="px-4 pb-4">
+              {item.details.map((detail: any, index: number) => (
+                <p key={index} className="text-gray-700">
+                  {detail}
+                </p>
+              ))}
+            </div>
+          )}
+        </>
+      )}
+    </div>
+  );
+})}
+
       </div>
     </div>
    </div>

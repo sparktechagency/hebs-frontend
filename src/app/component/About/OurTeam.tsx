@@ -1,157 +1,68 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import Image from "next/image";
-import team4 from "@/assets/team4.png";
-import team5 from "@/assets/team5.png";
-import team6 from "@/assets/team6.png";
+
 import style from "@/app/styles.module.css";
+import { useGetTeamsQuery } from "@/redux/features/others/othersApi";
+import LoadingPage from "@/app/loading";
 
 export default function OurTeam() {
+  const { data: teams, isLoading } = useGetTeamsQuery(undefined);
+  console.log("teams", teams);
+
+  if (isLoading) {
+    return <LoadingPage />;
+  }
   return (
-    <div className="w-full">
-      {/* Team Member 1 */}
-      <section className="px-4 sm:px-6 md:px-10 py-16 md:py-24 bg-[#FEECDE]">
-        <div className="container mx-auto">
-          <div className="flex  flex-col-reverse md:flex-row gap-3 lg:gap-16 2xl:gap-2 items-center">
-            {/* Text Content */}
-            <div className=" text-center md:text-left py-5  md:w-[50%] ">
-              <p
-                className={`text-black text-3xl  ${style.fontJost}`}
-              >
-                Founders: <span>Khader Zahdan and Eanara Ghouleh</span>
-              </p>
-              <p className={`${style.fontJost} text-2xl font-bold`}>
-                <span className="text-[#F37975]">CEO:</span>{" "}
-                <span className="text-[#F37975]">Eanara Ghouleh</span>
-              </p>
+    <div className="w-full bg-[#FEECDE] relative">
+   {teams?.data?.map((team: any, idx: number) => {
+  const isEven = idx % 2 === 0; // even index
+  return (
+    <section className="px-4 sm:px-6 md:px-10 py-16 md:py-24" key={idx}>
+      <div className="container mx-auto">
+ 
+  
+        <div
+          className={`flex gap-12 items-center flex-col-reverse md:flex-row ${
+            isEven ? "md:flex-row-reverse" : "md:flex-row"
+          }`}
+        >
+          {/* Text Content */}
+          <div className="text-center md:text-left py-5 md:py-0 md:w-1/2 px-4 md:px-0">
+                {idx === 0 && (
+          <p className={`text-black text-3xl mb-8 ${style.fontJost}`}>
+            Founders: <span>Khader Zahdan and Eanara Ghouleh</span>
+          </p>
+        )}
 
-              <p
-                className={`${style.fontPoppins} leading-relaxed text-[20px] lg:text-lg`}
-              >
-                Welcome to Illuminate Muslim Minds, where each book opens a
-                world of discovery and joyful adventure! Our story began with a
-                vision from Eanara, a passionate advocate with a master’s degree
-                in social work, who has made significant impacts as a therapist
-                and community organizer. Alongside her every step was Khader,
-                her husband, whose unwavering support was instrumental in
-                turning this dream into a reality. As parents, Khader and Eanara
-                encountered the challenge of finding engaging and appropriate
-                Islamic, Arabic, and English books for young Muslim readers.
-                This led to the start of Illuminate Muslim Minds, a haven where
-                children aged 0-11 can find stories that resonate with them and
-                foster a love for reading. Driven by a mission to blend fun with
-                Islamic learning, Illuminate Muslim Minds offers a monthly book
-                subscription, individual book purchases, and lively book fairs,
-                all aimed at boosting reading literacy and enriching Islamic
-                knowledge among young minds. Eanara&apos;s vision is not just to
-                distribute books but to ignite a love of Islam and reading. Join
-                us on this delightful journey to make Islamic reading a
-                cherished part of every child&apos;s life!
-              </p>
-            </div>
+            <p className={`${style.fontJost} text-2xl font-bold mb-4`}>
+              <span className="text-[#F37975]">{team.position}:</span>{" "}
+              <span className="text-[#F37975]">{team?.name}</span>
+            </p>
 
-            {/* Image */}
-            <div className="flex justify-center md:justify-end  md:w-[50%] md:pt-20 lg:pt-0">
-              <Image
-                src={team4}
-                alt="Founders reading a book together"
-                width={500}
-                height={500}
-                className="w-full max-w-[500px] h-auto object-cover rounded-lg"
-              />
-            </div>
+            <p
+              className={`${style.fontPoppins} leading-relaxed text-[20px] lg:text-lg`}
+            >
+              {team.description}
+            </p>
+          </div>
+
+          {/* Image */}
+          <div className="flex justify-center md:w-1/2">
+            <Image
+              src={team.image}
+              alt={`${team.name}`}
+              width={500}
+              height={500}
+              className="w-full max-w-[500px] h-auto object-cover rounded-lg"
+            />
           </div>
         </div>
-      </section>
+      </div>
+    </section>
+  );
+})}
 
-      {/* Team Member 2 */}
-
-      <section className="px-4 sm:px-6 md:px-10 py-16 md:py-24 bg-[#FDFBDF]">
-        <div className="container mx-auto">
-          <div className="flex  flex-col md:flex-row gap-8 md:gap-16   2xl:gap-2 items-center">
-               {/* Image */}
-               <div className="flex md:justify-start  md:w-[50%] md:pt-20 lg:pt-0">
-              <Image
-                src={team5}
-                alt="Nadean Ghouleh"
-                width={500}
-                height={500}
-                className="w-full max-w-[500px] h-auto object-cover rounded-lg"
-              />
-            </div>
-            {/* Text Content */}
-            <div className="space-y-6 text-center md:text-left  md:w-[50%]">
-              <p
-                className={`text-[#F37975]  font-bold  text-2xl   ${style.fontPoppins}`}
-              >
-                Chief Operating Officer: Heba Morad
-              </p>
-              <p
-                className={`${style.fontPoppins} leading-relaxed text-[20px] lg:text-lg`}
-              >
-             Heba plays a pivotal role at Illuminate Muslim Minds, guiding
-                our mission to enrich young minds with the excitement of Islamic
-                literature. As our Chief Operating Officer, she combines her
-                rich background in education with a passion for bringing
-                diverse, engaging Islamic stories to children. Heba&apos;s
-                expertise lies in curating children’s book boxes that are not
-                only entertaining but also deeply rooted in Islamic values,
-                designed to inspire and educate our young readers. Her vision
-                drives Illuminate Muslim Minds to be a gateway to a world where
-                young minds can explore, learn, and grow within the framework of
-                their faith
-              </p>
-            </div>
-
-         
-          </div>
-        </div>
-      </section>
-
-
-
-
-      {/* Team Member 3 */}
-      <section className="px-4 sm:px-6 md:px-10 py-16 md:py-24 bg-[#FEECDE]">
-        <div className="container mx-auto">
-          <div className="flex  flex-col-reverse md:flex-row gap-8 md:gap-16  2xl:gap-2 items-center">
-            {/* Text Content */}
-            <div className="space-y-6 text-center md:text-left  md:w-[50%]">
-              <p
-                className={`text-[#F37975]  font-bold  text-2xl   ${style.fontPoppins}`}
-              >
-                Social Media and Logistics Coordinator: Nadean Ghouleh
-              </p>
-              <p
-                className={`${style.fontPoppins} leading-relaxed text-[20px] lg:text-lg`}
-              >
-                At the heart of our operation, Nadean brings a unique blend of
-                compassion and practicality to our team. With a professional
-                background in nursing, she carries with her the care and
-                dedication that define the healthcare profession. Nadean
-                orchestrates our social media presence and manages the logistics
-                that keep our company moving smoothly. She also transforms our
-                digital spaces into vibrant communities, where customers can
-                feel the heartbeat of our brand. On the logistics front, she
-                ensures that our operations run seamlessly. Her unique blend of
-                skills enriches our company culture, making Illuminate Muslim
-                Minds, not just a place to work, but a place to grow, care, and
-                connect.
-              </p>
-            </div>
-
-            {/* Image */}
-            <div className="flex justify-center md:justify-end  md:w-[50%] md:pt-20 lg:pt-0">
-              <Image
-                src={team6}
-                alt="Nadean Ghouleh"
-                width={500}
-                height={500}
-                className="w-full max-w-[500px] h-auto object-cover rounded-lg"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
     </div>
   );
 }

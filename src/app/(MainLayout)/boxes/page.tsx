@@ -15,6 +15,8 @@ import { useEffect } from "react";
 import { useGetSpecefiqUserQuery } from "@/redux/features/auth/authApi";
 import { selectCurrentUser } from "@/redux/features/auth/authSlice";
 import { useGetRecommendationQuery } from "@/redux/features/survey/surveyApi";
+import { message } from "antd";
+import { useRouter } from "next/navigation";
 
 const BoxesPage = () => {
   const user = useAppSelector(selectCurrentUser);
@@ -22,7 +24,7 @@ const BoxesPage = () => {
   const { data: specefiqUser, isLoading } = useGetSpecefiqUserQuery(
     user?.userId
   );
-  const dob = specefiqUser?.data?.survey?.dateOfBirth;
+    const dob = specefiqUser?.data?.survey?.dateOfBirth;
   const formattedDOB = dob ? dob.split("T")[0] : null;
   const { data: recommendation } = useGetRecommendationQuery(formattedDOB);
   // console.log("Formatted DOB:", recommendation?.data?.category?._id);
@@ -30,6 +32,23 @@ const BoxesPage = () => {
   const { data: specifiqBox, refetch } = useGetSpecefiqBoxesQuery(categoryId, {
     skip: !categoryId,
   });
+    useEffect(() => {
+    const interval = setInterval(() => {
+      refetch();
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [refetch]);
+
+const router = useRouter()
+
+  const subscription = specefiqUser?.data?.subscription;
+  console.log("singleUser",subscription);
+  if(subscription?.isActive=== false){
+    message.error("You havent Subscribe yet!Please Subscribe and try again")
+   router.push("/name")
+  }
+
   const process = specifiqBox?.data?.category?.createdAt;
   const formattedProccessed = process ? process.split("T")[0] : null;
   const formattedDate = new Date(formattedProccessed).toLocaleDateString(
@@ -38,13 +57,7 @@ const BoxesPage = () => {
   );
 
   // console.log(formattedDate);
-  useEffect(() => {
-    const interval = setInterval(() => {
-      refetch();
-    }, 5000);
 
-    return () => clearInterval(interval);
-  }, [refetch]);
   if (isLoading) {
     return <LoadingPage />;
   }

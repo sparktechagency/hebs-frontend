@@ -9,7 +9,7 @@ import {
   User,
   FileText,
 } from "lucide-react";
-import { Form, Input, Modal, Select } from "antd";
+import { Form, Input, message, Modal, Select } from "antd";
 import Link from "next/link";
 import { useAppSelector } from "@/redux/hooks";
 
@@ -19,10 +19,11 @@ import LoadingPage from "@/app/loading";
 
 import { useGetSpecefiqBoxesQuery } from "@/redux/features/boxes/boxesApi";
 import Image from "next/image";
-import { selectCurrentSurvey } from "@/redux/features/survey/surveySlice";
+
 import { useGetRecommendationQuery } from "@/redux/features/survey/surveyApi";
 // import { selectCurrentPlan } from "@/redux/features/subscription/subscriptionSlice";
-import { useSpecefiqSubscriptionQuery } from "@/redux/features/subscription/subscriptionApi";
+import { useCancelSubscriptionMutation, useSpecefiqSubscriptionQuery } from "@/redux/features/subscription/subscriptionApi";
+import { useRouter } from "next/navigation";
 const { Option } = Select;
 
 const SubscriptionPage = () => {
@@ -30,19 +31,18 @@ const SubscriptionPage = () => {
   const user = useAppSelector(selectCurrentUser);
   const userId = user?.userId
 
-  const {data:purchaseSubscription}=useSpecefiqSubscriptionQuery(userId)
-console.log("purchasd subscription",purchaseSubscription);
-  const survey = useAppSelector(selectCurrentSurvey);
-  const { data: singleUser, isLoading } = useGetSpecefiqUserQuery(userId);
-  // console.log(singleUser);
+const [cancelSubscription]=useCancelSubscriptionMutation();
+  const {data:purchaseSubscription}=useSpecefiqSubscriptionQuery(userId,{skip:!user})
+// console.log("purchasd subscription",purchaseSubscription);
+
+  const { data: singleUser, isLoading } = useGetSpecefiqUserQuery(userId,{skip:!user});
+//  console.log("user",singleUser);
   // console.log("plan===>",plan);
   // console.log("user===>",singleUser);
   // console.log("survey===>",survey);
-  const { data: specefiqUser} = useGetSpecefiqUserQuery(
-    user?.userId
-  );
+
   // console.log("userid",specefiqUser);
-  const dob = specefiqUser?.data?.survey?.dateOfBirth;
+  const dob = singleUser?.data?.survey?.dateOfBirth;
   const formattedDOB = dob ? dob.split("T")[0] : null;
   //  console.log("Formatted DOB:", formattedDOB);
   const { data: recommendation } = useGetRecommendationQuery(formattedDOB);
@@ -61,7 +61,7 @@ console.log("purchasd subscription",purchaseSubscription);
     return () => clearInterval(interval);
   }, [refetch]);
 
-
+const router = useRouter()
 
   const books = specifiqBox?.data?.books;
   const boxs = specifiqBox?.data;
@@ -76,10 +76,10 @@ console.log("purchasd subscription",purchaseSubscription);
   });
   const handleSave = () => {
     // Handle saving the updated details
-    console.log("Saving:", readerDetails);
+    // console.log("Saving:", readerDetails);
     setShowUpdateModal(false);
   };
-  const DOB = survey?.dateOfBirth;
+  const DOB = singleUser?.data?.survey?.dateOfBirth;
   // console.log("Dob===>", DOB);
   const date = new Date(DOB);
   const monthNames = [
@@ -96,10 +96,37 @@ console.log("purchasd subscription",purchaseSubscription);
     "NOV",
     "DEC",
   ];
+
+
+
+  const subscription = singleUser?.data?.subscription;
+  console.log("singleUser",subscription);
+  if(subscription?.isActive=== false){
+    message.error("You havent Subscribe yet!Please Subscribe and try again")
+   router.push("/name")
+  }
+
+
   const month = monthNames[date.getMonth()];
   const year = date.getFullYear();
 
-  console.log("Month & Year:", month, year);
+  // console.log("Month & Year:", month, year);
+
+
+const subId = purchaseSubscription?.data?._id
+const handleCancel=async()=>{
+try {
+  const res = await cancelSubscription(subId);
+  console.log("res",res);
+  message.success(res?.data?.message)
+} catch (error:any) {
+  message.error(error?.message)
+}
+}
+
+
+
+
   if (isLoading)
     return (
       <div>
@@ -175,7 +202,7 @@ console.log("purchasd subscription",purchaseSubscription);
                 Try Before You Buy Legacy
               </span>
             </div>
-            <button className="mt-4 md:mt-0 bg-[#f08080] hover:bg-[#f08080]/90 text-white px-6 py-2 rounded-full">
+            <button onClick={()=>handleCancel()} className="mt-4 md:mt-0 bg-[#f08080] hover:bg-[#f08080]/90 text-white px-6 py-2 rounded-full">
               Cancel Request
             </button>
           </div>

@@ -1,21 +1,18 @@
-'use client'
+
 import AboutBanner from "@/app/component/About/AboutBanner";
 import Mission from "@/app/component/About/Mission";
 import NewsletterSignup from "@/app/component/About/NewsLetter";
 import OurTeam from "@/app/component/About/OurTeam";
 import ValuesSection from "@/app/component/About/OurValues";
 import FeatureBook from "@/app/component/Home/FeatureBook";
-import LoadingPage from "@/app/loading";
+
 import style from "@/app/styles.module.css";
-import { useGetAboutQuery } from "@/redux/features/others/othersApi";
+
 
 const AboutPage = () => {
-const {data:aboutData,isLoading}=useGetAboutQuery(undefined)
-console.log("about data",aboutData);
 
-if(isLoading){
-  return <LoadingPage/>
-}
+
+
   return (  
     <div>
       <AboutBanner />

@@ -16,6 +16,13 @@ const boxesApi = baseApi.injectEndpoints({
         providesTags: ["box"],
       }),
     }),
+    getSpecefiqInvoice: builder.query({
+      query: (id) => ({
+        url: `/invoice/current/retrieve/user/${id}`,
+        method: "GET",
+        providesTags: ["box"],
+      }),
+    }),
     reviewBoxes: builder.mutation({
       query: (info) => ({
         url: `/review/create`,
@@ -25,8 +32,8 @@ const boxesApi = baseApi.injectEndpoints({
           invalidatesTags: ['box'],
     }),
     createInvoice: builder.mutation({
-      query: ({info,id}) => ({
-        url: `/invoice/update/${id}`,
+      query: ({info,invoiceId}) => ({
+        url: `/invoice/update/${invoiceId}`,
         method: "PATCH",
         body: info,
       }),
@@ -39,5 +46,6 @@ export const {
   useGetAllBoxesQuery,
   useGetSpecefiqBoxesQuery,
   useReviewBoxesMutation,
-  useCreateInvoiceMutation
+  useCreateInvoiceMutation,
+  useGetSpecefiqInvoiceQuery
 } = boxesApi;

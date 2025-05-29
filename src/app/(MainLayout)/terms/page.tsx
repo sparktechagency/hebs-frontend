@@ -15,7 +15,8 @@ const TermsPage = () => {
   }
 
  
-  const termsHTML = termsData?.data?.terms || '';
+ const termsHTML = termsData?.data?.termsCondition || 'Terms of Service';
+
 
 
   function extractH1Text(htmlString: string) {
@@ -35,8 +36,8 @@ const TermsPage = () => {
   }
 
 
-  const h1Text = extractH1Text(termsHTML) || 'Terms of Service';
-  console.log("title text",h1Text);
+  const h1Text = extractH1Text(termsHTML) || 'Terms of Services';
+  console.log("title text", extractH1Text(termsHTML));
   const restHTML = removeH1Tag(termsHTML);
   console.log("restHTML",restHTML);
 
