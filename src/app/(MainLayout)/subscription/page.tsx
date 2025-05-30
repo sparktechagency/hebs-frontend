@@ -36,7 +36,7 @@ const [cancelSubscription]=useCancelSubscriptionMutation();
 // console.log("purchasd subscription",purchaseSubscription);
 
   const { data: singleUser, isLoading } = useGetSpecefiqUserQuery(userId,{skip:!user});
-//  console.log("user",singleUser);
+ console.log("user",singleUser);
   // console.log("plan===>",plan);
   // console.log("user===>",singleUser);
   // console.log("survey===>",survey);

@@ -407,9 +407,9 @@ export default function SubscriptionPurchasePage() {
                 </span>
                 <span className="text-gray-600 ml-1">per month</span>
               </div>
-              <div className="text-gray-500 text-right">
+              {/* <div className="text-gray-500 text-right">
                 (paid yearly at $179.88)
-              </div>
+              </div> */}
             </div>
 
             <p className="text-gray-700 mb-6">
@@ -419,7 +419,7 @@ export default function SubscriptionPurchasePage() {
 
             <div className="bg-red-50 rounded-xl p-4 flex items-center mb-6">
               <span className="text-gray-700">
-                Get $60 credit to spend on books
+                Get${plan?.price?.amount} credit to spend on books
               </span>
               <Tooltip title="Credit will be applied to your account after purchase">
                 <InfoCircleOutlined className="text-gray-400 ml-auto" />
