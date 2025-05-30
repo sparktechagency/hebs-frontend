@@ -37,14 +37,14 @@ const BookCheckoutPage = () => {
     const userId = user?.userId
 
     const {data:purchaseSubscription}=useSpecefiqSubscriptionQuery(userId,{skip:!user})
-  console.log("purchasd subscription",purchaseSubscription);
+  // console.log("purchasd subscription",purchaseSubscription);
  
     const [enable,setEnable]=useState(false)
     const [enableCashon,setEnableCashon]=useState(false)
   // console.log("userId",user?.userId);
-  const {data:userInvoiceData}=useGetSpecefiqInvoiceQuery(user?.userId,{skip:!user})
+  const {data:userInvoiceData}=useGetSpecefiqInvoiceQuery(userId,{skip:!user})
   const invoiceId = userInvoiceData?.data?._id
-  console.log("user invoice",invoiceId);
+  console.log("user invoice",userInvoiceData);
   const router = useRouter();
   const currentCategory = useAppSelector(selectCurrentCategoryId);
   const categoryId = currentCategory?.categoryID;
@@ -179,7 +179,7 @@ const subscriptionPrice =    purchaseSubscription?.data?.priceAmount;
     ) || 0) - (totalDiscountSelector(selectedBooksWithQuantity) || 0);
 
 // const totalD = currencyFormatter(total);
-console.log("total price",isNaN(total));
+// console.log("total price",isNaN(total));
   const [placeOrder] = usePlaceBoxOrderMutation();
   // console.log("se track det", selectedBooksWithQuantity);
     //  console.log("invoice outside",invoiceId);
@@ -208,7 +208,7 @@ console.log("total price",isNaN(total));
     // console.log("invoice",invoiceId);
     try {
       const res = await createInvoice({ info:invoiceData,invoiceId:id });
-      // console.log("invoice update response===>",res);
+      console.log("invoice update response===>",res);
       if (res?.data) {
         message.success(res?.data?.message)
        
@@ -219,7 +219,7 @@ console.log("total price",isNaN(total));
       console.log(err);
     }
   };
-  console.log("selectedBooksWithQuantity",selectedBooksWithQuantity);
+  // console.log("selectedBooksWithQuantity",selectedBooksWithQuantity);
   const handleOrder = async () => {
     const items = selectedBooksWithQuantity.map((product: any) => ({
       itemId: product._id,
@@ -249,7 +249,7 @@ console.log("total price",isNaN(total));
     };
 
     const data = encodeURIComponent(JSON.stringify(invoiceData))
-    console.log("data",invoiceData);
+    // console.log("data",invoiceData);
     try {
       const res = await placeOrder({ info: order, data });
       message.success(res.data.message);
@@ -585,7 +585,16 @@ console.log("total price",isNaN(total));
                     <span>Pay Now</span>
                   </label>
                 </div>
-                <button disabled={!enableCashon} onClick={()=>handleInvoice(invoiceId)} className="my-2 py-2 px-4 rounded-xl bg-orange-600 text-white">Proceed CashOn Delivery</button>
+                <button disabled={!enableCashon} onClick={()=>handleInvoice(invoiceId)}
+                              className={`w-full md:px-8 p-4 md:h-12 flex items-center justify-center text-white border-none mb-4 my-5
+              ${
+         (enableCashon)
+                  ? "bg-[#F37975] hover:bg-red-500 cursor-pointer"
+                  : "bg-gray-400 cursor-not-allowed"
+              }`}
+                 
+                 
+                 >Proceed CashOn Delivery</button>
               </div>
 
               {/* Proceed Checkout Button */}

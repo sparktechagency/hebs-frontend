@@ -12,6 +12,8 @@ import { Input } from "antd";
 import { useDispatch } from "react-redux";
 import { updateSurveyData } from "@/redux/features/survey/surveySlice";
 import { useRouter } from "next/navigation";
+import { useAppSelector } from "@/redux/hooks";
+import {  selectCurrentUser } from "@/redux/features/auth/authSlice";
 
 const Email = ({
   setIsEmail,
@@ -29,13 +31,19 @@ const Email = ({
   const {
     control,
     handleSubmit,
-    formState: { errors },
+    // formState: { errors },
   } = useForm();
   const router = useRouter();
   const dispatch = useDispatch();
+
+const user = useAppSelector(selectCurrentUser)
+// console.log("user",user?.user?.email);
+
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const onSubmit: SubmitHandler<FieldValues> = (d) => {
     // console.log("Email entered:", d.email);
-    setData((prev: any) => ({ ...prev, email: d.email }));
+    setData((prev: any) => ({ ...prev, email: user?.user?.email}));
 
     const year = data?.birthYear;
     const month = data?.birthMonth;
@@ -50,7 +58,7 @@ const Email = ({
  
     const surveyData = {
       readerName: data.readerName,
-      email: d.email,
+      email: user?.user?.email,
       relation: data.relation,
       gender: data.gender,
       dateOfBirth: dateOfBirth,
@@ -90,27 +98,29 @@ const Email = ({
       <Controller
         name="email"
         control={control}
-        rules={{
-          required: "Email is required",
-          pattern: {
-            value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-            message: "Enter a valid email address",
-          },
-        }}
+        // rules={{
+        //   required: "Email is required",
+        //   pattern: {
+        //     value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+        //     message: "Enter a valid email address",
+        //   },
+        // }}
         render={({ field }) => (
           <Input
             {...field}
+            defaultValue={user?.user?.email}
+            readOnly
             type="email"
-            placeholder="Type your email here"
+            // placeholder="Type your email here"
             className="w-full mt-5 py-3 focus:border-[#F37975] focus:ring-[#F37975]"
           />
         )}
       />
-      {errors.email && (
+      {/* {errors.email && (
         <p className="text-red-500 text-sm mt-1">
           {errors.email.message as string}
         </p>
-      )}
+      )} */}
 
       <div className="mt-6 flex justify-center">
         <button

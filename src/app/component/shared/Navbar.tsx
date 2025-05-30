@@ -17,6 +17,8 @@ import { logout, selectCurrentUser } from "@/redux/features/auth/authSlice";
 import { protectedRoutes } from "@/constants";
 import { setCookie } from "nookies";
 import { clearCart } from "@/redux/features/cart/cartSlice";
+import { resetSurveyData } from "@/redux/features/survey/surveySlice";
+import { resetPlanData } from "@/redux/features/subscription/subscriptionSlice";
 export default function Navbar() {
   const user = useAppSelector(selectCurrentUser);
   const dispatch = useAppDispatch();
@@ -53,6 +55,8 @@ export default function Navbar() {
   const handleLogout = () => {
     dispatch(logout());
     dispatch(clearCart())
+    dispatch(resetSurveyData())
+    dispatch(resetPlanData())
     // Delete cookie manually
     router.push("/login");
     setCookie(null, 'user', '', { path: '/', maxAge: -1 });

@@ -49,6 +49,10 @@ const { data: specefiqUser,} = useGetSpecefiqUserQuery(
     user?.userId
   );
   const survey = specefiqUser?.data?.survey;
+    if(!user){
+    message.error("User Not found Please Login")
+    router.push("/login")
+  }
   console.log("singleUser",survey);
   if(survey){
          message.success(

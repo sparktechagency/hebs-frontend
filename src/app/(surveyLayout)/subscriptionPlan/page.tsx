@@ -1,15 +1,18 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 
-import {  useState } from "react"
-import { Radio } from "antd"
+import {  useEffect, useState } from "react"
+import { message, Radio } from "antd"
 import {  LeftOutlined, RightOutlined } from "@ant-design/icons"
 import Image from "next/image"
 import packaging from "@/assets/tinnymuslimBox.png";
 import Link from "next/link"
 import { useGetSubscriptionsQuery } from "@/redux/features/survey/surveyApi"
-import { useAppDispatch } from "@/redux/hooks"
+import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { subscriptionPlan } from "@/redux/features/subscription/subscriptionSlice"
+import { selectCurrentUser } from "@/redux/features/auth/authSlice"
+import { useRouter } from "next/navigation"
+
 export interface Plan {
   _id: string;
   name: string;
@@ -35,21 +38,37 @@ export default function SubscriptionPlanPage() {
   const [selectedPlanData, setSelectedPlanData] = useState<Plan | null>(null);
   // console.log("current plan get purchase plan=>",selectedPlanData);
   const [subscribed, setSubscribed] = useState(false)
-const {data:plans}=useGetSubscriptionsQuery(undefined)
+const {data:plans,refetch}=useGetSubscriptionsQuery(undefined)
 console.log("plans>>>",plans?.data);
 // Find the first plan where the name matches selectedPlan
 const selectedPlanObject = plans?.data?.find((plan: any) => plan._id === selectedPlanData?._id);
   // console.log("current plan get purchase plan=>",selectedPlanObject);
 const dispatch = useAppDispatch();
 // console.log("Selected plan object>>>", selectedPlanObject);
-// handle plan submit
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     refetch();
-  //   }, 5000); 
+  const user = useAppSelector(selectCurrentUser);
+  const router = useRouter();
 
-  //   return () => clearInterval(interval);
-  // }, [refetch]);
+  // Local state to control redirect flow
+  const [redirecting, setRedirecting] = useState(false);
+
+  useEffect(() => {
+    if (!user && !redirecting) {
+      message.error("User Not found Please Login");
+      setRedirecting(true);
+      setTimeout(() => {
+        router.push("/login");
+      }, 1000);
+    }
+  }, [user, redirecting, router]);
+
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      refetch();
+    }, 5000); 
+
+    return () => clearInterval(interval);
+  }, [refetch]);
 const handleSubmitPlans=()=>{
   // dispatch(resetPlanData())
   dispatch(subscriptionPlan(selectedPlanObject))
