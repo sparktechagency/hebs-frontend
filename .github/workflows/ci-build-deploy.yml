@@ -1,0 +1,68 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Set up Docker Buildx
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      # Build and run locally using Docker Compose
+      - name: Build and Test Docker Compose
+        env:
+          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
+        run: |
+          docker compose -f docker-compose.yml config
+          docker compose build
+          docker compose up -d
+          sleep 15
+          docker ps
+
+      # Tear down test containers
+      - name: Tear Down Docker Containers
+        run: docker compose down
+
+      # SSH key for EC2
+      - name: Configure SSH Key
+        run: |
+          echo "${{ secrets.EC2_SSH_KEY }}" > /tmp/pro-key.pem
+          chmod 600 /tmp/pro-key.pem
+
+      # Add EC2 to known_hosts
+      - name: Add EC2 Host to known_hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
+
+      # Ensure correct permissions on EC2
+      - name: Ensure EC2 Permissions
+        run: |
+          ssh -i /tmp/pro-key.pem ubuntu@${{ secrets.EC2_HOST }} << 'EOF'
+          sudo mkdir -p /var/www/hebs-frontend
+          sudo chown -R ubuntu:ubuntu /var/www/hebs-frontend
+          sudo chmod -R 755 /var/www/hebs-frontend
+          EOF
+
+      # Copy code to EC2
+      - name: Copy Files to EC2
+        run: |
+          scp -i /tmp/pro-key.pem -r . ubuntu@${{ secrets.EC2_HOST }}:/var/www/hebs-frontend
+
+      # Deploy on EC2
+      - name: Deploy Application on EC2
+        run: |
+          ssh -i /tmp/pro-key.pem ubuntu@${{ secrets.EC2_HOST }} << 'EOF'
+          cd /var/www/hebs-frontend
+          docker compose up -d --build
+          EOF

@@ -1,0 +1,7 @@
+node_modules
+.next
+Dockerfile
+.git
+.gitignore
+.env
+src/app/(surveyLayout)/payment/page.tsx
