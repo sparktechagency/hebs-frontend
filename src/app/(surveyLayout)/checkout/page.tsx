@@ -1,57 +1,74 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { Button, Form, Input, message, Tooltip } from "antd";
-import { InfoCircleOutlined, LeftOutlined, MailOutlined, RightOutlined } from "@ant-design/icons";
+import { message, Tooltip } from "antd";
+import { InfoCircleOutlined, LeftOutlined,  RightOutlined } from "@ant-design/icons";
 import Image from "next/image";
 import packaging from "@/assets/tinnymuslimBox.png";
 import Link from "next/link";
 import handShack from "@/assets/handshake-light-skin-tone_svgrepo.com.png";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { selectCurrentPlan } from "@/redux/features/subscription/subscriptionSlice";
 
-import styles from "@/app/styles.module.css";
-import { useLoginMutation } from "@/redux/features/auth/authApi";
-import { useState } from "react";
-import { setUser, TUser } from "@/redux/features/auth/authSlice";
-import { verifyToken } from "@/utils/VerifyToken";
+import { selectCurrentPlan } from "@/redux/features/subscription/subscriptionSlice";
+import { useAppSelector } from "@/redux/hooks";
+import { selectCurrentUser } from "@/redux/features/auth/authSlice";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+
 export default function CheckoutPage() {
-    const [login] = useLoginMutation();
-    const [loading, setLoading] = useState(false);
-    const dispatch = useAppDispatch();
+    // const [login] = useLoginMutation();
+    // const [loading, setLoading] = useState(false);
+    // const dispatch = useAppDispatch();
   const plan = useAppSelector(selectCurrentPlan);
 
-  const onFinish = async (values: any) => {
-    try {
-      // console.log(values);
-      // Handle login logic here
-      const res = await login(values).unwrap();
-      // console.log("response:", res)
-      setLoading(true);
-      const user = verifyToken(res.data.accessToken) as TUser;
-      const modifiedUser={userId:res?.data?._id,user:user}
-      // console.log(modifiedUser);
-      // console.log("dispatchUser", user);
-      dispatch(setUser({ user: modifiedUser, token: res.data.accessToken }));
-      setLoading(false);
-      message.success(res.message);
 
-    } catch (error: any) {
-      message.error(error?.data?.message || error.data.error);
-      // console.error("Error:", error);
-    } finally {
-      setLoading(false);
+  const user = useAppSelector(selectCurrentUser);
+  const router = useRouter();
+
+  // Local state to control redirect flow
+  const [redirecting, setRedirecting] = useState(false);
+
+  useEffect(() => {
+    if (!user && !redirecting) {
+      message.error("User Not found Please Login");
+      setRedirecting(true);
+      setTimeout(() => {
+        router.push("/login");
+      }, 1000);
     }
-  };
+  }, [user, redirecting, router]);
+
+
+
+  // const onFinish = async (values: any) => {
+  //   try {
+
+  //     const res = await login(values).unwrap();
+
+  //     setLoading(true);
+  //     const user = verifyToken(res.data.accessToken) as TUser;
+  //     const modifiedUser={userId:res?.data?._id,user:user}
+
+  //     dispatch(setUser({ user: modifiedUser, token: res.data.accessToken }));
+  //     setLoading(false);
+  //     message.success(res.message);
+
+  //   } catch (error: any) {
+  //     message.error(error?.data?.message || error.data.error);
+
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
   return (
     <>
       <div className="max-w-6xl mx-auto p-6">
         <h1 className="text-3xl font-bold text-center mb-8">Checkout</h1>
 
-        <div className="grid md:grid-cols-2 gap-6">
+        {/* <div className="grid md:grid-cols-2 gap-6 items-center justify-center">   */}
+        <div className="flex items-center justify-center">  
           {/* Left Column */}
-          <div className="space-y-6">
-            {/* Sign in section */}
+          {/* <div className="space-y-6">
+    
             <div className="border rounded-2xl p-6 shadow-sm">
               <h2 className="text-xl font-semibold text-gray-700 mb-6">
                 Sign in or create an account
@@ -133,7 +150,7 @@ export default function CheckoutPage() {
           </div>
         </Form>
             </div>
-          </div>
+          </div> */}
 
           {/* Right Column */}
           <div className="border rounded-2xl p-6 shadow-sm">
@@ -156,13 +173,13 @@ export default function CheckoutPage() {
             <div className="flex justify-between items-start mb-4">
               <div>
                 <span className="text-2xl font-semibold text-red-400">
-                  ${plan?.price?.amount ?? 0}
+                  ${plan?.price?.amount ?? 0} 
                 </span>
                 <span className="text-gray-600 ml-1">per month</span>
               </div>
-              <div className="text-gray-500 text-right">
+              {/* <div className="text-gray-500 text-right">
                 (paid yearly at $179.88)
-              </div>
+              </div> */}
             </div>
 
             <p className="text-gray-700 mb-6">
@@ -172,7 +189,7 @@ export default function CheckoutPage() {
 
             <div className="bg-red-50 rounded-xl p-4 flex items-center mb-6">
               <span className="text-gray-700">
-                Get $60 credit to spend on books
+                Get   ${plan?.price?.amount ?? 0} credit to spend on books
               </span>
               <Tooltip title="Credit will be applied to your account after purchase">
                 <InfoCircleOutlined className="text-gray-400 ml-auto" />

@@ -44,6 +44,10 @@ const router = useRouter()
 
   const subscription = specefiqUser?.data?.subscription;
   console.log("singleUser",subscription);
+  if(!user){
+    message.error("User Not found Please Login")
+    router.push("/login")
+  }
   if(subscription?.isActive=== false){
     message.error("You havent Subscribe yet!Please Subscribe and try again")
    router.push("/name")
