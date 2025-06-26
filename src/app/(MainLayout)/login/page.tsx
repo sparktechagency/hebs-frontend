@@ -46,7 +46,7 @@ const Login = () => {
       console.log("response:", res);
       setLoading(true);
       const user = verifyToken(res.data.accessToken) as TUser;
-      const modifiedUser = { userId: res?.data?._id, user: user };
+      const modifiedUser = { userId: res?.data?._id,userName:res?.data?.name, user: user };
       // console.log(modifiedUser);
       // console.log("dispatchUser", user);
       dispatch(setUser({ user: modifiedUser, token: res.data.accessToken }));
@@ -57,7 +57,7 @@ const Login = () => {
 
       if (redirect) {
         console.log("inside if block login page");
-        router.push(redirect); // Redirect without adding a new entry to history
+        router.push(redirect);
       }else{
         router.push("/")
       }

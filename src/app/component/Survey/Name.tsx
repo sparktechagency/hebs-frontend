@@ -10,7 +10,7 @@ import {
 } from "react-hook-form";
 import style from "@/app/styles.module.css";
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const Name = ({ setIsRelation, setIsName,setData }: { setIsRelation: (value: boolean) => void, setIsName: (value: boolean) => void,setData:any }) => {
+const Name = ({ setIsRelation, setIsName,setData }: { setIsRelation: (value: boolean) => void, setIsName: (value: boolean) => void,setData:any, }) => {
   const {
     control,
     handleSubmit,
@@ -31,7 +31,7 @@ const Name = ({ setIsRelation, setIsName,setData }: { setIsRelation: (value: boo
         What is your reader’s name?
       </h3>
 
-      <h2 className="font-bold text-[#F37975] my-5">First and last name</h2>
+      {/* <h2 className="font-bold text-[#F37975] my-5">First and last name</h2> */}
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="text-center "

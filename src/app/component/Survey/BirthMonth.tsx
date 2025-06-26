@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { Select } from "antd";
 
@@ -14,12 +15,14 @@ const BirthMonth = ({
   setIsBirthMonth,
   setIsRelation,
   setData,
+
 }: {
   setIsBirthYear: (value: boolean) => void;
   setIsRelation: (value: boolean) => void;
   setIsBirthMonth: (value: boolean) => void;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  setData: any;
+
+  setData: any
+
 }) => {
 //   const [selectedMonth, setSelectedMonth] = useState(null);
 
@@ -69,7 +72,7 @@ const BirthMonth = ({
         <h3
           className={`text-[#F37975] font-medium text-xl mb-12 ${style.fontInter}`}
         >
-          What month was Talia Mosleh born?
+          What month were they born?
         </h3>
         <form
           onSubmit={handleSubmit(onSubmit)}

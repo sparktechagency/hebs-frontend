@@ -58,7 +58,7 @@ const BirthYear = ({
       <h3
         className={`text-[#F37975] font-medium text-xl mb-12 ${style.fontInter}`}
       >
-        What year was Talia Mosleh born?
+        What year were they born?
       </h3>
       <form
         onSubmit={handleSubmit(onSubmit)}

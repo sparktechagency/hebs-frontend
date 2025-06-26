@@ -11,11 +11,13 @@ const Topics = ({
   setIsTopics,
   setIsInterested,
   setData,
+   data
 }: {
   setIsGender: (value: boolean) => void;
   setIsTopics: (value: boolean) => void;
   setIsInterested: (value: boolean) => void;
   setData: any;
+  data:any
 }) => {
   const {
     control,
@@ -51,7 +53,7 @@ const Topics = ({
     <div>
       <form onSubmit={handleSubmit(onSubmit)} className="text-center max-w-md w-full p-10">
         <h3 className={`text-[#F37975] font-medium text-xl mb-12 ${style.fontInter}`}>
-          Which of these topics might you and Talia Mosleh enjoy?
+          Which of these topics might you and {data?.readerName} enjoy?
         </h3>
 
         <Controller

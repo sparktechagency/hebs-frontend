@@ -4,6 +4,8 @@
 import { Select } from "antd";
 import { Controller, FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import style from "@/app/styles.module.css";
+import { selectCurrentSurvey } from "@/redux/features/survey/surveySlice";
+import { useAppSelector } from "@/redux/hooks";
 
 const BooksLevel = ({
   setIsSpend,
@@ -39,17 +41,20 @@ const BooksLevel = ({
     setIsBooksLevel(false);
     setIsInterested(true);
   };
-
+ const surveyData = useAppSelector(selectCurrentSurvey);
+ console.log("surveydata==>",surveyData);
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="text-center max-w-md w-full p-10">
       <h3 className={`text-[#F37975] font-medium text-xl mb-12 ${style.fontInter}`}>
-        What level of Arabic books are you interested in?
+        What level of Arabic books are you interested in?<span className="text-xs ml-3">(If No Skip this question)</span>
       </h3>
 
       <Controller
         name="lavelInArabic"
         control={control}
-        rules={{ required: "Please select a level" }}
+          rules={{
+          required: surveyData?.interestInArabic ===true ? "Please select a level" : false,
+        }}
         render={({ field }) => (
           <Select
             {...field}
