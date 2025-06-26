@@ -10,6 +10,7 @@ role:string;
 iat:number;
 exp:number;
 user:TEmail
+userName:string
 }
 
 type TAuthState = {

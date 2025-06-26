@@ -10,11 +10,13 @@ const Spend = ({
   setData,
   setIsBooksLevel,
   setIsSpend,
+
 }: {
   setIsBooksLevel: (value: boolean) => void;
   setIsEmail: (value: boolean) => void;
   setIsSpend: (value: boolean) => void;
   setData: any;
+ 
 }) => {
   const {
     control,

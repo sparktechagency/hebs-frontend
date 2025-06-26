@@ -60,7 +60,7 @@ const { data: specefiqUser,} = useGetSpecefiqUserQuery(
       );
    router.push("/")
   }
-
+console.log("data==>",data);
 
   return (
     <div
@@ -72,6 +72,7 @@ const { data: specefiqUser,} = useGetSpecefiqUserQuery(
           setIsName={setIsName}
           setIsRelation={setIsRelation}
           setData={setData}
+       
         />
       )}
       {isRelation && (
@@ -79,6 +80,7 @@ const { data: specefiqUser,} = useGetSpecefiqUserQuery(
           setIsRelation={setIsRelation}
           setData={setData}
           setIsBirthMonth={setIsBirthMonth}
+           data={data}
         />
       )}
       {isBirthMonth && (
@@ -87,6 +89,7 @@ const { data: specefiqUser,} = useGetSpecefiqUserQuery(
           setData={setData}
           setIsBirthMonth={setIsBirthMonth}
           setIsRelation={setIsRelation}
+        
         />
       )}
       {isBirthYear && (
@@ -95,6 +98,7 @@ const { data: specefiqUser,} = useGetSpecefiqUserQuery(
           setData={setData}
           setIsBirthMonth={setIsBirthMonth}
           setIsGender={setIsGender}
+       
         />
       )}
       {isGender && (
@@ -103,6 +107,7 @@ const { data: specefiqUser,} = useGetSpecefiqUserQuery(
           setData={setData}
           setIsGender={setIsGender}
           setIsTopics={setIsTopics}
+           data={data}
         />
       )}
       {isTopics && (
@@ -111,6 +116,7 @@ const { data: specefiqUser,} = useGetSpecefiqUserQuery(
           setData={setData}
           setIsInterested={setIsInterested}
           setIsTopics={setIsTopics}
+           data={data}
         />
       )}
       {isInterested && (
@@ -119,6 +125,7 @@ const { data: specefiqUser,} = useGetSpecefiqUserQuery(
           setData={setData}
           setIsInterested={setIsInterested}
           setIsTopics={setIsTopics}
+
         />
       )}
       {isBooksLevel && (
@@ -127,6 +134,7 @@ const { data: specefiqUser,} = useGetSpecefiqUserQuery(
           setData={setData}
           setIsInterested={setIsInterested}
           setIsBooksLevel={setIsBooksLevel}
+      data={data}
         />
       )}
       {isSpend && (
@@ -135,6 +143,7 @@ const { data: specefiqUser,} = useGetSpecefiqUserQuery(
           setData={setData}
           setIsBooksLevel={setIsBooksLevel}
           setIsSpend={setIsSpend}
+         
         />
       )}
       {isEmail && (

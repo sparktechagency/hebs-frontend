@@ -5,7 +5,9 @@ import { Input, message } from "antd";
 import { useForm, Controller } from "react-hook-form";
 import style from "@/app/styles.module.css";
 import img1 from "@/assets/Image.png";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import img2 from "@/assets/Image (1).png";
+import planetOmor from "@/assets/planetOmorClearImg.png";
 import tab from "@/assets/tabUpdated.png";
 import { useCreteNewsletterMutation } from "@/redux/features/others/othersApi";
 
@@ -25,13 +27,14 @@ export default function NewsletterSignup() {
   const onSubmit = async(data: FormData) => {
     // console.log("Form Data:", data);
     try {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const res = await createSubscription(data).unwrap()
       // console.log("res",res);
-      message.success(res?.message)
+      message.success("You’re in! Welcome to the Illuminate Muslim Minds family. Look our for our updates, books, and tips to help you raise confident, curious Muslim kids.")
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error:any) {
-      // console.log(error);
-      message.error(error?.message)
+      // console.log(error?.data?.error);
+      message.error(error?.data?.error)
     }
   };
 
@@ -147,12 +150,21 @@ export default function NewsletterSignup() {
         </div>
 
         {/* Right Book Image (Hidden on small screens) */}
-        <div className="absolute md:-right-[230px] lg:-right-72 bottom-0 hidden md:block ">
+        {/* <div className="absolute md:-right-[230px] lg:-right-72 bottom-0 hidden md:block "> 
           <Image
             src={img2}
             alt="Planet Omar"
             width={320}
             height={320}
+            className="object-contain rotate-[-5deg]"
+          />
+        </div> */}
+                <div className="absolute md:-right-[230px] lg:-right-80 bottom-0 hidden md:block ">
+          <Image
+            src={planetOmor}
+            alt="Planet Omar"
+            width={500}
+            height={500}
             className="object-contain rotate-[-5deg]"
           />
         </div>

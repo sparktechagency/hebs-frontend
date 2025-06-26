@@ -46,7 +46,7 @@ const Login = () => {
       console.log("response:", res);
       setLoading(true);
       const user = verifyToken(res.data.accessToken) as TUser;
-      const modifiedUser = { userId: res?.data?._id, user: user };
+      const modifiedUser = { userId: res?.data?._id,userName:res?.data?.name, user: user };
       // console.log(modifiedUser);
       // console.log("dispatchUser", user);
       dispatch(setUser({ user: modifiedUser, token: res.data.accessToken }));
@@ -57,7 +57,7 @@ const Login = () => {
 
       if (redirect) {
         console.log("inside if block login page");
-        router.push(redirect); // Redirect without adding a new entry to history
+        router.push(redirect);
       }else{
         router.push("/")
       }
@@ -155,10 +155,10 @@ const Login = () => {
 
           <div className="flex items-center justify-end">
             <Link
-              href="/forgot-password"
+              href="/forgotPass"
               className={`text-sm text-gray-500 hover:text-gray-700 ${styles.fontInter}`}
             >
-              Forget Password?
+              Forgot Password?
             </Link>
           </div>
 
@@ -204,7 +204,7 @@ const Login = () => {
 
           <div className="text-center mt-6">
             <p className="text-sm text-gray-600">
-              Already have an account?{" "}
+            Don&apos;t have an account
               <Link
                 href="/signUp"
                 className="text-[#FF4444] hover:text-[#FF6666]"

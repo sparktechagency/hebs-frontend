@@ -33,9 +33,10 @@ const [createContact]=useCreteContactMutation()
     console.log("Form Data:", data);
     // Here you can handle your form submission e.g. API call
 try {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const res = await createContact(data)
   // console.log("conatct response",res);
-  message.success(res?.data?.message)
+  message.success("Thank you! Your message has been sent. We’ll get back to you soon.")
 } catch (error:any) {
   console.log("error",error);
 }

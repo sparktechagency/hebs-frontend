@@ -6,7 +6,7 @@ import OurTeam from "@/app/component/About/OurTeam";
 import ValuesSection from "@/app/component/About/OurValues";
 import FeatureBook from "@/app/component/Home/FeatureBook";
 
-import style from "@/app/styles.module.css";
+// import style from "@/app/styles.module.css";
 
 
 const AboutPage = () => {
@@ -18,7 +18,7 @@ const AboutPage = () => {
       <AboutBanner />
       <Mission />
       <ValuesSection />
-      <div className="text-center  relative z-10 mt-8 mb-3">
+      {/* <div className="text-center  relative z-10 mt-8 mb-3">
         <h2
           className={`text-4xl md:text-5xl  text-black  relative inline-block ${style.fontRozha}`}
         >
@@ -28,7 +28,7 @@ const AboutPage = () => {
             <span className="absolute left-0 bottom-0 w-full h-4 sm:h-6 md:h-[15px] bg-[#FAF397] -z-10"></span>
           </span>
         </h2>
-      </div>
+      </div> */}
       <OurTeam />
       <div className="overflow-x-hidden">
         <NewsletterSignup />

@@ -3,16 +3,19 @@ import { Select } from "antd";
 import { Controller, FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import style from "@/app/styles.module.css";
 
+
 const Gender = ({
   setIsBirthYear,
   setData,
   setIsGender,
   setIsTopics,
+  data
 }: {
   setIsBirthYear: (value: boolean) => void;
   setIsGender: (value: boolean) => void;
   setIsTopics: (value: boolean) => void;
   setData: any;
+   data:any
 }) => {
   const {
     control,
@@ -36,7 +39,7 @@ const Gender = ({
     <div>
       <form onSubmit={handleSubmit(onSubmit)} className="text-center max-w-md w-full p-10">
         <h3 className={`text-[#F37975] font-medium text-xl mb-4 ${style.fontInter}`}>
-          What is Your Gender?
+          What is  {data?.readerName} Gender?
         </h3>
 
         <Controller

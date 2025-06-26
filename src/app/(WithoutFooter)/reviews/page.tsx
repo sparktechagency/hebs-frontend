@@ -59,27 +59,27 @@ const BookReview = () => {
   }
 
   const emojis = [
-    { emoji: "😵", label: "Dizzy" },
-    { emoji: "😒", label: "Unamused" },
-    { emoji: "😮", label: "Surprised" },
+    { emoji: "😵", label: "dead" },
+    { emoji: "😒", label: "bored" },
+    { emoji: "😮", label: "shocked" },
     { emoji: "😃", label: "happy" },
-    { emoji: "😍", label: "Love" },
+    { emoji: "😍", label: "loved" },
   ];
 
   const difficultyMarks: { [key: number]: string } = {
-    1: "Too Easy",
-    2: "A little hard",
+    1: "easy",
+    // 2: "A little hard",
     3: "medium",
-    4: "Hard",
-    5: "Too Hard",
+    5: "hard",
+    // 5: "Too Hard",
   };
 
   const topicMarks: Record<number, string> = {
     1: "disliked",
-    2: "Somewhat",
-    3: "Okay",
-    4: "Liked",
-    5: "Loved",
+    // 2: "Somewhat",
+    // 3: "Okay",
+    3: "liked",
+    5: "loved",
   };
 
   const onSubmit = async (data: FormData) => {

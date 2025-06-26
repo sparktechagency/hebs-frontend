@@ -6,14 +6,17 @@ import { Select } from "antd";
 import { RightOutlined } from "@ant-design/icons";
 import { Controller, FieldValues, SubmitHandler, useForm } from "react-hook-form";
 
+
 const Relation = ({
   setIsRelation,
   setIsBirthMonth,
   setData,
+  data
 }: {
   setIsRelation: (value: boolean) => void;
   setIsBirthMonth: (value: boolean) => void;
   setData: any;
+   data:any
 }) => {
   const {
     control,
@@ -36,6 +39,7 @@ const Relation = ({
       .toLowerCase()
       .localeCompare((optionB?.label ?? "").toLowerCase());
 
+
   return (
     <div>
       <form
@@ -43,7 +47,7 @@ const Relation = ({
         className="text-center max-w-md w-full p-10"
       >
         <h3 className={`text-[#F37975] font-medium text-xl mb-12 ${style.fontInter}`}>
-          What is your relationship to Talia Mosleh?
+          What is your relationship to {data?.readerName}
         </h3>
 
         {/* Controlled Select Field */}

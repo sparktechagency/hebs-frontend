@@ -11,11 +11,13 @@ const Topics = ({
   setIsTopics,
   setIsInterested,
   setData,
+  data
 }: {
   setIsGender: (value: boolean) => void;
   setIsTopics: (value: boolean) => void;
   setIsInterested: (value: boolean) => void;
   setData: any;
+  data: any;
 }) => {
   const {
     control,
@@ -28,8 +30,9 @@ const Topics = ({
   console.log("collections--->", collections?.data);
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    console.log("Selected topic:", data.favoriteCollection);
+    console.log("Selected topics:", data.favoriteCollection);
 
+    // Save the selected topics (which will be an array now) in state
     setData((prev: any) => ({ ...prev, favoriteCollection: data.favoriteCollection }));
     setIsTopics(false);
     setIsInterested(true);
@@ -51,21 +54,23 @@ const Topics = ({
     <div>
       <form onSubmit={handleSubmit(onSubmit)} className="text-center max-w-md w-full p-10">
         <h3 className={`text-[#F37975] font-medium text-xl mb-12 ${style.fontInter}`}>
-          Which of these topics might you and Talia Mosleh enjoy?
+          Which of these topics might you and {data?.readerName} enjoy?
         </h3>
 
         <Controller
           name="favoriteCollection"
           control={control}
-          rules={{ required: "Please select a topic" }}
+          rules={{ required: "Please select at least one topic" }}
           render={({ field }) => (
             <Select
               {...field}
+              mode="multiple" // This allows multiple selections
               showSearch
-              placeholder="Choose a topic"
+              placeholder="Choose topics"
               className="w-full"
               options={topics} // Using the dynamically populated options
               onChange={(value) => field.onChange(value)}
+              value={field.value || []} // Ensuring the selected topics are handled as an array
             />
           )}
         />
