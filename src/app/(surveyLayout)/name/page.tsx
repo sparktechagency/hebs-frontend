@@ -60,7 +60,7 @@ const { data: specefiqUser,} = useGetSpecefiqUserQuery(
       );
    router.push("/")
   }
-
+console.log("data==>",data);
 
   return (
     <div
@@ -134,7 +134,7 @@ const { data: specefiqUser,} = useGetSpecefiqUserQuery(
           setData={setData}
           setIsInterested={setIsInterested}
           setIsBooksLevel={setIsBooksLevel}
-      
+      data={data}
         />
       )}
       {isSpend && (

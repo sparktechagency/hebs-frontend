@@ -4,19 +4,20 @@
 import { Select } from "antd";
 import { Controller, FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import style from "@/app/styles.module.css";
-import { selectCurrentSurvey } from "@/redux/features/survey/surveySlice";
-import { useAppSelector } from "@/redux/hooks";
+
 
 const BooksLevel = ({
   setIsSpend,
   setData,
   setIsInterested,
   setIsBooksLevel,
+  data
 }: {
   setIsBooksLevel: (value: boolean) => void;
   setIsSpend: (value: boolean) => void;
   setIsInterested: (value: boolean) => void;
   setData: any;
+  data: any;
 }) => {
   const topics = [
     { value: "Beginner", label: "Beginners" },
@@ -41,8 +42,7 @@ const BooksLevel = ({
     setIsBooksLevel(false);
     setIsInterested(true);
   };
- const surveyData = useAppSelector(selectCurrentSurvey);
- console.log("surveydata==>",surveyData);
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="text-center max-w-md w-full p-10">
       <h3 className={`text-[#F37975] font-medium text-xl mb-12 ${style.fontInter}`}>
@@ -53,7 +53,7 @@ const BooksLevel = ({
         name="lavelInArabic"
         control={control}
           rules={{
-          required: surveyData?.interestInArabic ===true ? "Please select a level" : false,
+          required: data?.interestInArabic ==="yes" ?"please answer this question" : false,
         }}
         render={({ field }) => (
           <Select
