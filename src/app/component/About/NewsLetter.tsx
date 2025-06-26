@@ -27,13 +27,14 @@ export default function NewsletterSignup() {
   const onSubmit = async(data: FormData) => {
     // console.log("Form Data:", data);
     try {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const res = await createSubscription(data).unwrap()
       // console.log("res",res);
-      message.success(res?.message)
+      message.success("You’re in! Welcome to the Illuminate Muslim Minds family. Look our for our updates, books, and tips to help you raise confident, curious Muslim kids.")
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error:any) {
-      // console.log(error);
-      message.error(error?.message)
+      // console.log(error?.data?.error);
+      message.error(error?.data?.error)
     }
   };
 

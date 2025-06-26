@@ -16,6 +16,20 @@ const authApi = baseApi.injectEndpoints({
         body: userInfo,
       }),
     }),
+    getOtp: builder.mutation({
+      query: (userInfo) => ({
+        url: "/user/auth/forget-password/send-otp",
+        method: "POST",
+        body:userInfo,
+      }),
+    }),
+    verifyOtp: builder.mutation({
+      query: (userInfo) => ({
+        url: "/user/auth/verify-otp",
+        method: "POST",
+        body:userInfo,
+      }),
+    }),
     loginWithGoogle: builder.query({
       query: () => ({
         url: "/user/auth/google",
@@ -58,4 +72,4 @@ const authApi = baseApi.injectEndpoints({
   }),
 });   
 
-export const { useLoginMutation,useSignUpMutation,useLazyLoginWithGoogleQuery,useLazyLoginWithFacebookQuery,useGetSpecefiqUserQuery,useUpdateSpecefiqUserMutation,useChangePassMutation} = authApi;
+export const { useLoginMutation,useSignUpMutation,useLazyLoginWithGoogleQuery,useLazyLoginWithFacebookQuery,useGetSpecefiqUserQuery,useUpdateSpecefiqUserMutation,useChangePassMutation,useGetOtpMutation,useVerifyOtpMutation} = authApi;

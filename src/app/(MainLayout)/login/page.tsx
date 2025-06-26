@@ -155,10 +155,10 @@ const Login = () => {
 
           <div className="flex items-center justify-end">
             <Link
-              href="/forgot-password"
+              href="/forgotPass"
               className={`text-sm text-gray-500 hover:text-gray-700 ${styles.fontInter}`}
             >
-              Forget Password?
+              Forgot Password?
             </Link>
           </div>
 
@@ -204,7 +204,7 @@ const Login = () => {
 
           <div className="text-center mt-6">
             <p className="text-sm text-gray-600">
-              Already have an account?{" "}
+            Don&apos;t have an account
               <Link
                 href="/signUp"
                 className="text-[#FF4444] hover:text-[#FF6666]"
