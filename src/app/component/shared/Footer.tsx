@@ -22,8 +22,12 @@ const FooterPage = () => {
               Our Story
             </p> 
             <Space direction="vertical" className=" uppercase">
+                       <Link href={'/about'}>
               <p className={`text-white ${style.fontJosefin}`}>About Us</p>
+                       </Link>
+                                <Link href={'/contact'}>
               <p className={`text-white ${style.fontJosefin}`}>Contact Us</p>
+                                </Link>
             </Space>
           </div>
 
@@ -32,18 +36,27 @@ const FooterPage = () => {
               Book Clubs
             </p>
             <Space direction="vertical" className=" uppercase">
+              <Link href={'/tinyMuslimBox'}>
               <p className={`text-white ${style.fontJosefin}`}>
                 Tiny Mu&apos;mins
               </p>
+              </Link>
+                       <Link href={'/littleCaliphsBox'}>
+                       
               <p className={`text-white ${style.fontJosefin}`}>
                 Little Caliphs
               </p>
+                       </Link>
+                                <Link href={'/deen'}>
               <p className={`text-white ${style.fontJosefin}`}>
                 Deen Discoverers
               </p>
+                                </Link>
+                                         <Link href={'/islamic'}>
               <p className={`text-white ${style.fontJosefin}`}>
                 Islamic Explorers
               </p>
+                                         </Link>
             </Space>
           </div>
 
@@ -54,9 +67,13 @@ const FooterPage = () => {
               More
             </p>
             <Space direction="vertical" className=" uppercase">
+                       <Link href={'/gift'}>
               <p className="text-white">Give a gift</p>
+                       </Link>
+                                <Link href={'/bookStore'}>
               <p className="text-white">online book store</p>
-              <p className="text-white">blog</p>
+                                </Link>
+        
             </Space>
           </div>
 
