@@ -45,6 +45,15 @@ jobs:
           mkdir -p ~/.ssh
           ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
 
+      - name: Clean Up Disk Space on EC2
+        run: |
+          ssh -i /tmp/pro-key.pem ubuntu@${{ secrets.EC2_HOST }} << 'EOF'
+          docker system prune -af --volumes
+          sudo rm -rf /var/log/journal/*
+          sudo rm -rf /var/lib/apt/lists/*
+          sudo rm -rf /var/cache/apt/*
+          EOF
+
       # Ensure correct permissions on EC2
       - name: Ensure EC2 Permissions
         run: |
