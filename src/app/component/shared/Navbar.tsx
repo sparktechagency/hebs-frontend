@@ -16,7 +16,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { logout, selectCurrentUser } from "@/redux/features/auth/authSlice";
 import { protectedRoutes } from "@/constants";
 import { setCookie } from "nookies";
-import { clearCart } from "@/redux/features/cart/cartSlice";
+import { clearCart, orderedProductsSelector } from "@/redux/features/cart/cartSlice";
 import { resetSurveyData } from "@/redux/features/survey/surveySlice";
 import { resetPlanData } from "@/redux/features/subscription/subscriptionSlice";
 export default function Navbar() {
@@ -24,7 +24,7 @@ export default function Navbar() {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const [open, setOpen] = useState(false);
-
+  const products = useAppSelector(orderedProductsSelector);
   const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
   const [kidsClubDropdownOpen, setKidsClubDropdownOpen] = useState(false);
   // const [kidsClubMobileDropdownOpen, setKidsClubMobileDropdownOpen] =
@@ -246,14 +246,21 @@ export default function Navbar() {
             </div>
           )}
 
-          <Link href="/cart">
-            <button
-              className={`py-3 w-[100px] md:w-[120px] flex gap-1 items-center justify-center font-bold rounded-full border-none bg-white text-[#f08080] hover:bg-white/90 ${style.fontJosefin}`}
-            >
-              <ShoppingCartOutlined style={{ marginRight: 8 }} />
-              Cart
-            </button>
-          </Link>
+            <Link href="/cart">
+  <button
+    className={`relative py-3 w-[100px] md:w-[120px] flex gap-1 items-center justify-center font-bold rounded-full border-none bg-white text-[#f08080] hover:bg-white/90 ${style.fontJosefin}`}
+  >
+    <div className="relative">
+      <ShoppingCartOutlined style={{ marginRight: 8 }} />
+      {products.length > 0 && (
+        <span className="absolute -top-5 -right-16 bg-red-500 text-white text-[10px] min-w-[20px] h-[20px] px-[4px] rounded-full flex items-center justify-center">
+          {products.length}
+        </span>
+      )}
+    </div>
+    Cart
+  </button>
+</Link>
         </div>
 
         {/* Mobile Menu Button */}

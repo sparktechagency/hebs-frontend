@@ -12,8 +12,7 @@ import { Input } from "antd";
 import { useDispatch } from "react-redux";
 import { updateSurveyData } from "@/redux/features/survey/surveySlice";
 import { useRouter } from "next/navigation";
-import { useAppSelector } from "@/redux/hooks";
-import {  selectCurrentUser } from "@/redux/features/auth/authSlice";
+
 
 const Email = ({
   setIsEmail,
@@ -36,14 +35,14 @@ const Email = ({
   const router = useRouter();
   const dispatch = useDispatch();
 
-const user = useAppSelector(selectCurrentUser)
+// const user = useAppSelector(selectCurrentUser)
 // console.log("user",user?.user?.email);
 
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const onSubmit: SubmitHandler<FieldValues> = (d) => {
-    // console.log("Email entered:", d.email);
-    setData((prev: any) => ({ ...prev, email: user?.user?.email}));
+    console.log("Email entered:", d.email);
+    setData((prev: any) => ({ ...prev, email: d.email}));
 
     const year = data?.birthYear;
     const month = data?.birthMonth;
@@ -58,7 +57,8 @@ const user = useAppSelector(selectCurrentUser)
  
     const surveyData = {
       readerName: data.readerName,
-      email: user?.user?.email,
+      // email: user?.user?.email,
+      email: d?.email,
       relation: data.relation,
       gender: data.gender,
       dateOfBirth: dateOfBirth,
@@ -73,7 +73,7 @@ const user = useAppSelector(selectCurrentUser)
 
     // dispatch(resetSurveyData());
     dispatch(updateSurveyData(surveyData));
-    router.push("/recomended")
+    router.push("/subscriptionPlan")
     // You can now proceed to the final step or submit the collected data
     // setIsEmail(false);
     // setIsRecomended(true)
@@ -108,8 +108,8 @@ const user = useAppSelector(selectCurrentUser)
         render={({ field }) => (
           <Input
             {...field}
-            defaultValue={user?.user?.email}
-            readOnly
+            // defaultValue={user?.user?.email}
+            // readOnly
             type="email"
             // placeholder="Type your email here"
             className="w-full mt-5 py-3 focus:border-[#F37975] focus:ring-[#F37975]"

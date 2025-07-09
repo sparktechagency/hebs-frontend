@@ -47,7 +47,7 @@ const Relation = ({
         className="text-center max-w-md w-full p-10"
       >
         <h3 className={`text-[#F37975] font-medium text-xl mb-12 ${style.fontInter}`}>
-          What is your relationship to {data?.readerName}
+          What is your relationship to {data?.readerName}?
         </h3>
 
         {/* Controlled Select Field */}
