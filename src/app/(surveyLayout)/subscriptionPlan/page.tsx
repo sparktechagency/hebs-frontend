@@ -2,16 +2,15 @@
 "use client"
 
 import {  useEffect, useState } from "react"
-import { message, Radio } from "antd"
+import { Radio } from "antd"
 import {  LeftOutlined, RightOutlined } from "@ant-design/icons"
 import Image from "next/image"
 import packaging from "@/assets/tinnymuslimBox.png";
 import Link from "next/link"
 import { useGetSubscriptionsQuery } from "@/redux/features/survey/surveyApi"
-import { useAppDispatch, useAppSelector } from "@/redux/hooks"
+import { useAppDispatch } from "@/redux/hooks"
 import { subscriptionPlan } from "@/redux/features/subscription/subscriptionSlice"
-import { selectCurrentUser } from "@/redux/features/auth/authSlice"
-import { useRouter } from "next/navigation"
+
 
 export interface Plan {
   _id: string;
@@ -45,21 +44,21 @@ const selectedPlanObject = plans?.data?.find((plan: any) => plan._id === selecte
   // console.log("current plan get purchase plan=>",selectedPlanObject);
 const dispatch = useAppDispatch();
 // console.log("Selected plan object>>>", selectedPlanObject);
-  const user = useAppSelector(selectCurrentUser);
-  const router = useRouter();
+  // const user = useAppSelector(selectCurrentUser);
+  // const router = useRouter();
 
   // Local state to control redirect flow
-  const [redirecting, setRedirecting] = useState(false);
+  // const [redirecting, setRedirecting] = useState(false);
 
-  useEffect(() => {
-    if (!user && !redirecting) {
-      message.error("User Not found Please Login");
-      setRedirecting(true);
-      setTimeout(() => {
-        router.push("/login");
-      }, 1000);
-    }
-  }, [user, redirecting, router]);
+  // useEffect(() => {
+  //   if (!user && !redirecting) {
+  //     message.error("User Not found Please Login");
+  //     setRedirecting(true);
+  //     setTimeout(() => {
+  //       router.push("/login");
+  //     }, 1000);
+  //   }
+  // }, [user, redirecting, router]);
 
 
   useEffect(() => {
