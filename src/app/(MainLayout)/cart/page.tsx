@@ -86,9 +86,9 @@ const router = useRouter();
             </p>
           </div>
         ) : (
-          <div className="grid grid-cols-12 gap-8 my-5 w-full p-8 container mx-auto">
+          <div className="md:flex gap-4 my-5 w-full p-8 container mx-auto">
             {/* Left Column: Cart Products */}
-            <div className="col-span-12 md:col-span-7">
+            <div className="col-span-8 md:col-span-7 ">
               <CartProducts />
             </div>
 
