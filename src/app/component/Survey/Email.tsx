@@ -12,8 +12,7 @@ import { Input } from "antd";
 import { useDispatch } from "react-redux";
 import { updateSurveyData } from "@/redux/features/survey/surveySlice";
 import { useRouter } from "next/navigation";
-import { useAppSelector } from "@/redux/hooks";
-import {  selectCurrentUser } from "@/redux/features/auth/authSlice";
+
 
 const Email = ({
   setIsEmail,
@@ -36,7 +35,7 @@ const Email = ({
   const router = useRouter();
   const dispatch = useDispatch();
 
-const user = useAppSelector(selectCurrentUser)
+// const user = useAppSelector(selectCurrentUser)
 // console.log("user",user?.user?.email);
 
 

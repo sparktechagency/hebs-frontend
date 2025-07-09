@@ -287,16 +287,82 @@ const {name,description,price,author,level,weight,format,coverImage,}=data?.data
                     </div>
                   ),
                   children: (
-                    <div className="p-4">
-                      <p>
-                        Standard shipping takes 3-5 business days. Express
-                        shipping is available at checkout.
-                      </p>
-                      <p>
-                        Returns accepted within 30 days of purchase. Item must
-                        be in original condition.
-                      </p>
-                    </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-sm leading-6 text-gray-800">
+  {/* Subscription Box Shipping & Returns */}
+  <div>
+    <h2 className="text-lg font-semibold mb-2">Subscription Box Shipping & Returns</h2>
+
+    <p className="font-semibold mt-4">Free Shipping and Returns:</p>
+    <ul className="list-disc list-inside ml-4">
+      <li>Shipping for both receiving and returning books is completely free.</li>
+      <li>You will only be charged for the books you decide to keep.</li>
+      <li>We do not charge for books that are sent back to us within the 7-day return period and in good condition.</li>
+    </ul>
+
+    <p className="font-semibold mt-4">Return Period:</p>
+    <p className="ml-4">Returns must be made within 7 days of receiving your books.</p>
+
+    <p className="font-semibold mt-4">Book Condition:</p>
+    <ul className="list-disc list-inside ml-4">
+      <li>No significant damage such as tears, stains, or missing pages.</li>
+      <li>The book should not have been written in, highlighted, or otherwise altered.</li>
+    </ul>
+
+    <p className="font-semibold mt-4">Return Process:</p>
+    <ul className="list-disc list-inside ml-4">
+      <li>You will find a prepaid return label included in your package. Stick this label on the Illuminate book box.</li>
+      <li>Pack the books securely and ensure the return label is clearly visible.</li>
+      <li>Drop off the package at your nearest shipping location.</li>
+    </ul>
+
+    <p className="font-semibold mt-4">Refunds and Charges:</p>
+    <ul className="list-disc list-inside ml-4">
+      <li>You will only be charged for the books you decide to keep.</li>
+      <li>We do not charge for books returned on time and in good condition.</li>
+      <li>Once we verify returned book conditions, we will adjust charges accordingly.</li>
+    </ul>
+  </div>
+
+  {/* Online Bookstore Shipping & Returns */}
+  <div>
+    <h2 className="text-lg font-semibold mb-2">Online Bookstore Shipping & Returns</h2>
+
+    <p className="font-semibold mt-4">Shipping Fees:</p>
+    <ul className="list-disc list-inside ml-4">
+      <li>You are responsible for paying shipping fees for purchased books.</li>
+      <li>Shipping fees depend on method, weight, and destination.</li>
+      <li>We provide an estimate before purchase completion.</li>
+    </ul>
+
+    <p className="font-semibold mt-4">Delivery:</p>
+    <ul className="list-disc list-inside ml-4">
+      <li>We dispatch orders promptly, but delivery time may vary due to uncontrollable factors.</li>
+      <li>We are not liable for any delivery delays.</li>
+    </ul>
+
+    <p className="font-semibold mt-4">Returns:</p>
+    <ul className="list-disc list-inside ml-4">
+      <li>You may return books within 30 days of delivery unless stated otherwise.</li>
+      <li>Books must be returned in their original condition.</li>
+    </ul>
+
+    <p className="font-semibold mt-4">Return Shipping Fees:</p>
+    <ul className="list-disc list-inside ml-4">
+      <li>You must pay return shipping unless it was our error (e.g., incorrect/damaged book).</li>
+      <li>In case of our error, we cover the return cost.</li>
+    </ul>
+
+    <p className="font-semibold mt-4">Refunds:</p>
+    <ul className="list-disc list-inside ml-4">
+      <li>Refunds are processed upon receiving returned books in original condition.</li>
+      <li>Refunds are issued to the original payment method per card issuer timelines.</li>
+    </ul>
+
+    <p className="font-semibold mt-4">Contact Information:</p>
+    <p className="ml-4">For return-related queries, contact us at <a className="text-blue-600 underline" href="mailto:info@illuminatemuslimminds.com">info@illuminatemuslimminds.com</a>.</p>
+  </div>
+</div>
+
                   ),
                 },
               ]}
