@@ -46,7 +46,9 @@ const BooksLevel = ({
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="text-center max-w-md w-full p-10">
       <h3 className={`text-[#F37975] font-medium text-xl mb-12 ${style.fontInter}`}>
-        What level of Arabic books are you interested in?<span className="text-xs ml-3">(If No Skip this question)</span>
+        What level of Arabic books are you interested in?{data?.interestInArabic !== "yes" && (
+    <span className="text-xs ml-3">(Skip this question)</span>
+  )}
       </h3>
 
       <Controller
