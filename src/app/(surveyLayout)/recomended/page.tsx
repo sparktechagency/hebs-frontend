@@ -10,13 +10,11 @@ import { useAppSelector } from "@/redux/hooks";
 import { selectCurrentSurvey } from "@/redux/features/survey/surveySlice";
 import { useGetRecommendationQuery } from "@/redux/features/survey/surveyApi";
 import LoadingPage from "@/app/loading";
-import { useEffect, useState } from "react";
+import { useEffect, } from "react";
 import { useDispatch } from "react-redux";
 import { addCategory } from "@/redux/features/boxes/boxesSlice";
 import { selectCurrentUser } from "@/redux/features/auth/authSlice";
 
-import { message } from "antd";
-import { useRouter } from "next/navigation";
 
 export default function BookRecommendations() {
   const surveyData = useAppSelector(selectCurrentSurvey);
@@ -25,30 +23,30 @@ export default function BookRecommendations() {
     surveyData?.dateOfBirth
   );
   const user = useAppSelector(selectCurrentUser);
-  const router = useRouter();
+  // const router = useRouter();
 
   // Local state to control redirect flow
-  const [redirecting, setRedirecting] = useState(false);
+  // const [redirecting, setRedirecting] = useState(false);
 
-  useEffect(() => {
-    if (!user && !redirecting) {
-      message.error("User Not found Please Login");
-      setRedirecting(true);
-      setTimeout(() => {
-        router.push("/login");
-      }, 1000);
-    }
-  }, [user, redirecting, router]);
+  // useEffect(() => {
+  //   if (!user && !redirecting) {
+  //     message.error("User Not found Please Login");
+  //     setRedirecting(true);
+  //     setTimeout(() => {
+  //       router.push("/login");
+  //     }, 1000);
+  //   }
+  // }, [user, redirecting, router]);
 
-  useEffect(() => {
-    if (!recommended && !redirecting && !isLoading) {
-      message.info("At first you have to complete the survey");
-      setRedirecting(true);
-      setTimeout(() => {
-        router.push("/name");
-      }, 1000);
-    }
-  }, [recommended, redirecting, router, isLoading]);
+  // useEffect(() => {
+  //   if (!recommended && !redirecting && !isLoading) {
+  //     message.info("At first you have to complete the survey");
+  //     setRedirecting(true);
+  //     setTimeout(() => {
+  //       router.push("/name");
+  //     }, 1000);
+  //   }
+  // }, [recommended, redirecting, router, isLoading]);
 
   // Add category when recommendation is available
   useEffect(() => {
@@ -58,7 +56,7 @@ export default function BookRecommendations() {
   }, [recommended, dispatch]);
 
   // If redirecting or loading, show loading page only - no UI or logic
-  if (redirecting || isLoading) {
+  if ( isLoading) {
     return <LoadingPage />;
   }
 

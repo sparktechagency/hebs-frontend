@@ -73,7 +73,7 @@ const Email = ({
 
     // dispatch(resetSurveyData());
     dispatch(updateSurveyData(surveyData));
-    router.push("/subscriptionPlan")
+    router.push("/recomended")
     // You can now proceed to the final step or submit the collected data
     // setIsEmail(false);
     // setIsRecomended(true)
