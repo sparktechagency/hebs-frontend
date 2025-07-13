@@ -119,7 +119,7 @@ console.log("user from checkout------>",user);
         message.success(response?.data?.message);
       } else {
         message.error(
-          response?.data?.error || "An unknown error occurred for survey"
+          response?.data?.error || "Something Went wrong"
         );
       }
 
@@ -214,7 +214,7 @@ console.log("user from checkout------>",user);
 
                 <div className="text-center mt-6">
                   <p className="text-sm text-gray-600">
-                    Already have an account?{" "}
+                    Don&apos;t  have any account?
                     <Link
                       href="/signUp"
                       className="text-[#FF4444] hover:text-[#FF6666]"

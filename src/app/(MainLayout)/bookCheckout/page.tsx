@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import wild from "@/assets/wild.png";
@@ -56,7 +57,7 @@ const BookCheckoutPage = () => {
     skip: !categoryId,
   });
   const books = specifiqBox?.data?.books;
-
+console.log("Kept Books-------->",books);
   const [trackingDetails, setTrackingDetails] = useState<any>({});
 
   // Store selected books IDs
@@ -167,6 +168,7 @@ const BookCheckoutPage = () => {
   }, 0);
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const subscriptionPrice =    purchaseSubscription?.data?.priceAmount;
 
   const total =
@@ -220,6 +222,7 @@ const subscriptionPrice =    purchaseSubscription?.data?.priceAmount;
     }
   };
   // console.log("selectedBooksWithQuantity",selectedBooksWithQuantity);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleOrder = async () => {
     const items = selectedBooksWithQuantity.map((product: any) => ({
       itemId: product._id,
@@ -272,6 +275,7 @@ const subscriptionPrice =    purchaseSubscription?.data?.priceAmount;
   }
 
   // Shipping form submit handler
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     const orderData = {
       toAddress: {
@@ -290,10 +294,7 @@ const subscriptionPrice =    purchaseSubscription?.data?.priceAmount;
       const res = (await shippingInfo(orderData)) as any;
       if (res?.data) {
         message.success(res.data.message);
-        // localStorage.setItem(
-        //   "shippingMethod",
-        //   JSON.stringify(res.data.data.rates)
-        // );
+
         setEnableCashon(true)
         setEnable(true)
         setTrackingDetails(res.data.data);
@@ -309,7 +310,7 @@ const subscriptionPrice =    purchaseSubscription?.data?.priceAmount;
     <div className="container mx-auto px-4 py-10 min-h-screen">
       <div className="flex flex-wrap justify-between gap-6">
         {/* Left side */}
-        <div className="w-full md:w-7/12 px-2">
+        <div className="w-full md:w-7/12 px-2 mx-auto">
           <h1 className={`text-2xl font-bold ${style.fontInter}`}>
             Book Checkout Summary
           </h1>
@@ -321,14 +322,14 @@ const subscriptionPrice =    purchaseSubscription?.data?.priceAmount;
               className="bg-white shadow-md rounded-lg mt-5 p-4"
             >
               <div className="flex flex-wrap items-center gap-4">
-                <input
+                {/* <input
                   type="checkbox"
                   checked={selectedBooks.includes(book._id)}
                   onChange={(e) =>
                     handleCheckboxChange(book._id, e.target.checked)
                   }
                   className="w-5 h-5 flex-shrink-0"
-                />
+                /> */}
 
                 <div className="relative w-20 h-20 sm:w-24 sm:h-24 flex-shrink-0">
                   <Image
@@ -353,7 +354,7 @@ const subscriptionPrice =    purchaseSubscription?.data?.priceAmount;
                     <span className="mr-2">Price:</span>
                     {currencyFormatter(book.price?.amount)}
                   </p>
-                  <div className="flex items-center gap-2 mt-3 justify-end">
+                  {/* <div className="flex items-center gap-2 mt-3 justify-end">
                     <p className="text-gray-500 font-semibold text-xs sm:text-sm">
                       Quantity
                     </p>
@@ -374,7 +375,7 @@ const subscriptionPrice =    purchaseSubscription?.data?.priceAmount;
                     >
                       <Plus />
                     </button>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
@@ -382,11 +383,14 @@ const subscriptionPrice =    purchaseSubscription?.data?.priceAmount;
         </div>
 
         {/* Right Section - only show if selectedBooks not empty */}
-        {selectedBooks.length > 0 ? (
+
+
+
+        {/* {selectedBooks.length > 0 ? (
           <div className="w-full md:w-4/12 mt-10 md:mt-0">
             <div className="mb-10">
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-                {/* Street Address */}
+        
                 <div>
                   <label className="block text-sm text-gray-500 mb-1">
                     Street Address
@@ -406,7 +410,7 @@ const subscriptionPrice =    purchaseSubscription?.data?.priceAmount;
                   )}
                 </div>
 
-                {/* City & State */}
+ 
                 <div className="flex space-x-4">
                   <div className="flex-1">
                     <label className="block text-sm text-gray-500 mb-1">
@@ -447,7 +451,6 @@ const subscriptionPrice =    purchaseSubscription?.data?.priceAmount;
                   </div>
                 </div>
 
-                {/* Zip Code & Country */}
                 <div className="flex space-x-4">
                   <div className="flex-1">
                     <label className="block text-sm text-gray-500 mb-1">
@@ -498,12 +501,11 @@ const subscriptionPrice =    purchaseSubscription?.data?.priceAmount;
               </form>
             </div>
 
-            {/* Payment details */}
+        
             <div className="bg-white shadow-md rounded-lg p-6">
               <h3 className="text-lg font-semibold mb-4">Payment Details</h3>
               <div className="border-b mb-4"></div>
 
-              {/* Book Subtotal */}
               <div className="flex justify-between mb-2">
                 <span>Book Subtotal</span>
                 <span className="font-medium">
@@ -521,7 +523,7 @@ const subscriptionPrice =    purchaseSubscription?.data?.priceAmount;
                 </span>
               </div>
 
-              {/* Illuminate Discount */}
+ 
               <div className="flex justify-between mb-2">
                 <span>Illuminate Discount</span>
                 <span className="font-medium">
@@ -539,7 +541,6 @@ const subscriptionPrice =    purchaseSubscription?.data?.priceAmount;
                 </span>
               </div>
 
-              {/* Order Total */}
               <div className="flex justify-between mb-4">
                 <span className="font-semibold text-lg">Order Total</span>
                 <span className="font-semibold text-lg">
@@ -557,7 +558,6 @@ const subscriptionPrice =    purchaseSubscription?.data?.priceAmount;
                 </span>
               </div>
 
-              {/* Payment Method Radio Buttons */}
               <div className="mb-6">
                 <h4 className="font-semibold mb-2">Payment Method</h4>
                 <div className="flex flex-col space-y-2">
@@ -597,7 +597,6 @@ const subscriptionPrice =    purchaseSubscription?.data?.priceAmount;
                  >Proceed CashOn Delivery</button>
               </div>
 
-              {/* Proceed Checkout Button */}
               <div className="flex justify-between items-center">
                 <button
                   disabled={selectPaymentMethod !== "payNow" && enable}
@@ -616,11 +615,13 @@ const subscriptionPrice =    purchaseSubscription?.data?.priceAmount;
             </div>
           </div>
         ) : (
-          // Optional message when no books selected
           <div className="w-full md:w-4/12 mt-10 md:mt-0 flex items-center justify-center text-gray-500 italic">
             Please select at least one book to proceed to checkout.
           </div>
-        )}
+        )} */}
+
+
+
       </div>
     </div>
   );

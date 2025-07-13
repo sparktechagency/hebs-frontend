@@ -18,10 +18,13 @@ import { selectCurrentUser } from "@/redux/features/auth/authSlice";
 
 export default function BookRecommendations() {
   const surveyData = useAppSelector(selectCurrentSurvey);
+  console.log("survey data->",surveyData);
   const dispatch = useDispatch();
   const { data: recommended, isLoading } = useGetRecommendationQuery(
     surveyData?.dateOfBirth
   );
+    console.log("recomended data--->",recommended);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const user = useAppSelector(selectCurrentUser);
   // const router = useRouter();
 
@@ -61,9 +64,9 @@ export default function BookRecommendations() {
   }
 
   // If no user or recommendation and not redirecting yet, don't render UI to prevent flashes
-  if (!user || !recommended) {
-    return null;
-  }
+  // if (!user || !recommended) {
+  //   return null;
+  // }
 
   return (
     <>
