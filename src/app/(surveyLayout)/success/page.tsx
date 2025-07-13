@@ -41,7 +41,7 @@ const SucessPage = () => {
       return null;
     }
   }, [rawPurpose]);
-
+// console.log("user------->",user?.userName);
   const [shippingMethods, setShippingMethods] = useState<any>({});
   const orderedProducts = useAppSelector(orderedProductsSelector);
 
@@ -121,7 +121,7 @@ const SucessPage = () => {
       sessionId,
       user: {
         userId: user.userId,
-        name: userData.data?.survey?.readerName,
+        name: userData.data?.firstName,
         email: userData.data?.email,
       },
       items,
