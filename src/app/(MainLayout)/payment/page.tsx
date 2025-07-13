@@ -42,7 +42,7 @@ export default function PaymentPage() {
   const subTotalAfterSelectDeliveryCost = subTotal + deliveryCost;
 const user = useAppSelector(selectCurrentUser)
   const products = useAppSelector(orderedProductsSelector);
-// console.log("user",user?.user?.email);
+console.log("user",user?.user);
   // Log full selected shipping method object
   // console.log("Selected shipping method object:", selectedShippingMethod);
 
@@ -59,7 +59,7 @@ const user = useAppSelector(selectCurrentUser)
     }
   }, []);
 const router = useRouter();
-  const [placeOrder]=usePlaceCartOrderMutation();
+  const [placeCartOrder]=usePlaceCartOrderMutation();
   const handleOrder = async() => {
     // Implement your order logic here
   const items = products.map(product => ({
@@ -68,13 +68,14 @@ const router = useRouter();
   }));
     const order = {
           items,
+
     shippingCost: currencyFormatter(deliveryCost),
     customerEmail: user?.user?.email
     }
     console.log("order",order);
     try{
-      const res =await placeOrder(order)
-      console.log("response",res);
+      const res =await placeCartOrder(order)
+      console.log("response-------------<>-->",res);
       message.success(res.data.message)
       router.push(res?.data?.data?.url)
 
