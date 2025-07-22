@@ -2,7 +2,7 @@
 "use client";
 
 import { Button, Form, Input, message, Tooltip } from "antd";
-import { InfoCircleOutlined, LeftOutlined, MailOutlined, RightOutlined } from "@ant-design/icons";
+import { InfoCircleOutlined,  MailOutlined, RightOutlined } from "@ant-design/icons";
 import Image from "next/image";
 import packaging from "@/assets/tinnymuslimBox.png";
 import Link from "next/link";
@@ -142,7 +142,7 @@ console.log("user from checkout------>",user);
         {/* <div className="grid md:grid-cols-2 gap-6 items-center justify-center">   */}
         <div className="lg:flex gap-5 items-center justify-center">
           {/* Left Column */}
-          <div className="space-y-6 w-full sm:w-[50%] mx-auto">
+          <div className={`space-y-6 w-full sm:w-[50%] mx-auto ${user ? 'hidden' : ''}`}>
 
             <div className="border rounded-2xl p-6 shadow-sm">
               <h2 className="text-xl font-semibold text-gray-700 mb-6">
@@ -212,17 +212,17 @@ console.log("user from checkout------>",user);
 
 
 
-                <div className="text-center mt-6">
+                {/* <div  className="text-center mt-6">
                   <p className="text-sm text-gray-600">
                     Don&apos;t  have any account?
                     <Link
                       href="/signUp"
-                      className="text-[#FF4444] hover:text-[#FF6666]"
+                      className="text-[#FF4444] hover:text-[#FF6666] ml-1"
                     >
                       Sign Up
                     </Link>
                   </p>
-                </div>
+                </div> */}
               </Form>
             </div>
           </div>
@@ -313,14 +313,14 @@ console.log("user from checkout------>",user);
 
       {/* Button */}
       <div className=" bg-[#EDEBE6] shadow-lg p-5 w-full">
-        <div className="container mx-auto flex justify-between">
+        <div className="container mx-auto flex justify-end">
           {/* Back Button */}
-          <Link href="/subscriptionPurchase">
+          {/* <Link href="/subscriptionPurchase">
             <button className="border border-black text-black px-6 py-2 rounded-full inline-flex items-center justify-center space-x-2 hover:bg-gray-100 active:bg-gray-200 transition">
               <LeftOutlined />
               <span className="font-semibold">Skip</span>
             </button>
-          </Link>
+          </Link> */}
 
           {/* Next Button */}
           {/* <Link href={"/subscriptionPurchase"}> */}
