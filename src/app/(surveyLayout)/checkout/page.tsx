@@ -92,6 +92,27 @@ console.log("user from checkout------>",user);
       userId: user?.userId,
       priceId: plan?.priceId,
     };
+        try {
+      //   post survey
+      const response = await createSurvey(surveyData);
+      console.log("sur res", response);
+      if (response?.data) {
+        message.success(response?.data?.message);
+      } else {
+        message.error(
+          response?.data?.error || "Something Went wrong"
+        
+        );
+      }
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      console.log(error);
+      message.error(error);
+      return
+    }
+
+    
     try {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const res = (await createSubscription(orderData)) as any;
@@ -111,23 +132,7 @@ console.log("user from checkout------>",user);
       console.log(error);
       message.error(error);
     }
-    try {
-      //   post survey
-      const response = await createSurvey(surveyData);
-      console.log("sur res", response);
-      if (response?.data) {
-        message.success(response?.data?.message);
-      } else {
-        message.error(
-          response?.data?.error || "Something Went wrong"
-        );
-      }
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (error: any) {
-      console.log(error);
-      message.error(error);
-    }
   };
 
 
