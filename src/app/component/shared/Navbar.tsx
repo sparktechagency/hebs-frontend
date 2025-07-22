@@ -110,11 +110,14 @@ export default function Navbar() {
               KIDS BOOK CLUB ▼
             </button>
             {kidsClubDropdownOpen && (
-              <div className="absolute z-40 bg-white w-[650px] shadow-lg mt-2">
+              // w-[650px]
+              <div className="absolute z-40 bg-white w-[450px]  shadow-lg mt-2">
                 <div className="container mx-auto px-4 py-10">
                   <div className="flex flex-col md:flex-row justify-between gap-12">
                     {/* Left Side - Age Categories */}
-                    <div className="w-full md:w-1/2 lg:w-1/2 border-r border-gray-200 text-center lg:text-start">
+                    {/* border-r border-gray-200 */}
+                    {/* md:w-1/2 lg:w-1/2 */}
+                    <div className="w-full   text-center lg:text-start">
                       <h2
                         className={`text-[#FF7F7F] text-2xl  mb-1 uppercase ${style.fontRozha}`}
                       >
@@ -142,8 +145,8 @@ export default function Navbar() {
                     </div>
 
                     {/* Right Side - Kids Book Clubs & Gifts */}
-                    <div className="w-full md:w-1/2 lg:w-1/2 flex flex-col space-y-12">
-                      {/* Gifts Section */}
+                    {/* <div className="w-full md:w-1/2 lg:w-1/2 flex flex-col space-y-12">
+             
                       <div className="">
                         <h2
                           className={`text-[#FF7F7F] text-2xl  mb-1 uppercase ${style.fontRozha}`}
@@ -158,7 +161,7 @@ export default function Navbar() {
                           </button>
                         </Link>
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>
