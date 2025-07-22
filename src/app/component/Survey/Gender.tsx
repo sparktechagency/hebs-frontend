@@ -52,7 +52,7 @@ const Gender = ({
               options={[
                 { label: "Male", value: "Male" },
                 { label: "Female", value: "Female" },
-                { label: "Other", value: "Other" },
+                // { label: "Other", value: "Other" },
               ]}
               placeholder="Select your gender"
               className="w-full mt-5"

@@ -20,16 +20,30 @@ const SignUpPage = () => {
   const { register, handleSubmit, formState: { errors } } = useForm<SignUpFormInputs>();
   const [signUp] = useSignUpMutation();
 const router = useRouter()
+const showErrorMessage = (error: any) => {
+  let msg = 'Something went wrong! Try again.';
+
+  if (error.data?.message === 'Request validation error!' && Array.isArray(error.data?.data)) {
+    msg = error.data.data[0]?.message || msg;
+  } else {
+    msg = error.data?.message || error.message || error.data?.error || msg;
+  }
+
+  message.error(msg);
+};
+
+
   const onSubmit: SubmitHandler<SignUpFormInputs> = async (data) => {
     try {
       const response = await signUp(data).unwrap();
       
+      message.success(response?.message)
      router.push("/login")
-      message.success(response.message )
+      console.error("Signup response:", response?.message);
       // Redirect user or show success message
     } catch (error:any) {
-      // console.error("Signup failed:", error);
-      message.error(error?.data?.message || error.data.error)
+      console.error("Signup failed:", error);
+     showErrorMessage(error)
       // Show error to user
     }
   };
