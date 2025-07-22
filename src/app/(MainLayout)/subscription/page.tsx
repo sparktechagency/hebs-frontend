@@ -44,7 +44,7 @@ const [cancelSubscription]=useCancelSubscriptionMutation();
   // console.log("userid",specefiqUser);
   const dob = singleUser?.data?.survey?.dateOfBirth;
   const formattedDOB = dob ? dob.split("T")[0] : null;
-  //  console.log("Formatted DOB:", formattedDOB);
+   console.log("Formatted DOB:", formattedDOB);
   const { data: recommendation } = useGetRecommendationQuery(formattedDOB);
   const categoryId = recommendation?.data?.category?._id;
   // console.log("cat id:", recommendation?.data?.category?._id);

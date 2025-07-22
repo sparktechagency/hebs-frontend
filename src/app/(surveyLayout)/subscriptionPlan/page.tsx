@@ -3,7 +3,7 @@
 
 import {  useEffect, useState } from "react"
 import { Radio } from "antd"
-import {  LeftOutlined, RightOutlined } from "@ant-design/icons"
+import { RightOutlined } from "@ant-design/icons"
 import Image from "next/image"
 import packaging from "@/assets/tinnymuslimBox.png";
 import Link from "next/link"
@@ -186,15 +186,15 @@ const handleSubmitPlans=()=>{
 
 {/* button */}
 <div className=" bg-[#EDEBE6] shadow-lg p-5 w-full ">
-<div className="container mx-auto flex justify-between ">
+<div className="container mx-auto flex justify-end ">
           {/* Back Button */}
-          <Link href="/checkout">
+          {/* <Link href="/checkout">
 
 <button className="border border-black text-black px-6 py-2 rounded-full inline-flex items-center justify-center space-x-2 hover:bg-gray-100 active:bg-gray-200 transition">
   <LeftOutlined/>
   <span className="font-semibold">Skip</span>
 </button>
-</Link>
+</Link> */}
 
 {/* Next Button */}
 <Link href={"/checkout"}>

@@ -95,7 +95,7 @@ export default function BookRecommendations() {
             {/* Legend Section */}
             <div className="mb-8 pt-16">
               <p className="text-2xl text-black mb-4">Current Reading Level</p>
-              <h2 className="text-2xl text-black font-semibold mb-4">Legend</h2>
+              <h2 className="text-2xl text-black font-semibold mb-4">{recommended?.data?.category?.title}</h2>
               <div className="inline-block bg-[#ff7171] text-black px-4 py-1.5 rounded-full text-sm font-medium">
                 {recommended?.data?.category?.ageGroup}
               </div>
