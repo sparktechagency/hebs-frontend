@@ -16,6 +16,7 @@ import { currencyFormatter } from "@/utils/currencyFormatter";
 import { useForm, Controller } from "react-hook-form";
 import { selectCurrentUser } from "@/redux/features/auth/authSlice";
 import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 const { TextArea } = Input;
 
@@ -29,7 +30,7 @@ type FormData = {
 const BookReview = () => {
   const [createReview] = useReviewBoxesMutation();
   const user = useAppSelector(selectCurrentUser);
-
+const router = useRouter()
   const {
     handleSubmit,
 
@@ -69,8 +70,8 @@ const BookReview = () => {
   const difficultyMarks: { [key: number]: string } = {
     1: "easy",
     // 2: "A little hard",
-    3: "medium",
-    5: "hard",
+    2: "medium",
+    3: "hard",
     // 5: "Too Hard",
   };
 
@@ -78,8 +79,8 @@ const BookReview = () => {
     1: "disliked",
     // 2: "Somewhat",
     // 3: "Okay",
-    3: "liked",
-    5: "loved",
+    2: "liked",
+    3: "loved",
   };
 
   const onSubmit = async (data: FormData) => {
@@ -103,6 +104,7 @@ const BookReview = () => {
       // console.log("res==>", res);
       if (res?.data) {
         message.success(res?.data?.message);
+        router.back()
       } else {
         message.error("An unknown error occurred");
       }
@@ -197,7 +199,7 @@ const BookReview = () => {
               marks={difficultyMarks}
               step={1}
               min={1}
-              max={5}
+              max={3}
               className="mx-2 sm:mx-4"
               onChange={(value) => field.onChange(value)}
             />
@@ -218,7 +220,7 @@ const BookReview = () => {
               marks={topicMarks}
               step={1}
               min={1}
-              max={5}
+              max={3}
               className="mx-2 sm:mx-4"
               onChange={(value) => field.onChange(value)}
             />
@@ -250,22 +252,21 @@ const BookReview = () => {
         />
       </div>
 
-      <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-8 pt-4">
-        {/* <Link href={"/reviews-second"}>
-          <button
-            type="button"
-            className="h-10 w-full sm:w-36 rounded-full bg-white border border-black hover:bg-[#FF7F7F] hover:text-white hover:border-[#FF7F7F] transition-all uppercase"
-          >
-            Skip Book
-          </button>
-        </Link> */}
-        <button
-          type="submit"
-          className="h-10 w-full sm:w-36 rounded-full bg-[#F37975] px-8 text-base sm:text-lg hover:bg-[#e57373] text-white"
-        >
-          SUBMIT
-        </button>
-      </div>
+  <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-8 pt-4">
+  <button
+    type="button"
+    onClick={() => router.back()}
+    className="h-10 w-full sm:w-36 rounded-full bg-white border border-black hover:bg-[#FF7F7F] hover:text-white hover:border-[#FF7F7F] transition-all uppercase"
+  >
+    Skip Book
+  </button>
+  <button
+    type="submit"
+    className="h-10 w-full sm:w-36 rounded-full bg-[#F37975] px-8 text-base sm:text-lg hover:bg-[#e57373] text-white"
+  >
+    Submit
+  </button>
+</div>
     </div>
   </form>
 </div>
