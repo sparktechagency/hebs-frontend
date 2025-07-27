@@ -10,7 +10,7 @@ import {
   FileText,
 } from "lucide-react";
 import { Form, Input, message, Modal, Select } from "antd";
-import Link from "next/link";
+import Link from "next/link"; 
 import { useAppSelector } from "@/redux/hooks";
 
 import { selectCurrentUser } from "@/redux/features/auth/authSlice";
@@ -30,13 +30,14 @@ const SubscriptionPage = () => {
   // const plan = useAppSelector(selectCurrentPlan);
   const user = useAppSelector(selectCurrentUser);
   const userId = user?.userId
-
+  const { data: singleUser, isLoading } = useGetSpecefiqUserQuery(userId,{skip:!user});
+const id = singleUser?.data?.subscription?.purchaseId
+console.log("id-->",id);
 const [cancelSubscription]=useCancelSubscriptionMutation();
   const {data:purchaseSubscription}=useSpecefiqSubscriptionQuery(userId,{skip:!user})
 // console.log("purchasd subscription",purchaseSubscription);
 
-  const { data: singleUser, isLoading } = useGetSpecefiqUserQuery(userId,{skip:!user});
- console.log("user",singleUser);
+//  console.log("user->",singleUser?.data?.subscription?.purchaseId);
   // console.log("plan===>",plan);
   // console.log("user===>",singleUser);
   // console.log("survey===>",survey);
@@ -44,7 +45,7 @@ const [cancelSubscription]=useCancelSubscriptionMutation();
   // console.log("userid",specefiqUser);
   const dob = singleUser?.data?.survey?.dateOfBirth;
   const formattedDOB = dob ? dob.split("T")[0] : null;
-   console.log("Formatted DOB:", formattedDOB);
+  //  console.log("Formatted DOB:", formattedDOB);
   const { data: recommendation } = useGetRecommendationQuery(formattedDOB);
   const categoryId = recommendation?.data?.category?._id;
   // console.log("cat id:", recommendation?.data?.category?._id);
@@ -100,7 +101,7 @@ const router = useRouter()
 
 
   const subscription = singleUser?.data?.subscription;
-  console.log("singleUser",subscription);
+  // console.log("singleUser",subscription);
   if(subscription?.isActive=== false){
     message.error("You havent Subscribe yet!Please Subscribe and try again")
    router.push("/name")
@@ -113,10 +114,11 @@ const router = useRouter()
   // console.log("Month & Year:", month, year);
 
 
-const subId = purchaseSubscription?.data?._id
+// const subId = purchaseSubscription?.data?._id
 const handleCancel=async()=>{
 try {
-  const res = await cancelSubscription(subId);
+  // subId
+  const res = await cancelSubscription(id);
   console.log("res",res);
   message.success(res?.data?.message)
 } catch (error:any) {
