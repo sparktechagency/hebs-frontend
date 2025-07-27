@@ -9,7 +9,7 @@ import {
   User,
   FileText,
 } from "lucide-react";
-import { Form, Input, message, Modal, Select } from "antd";
+import { Form, Input, message, Modal,  } from "antd";
 import Link from "next/link"; 
 import { useAppSelector } from "@/redux/hooks";
 
@@ -24,7 +24,7 @@ import { useGetRecommendationQuery } from "@/redux/features/survey/surveyApi";
 // import { selectCurrentPlan } from "@/redux/features/subscription/subscriptionSlice";
 import { useCancelSubscriptionMutation, useSpecefiqSubscriptionQuery,  } from "@/redux/features/subscription/subscriptionApi";
 import { useRouter } from "next/navigation";
-const { Option } = Select;
+
 
 const SubscriptionPage = () => {
   // const plan = useAppSelector(selectCurrentPlan);
@@ -79,9 +79,8 @@ const router = useRouter()
   const [showUpdateModal, setShowUpdateModal] = useState(false);
   // Add form state
   const [readerDetails, setReaderDetails] = useState({
-    name: "Ahmed",
-    birthday: "July 2019",
-    readingLevel: "Little Caliphs",
+
+    address:"Los Angeles"
   });
   const handleSave = () => {
     // Handle saving the updated details
@@ -212,9 +211,7 @@ try {
                 Try Before You Buy Legacy
               </span>
             </div>
-            {/* <button onClick={()=>handleCancel()} className="mt-4 md:mt-0 bg-[#f08080] hover:bg-[#f08080]/90 text-white px-6 py-2 rounded-full">
-              Cancel Request
-            </button> */}
+    
             <button
   onClick={handleCancel}
   disabled={isCanceling}
@@ -265,6 +262,19 @@ try {
         </div>
 
         {/* Shipping Address Section */}
+            <div className=" mb-6">
+    <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
+              <h2 className="text-xl font-semibold">Shipping Address</h2>
+            <button className="mt-4 md:mt-0 border border-[#f08080] text-[#f08080] hover:bg-[#f08080]/5 px-6 py-2 rounded-full" 
+             onClick={() => setShowUpdateModal(true)}
+            >
+              Update Shipping Addresss
+            </button>
+    </div>
+              <div className="border-t border-gray-200 pt-6">
+            <p className="font-medium">Los Angelas, east 92st, USA</p>
+          </div>
+          </div>
         {/* <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
           <h2 className="text-xl font-semibold mb-6">Shipping Address</h2>
 
@@ -320,73 +330,48 @@ try {
           </div>
         </div>
 
-        {/* Update Details Modal */}
         <Modal
-          title="Reader Details"
-          open={showUpdateModal}
-          onCancel={() => setShowUpdateModal(false)}
-          footer={null} // Remove default footer buttons
-          styles={{
-            header: { borderBottom: "none", paddingBottom: 0 },
-            body: { paddingTop: 16 },
-          }}
-        >
-          <div className="border-t border-gray-200 my-4"></div>
-          <Form layout="vertical">
-            <div className="grid grid-cols-2 gap-4">
-              {/* Name Field */}
-              <Form.Item label="Name" className="mb-4">
-                <Input
-                  value={readerDetails.name}
-                  onChange={(e) =>
-                    setReaderDetails({ ...readerDetails, name: e.target.value })
-                  }
-                  className="rounded-lg"
-                />
-              </Form.Item>
+  title={
+    <h2 className="text-xl font-semibold text-gray-800">
+      Update Your Shipping Address
+    </h2>
+  }
+  open={showUpdateModal}
+  onCancel={() => setShowUpdateModal(false)}
+  footer={null}
+  styles={{
+    header: { borderBottom: "none", paddingBottom: 0 },
+    body: { paddingTop: 0 },
+  }}
+>
+  {/* Divider */}
+  <div className="border-t border-gray-200 my-4" />
 
-              {/* Birthday Field */}
-              <Form.Item label="Birthday" className="mb-4">
-                <Input
-                  value={readerDetails.birthday}
-                  onChange={(e) =>
-                    setReaderDetails({
-                      ...readerDetails,
-                      birthday: e.target.value,
-                    })
-                  }
-                  className="rounded-lg"
-                />
-              </Form.Item>
-            </div>
+  <Form layout="vertical" className="space-y-6">
+    {/* Address Field */}
+    <Form.Item label={<span className="font-medium text-gray-700">Address</span>} className="mb-0">
+      <Input
+        value={readerDetails.address}
+        onChange={(e) =>
+          setReaderDetails({ ...readerDetails, address: e.target.value })
+        }
+        placeholder="Enter your shipping address"
+        className="rounded-lg w-full"
+      />
+    </Form.Item>
 
-            {/* Reading Level Field */}
-            <Form.Item label="Reading Level" className="mb-6">
-              <Select
-                value={readerDetails.readingLevel}
-                onChange={(value) =>
-                  setReaderDetails({ ...readerDetails, readingLevel: value })
-                }
-                placeholder="Reading Level"
-                className="w-full rounded-lg"
-              >
-                <Option value="Little Caliphs">Little Caliphs</Option>
-                <Option value="Intermediate">Intermediate</Option>
-                <Option value="Advanced">Advanced</Option>
-              </Select>
-            </Form.Item>
+    {/* Save Button */}
+    <div className="flex justify-end">
+      <button
+        onClick={handleSave}
+        className="bg-[#ff0000] hover:bg-[#ff0000]/90 text-white px-5 py-2 rounded-full font-medium transition-all duration-200"
+      >
+        Save
+      </button>
+    </div>
+  </Form>
+</Modal>
 
-            {/* Save Button */}
-            <div className="flex justify-end">
-              <button
-                onClick={handleSave}
-                className="text-[#ff0000] hover:text-[#ff0000]/90 font-medium border-0 bg-transparent cursor-pointer"
-              >
-                Save
-              </button>
-            </div>
-          </Form>
-        </Modal>
       </main>
     </div>
   );
