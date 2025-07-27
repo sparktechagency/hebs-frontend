@@ -21,7 +21,7 @@ const BillingHistory=()=> {
 if(isLoading){
   return <LoadingPage/>
 }
-console.log("billing",billing);
+console.log("billing------------->",billing);
 
 
   const toggleExpand = (id: string) => {
@@ -102,11 +102,11 @@ const formattedDate = formattedProccessed
       <div className="p-4 flex justify-between items-center">
         <div className="flex items-center gap-4">
           <span className="bg-gray-200 text-gray-800 px-3 py-1 rounded-md text-sm font-medium">
-            {item.contentId.status}
+            {item.contentId.paymentStatus || item.contentId.status}
           </span>
           <span className="text-gray-700">{formattedDate}</span>
         </div>
-        <span className="font-medium">{currencyFormatter(item?.contentId?.total?.amount)}</span>
+        <span className="font-medium">{currencyFormatter(item?.contentId?.total ?item?.contentId?.total?.amount :0 )}</span>
       </div>
 
       {item?.title && (
