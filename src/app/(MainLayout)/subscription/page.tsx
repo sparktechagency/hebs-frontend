@@ -22,7 +22,7 @@ import Image from "next/image";
 
 import { useGetRecommendationQuery } from "@/redux/features/survey/surveyApi";
 // import { selectCurrentPlan } from "@/redux/features/subscription/subscriptionSlice";
-import { useCancelSubscriptionMutation, useSpecefiqSubscriptionQuery } from "@/redux/features/subscription/subscriptionApi";
+import { useCancelSubscriptionMutation, useSpecefiqSubscriptionQuery,  } from "@/redux/features/subscription/subscriptionApi";
 import { useRouter } from "next/navigation";
 const { Option } = Select;
 
@@ -33,10 +33,18 @@ const SubscriptionPage = () => {
   const { data: singleUser, isLoading } = useGetSpecefiqUserQuery(userId,{skip:!user});
 const id = singleUser?.data?.subscription?.purchaseId
 console.log("id-->",id);
-const [cancelSubscription]=useCancelSubscriptionMutation();
+const [cancelSubscription,{ isLoading: isCanceling }]=useCancelSubscriptionMutation();
   const {data:purchaseSubscription}=useSpecefiqSubscriptionQuery(userId,{skip:!user})
-// console.log("purchasd subscription",purchaseSubscription);
-
+console.log("purchasd subscription",purchaseSubscription);
+const process = purchaseSubscription?.data?.subscriptionPurchases?.createdAt;
+const formattedProccessed = process ? process.split("T")[0] : null;
+const formattedDate = formattedProccessed
+  ? new Date(formattedProccessed).toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric", 
+    })
+  : null;
 //  console.log("user->",singleUser?.data?.subscription?.purchaseId);
   // console.log("plan===>",plan);
   // console.log("user===>",singleUser);
@@ -101,7 +109,7 @@ const router = useRouter()
 
 
   const subscription = singleUser?.data?.subscription;
-  // console.log("singleUser",subscription);
+  // console.log("singleUser suibcription",subscription);
   if(subscription?.isActive=== false){
     message.error("You havent Subscribe yet!Please Subscribe and try again")
    router.push("/name")
@@ -118,9 +126,9 @@ const router = useRouter()
 const handleCancel=async()=>{
 try {
   // subId
-  const res = await cancelSubscription(id);
+  const res = await cancelSubscription(id).unwrap();
   console.log("res",res);
-  message.success(res?.data?.message)
+  message.success(res?.data?.message || res.message)
 } catch (error:any) {
   message.error(error?.message)
 }
@@ -204,14 +212,22 @@ try {
                 Try Before You Buy Legacy
               </span>
             </div>
-            <button onClick={()=>handleCancel()} className="mt-4 md:mt-0 bg-[#f08080] hover:bg-[#f08080]/90 text-white px-6 py-2 rounded-full">
+            {/* <button onClick={()=>handleCancel()} className="mt-4 md:mt-0 bg-[#f08080] hover:bg-[#f08080]/90 text-white px-6 py-2 rounded-full">
               Cancel Request
-            </button>
+            </button> */}
+            <button
+  onClick={handleCancel}
+  disabled={isCanceling}
+  className={`mt-4 md:mt-0 text-white px-6 py-2 rounded-full
+    ${isCanceling ? 'bg-gray-400 cursor-not-allowed' : 'bg-[#f08080] hover:bg-[#f08080]/90'}`}
+>
+  {isCanceling ? "Cancelling..." : "Cancel Request"}
+</button>
           </div>
 
           <div className="border-t border-gray-200 mt-4 pt-4">
             <p className="bg-red-50 p-3 rounded-md text-gray-700">
-              Connected on May 11, 2025
+              Connected on {formattedDate}
             </p>
           </div>
         </div>
