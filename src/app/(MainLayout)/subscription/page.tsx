@@ -35,7 +35,7 @@ const SubscriptionPage = () => {
   const userId = user?.userId
   const { data: singleUser, isLoading } = useGetSpecefiqUserQuery(userId,{skip:!user});
 const id = singleUser?.data?.subscription?.purchaseId
-// console.log("id-->",id);
+console.log("single user->",singleUser);
 const [cancelSubscription,{ isLoading: isCanceling }]=useCancelSubscriptionMutation();
   const {data:purchaseSubscription}=useSpecefiqSubscriptionQuery(userId,{skip:!user})
 // console.log("purchasd subscription",purchaseSubscription);
