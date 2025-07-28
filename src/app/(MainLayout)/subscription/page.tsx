@@ -9,8 +9,8 @@ import {
   User,
   FileText,
 } from "lucide-react";
-import { Form, Input, message, Modal, Select } from "antd";
-import Link from "next/link";
+import {  Button,  Input, message, Modal,  } from "antd";
+import Link from "next/link"; 
 import { useAppSelector } from "@/redux/hooks";
 
 import { selectCurrentUser } from "@/redux/features/auth/authSlice";
@@ -22,21 +22,34 @@ import Image from "next/image";
 
 import { useGetRecommendationQuery } from "@/redux/features/survey/surveyApi";
 // import { selectCurrentPlan } from "@/redux/features/subscription/subscriptionSlice";
-import { useCancelSubscriptionMutation, useSpecefiqSubscriptionQuery } from "@/redux/features/subscription/subscriptionApi";
+import { useCancelSubscriptionMutation, useSpecefiqSubscriptionQuery,  } from "@/redux/features/subscription/subscriptionApi";
 import { useRouter } from "next/navigation";
-const { Option } = Select;
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { FormData } from "../cart/page";
+import { useUpdateSpecefiqUserAddressMutation } from "@/redux/features/others/othersApi";
+
 
 const SubscriptionPage = () => {
   // const plan = useAppSelector(selectCurrentPlan);
   const user = useAppSelector(selectCurrentUser);
   const userId = user?.userId
-
-const [cancelSubscription]=useCancelSubscriptionMutation();
+  const { data: singleUser, isLoading } = useGetSpecefiqUserQuery(userId,{skip:!user});
+const id = singleUser?.data?.subscription?.purchaseId
+console.log("single user->",singleUser);
+const [cancelSubscription,{ isLoading: isCanceling }]=useCancelSubscriptionMutation();
   const {data:purchaseSubscription}=useSpecefiqSubscriptionQuery(userId,{skip:!user})
 // console.log("purchasd subscription",purchaseSubscription);
+const process = purchaseSubscription?.data?.subscriptionPurchases?.createdAt;
+const formattedProccessed = process ? process.split("T")[0] : null;
+const formattedDate = formattedProccessed
+  ? new Date(formattedProccessed).toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric", 
+    })
+  : null;
 
-  const { data: singleUser, isLoading } = useGetSpecefiqUserQuery(userId,{skip:!user});
- console.log("user",singleUser);
+//  console.log("user->",singleUser?.data?.subscription?.purchaseId);
   // console.log("plan===>",plan);
   // console.log("user===>",singleUser);
   // console.log("survey===>",survey);
@@ -44,7 +57,7 @@ const [cancelSubscription]=useCancelSubscriptionMutation();
   // console.log("userid",specefiqUser);
   const dob = singleUser?.data?.survey?.dateOfBirth;
   const formattedDOB = dob ? dob.split("T")[0] : null;
-   console.log("Formatted DOB:", formattedDOB);
+  //  console.log("Formatted DOB:", formattedDOB);
   const { data: recommendation } = useGetRecommendationQuery(formattedDOB);
   const categoryId = recommendation?.data?.category?._id;
   // console.log("cat id:", recommendation?.data?.category?._id);
@@ -60,8 +73,45 @@ const [cancelSubscription]=useCancelSubscriptionMutation();
 
     return () => clearInterval(interval);
   }, [refetch]);
-
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>();
 const router = useRouter()
+const [updateSpecifiqUserAddress]=useUpdateSpecefiqUserAddressMutation()
+  // Handle form submission
+  const onSubmit: SubmitHandler<FormData> = async (data) => {
+    const orderData = {
+    shippingAddress:{
+
+      street: data.shipping.street,
+      city: data.shipping.city,
+      state: data.shipping.state,
+      zipCode: data.shipping.zipCode,
+      country: data.shipping.country,
+    }
+
+    
+    };
+console.log("orderdata-->",orderData);
+    try {
+      // console.log("userId-->",singleUser?.data?._id);
+       const res = await updateSpecifiqUserAddress({
+      id:singleUser?.data?._id,
+      userInfo:orderData,
+    }).unwrap(); 
+    // console.log("response--->",res);
+     
+        message.success(res.message);
+       
+
+ 
+    } catch (error: any) {
+      message.error(error.message || "An error occurred");
+    }
+  };
+
 
   const books = specifiqBox?.data?.books;
   const boxs = specifiqBox?.data;
@@ -69,16 +119,14 @@ const router = useRouter()
 
   const [showUpdateModal, setShowUpdateModal] = useState(false);
   // Add form state
-  const [readerDetails, setReaderDetails] = useState({
-    name: "Ahmed",
-    birthday: "July 2019",
-    readingLevel: "Little Caliphs",
-  });
-  const handleSave = () => {
-    // Handle saving the updated details
-    // console.log("Saving:", readerDetails);
-    setShowUpdateModal(false);
-  };
+  // const [readerDetails, setReaderDetails] = useState({
+
+  //   address:"Los Angeles"
+  // });
+  // const handleSave = () => {
+
+  //   setShowUpdateModal(false);
+  // };
   const DOB = singleUser?.data?.survey?.dateOfBirth;
   // console.log("Dob===>", DOB);
   const date = new Date(DOB);
@@ -100,10 +148,10 @@ const router = useRouter()
 
 
   const subscription = singleUser?.data?.subscription;
-  console.log("singleUser",subscription);
+  // console.log("singleUser suibcription",subscription);
   if(subscription?.isActive=== false){
     message.error("You havent Subscribe yet!Please Subscribe and try again")
-   router.push("/name")
+   router.push("/recomended")
   }
 
 
@@ -113,12 +161,13 @@ const router = useRouter()
   // console.log("Month & Year:", month, year);
 
 
-const subId = purchaseSubscription?.data?._id
+// const subId = purchaseSubscription?.data?._id
 const handleCancel=async()=>{
 try {
-  const res = await cancelSubscription(subId);
+  // subId
+  const res = await cancelSubscription(id).unwrap();
   console.log("res",res);
-  message.success(res?.data?.message)
+  message.success(res?.data?.message || res.message)
 } catch (error:any) {
   message.error(error?.message)
 }
@@ -202,14 +251,20 @@ try {
                 Try Before You Buy Legacy
               </span>
             </div>
-            <button onClick={()=>handleCancel()} className="mt-4 md:mt-0 bg-[#f08080] hover:bg-[#f08080]/90 text-white px-6 py-2 rounded-full">
-              Cancel Request
-            </button>
+    
+            <button
+  onClick={handleCancel}
+  disabled={isCanceling}
+  className={`mt-4 md:mt-0 text-white px-6 py-2 rounded-full
+    ${isCanceling ? 'bg-gray-400 cursor-not-allowed' : 'bg-[#f08080] hover:bg-[#f08080]/90'}`}
+>
+  {isCanceling ? "Cancelling..." : "Cancel Request"}
+</button>
           </div>
 
           <div className="border-t border-gray-200 mt-4 pt-4">
             <p className="bg-red-50 p-3 rounded-md text-gray-700">
-              Connected on May 11, 2025
+              Connected on {formattedDate}
             </p>
           </div>
         </div>
@@ -247,6 +302,19 @@ try {
         </div>
 
         {/* Shipping Address Section */}
+            <div className=" mb-6">
+    <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
+              <h2 className="text-xl font-semibold">Shipping Address</h2>
+            <button className="mt-4 md:mt-0 border border-[#f08080] text-[#f08080] hover:bg-[#f08080]/5 px-6 py-2 rounded-full" 
+             onClick={() => setShowUpdateModal(true)}
+            >
+              Update Shipping Addresss
+            </button>
+    </div>
+              <div className="border-t border-gray-200 pt-6">
+            <p className="font-medium">Los Angelas, east 92st, USA</p>
+          </div>
+          </div>
         {/* <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
           <h2 className="text-xl font-semibold mb-6">Shipping Address</h2>
 
@@ -302,73 +370,118 @@ try {
           </div>
         </div>
 
-        {/* Update Details Modal */}
         <Modal
-          title="Reader Details"
-          open={showUpdateModal}
-          onCancel={() => setShowUpdateModal(false)}
-          footer={null} // Remove default footer buttons
-          styles={{
-            header: { borderBottom: "none", paddingBottom: 0 },
-            body: { paddingTop: 16 },
-          }}
-        >
-          <div className="border-t border-gray-200 my-4"></div>
-          <Form layout="vertical">
-            <div className="grid grid-cols-2 gap-4">
-              {/* Name Field */}
-              <Form.Item label="Name" className="mb-4">
-                <Input
-                  value={readerDetails.name}
-                  onChange={(e) =>
-                    setReaderDetails({ ...readerDetails, name: e.target.value })
-                  }
-                  className="rounded-lg"
-                />
-              </Form.Item>
+  title={
+    <h2 className="text-xl font-semibold text-gray-800">
+      Update Your Shipping Address
+    </h2>
+  }
+  open={showUpdateModal}
+  onCancel={() => setShowUpdateModal(false)}
+  footer={null}
+  styles={{
+    header: { borderBottom: "none", paddingBottom: 0 },
+    body: { paddingTop: 0 },
+  }}
+>
+  {/* Divider */}
+  <div className="border-t border-gray-200 my-4" />
 
-              {/* Birthday Field */}
-              <Form.Item label="Birthday" className="mb-4">
-                <Input
-                  value={readerDetails.birthday}
-                  onChange={(e) =>
-                    setReaderDetails({
-                      ...readerDetails,
-                      birthday: e.target.value,
-                    })
-                  }
-                  className="rounded-lg"
-                />
-              </Form.Item>
-            </div>
+     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+                  {/* Street Address */}
+                  <div>
+                    <label className="block text-sm text-gray-500 mb-1">Street Address</label>
+                    <Controller
+                      name="shipping.street"
+                      control={control}
+                      rules={{ required: "Street address is required" }}
+                      render={({ field }) => (
+                        <Input {...field} size="large" className="rounded-lg" />
+                      )}
+                    />
+                    {errors.shipping?.street && (
+                      <p className="text-red-600">{errors.shipping.street.message}</p>
+                    )}
+                  </div>
 
-            {/* Reading Level Field */}
-            <Form.Item label="Reading Level" className="mb-6">
-              <Select
-                value={readerDetails.readingLevel}
-                onChange={(value) =>
-                  setReaderDetails({ ...readerDetails, readingLevel: value })
-                }
-                placeholder="Reading Level"
-                className="w-full rounded-lg"
-              >
-                <Option value="Little Caliphs">Little Caliphs</Option>
-                <Option value="Intermediate">Intermediate</Option>
-                <Option value="Advanced">Advanced</Option>
-              </Select>
-            </Form.Item>
+                  {/* City & State */}
+                  <div className="flex space-x-4">
+                    <div className="flex-1">
+                      <label className="block text-sm text-gray-500 mb-1">City</label>
+                      <Controller
+                        name="shipping.city"
+                        control={control}
+                        rules={{ required: "City is required" }}
+                        render={({ field }) => (
+                          <Input {...field} size="large" className="rounded-lg" />
+                        )}
+                      />
+                      {errors.shipping?.city && (
+                        <p className="text-red-600">{errors.shipping.city.message}</p>
+                      )}
+                    </div>
 
-            {/* Save Button */}
-            <div className="flex justify-end">
-              <button
-                onClick={handleSave}
-                className="text-[#ff0000] hover:text-[#ff0000]/90 font-medium border-0 bg-transparent cursor-pointer"
-              >
-                Save
-              </button>
-            </div>
-          </Form>
-        </Modal>
+                    <div className="flex-1">
+                      <label className="block text-sm text-gray-500 mb-1">State</label>
+                      <Controller
+                        name="shipping.state"
+                        control={control}
+                        rules={{ required: "State is required" }}
+                        render={({ field }) => (
+                          <Input {...field} size="large" className="rounded-lg" />
+                        )}
+                      />
+                      {errors.shipping?.state && (
+                        <p className="text-red-600">{errors.shipping.state.message}</p>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Zip Code & Country */}
+                  <div className="flex space-x-4">
+                    <div className="flex-1">
+                      <label className="block text-sm text-gray-500 mb-1">Zip Code</label>
+                      <Controller
+                        name="shipping.zipCode"
+                        control={control}
+                        rules={{ required: "Zip code is required" }}
+                        render={({ field }) => (
+                          <Input {...field} size="large" className="rounded-lg" />
+                        )}
+                      />
+                      {errors.shipping?.zipCode && (
+                        <p className="text-red-600">{errors.shipping.zipCode.message}</p>
+                      )}
+                    </div>
+
+                    <div className="flex-1">
+                      <label className="block text-sm text-gray-500 mb-1">Country</label>
+                      <Controller
+                        name="shipping.country"
+                        control={control}
+                        rules={{ required: "Country is required" }}
+                        render={({ field }) => (
+                          <Input {...field} size="large" className="rounded-lg" />
+                        )}
+                      />
+                      {errors.shipping?.country && (
+                        <p className="text-red-600">{errors.shipping.country.message}</p>
+                      )}
+                    </div>
+                  </div>
+
+              
+                  <Button
+                    
+                    htmlType="submit"
+                    className="w-full mt-6 bg-[#f08080] text-white"
+                
+                  >
+                    Continue
+                  </Button>
+                </form>
+</Modal>
+
       </main>
     </div>
   );

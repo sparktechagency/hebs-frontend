@@ -17,7 +17,7 @@ import { useLoginMutation } from "@/redux/features/auth/authApi";
 import { verifyToken } from "@/utils/VerifyToken";
 import styles from "@/app/styles.module.css"
 import { useCreateSubscriptionMutation } from "@/redux/features/subscription/subscriptionApi";
-import { useCreateServeyMutation } from "@/redux/features/survey/surveyApi";
+
 import { selectCurrentSurvey } from "@/redux/features/survey/surveySlice";
 import { setCookie } from "cookies-next";
 export default function CheckoutPage() {
@@ -26,7 +26,7 @@ export default function CheckoutPage() {
   const dispatch = useAppDispatch();
   const plan = useAppSelector(selectCurrentPlan);
   const [createSubscription] = useCreateSubscriptionMutation();
-  const [createSurvey] = useCreateServeyMutation();
+  // const [createSurvey] = useCreateServeyMutation();
 
   const user = useAppSelector(selectCurrentUser);
   const router = useRouter();
@@ -92,25 +92,24 @@ console.log("user from checkout------>",user);
       userId: user?.userId,
       priceId: plan?.priceId,
     };
-        try {
-      //   post survey
-      const response = await createSurvey(surveyData);
-      console.log("sur res", response);
-      if (response?.data) {
-        message.success(response?.data?.message);
-      } else {
-        message.error(
-          response?.data?.error || "Something Went wrong"
+    //   post survey
+    //     try {
+    //   const response = await createSurvey(surveyData);
+    //   console.log("sur res", response);
+    //   if (response?.data) {
+    //     message.success(response?.data?.message);
+    //   } else {
+    //     message.error(
+    //       response?.data?.error || "Something Went wrong"
         
-        );
-      }
+    //     );
+    //   }
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (error: any) {
-      console.log(error);
-      message.error(error);
-      return
-    }
+    // } catch (error: any) {
+    //   console.log(error);
+    //   message.error(error);
+    //   return
+    // }
 
     
     try {
@@ -217,7 +216,7 @@ console.log("user from checkout------>",user);
 
 
 
-                {/* <div  className="text-center mt-6">
+                <div  className="text-center mt-6">
                   <p className="text-sm text-gray-600">
                     Don&apos;t  have any account?
                     <Link
@@ -227,7 +226,7 @@ console.log("user from checkout------>",user);
                       Sign Up
                     </Link>
                   </p>
-                </div> */}
+                </div>
               </Form>
             </div>
           </div>

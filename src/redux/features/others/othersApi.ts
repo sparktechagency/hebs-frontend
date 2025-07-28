@@ -45,6 +45,19 @@ const othersApi = baseApi.injectEndpoints({
         body:data
       }),
     }),
+     updateSpecefiqUserAddress: builder.mutation({
+  query: ({ id, userInfo }) => {
+    console.log("API call received ID:", id);
+    console.log("User info api call:", userInfo);
+    return {
+      url: `/user/update/shipping-address/${id}`,
+      method: "PATCH",
+      body: userInfo,
+    };
+  },
+  invalidatesTags: ['user'], 
+}),
+
   }),
 });
 
@@ -56,4 +69,5 @@ export const {
   useCreteContactMutation,
   useGetTeamsQuery,
  useCreteNewsletterMutation,
+ useUpdateSpecefiqUserAddressMutation
 } = othersApi;
