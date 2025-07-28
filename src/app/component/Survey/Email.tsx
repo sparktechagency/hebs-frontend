@@ -8,12 +8,13 @@ import {
   useForm,
 } from "react-hook-form";
 import style from "@/app/styles.module.css";
-import { Input } from "antd";
+import { Input, message } from "antd";
 import { useDispatch } from "react-redux";
 import { updateSurveyData } from "@/redux/features/survey/surveySlice";
 import { useRouter } from "next/navigation";
 import { useAppSelector } from "@/redux/hooks";
 import { selectCurrentUser } from "@/redux/features/auth/authSlice";
+import { useCreateServeyMutation } from "@/redux/features/survey/surveyApi";
 
 
 const Email = ({
@@ -39,10 +40,10 @@ const Email = ({
 
 const user = useAppSelector(selectCurrentUser)
 console.log("user",user?.user?.email);
-
+const [createSurvey] = useCreateServeyMutation();
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const onSubmit: SubmitHandler<FieldValues> = (d) => {
+  const onSubmit: SubmitHandler<FieldValues>= async(d) => {
       const emailToUse = user?.user?.email || d.email;
     console.log("Email entered:", d.email);
     setData((prev: any) => ({ ...prev, email:emailToUse}));
@@ -76,7 +77,26 @@ console.log("user",user?.user?.email);
 
     // dispatch(resetSurveyData());
     dispatch(updateSurveyData(surveyData));
-    router.push("/recomended")
+     try {
+      const response = await createSurvey(surveyData);
+      console.log("sur res", response);
+      if (response?.data) {
+        message.success(response?.data?.message);
+            router.push("/recomended")
+      } else {
+        message.error(
+          response?.data?.error || "Something Went wrong" 
+      
+        );
+      }
+
+    } catch (error: any) {
+      console.log(error);
+      message.error(error);
+      return
+    }
+
+
     // You can now proceed to the final step or submit the collected data
     // setIsEmail(false);
     // setIsRecomended(true)

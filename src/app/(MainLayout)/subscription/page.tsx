@@ -35,10 +35,10 @@ const SubscriptionPage = () => {
   const userId = user?.userId
   const { data: singleUser, isLoading } = useGetSpecefiqUserQuery(userId,{skip:!user});
 const id = singleUser?.data?.subscription?.purchaseId
-console.log("id-->",id);
+// console.log("id-->",id);
 const [cancelSubscription,{ isLoading: isCanceling }]=useCancelSubscriptionMutation();
   const {data:purchaseSubscription}=useSpecefiqSubscriptionQuery(userId,{skip:!user})
-console.log("purchasd subscription",purchaseSubscription);
+// console.log("purchasd subscription",purchaseSubscription);
 const process = purchaseSubscription?.data?.subscriptionPurchases?.createdAt;
 const formattedProccessed = process ? process.split("T")[0] : null;
 const formattedDate = formattedProccessed
@@ -96,12 +96,12 @@ const [updateSpecifiqUserAddress]=useUpdateSpecefiqUserAddressMutation()
     };
 console.log("orderdata-->",orderData);
     try {
-      console.log("userId-->",singleUser?.data?._id);
+      // console.log("userId-->",singleUser?.data?._id);
        const res = await updateSpecifiqUserAddress({
       id:singleUser?.data?._id,
       userInfo:orderData,
     }).unwrap(); 
-    console.log("response--->",res);
+    // console.log("response--->",res);
      
         message.success(res.message);
        
@@ -151,7 +151,7 @@ console.log("orderdata-->",orderData);
   // console.log("singleUser suibcription",subscription);
   if(subscription?.isActive=== false){
     message.error("You havent Subscribe yet!Please Subscribe and try again")
-   router.push("/name")
+   router.push("/recomended")
   }
 
 
