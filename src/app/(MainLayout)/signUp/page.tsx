@@ -63,7 +63,7 @@ const showErrorMessage = (error: any) => {
 
 
   const onSubmit: SubmitHandler<SignUpFormInputs> = async (data) => {
-    // console.log("------->",data);
+    console.log("------->",data);
 
     try {
       const response = await signUp(data).unwrap();
@@ -89,15 +89,17 @@ const showErrorMessage = (error: any) => {
           <label htmlFor="survey" className="block text-gray-500"> 
           Survey Id
           </label>
-       <input
-  id="survey"
-  defaultValue={getSpecServey?.data?._id || ""}
-  {...register("survey")} 
-  className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-pink-200"
-/>
+{getSpecServey?.data?._id && (
+  <input
+    id="survey"
+    defaultValue={getSpecServey.data._id}
+    {...register("survey")} 
+    className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-pink-200"
+  />
+)}
 
 
-        </div>  
+        </div>   
 
 
         <div className="space-y-2">
