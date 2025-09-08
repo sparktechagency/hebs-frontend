@@ -43,15 +43,15 @@ const NamePage = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const surveyData = useAppSelector(selectCurrentSurvey)
 const user = useAppSelector(selectCurrentUser)
-// console.log(user);
+console.log("user spec",user);
 
 const { data: specefiqUser,} = useGetSpecefiqUserQuery(
     user?.userId
   );
   const survey = specefiqUser?.data?.survey;
-
+   const issubscribe = specefiqUser?.data?.subscription?.isActive;
   console.log("singleUser",survey);
-  if(survey){
+  if(survey && issubscribe){
          message.success(
         "You have already done our survey.Thank you for stay with us"
       );

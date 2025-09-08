@@ -11,8 +11,9 @@ import paypal from "@/assets/paypal.png";
 import visa from "@/assets/visa-4-logo_svgrepo.com.png";
 import master from "@/assets/master-card_svgrepo.com.png";
 
-import { useAppSelector } from "@/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import {
+  clearCart,
   orderedProductsSelector,
   subTotalSelector,
   totalActualPriceSelector,
@@ -45,7 +46,7 @@ const user = useAppSelector(selectCurrentUser)
 console.log("user",user?.user);
   // Log full selected shipping method object
   // console.log("Selected shipping method object:", selectedShippingMethod);
-
+  const dispatch = useAppDispatch();
   useEffect(() => {
     const methods = localStorage.getItem("shippingMethod");
     if (methods) {
@@ -77,6 +78,7 @@ const router = useRouter();
       const res =await placeCartOrder(order)
       console.log("response-------------<>-->",res);
       message.success(res.data.message)
+         dispatch(clearCart())
       router.push(res?.data?.data?.url)
 
     }catch(error:any){

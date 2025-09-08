@@ -35,7 +35,7 @@ const SignUpPage = () => {
 //  console.log("user survey--->",userServey?.email);
   const [signUp] = useSignUpMutation();
   const {data:getSpecServey}=useGetSpecServeyQuery(userServey?.email)
-  //  console.log("spec user survey from db--->",getSpecServey?.data?._id);
+   console.log("spec user survey from db--->",getSpecServey?.data?._id);
     useEffect(() => {
     if (getSpecServey?.data?._id) {
       setValue("survey", getSpecServey?.data?._id);

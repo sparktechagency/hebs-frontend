@@ -19,7 +19,8 @@ const Banner = () => {
   const user = useAppSelector(selectCurrentUser);
   const { data: specefiqUser } = useGetSpecefiqUserQuery(user?.userId);
   const survey = specefiqUser?.data?.survey;
-  // console.log("singleUser", survey);
+   const issubscribe = specefiqUser?.data?.subscription?.isActive;
+  console.log("subscription purchase", issubscribe);
   // const plan = useAppSelector(selectCurrentPlan);
   const handleSurvey = async () => {
     //  const orderData = {
@@ -30,7 +31,7 @@ const Banner = () => {
 
     //   const res = (await createSubscription(orderData)) as any;
     //   console.log("response===>", res);
-    if (survey) {
+    if (survey && issubscribe) {
       message.success(
         "You have already done our survey.Thank you for stay with us"
       );

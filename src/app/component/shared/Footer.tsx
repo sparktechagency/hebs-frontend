@@ -20,14 +20,14 @@ const FooterPage = () => {
           <div className="lg:w-[20%]">
             <p className={`text-[#FAF397] font-bold py-3 ${style.fontJosefin}`}>
               Our Story
-            </p> 
+            </p>
             <Space direction="vertical" className=" uppercase">
-                       <Link href={'/about'}>
-              <p className={`text-white ${style.fontJosefin}`}>About Us</p>
-                       </Link>
-                                <Link href={'/contact'}>
-              <p className={`text-white ${style.fontJosefin}`}>Contact Us</p>
-                                </Link>
+              <Link href={"/about"}>
+                <p className={`text-white ${style.fontJosefin}`}>About Us</p>
+              </Link>
+              <Link href={"/contact"}>
+                <p className={`text-white ${style.fontJosefin}`}>Contact Us</p>
+              </Link>
             </Space>
           </div>
 
@@ -36,27 +36,26 @@ const FooterPage = () => {
               Book Clubs
             </p>
             <Space direction="vertical" className=" uppercase">
-              <Link href={'/tinyMuslimBox'}>
-              <p className={`text-white ${style.fontJosefin}`}>
-                Tiny Mu&apos;mins
-              </p>
+              <Link href={"/tinyMuslimBox"}>
+                <p className={`text-white ${style.fontJosefin}`}>
+                  Tiny Mu&apos;mins
+                </p>
               </Link>
-                       <Link href={'/littleCaliphsBox'}>
-                       
-              <p className={`text-white ${style.fontJosefin}`}>
-                Little Caliphs
-              </p>
-                       </Link>
-                                <Link href={'/deen'}>
-              <p className={`text-white ${style.fontJosefin}`}>
-                Deen Discoverers
-              </p>
-                                </Link>
-                                         <Link href={'/islamic'}>
-              <p className={`text-white ${style.fontJosefin}`}>
-                Islamic Explorers
-              </p>
-                                         </Link>
+              <Link href={"/littleCaliphsBox"}>
+                <p className={`text-white ${style.fontJosefin}`}>
+                  Little Caliphs
+                </p>
+              </Link>
+              <Link href={"/deen"}>
+                <p className={`text-white ${style.fontJosefin}`}>
+                  Deen Discoverers
+                </p>
+              </Link>
+              <Link href={"/islamic"}>
+                <p className={`text-white ${style.fontJosefin}`}>
+                  Islamic Explorers
+                </p>
+              </Link>
             </Space>
           </div>
 
@@ -67,13 +66,12 @@ const FooterPage = () => {
               More
             </p>
             <Space direction="vertical" className=" uppercase">
-                       <Link href={'/gift'}>
+              {/* <Link href={'/gift'}>
               <p className="text-white">Give a gift</p>
-                       </Link>
-                                <Link href={'/bookStore'}>
-              <p className="text-white">online book store</p>
-                                </Link>
-        
+                       </Link> */}
+              <Link href={"/bookStore"}>
+                <p className="text-white">online book store</p>
+              </Link>
             </Space>
           </div>
 
@@ -91,9 +89,7 @@ const FooterPage = () => {
                 <button
                   className={`py-3 w-[100px] md:w-[120px] flex gap-1 items-center justify-center font-bold rounded-full border-none bg-white text-[#f08080] hover:bg-white/90 ${style.fontJosefin}`}
                 >
-                  <ShoppingCartOutlined
-                    className="pr-2 text-[20px]"
-                  />
+                  <ShoppingCartOutlined className="pr-2 text-[20px]" />
                   {/* <IoCartOutline className="w-6 h-6" /> */}
                   Cart
                 </button>
@@ -150,19 +146,18 @@ const FooterPage = () => {
         <div className="mt-16 border-t border-white/20 pt-8 ">
           <div className="flex flex-col items-center justify-between gap-4 text-sm  sm:flex-row">
             <p className="text-white">
-              © {new Date().getFullYear()} <span className="uppercase"> Illuminate MUSLIM MIND&apos;S.</span> All rights
-              reserved.
+              © {new Date().getFullYear()}{" "}
+              <span className="uppercase"> Illuminate MUSLIM MIND&apos;S.</span>{" "}
+              All rights reserved.
             </p>
             <Space className="">
               <Link href={"/terms"}>
-              
-              <p className="text-white">Terms of Service</p>
+                <p className="text-white">Terms of Service</p>
               </Link>
               <p className="text-white">|</p>
-                    <Link href={"/privacy"}>
-                    
-              <p className="text-white">Privacy Policy</p>
-                    </Link>
+              <Link href={"/privacy"}>
+                <p className="text-white">Privacy Policy</p>
+              </Link>
             </Space>
           </div>
         </div>

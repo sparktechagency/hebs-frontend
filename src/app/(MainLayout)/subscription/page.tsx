@@ -38,7 +38,7 @@ const id = singleUser?.data?.subscription?.purchaseId
 console.log("single user->",singleUser);
 const [cancelSubscription,{ isLoading: isCanceling }]=useCancelSubscriptionMutation();
   const {data:purchaseSubscription}=useSpecefiqSubscriptionQuery(userId,{skip:!user})
-// console.log("purchasd subscription",purchaseSubscription);
+console.log("purchasd subscription",purchaseSubscription);
 const process = purchaseSubscription?.data?.subscriptionPurchases?.createdAt;
 const formattedProccessed = process ? process.split("T")[0] : null;
 const formattedDate = formattedProccessed
@@ -48,6 +48,9 @@ const formattedDate = formattedProccessed
       year: "numeric", 
     })
   : null;
+
+  const isDesable = purchaseSubscription?.data?.subscriptionPurchases?.disableRequest
+
 
 //  console.log("user->",singleUser?.data?.subscription?.purchaseId);
   // console.log("plan===>",plan);
@@ -151,7 +154,7 @@ console.log("orderdata-->",orderData);
   // console.log("singleUser suibcription",subscription);
   if(subscription?.isActive=== false){
     message.error("You havent Subscribe yet!Please Subscribe and try again")
-   router.push("/recomended")
+   router.push("/name")
   }
 
 
@@ -254,9 +257,9 @@ try {
     
             <button
   onClick={handleCancel}
-  disabled={isCanceling}
+  disabled={isCanceling || isDesable}
   className={`mt-4 md:mt-0 text-white px-6 py-2 rounded-full
-    ${isCanceling ? 'bg-gray-400 cursor-not-allowed' : 'bg-[#f08080] hover:bg-[#f08080]/90'}`}
+    ${isCanceling || isDesable ? 'bg-gray-400 cursor-not-allowed' : 'bg-[#f08080] hover:bg-[#f08080]/90'}`}
 >
   {isCanceling ? "Cancelling..." : "Cancel Request"}
 </button>
