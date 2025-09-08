@@ -8,8 +8,11 @@ import styles from "@/app/styles.module.css";
 import { useForm, Controller } from "react-hook-form";
 import { useChangePassMutation } from "@/redux/features/auth/authApi";
 import { useRouter } from "next/navigation";
+import { useAppDispatch } from "@/redux/hooks";
+import { logout } from "@/redux/features/auth/authSlice";
 
 const ChangePassword = () => {
+    const dispatch = useAppDispatch();
   const {
     control,
     handleSubmit,
@@ -24,8 +27,8 @@ const router = useRouter()
         console.log(res);
         message.success(res?.data?.message );
         if(res?.data){
-
-            router.push("/my-profile")
+    dispatch(logout());
+            router.push("/login")
         }
     } catch (error) {
     console.log(error);
