@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import {
   ChevronDown,
   ChevronRight,
@@ -33,12 +33,12 @@ const SubscriptionPage = () => {
   // const plan = useAppSelector(selectCurrentPlan);
   const user = useAppSelector(selectCurrentUser);
   const userId = user?.userId
-  const { data: singleUser, isLoading } = useGetSpecefiqUserQuery(userId,{skip:!user});
+  const { data: singleUser, isLoading,refetch } = useGetSpecefiqUserQuery(userId,{skip:!user});
 const id = singleUser?.data?.subscription?.purchaseId
-console.log("single user->",singleUser);
+// console.log("single user->",singleUser);
 const [cancelSubscription,{ isLoading: isCanceling }]=useCancelSubscriptionMutation();
-  const {data:purchaseSubscription}=useSpecefiqSubscriptionQuery(userId,{skip:!user})
-console.log("purchasd subscription",purchaseSubscription);
+  const {data:purchaseSubscription,refetch:subPurchase}=useSpecefiqSubscriptionQuery(userId,{skip:!user})
+// console.log("purchasd subscription",purchaseSubscription);
 const process = purchaseSubscription?.data?.subscriptionPurchases?.createdAt;
 const formattedProccessed = process ? process.split("T")[0] : null;
 const formattedDate = formattedProccessed
@@ -64,18 +64,12 @@ const formattedDate = formattedProccessed
   const { data: recommendation } = useGetRecommendationQuery(formattedDOB);
   const categoryId = recommendation?.data?.category?._id;
   // console.log("cat id:", recommendation?.data?.category?._id);
-  const { data: specifiqBox ,refetch} = useGetSpecefiqBoxesQuery(categoryId, {
+  const { data: specifiqBox } = useGetSpecefiqBoxesQuery(categoryId, {
     skip: !categoryId,
   });
   // console.log("current  box ", specifiqBox);
   // console.log("box===>",specifiqBox?.data);
-  useEffect(() => {
-    const interval = setInterval(() => {
-      refetch();
-    }, 5000); // Refetch every 5 seconds
 
-    return () => clearInterval(interval);
-  }, [refetch]);
   const {
     control,
     handleSubmit,
@@ -108,7 +102,7 @@ console.log("orderdata-->",orderData);
      
         message.success(res.message);
        
-
+refetch()
  
     } catch (error: any) {
       message.error(error.message || "An error occurred");
@@ -169,8 +163,9 @@ const handleCancel=async()=>{
 try {
   // subId
   const res = await cancelSubscription(id).unwrap();
-  console.log("res",res);
+  // console.log("res",res);
   message.success(res?.data?.message || res.message)
+  subPurchase()
 } catch (error:any) {
   message.error(error?.message)
 }
@@ -315,7 +310,7 @@ try {
             </button>
     </div>
               <div className="border-t border-gray-200 pt-6">
-            <p className="font-medium">Los Angelas, east 92st, USA</p>
+            <p className="font-medium">{singleUser?.data?.shippingAddress.street+','+singleUser?.data?.shippingAddress.city+','+singleUser?.data?.shippingAddress.state+','+singleUser?.data?.shippingAddress.country}</p>
           </div>
           </div>
         {/* <div className="bg-white rounded-lg shadow-sm p-6 mb-8">

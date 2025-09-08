@@ -11,7 +11,7 @@ import { useAppSelector } from "@/redux/hooks";
 
 import { useGetSpecefiqBoxesQuery } from "@/redux/features/boxes/boxesApi";
 import LoadingPage from "@/app/loading";
-import { useEffect } from "react";
+
 import { useGetSpecefiqUserQuery } from "@/redux/features/auth/authApi";
 import { selectCurrentUser } from "@/redux/features/auth/authSlice";
 import { useGetRecommendationQuery } from "@/redux/features/survey/surveyApi";
@@ -29,16 +29,10 @@ const BoxesPage = () => {
   const { data: recommendation } = useGetRecommendationQuery(formattedDOB);
   // console.log("Formatted DOB:", recommendation?.data?.category?._id);
   const categoryId = recommendation?.data?.category?._id;
-  const { data: specifiqBox, refetch } = useGetSpecefiqBoxesQuery(categoryId, {
+  const { data: specifiqBox } = useGetSpecefiqBoxesQuery(categoryId, {
     skip: !categoryId,
   });
-    useEffect(() => {
-    const interval = setInterval(() => {
-      refetch();
-    }, 5000);
 
-    return () => clearInterval(interval);
-  }, [refetch]);
 
 const router = useRouter()
 

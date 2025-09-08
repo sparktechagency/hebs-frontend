@@ -21,6 +21,8 @@ import LoadingPage from "@/app/loading";
 
 
 function BookStore() {
+  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("");
+
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<
     string | undefined
@@ -29,6 +31,14 @@ function BookStore() {
   const dispatch = useAppDispatch();
 
 
+useEffect(() => {
+  const handler = setTimeout(() => {
+    setDebouncedSearchTerm(searchTerm);
+    setCurrentPage(1);
+  }, 500);
+
+  return () => clearTimeout(handler);
+}, [searchTerm]);
 
 
 
@@ -54,7 +64,7 @@ function BookStore() {
   const [currentPage, setCurrentPage] = useState(1);
   // console.log("selectedCategory=>",selectedCategory);
   const queryParams = {
-    search: searchTerm || undefined,
+    search: debouncedSearchTerm || undefined,
     category: selectedCategory || undefined,
     grade: selectedGrade || undefined,
     collection: selectedCollection || undefined,
@@ -63,27 +73,17 @@ function BookStore() {
  
     page: currentPage,
   };
-  console.log(queryParams);
-  const { data, isLoading, error ,refetch} = useGetAllBooksQuery(queryParams);
+  // console.log(queryParams);
+  const { data, isLoading} = useGetAllBooksQuery(queryParams);
   const { data: categories } = useGetCategoriesQuery(undefined);
   const { data: grades } = useGetGradeQuery(undefined);
   const { data: collections } = useGetCollectionQuery(undefined);
 
   // const user = useAppSelector(selectCurrentUser);
 
-  useEffect(() => {
-    if (error) {
-      console.error("Query Error:", error);
-    }
-  }, [error]);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      refetch();
-    }, 5000); // Refetch every 5 seconds
 
-    return () => clearInterval(interval);
-  }, [refetch]);
+
 
   if (isLoading) return <div className=""><LoadingPage/></div>;
 
