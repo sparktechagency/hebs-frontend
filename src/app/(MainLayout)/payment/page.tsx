@@ -100,7 +100,7 @@ console.log(proceed);
           {/* Left Column */}
           <div className="flex-1 space-y-6">
             {/* Order notification */}
-            <div className="border rounded-2xl p-6 shadow-sm flex items-center justify-between bg-white">
+            {/* <div className="border rounded-2xl p-6 shadow-sm flex items-center justify-between bg-white">
               <div>
                 <p className="text-gray-700 text-lg">
                   Order today to get your reader&apos;s first book box by{" "}
@@ -116,7 +116,7 @@ console.log(proceed);
                   className="object-contain shadow-2xl"
                 />
               </div>
-            </div>
+            </div> */}
 
             {/* Shipping Methods */}
             <div className="border rounded-2xl p-6 shadow-sm bg-white">
