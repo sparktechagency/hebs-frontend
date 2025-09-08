@@ -102,7 +102,7 @@ const formattedDate = formattedProccessed
       <div className="p-4 flex justify-between items-center">
         <div className="flex items-center gap-4">
           <span className="bg-gray-200 text-gray-800 px-3 py-1 rounded-md text-sm font-medium">
-            {item.contentId.paymentStatus || item.contentId.status}
+            {item.contentId.paymentInfo.status|| item.contentId.status}
           </span>
           <span className="text-gray-700">{formattedDate}</span>
         </div>
