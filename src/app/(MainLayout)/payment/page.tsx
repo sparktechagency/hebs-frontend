@@ -5,11 +5,6 @@
 import { useEffect, useState } from "react";
 import { message, Radio } from "antd";
 
-import Image from "next/image";
-import packaging from "@/assets/tinnymuslimBox.png";
-import paypal from "@/assets/paypal.png";
-import visa from "@/assets/visa-4-logo_svgrepo.com.png";
-import master from "@/assets/master-card_svgrepo.com.png";
 
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import {
@@ -43,7 +38,7 @@ export default function PaymentPage() {
   const subTotalAfterSelectDeliveryCost = subTotal + deliveryCost;
 const user = useAppSelector(selectCurrentUser)
   const products = useAppSelector(orderedProductsSelector);
-console.log("user",user?.user);
+// console.log("user",user?.user);
   // Log full selected shipping method object
   // console.log("Selected shipping method object:", selectedShippingMethod);
   const dispatch = useAppDispatch();
@@ -73,22 +68,22 @@ const router = useRouter();
     shippingCost: currencyFormatter(deliveryCost),
     customerEmail: user?.user?.email
     }
-    console.log("order",order);
+    // console.log("order",order);
     try{
       const res =await placeCartOrder(order)
-      console.log("response-------------<>-->",res);
+      // console.log("response-------------<>-->",res);
       message.success(res.data.message)
          dispatch(clearCart())
       router.push(res?.data?.data?.url)
 
     }catch(error:any){
-      console.log(error);
+      // console.log(error);
     }
   };
 
 const [proceed,setProceed]=useState(false)
 
-console.log(proceed);
+// console.log(proceed);
 
 
   return (
@@ -132,7 +127,7 @@ console.log(proceed);
                   setSelectedShippingMethod(selected);
                 setProceed(!!selected);
 
-                  console.log("Selected shipping method object:", selected);
+                  // console.log("Selected shipping method object:", selected);
                 }}
                 className="w-full"
               >
@@ -158,69 +153,7 @@ console.log(proceed);
               </Radio.Group>
             </div>
 
-            {/* Payment Methods */}
-            {/* <div className="border rounded-2xl p-6 shadow-sm bg-white">
-              <h2 className="text-xl font-semibold text-gray-700 mb-6">
-                Payment Methods
-              </h2>
-
-              <div className="space-y-4">
-                <Radio.Group
-                  value={paymentMethod}
-                  onChange={(e) => setPaymentMethod(e.target.value)}
-                  className="w-full"
-                >
-                  <div className="space-y-3">
-                    <div
-                      className={`border rounded-xl p-4 flex items-center justify-between ${
-                        paymentMethod === "paypal"
-                          ? "border-blue-500"
-                          : "border-gray-200"
-                      }`}
-                    >
-                      <Radio value="paypal" className="w-full">
-                        <span className="ml-2 text-gray-700">Paypal</span>
-                      </Radio>
-                      <Image
-                        src={paypal}
-                        alt="PayPal"
-                        width={24}
-                        height={24}
-                        className="object-contain"
-                      />
-                    </div>
-
-                    <div
-                      className={`border rounded-xl p-4 flex items-center justify-between ${
-                        paymentMethod === "credit"
-                          ? "border-blue-500"
-                          : "border-gray-200"
-                      }`}
-                    >
-                      <Radio value="credit" className="w-full">
-                        <span className="ml-2 text-gray-700">Credit Card</span>
-                      </Radio>
-                      <div className="flex gap-2">
-                        <Image
-                          src={visa}
-                          alt="Visa"
-                          width={36}
-                          height={24}
-                          className="object-contain"
-                        />
-                        <Image
-                          src={master}
-                          alt="Mastercard"
-                          width={36}
-                          height={24}
-                          className="object-contain"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </Radio.Group>
-              </div>
-            </div> */}
+          
           </div>
 
           {/* Right Column */}

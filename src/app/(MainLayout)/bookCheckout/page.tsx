@@ -213,7 +213,7 @@ const subscriptionPrice =    purchaseSubscription?.data?.priceAmount;
       console.log("invoice update response===>",res);
       if (res?.data) {
         message.success(res?.data?.message)
-       
+       refetch()
       } else {
         message.error("something went wrong!try again");
       }
@@ -256,19 +256,13 @@ const subscriptionPrice =    purchaseSubscription?.data?.priceAmount;
     try {
       const res = await placeOrder({ info: order, data });
       message.success(res.data.message);
-
+refetch()
       router.push(res?.data?.data?.url);
     } catch (error: any) {
       console.log(error);
     }
   };
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      refetch();
-    }, 5000);
-    return () => clearInterval(interval);
-  }, [refetch]);
 
   if (isLoading) {
     return <LoadingPage />;
@@ -298,6 +292,7 @@ const subscriptionPrice =    purchaseSubscription?.data?.priceAmount;
         setEnableCashon(true)
         setEnable(true)
         setTrackingDetails(res.data.data);
+        refetch()
       } else {
         message.error(res?.error?.data?.error || "An unknown error occurred");
       }

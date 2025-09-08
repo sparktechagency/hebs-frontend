@@ -12,7 +12,7 @@ import { TrashIcon } from "lucide-react";
 
 import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect } from "react";
+import React from "react";
 
 const FavouritePage = () => {
   const user = useAppSelector(selectCurrentUser);
@@ -23,13 +23,7 @@ const FavouritePage = () => {
   );
   // console.log("favrt books", favouriteBooks);
   const [removeBook] = useRemoveFavouriteBooksMutation();
-  useEffect(() => {
-    const interval = setInterval(() => {
-      refetch();
-    }, 5000); // Refetch every 5 seconds
 
-    return () => clearInterval(interval); // Cleanup the interval when the component unmounts
-  }, [refetch]);
   const removeFromFavourites = async (bookId: string) => {
     console.log(bookId);
     try {
@@ -38,6 +32,7 @@ const FavouritePage = () => {
       if(res?.data){
 
         message.success(res?.data?.message);
+        refetch()
       }
     } catch (error) {
       console.log(error);

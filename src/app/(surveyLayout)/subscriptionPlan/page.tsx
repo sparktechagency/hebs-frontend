@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 
-import {  useEffect, useState } from "react"
+import {  useState } from "react"
 import { Radio } from "antd"
 import { RightOutlined } from "@ant-design/icons"
 import Image from "next/image"
@@ -37,7 +37,7 @@ export default function SubscriptionPlanPage() {
   const [selectedPlanData, setSelectedPlanData] = useState<Plan | null>(null);
   // console.log("current plan get purchase plan=>",selectedPlanData);
   const [subscribed, setSubscribed] = useState(false)
-const {data:plans,refetch}=useGetSubscriptionsQuery(undefined)
+const {data:plans,}=useGetSubscriptionsQuery(undefined)
 console.log("plans>>>",plans?.data);
 // Find the first plan where the name matches selectedPlan
 const selectedPlanObject = plans?.data?.find((plan: any) => plan._id === selectedPlanData?._id);
@@ -61,13 +61,6 @@ const dispatch = useAppDispatch();
   // }, [user, redirecting, router]);
 
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      refetch();
-    }, 5000); 
-
-    return () => clearInterval(interval);
-  }, [refetch]);
 const handleSubmitPlans=()=>{
   // dispatch(resetPlanData())
   dispatch(subscriptionPlan(selectedPlanObject))
@@ -116,7 +109,7 @@ const handleSubmitPlans=()=>{
                   <span className="text-3xl font-semibold text-red-400">{plan?.price?.amount}</span>
                   <span className="text-gray-500 ml-2">per month</span>
                 </div>
-                <p className="text-gray-600 mt-1">paid yearly- cart price $179.88</p>
+                {/* <p className="text-gray-600 mt-1">paid yearly- cart price $179.88</p> */}
               </div>
             </div>
   

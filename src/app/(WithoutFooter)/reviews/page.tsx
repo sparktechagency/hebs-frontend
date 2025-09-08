@@ -15,7 +15,6 @@ import LoadingPage from "@/app/loading";
 import { currencyFormatter } from "@/utils/currencyFormatter";
 import { useForm, Controller } from "react-hook-form";
 import { selectCurrentUser } from "@/redux/features/auth/authSlice";
-import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 const { TextArea } = Input;
@@ -48,13 +47,7 @@ const router = useRouter()
   );
   const boxs = specifiqBox?.data;
   // console.log("box===>", boxs);
-    useEffect(() => {
-      const interval = setInterval(() => {
-        refetch();
-      }, 5000); // Refetch every 5 seconds
-  
-      return () => clearInterval(interval);
-    }, [refetch]);
+
   if (isLoading) {
     return <LoadingPage />;
   }
@@ -104,6 +97,7 @@ const router = useRouter()
       // console.log("res==>", res);
       if (res?.data) {
         message.success(res?.data?.message);
+        refetch()
         router.back()
       } else {
         message.error("An unknown error occurred");

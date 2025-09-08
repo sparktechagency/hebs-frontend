@@ -4,10 +4,10 @@ import FeatureBook from "@/app/component/Home/FeatureBook";
 import LoadingPage from "@/app/loading";
 import { useGetPrivacyPolicyQuery } from "@/redux/features/others/othersApi";
 
-import { useEffect } from "react";
+
 
 export default function PrivacyPolicy() {
-  const { data: privacyData, isLoading,refetch } = useGetPrivacyPolicyQuery(undefined);
+  const { data: privacyData, isLoading } = useGetPrivacyPolicyQuery(undefined);
   console.log("privacy data", privacyData);
     const privacyHTML = privacyData?.data?.privacyPolicy || '';
 function extractH1Text(htmlString:any) {
@@ -21,20 +21,14 @@ function removeH1Tag(htmlString: any) {
   tempDiv.innerHTML = htmlString;
   const h1 = tempDiv.querySelector('h1');
   if (h1) {
-    h1.remove();  // h1 ট্যাগ DOM থেকে রিমুভ করা হলো
+    h1.remove();  
   }
-  return tempDiv.innerHTML;  // বাকি HTML রিটার্ন করলাম
+  return tempDiv.innerHTML;  
 }
 const restHTML = removeH1Tag(privacyHTML);
   const h1Text = extractH1Text(privacyHTML);
   console.log("title",h1Text);
-  useEffect(() => {
-    const interval = setInterval(() => {
-      refetch();
-    }, 5000); // Refetch every 5 seconds
 
-    return () => clearInterval(interval); // Cleanup the interval when the component unmounts
-  }, [refetch]);
   if (isLoading) {
     return <LoadingPage />;
   }
