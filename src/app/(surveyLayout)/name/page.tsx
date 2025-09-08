@@ -43,7 +43,7 @@ const NamePage = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const surveyData = useAppSelector(selectCurrentSurvey)
 const user = useAppSelector(selectCurrentUser)
-// console.log(user);
+console.log("user spec",user);
 
 const { data: specefiqUser,} = useGetSpecefiqUserQuery(
     user?.userId
