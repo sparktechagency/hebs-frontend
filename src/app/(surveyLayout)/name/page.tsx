@@ -49,9 +49,9 @@ const { data: specefiqUser,} = useGetSpecefiqUserQuery(
     user?.userId
   );
   const survey = specefiqUser?.data?.survey;
-
+   const issubscribe = specefiqUser?.data?.subscription?.isActive;
   console.log("singleUser",survey);
-  if(survey){
+  if(survey && issubscribe){
          message.success(
         "You have already done our survey.Thank you for stay with us"
       );

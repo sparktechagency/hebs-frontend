@@ -154,7 +154,7 @@ console.log("orderdata-->",orderData);
   // console.log("singleUser suibcription",subscription);
   if(subscription?.isActive=== false){
     message.error("You havent Subscribe yet!Please Subscribe and try again")
-   router.push("/recomended")
+   router.push("/name")
   }
 
 

@@ -9,25 +9,23 @@ import LittleCalips from "@/app/component/Home/LittleCaliphs";
 import TinyMuminsSection from "@/app/component/Home/TinyMumins";
 import Work from "@/app/component/Home/Work";
 
-
 const HomePage = () => {
+  return (
+    <div className="">
+      <Banner />
 
-    return (
-        <div className="">
-            <Banner/>
+      <Hero />
 
-            <Hero/>
-
-            <FunFact/>
-            <Work/>
-            <HadithSlider/>
-            <TinyMuminsSection/>
-            <LittleCalips/>
-            <Discover/>
-            <Islamic/>
-          <FeatureBook/>
-        </div>
-    );
-}
+      <FunFact />
+      <Work />
+      <HadithSlider />
+      <TinyMuminsSection />
+      <LittleCalips />
+      <Discover />
+      <Islamic />
+      <FeatureBook />
+    </div>
+  );
+};
 
 export default HomePage;
