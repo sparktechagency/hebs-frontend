@@ -82,11 +82,11 @@ const [updateSpecifiqUserAddress]=useUpdateSpecefiqUserAddressMutation()
     const orderData = {
     shippingAddress:{
 
-      street: data.shipping.street,
-      city: data.shipping.city,
-      state: data.shipping.state,
-      zipCode: data.shipping.zipCode,
-      country: data.shipping.country,
+      street: data?.shipping?.street,
+      city: data?.shipping?.city,
+      state: data?.shipping?.state,
+      zipCode: data?.shipping?.zipCode,
+      country: data?.shipping?.country,
     }
 
     
@@ -310,7 +310,7 @@ try {
             </button>
     </div>
               <div className="border-t border-gray-200 pt-6">
-            <p className="font-medium">{singleUser?.data?.shippingAddress.street+','+singleUser?.data?.shippingAddress.city+','+singleUser?.data?.shippingAddress.state+','+singleUser?.data?.shippingAddress.country}</p>
+            <p className="font-medium">{singleUser?.data?.shippingAddress?.street+','+singleUser?.data?.shippingAddress.city+','+singleUser?.data?.shippingAddress.state+','+singleUser?.data?.shippingAddress.country}</p>
           </div>
           </div>
         {/* <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
@@ -398,7 +398,7 @@ try {
                       )}
                     />
                     {errors.shipping?.street && (
-                      <p className="text-red-600">{errors.shipping.street.message}</p>
+                      <p className="text-red-600">{errors?.shipping?.street?.message}</p>
                     )}
                   </div>
 
