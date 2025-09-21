@@ -35,7 +35,7 @@ const SubscriptionPage = () => {
   const userId = user?.userId
   const { data: singleUser, isLoading,refetch } = useGetSpecefiqUserQuery(userId,{skip:!user});
 const id = singleUser?.data?.subscription?.purchaseId
-// console.log("single user->",singleUser);
+console.log("single user->",singleUser);
 const [cancelSubscription,{ isLoading: isCanceling }]=useCancelSubscriptionMutation();
   const {data:purchaseSubscription,refetch:subPurchase}=useSpecefiqSubscriptionQuery(userId,{skip:!user})
 // console.log("purchasd subscription",purchaseSubscription);
@@ -310,7 +310,20 @@ try {
             </button>
     </div>
               <div className="border-t border-gray-200 pt-6">
-            <p className="font-medium">{singleUser?.data?.shippingAddress?.street+','+singleUser?.data?.shippingAddress?.city+','+singleUser?.data?.shippingAddress?.state+','+singleUser?.data?.shippingAddress?.country}</p>
+            {/* <p className="font-medium">{singleUser?.data?.shippingAddress?.street+','+singleUser?.data?.shippingAddress?.city+','+singleUser?.data?.shippingAddress?.state+','+singleUser?.data?.shippingAddress?.country}</p> */}
+            <p className="font-medium">
+  {
+    // Conditionally join address fields, skipping any undefined/null fields
+    [
+      singleUser?.data?.shippingAddress?.street,
+      singleUser?.data?.shippingAddress?.city,
+      singleUser?.data?.shippingAddress?.state,
+      singleUser?.data?.shippingAddress?.country
+    ]
+    .filter(Boolean) // Remove undefined/null/empty strings
+    .join(", ") // Join the remaining valid parts with a comma
+  }
+</p>
           </div>
           </div>
         {/* <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
