@@ -310,7 +310,7 @@ try {
             </button>
     </div>
               <div className="border-t border-gray-200 pt-6">
-            <p className="font-medium">{singleUser?.data?.shippingAddress?.street+','+singleUser?.data?.shippingAddress.city+','+singleUser?.data?.shippingAddress.state+','+singleUser?.data?.shippingAddress.country}</p>
+            <p className="font-medium">{singleUser?.data?.shippingAddress?.street+','+singleUser?.data?.shippingAddress?.city+','+singleUser?.data?.shippingAddress?.state+','+singleUser?.data?.shippingAddress?.country}</p>
           </div>
           </div>
         {/* <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
@@ -348,17 +348,17 @@ try {
                     <div key={idx} className="flex flex-col space-y-2">
                       <div className="aspect-[3/4] relative rounded-lg overflow-hidden shadow-sm">
                         <Image
-                          src={book.coverImage || "/placeholder.svg"}
-                          alt={book.name}
+                          src={book?.coverImage || "/placeholder.svg"}
+                          alt={book?.name}
                           fill
                           className="object-cover"
                         />
                       </div>
                       <h3 className="text-sm font-medium text-gray-800 line-clamp-2">
-                        {book.name}
+                        {book?.name}
                       </h3>
                       <p className="text-xs text-gray-500 line-clamp-2">
-                        {book.summary}
+                        {book?.summary}
                       </p>
                     </div>
                   ))}
@@ -397,7 +397,7 @@ try {
                         <Input {...field} size="large" className="rounded-lg" />
                       )}
                     />
-                    {errors.shipping?.street && (
+                    {errors?.shipping?.street && (
                       <p className="text-red-600">{errors?.shipping?.street?.message}</p>
                     )}
                   </div>
@@ -409,13 +409,13 @@ try {
                       <Controller
                         name="shipping.city"
                         control={control}
-                        rules={{ required: "City is required" }}
+                        rules={{ required: "City is required"}}
                         render={({ field }) => (
                           <Input {...field} size="large" className="rounded-lg" />
                         )}
                       />
                       {errors.shipping?.city && (
-                        <p className="text-red-600">{errors.shipping.city.message}</p>
+                        <p className="text-red-600">{errors?.shipping?.city?.message}</p>
                       )}
                     </div>
 
@@ -429,8 +429,8 @@ try {
                           <Input {...field} size="large" className="rounded-lg" />
                         )}
                       />
-                      {errors.shipping?.state && (
-                        <p className="text-red-600">{errors.shipping.state.message}</p>
+                      {errors?.shipping?.state && (
+                        <p className="text-red-600">{errors?.shipping?.state?.message}</p>
                       )}
                     </div>
                   </div>
@@ -448,7 +448,7 @@ try {
                         )}
                       />
                       {errors.shipping?.zipCode && (
-                        <p className="text-red-600">{errors.shipping.zipCode.message}</p>
+                        <p className="text-red-600">{errors?.shipping?.zipCode?.message}</p>
                       )}
                     </div>
 
@@ -463,7 +463,7 @@ try {
                         )}
                       />
                       {errors.shipping?.country && (
-                        <p className="text-red-600">{errors.shipping.country.message}</p>
+                        <p className="text-red-600">{errors?.shipping?.country?.message}</p>
                       )}
                     </div>
                   </div>
