@@ -18,6 +18,7 @@ const ChangePassword = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  // 
 const [changePass]=useChangePassMutation()
 const router = useRouter()
   const onSubmit = async(info: any) => {
