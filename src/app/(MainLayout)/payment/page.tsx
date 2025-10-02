@@ -34,8 +34,9 @@ export default function PaymentPage() {
   const [shippingMethods, setShippingMethods] = useState<any[]>([]);
 // console.log("shippingmethods",shippingMethods);
   // Convert rate to number safely
-  const deliveryCost = Number(selectedShippingMethod?.rate) || 0;
-  const subTotalAfterSelectDeliveryCost = subTotal + deliveryCost;
+  const deliveryCost = selectedShippingMethod?.rate
+  const subTotalAfterSelectDeliveryCost = Number(subTotal + deliveryCost);
+  console.log("subTotal-->",deliveryCost);
 const user = useAppSelector(selectCurrentUser)
   const products = useAppSelector(orderedProductsSelector);
 // console.log("user",user?.user);
@@ -65,10 +66,12 @@ const router = useRouter();
     const order = {
           items,
 
-    shippingCost: currencyFormatter(deliveryCost),
+  // shippingCost: Math.round(deliveryCost * 100),
+    shippingCost:deliveryCost?.toString(),
     customerEmail: user?.user?.email
     }
-    // console.log("order",order);
+    console.log("order",order);
+// return
     try{
       const res =await placeCartOrder(order)
       // console.log("response-------------<>-->",res);
