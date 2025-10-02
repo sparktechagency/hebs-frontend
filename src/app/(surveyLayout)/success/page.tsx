@@ -105,12 +105,12 @@ const SucessPage = () => {
 
   // Order creation effect (runs only once if purpose does NOT exist)
   useEffect(() => {
-      console.log("purpose:", purpose);
+      // console.log("purpose:", purpose);
   console.log("sessionId:", sessionId);
   console.log("userId:", user?.userId);
   console.log("items:", items);
   console.log("userData:", userData);
-    if (purpose) return;
+    // if (purpose) return;
     if (
       hasCreatedOrder.current ||
       !sessionId ||
@@ -147,7 +147,7 @@ const SucessPage = () => {
         message.error(err?.data?.error || "Failed to create order");
       });
   }, [
-    purpose,
+    // purpose,
     sessionId,
     user?.userId,
     userData,
