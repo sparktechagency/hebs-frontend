@@ -76,7 +76,7 @@ const router = useRouter();
       const res =await placeCartOrder(order)
       // console.log("response-------------<>-->",res);
       message.success(res.data.message)
-         dispatch(clearCart())
+        //  dispatch(clearCart())
       router.push(res?.data?.data?.url)
 
     }catch(error:any){

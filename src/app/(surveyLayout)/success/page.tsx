@@ -11,8 +11,8 @@ import {
   useGetSpecefiqInvoiceQuery,
 } from "@/redux/features/boxes/boxesApi";
 import { usePlaceOrderMutation } from "@/redux/features/cart/cartApi";
-import { orderedProductsSelector } from "@/redux/features/cart/cartSlice";
-import { useAppSelector } from "@/redux/hooks";
+import { clearCart, orderedProductsSelector } from "@/redux/features/cart/cartSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { message } from "antd";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -102,20 +102,21 @@ const SucessPage = () => {
         message.error("Something went wrong! Try again.");
       });
   }, [purpose, user?.userId, createInvoice,invoiceId]);
-
-  // Order creation effect (runs only once if purpose does NOT exist)
-  useEffect(() => {
-      // console.log("purpose:", purpose);
   console.log("sessionId:", sessionId);
   console.log("userId:", user?.userId);
   console.log("items:", items);
   console.log("userData:", userData);
+    const dispatch = useAppDispatch();
+  // Order creation effect (runs only once if purpose does NOT exist)
+  useEffect(() => {
+      // console.log("purpose:", purpose);
+
     // if (purpose) return;
     if (
       hasCreatedOrder.current ||
       !sessionId ||
       !user?.userId ||
-      !items.length ||
+      // !items.length ||
       !userData
     )
       return;
@@ -140,6 +141,7 @@ const SucessPage = () => {
       .then((response) => {
         console.log("order res", response);
         message.success(response?.message);
+         dispatch(clearCart())
         router.push("/bookStore");
       })
       .catch((err) => {
@@ -147,7 +149,7 @@ const SucessPage = () => {
         message.error(err?.data?.error || "Failed to create order");
       });
   }, [
-    // purpose,
+    purpose,
     sessionId,
     user?.userId,
     userData,
