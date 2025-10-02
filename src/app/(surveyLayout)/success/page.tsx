@@ -105,6 +105,11 @@ const SucessPage = () => {
 
   // Order creation effect (runs only once if purpose does NOT exist)
   useEffect(() => {
+      console.log("purpose:", purpose);
+  console.log("sessionId:", sessionId);
+  console.log("userId:", user?.userId);
+  console.log("items:", items);
+  console.log("userData:", userData);
     if (purpose) return;
     if (
       hasCreatedOrder.current ||
