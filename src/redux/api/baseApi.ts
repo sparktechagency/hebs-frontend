@@ -5,8 +5,8 @@ import { RootState } from "../store";
 
 const baseQuery = fetchBaseQuery({
   
-  baseUrl: "http://10.10.20.19:5003/v1",
-  // baseUrl: "http://13.48.93.57:5003/v1",
+  // baseUrl: "http://10.10.20.19:5003/v1",
+  baseUrl: "http://13.48.93.57:5003/v1",
   prepareHeaders: (headers, { getState }) => {
     headers.set('Accept', 'application/json');
 
