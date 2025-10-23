@@ -13,6 +13,7 @@ import {  useShippingInfoMutation } from "@/redux/features/cart/cartApi";
 import { useState } from "react";
 import { LockOutlined } from "@ant-design/icons";
 import { useRouter } from "next/navigation";
+import { selectCurrentUser } from "@/redux/features/auth/authSlice";
 
 export interface FormData {
   shipping: {
@@ -26,7 +27,7 @@ export interface FormData {
 
 const CartPage = () => {
   const [shippingInfo] = useShippingInfoMutation();
-
+  const user = useAppSelector(selectCurrentUser);
   const products = useAppSelector(orderedProductsSelector);
   const {
     control,
@@ -44,6 +45,10 @@ const CartPage = () => {
 const router = useRouter();
   // Handle form submission
   const onSubmit: SubmitHandler<FormData> = async (data) => {
+    if(!user){
+     message.error("Please sign in to keep going")
+     return
+    }
     const orderData = {
       toAddress: {
         street: data.shipping.street,
