@@ -137,18 +137,25 @@ useEffect(() => {
     { label: "500 - 1000", value: "500-1000" },
     { label: "1000+", value: "1000-100000" },
   ]}
-/> */}
+/> */
 
-              <Select
-                placeholder="Category"
-                className="w-32"
-                size="middle"
-                onChange={(value) => setSelectedCategory(value)}
-                options={categories?.data?.map((cat: any) => ({
-                  label: cat.title,
-                  value: cat._id,
-                }))}
-              />
+
+
+
+  // <Select
+  //               placeholder="Category"
+  //               className="w-32"
+  //               size="middle"
+  //               onChange={(value) => setSelectedCategory(value)}
+  //               options={categories?.data?.map((cat: any) => ({
+  //                 label: cat.title,
+  //                 value: cat._id,
+  //               }))}
+  //             />
+
+}
+
+            
 
               <Select
                 placeholder="Grade"
