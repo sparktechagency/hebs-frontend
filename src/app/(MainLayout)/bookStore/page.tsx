@@ -8,7 +8,7 @@ import { Pagination } from "antd";
 import { useEffect, useState } from "react";
 import {
   useGetAllBooksQuery,
-  useGetCategoriesQuery,
+  // useGetCategoriesQuery,
   useGetCollectionQuery,
   useGetGradeQuery,
 } from "@/redux/features/books/bookApi";
@@ -24,9 +24,9 @@ function BookStore() {
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("");
 
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState<
-    string | undefined
-  >();
+  // const [selectedCategory, setSelectedCategory] = useState<
+  //   string | undefined
+  // >();
   // const [product,setProduct]=useState([])
   const dispatch = useAppDispatch();
 
@@ -65,7 +65,7 @@ useEffect(() => {
   // console.log("selectedCategory=>",selectedCategory);
   const queryParams = {
     search: debouncedSearchTerm || undefined,
-    category: selectedCategory || undefined,
+    // category: selectedCategory || undefined,
     grade: selectedGrade || undefined,
     collection: selectedCollection || undefined,
     sortBy: sortBy || undefined,
@@ -75,7 +75,7 @@ useEffect(() => {
   };
   // console.log(queryParams);
   const { data, isLoading} = useGetAllBooksQuery(queryParams);
-  const { data: categories } = useGetCategoriesQuery(undefined);
+  // const { data: categories } = useGetCategoriesQuery(undefined);
   const { data: grades } = useGetGradeQuery(undefined);
   const { data: collections } = useGetCollectionQuery(undefined);
 
