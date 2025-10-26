@@ -19,16 +19,20 @@
 // };
    
 
-// module.exports = nextConfig;
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
+    // keep default deviceSizes unless you know what you're doing (750 must be present)
+    // deviceSizes default includes 750, so usually no change is needed.
     remotePatterns: [
       {
-        protocol: "https",
-        hostname: "res.cloudinary.com",
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+        pathname: '/**',   // IMPORTANT
       },
     ],
+    domains: ['res.cloudinary.com'], // for older Next versions
+    formats: ['image/avif', 'image/webp'],
   },
 };
 
