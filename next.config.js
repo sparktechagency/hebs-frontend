@@ -22,18 +22,18 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    // keep default deviceSizes unless you know what you're doing (750 must be present)
-    // deviceSizes default includes 750, so usually no change is needed.
+
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+
+    domains: ['res.cloudinary.com'],
     remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'res.cloudinary.com',
-        pathname: '/**',   // IMPORTANT
-      },
+      { protocol: 'https', hostname: 'res.cloudinary.com', pathname: '/**' },
+      { protocol: 'http',  hostname: 'res.cloudinary.com', pathname: '/**' }, 
     ],
-    domains: ['res.cloudinary.com'], // for older Next versions
     formats: ['image/avif', 'image/webp'],
   },
 };
 
 module.exports = nextConfig;
+
