@@ -75,6 +75,7 @@ useEffect(() => {
   };
   // console.log(queryParams);
   const { data, isLoading} = useGetAllBooksQuery(queryParams);
+  console.log("all books--->",data);
   // const { data: categories } = useGetCategoriesQuery(undefined);
   const { data: grades } = useGetGradeQuery(undefined);
   const { data: collections } = useGetCollectionQuery(undefined);
