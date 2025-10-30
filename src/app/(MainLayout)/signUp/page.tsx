@@ -64,9 +64,22 @@ const showErrorMessage = (error: any) => {
 
   const onSubmit: SubmitHandler<SignUpFormInputs> = async (data) => {
     console.log("------->",data);
+const modifiedData={
+  ...data,
+  shippingAddress:{
+    state:data?.state,
+    city:data?.city,
+    country:data?.country,
+    zipCode:data?.zipCode,
+    street:data?.street
+  }
+}
+
+
+console.log("modified data------>",modifiedData);
 
     try {
-      const response = await signUp(data).unwrap();
+      const response = await signUp(modifiedData).unwrap();
       
       message.success(response?.message)
      router.push("/login")
