@@ -1,57 +1,22 @@
 // // /** @type {import('next').NextConfig} */
-// // const nextConfig = {
-// //   experimental: {
-    
-// //   }, 
-// //   images: {
-// //     remotePatterns: [
-// //       {
-// //         protocol: "http",
-// //         hostname: "**",
-// //       },
-// //       // {
-// //       //   protocol: "http",  // Use HTTP for local IPs or servers
-// //       //   hostname: "10.0.60.55",  // Allow the local server IP
-// //       // },
-// //     ],
-// //     domains: ['res.cloudinary.com'],
-// //   },
-// // };
-   
-
-// /** @type {import('next').NextConfig} */
-// const nextConfig = {
-//   images: {
-
-//     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
-//     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-
-//     domains: ['res.cloudinary.com'],
-//     remotePatterns: [
-//       { protocol: 'https', hostname: 'res.cloudinary.com', pathname: '/**' },
-//       { protocol: 'http',  hostname: 'res.cloudinary.com', pathname: '/**' }, 
-//     ],
-//     formats: ['image/avif', 'image/webp'],
-//   },
-// };
-
-// module.exports = nextConfig;
-/** @type {import('next').NextConfig} */
 const nextConfig = {
-  images: {
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
-    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-
-    domains: ['res.cloudinary.com', 'illuminatemuslimminds.com'], // Added your live domain
-
-    remotePatterns: [
-      { protocol: 'https', hostname: 'res.cloudinary.com', pathname: '/**' },
-      { protocol: 'http', hostname: 'res.cloudinary.com', pathname: '/**' },
-      { protocol: 'https', hostname: 'illuminatemuslimminds.com', pathname: '/**' }, // Added for your domain
-    ],
-    formats: ['image/avif', 'image/webp'],
-  },
+    // experimental: {
+    //     allowedDevOrigins: ['http://16.16.183.92:9090'],
+    // },
+    images: {
+        remotePatterns: [
+     
+            {
+                protocol: 'https',
+                hostname: 'res.cloudinary.com',
+            },
+            {
+                protocol: 'https',
+                hostname: 'illuminatemuslimminds.com',
+            },
+        ],
+    },
 };
-
-module.exports = nextConfig;
+ 
+export default nextConfig;
 
