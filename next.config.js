@@ -1,22 +1,29 @@
-// // /** @type {import('next').NextConfig} */
+/** @type {import('next').NextConfig} */
+
 const nextConfig = {
-    // experimental: {
-    //     allowedDevOrigins: ['http://16.16.183.92:9090'],
-    // },
-    images: {
-        remotePatterns: [
-     
-            {
-                protocol: 'https',
-                hostname: 'res.cloudinary.com',
-            },
-            {
-                protocol: 'https',
-                hostname: 'illuminatemuslimminds.com',
-            },
-        ],
-    },
+
+  images: {
+
+    remotePatterns: [
+
+      {
+
+        protocol: "https",
+
+        hostname: "res.cloudinary.com",
+
+        port: "",
+
+        pathname: "/**", 
+
+      },
+
+    ],
+
+  },
+
 };
  
-export default nextConfig;
+module.exports = nextConfig;
 
+ 
