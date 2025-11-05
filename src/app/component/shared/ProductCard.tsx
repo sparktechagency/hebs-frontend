@@ -8,6 +8,7 @@ import {
 import { useAppSelector } from "@/redux/hooks";
 import { message } from "antd";
 import { HeartIcon } from "lucide-react";
+import Image from "next/image";
 
 import Link from "next/link";
 
@@ -27,7 +28,7 @@ const ProductCard = ({ product,handleAddProduct}: { product: any ,handleAddProdu
     // console.log("clicked",bookId);
 
     if (!user?.userId || !bookId) {
-      message.error("User or Book ID is missing");
+      message.error("Please login first");
       return;
     }
 const userId = user?.userId
@@ -66,10 +67,10 @@ const result = checkIfProductIdExists(product._id);
       >
         <div className="relative h-48 mb-3 rounded-md bg-[#fffbeb]">
           <Link href={`/bookStore/${product._id}`}>
-            <img
+            <Image
               src={product.coverImage}
               alt={product.name}
-              // fill
+              fill
               className="object-cover rounded-md"
               sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, (max-width: 1280px) 25vw, 20vw"
             />
