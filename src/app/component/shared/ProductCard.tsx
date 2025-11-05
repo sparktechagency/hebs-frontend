@@ -65,8 +65,8 @@ const result = checkIfProductIdExists(product._id);
         className="rounded-lg p-3 flex flex-col cursor-pointer"
         // onClick={() => router.push(`/bookStore/${product.id}`)}  
       >
-        <div className="relative h-48 mb-3 rounded-md bg-[#fffbeb]">
           <Link href={`/bookStore/${product._id}`}>
+        <div className="relative h-48 mb-3 rounded-md bg-[#fffbeb]">
             <Image
               src={product.coverImage}
               alt={product.name}
@@ -74,23 +74,23 @@ const result = checkIfProductIdExists(product._id);
               className="object-cover rounded-md"
               sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, (max-width: 1280px) 25vw, 20vw"
             />
-          </Link>
           <button
             onClick={() => handleFavourite(product._id)}
             className="absolute top-2 right-2 p-1.5 bg-white/80 rounded-full hover:bg-white transition-colors z-10"
             disabled={result}
-          >
+            >
             <HeartIcon
               size={20}
               className={
                 // favouriteBooks?.data?.books?.includes(product._id)
                 result
-                  ? "fill-red-500 text-red-500"
-                  : "text-gray-500"
+                ? "fill-red-500 text-red-500"
+                : "text-gray-500"
               }
-            />
+              />
           </button>
         </div>
+              </Link>
 
         {/* Add to Bag Button */}
         <button
