@@ -26,7 +26,7 @@ const userInfo = await getCurrentUser();
       console.log("from middleware");
       return NextResponse.redirect(
         new URL(
-          `http://localhost:3000/login?redirectPath=${pathname}`,
+          `https://illuminatemuslimminds.com/login?redirectPath=${pathname}`,
           request.url
         )
       );
