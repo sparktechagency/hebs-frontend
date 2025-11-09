@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
@@ -104,10 +105,16 @@ const currentYear = now.getFullYear();
           {books?.map((book: any, idx: number) => (
             <div key={idx} className="flex flex-col space-y-2">
               <div className="aspect-[3/4] relative rounded-lg overflow-hidden shadow-sm">
-                <Image
+                {/* <Image
                   src={book.coverImage || "/placeholder.svg"}
                   alt={book.name}
                   fill
+                  className="object-cover"
+                /> */}
+                <img
+                  src={book.coverImage || "/placeholder.svg"}
+                  alt={book.name}
+                
                   className="object-cover"
                 />
               </div>

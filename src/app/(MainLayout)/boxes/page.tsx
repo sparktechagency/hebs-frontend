@@ -4,7 +4,7 @@ import { Package, User, FileText, Check, ChevronRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import shape from "@/assets/shape.png";
-import shop from "@/assets/shop.png";
+// import shop from "@/assets/shop.png";
 import styles from "@/app/styles.module.css";
 
 import { useAppSelector } from "@/redux/hooks";
@@ -180,8 +180,8 @@ const router = useRouter()
             </div>
 
             {/* Second Box Card */}
-            <div className="relative bg-[#FBD5D4] rounded-2xl shadow-md w-full md:w-1/2 py-5">
-              {/* Header Section */}
+            {/* <div className="relative bg-[#FBD5D4] rounded-2xl shadow-md w-full md:w-1/2 py-5">
+       
               <div className="my-5 px-6">
                 <h1 className={`${styles.fontInter} text-2xl font-bold`}>
                   Boxes
@@ -193,14 +193,12 @@ const router = useRouter()
                 </p>
               </div>
 
-              {/* NEW Badge (Positioned Top-Right) */}
               <div className="absolute top-5 left-28">
                 <span className="bg-[#f08080] text-white px-4 py-1 rounded-full text-sm font-medium shadow-sm">
                   NEW
                 </span>
               </div>
 
-              {/* Content Section */}
               <div className="px-8 flex flex-col items-center">
                 <div className="mb-3">
                   <Image src={shop} width={500} height={500} alt="shop" />
@@ -210,11 +208,9 @@ const router = useRouter()
                   Book Shuffle
                 </h3>
 
-                {/* <button className="w-full bg-white hover:bg-gray-50 text-gray-800 py-4 px-6 rounded-full font-medium shadow-sm transition-all hover:shadow-md">
-      See Details
-    </button> */}
+      
               </div>
-            </div>
+            </div> */}
           </div>
         </main>
       ) : (
