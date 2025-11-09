@@ -1,6 +1,7 @@
+/* eslint-disable @next/next/no-img-element */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-import Image from "next/image";
+// import Image from "next/image";
 
 import style from "@/app/styles.module.css";
 import { useGetTeamsQuery } from "@/redux/features/others/othersApi";
@@ -49,7 +50,14 @@ export default function OurTeam() {
 
           {/* Image */}
           <div className="flex justify-center md:w-1/2">
-            <Image
+            {/* <Image
+              src={team.image}
+              alt={`${team.name}`}
+              width={500}
+              height={500}
+              className="w-full max-w-[500px] h-auto object-cover rounded-lg"
+            /> */}
+            <img
               src={team.image}
               alt={`${team.name}`}
               width={500}
@@ -59,7 +67,7 @@ export default function OurTeam() {
           </div>
         </div>
       </div>
-    </section>
+    </section> 
   );
 })}
 

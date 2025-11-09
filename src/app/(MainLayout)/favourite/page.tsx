@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
@@ -53,12 +54,18 @@ const FavouritePage = () => {
                 key={book._id}
               >
                 <div className="relative">
-                  <Image
+                  {/* <Image
                     src={book.coverImage}
                     alt=""
                     width={200}
                     height={300}
                     className="object-contain rounded-lg"
+                  /> */}
+                  <img
+                    src={book.coverImage}
+                    alt=""
+                  
+                    className="object-contain rounded-lg h-[200px] w-[200px]"
                   />
                   <button
                     onClick={() => removeFromFavourites(book._id)}

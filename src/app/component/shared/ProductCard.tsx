@@ -8,7 +8,7 @@ import {
 import { useAppSelector } from "@/redux/hooks";
 import { message } from "antd";
 import { HeartIcon } from "lucide-react";
-import Image from "next/image";
+
 
 import Link from "next/link";
 
@@ -67,13 +67,20 @@ const result = checkIfProductIdExists(product._id);
       >
           <Link href={`/bookStore/${product._id}`}>
         <div className="relative h-48 mb-3 rounded-md bg-[#fffbeb]">
-            <Image
+            <img
+              src={product.coverImage}
+              alt={product.name}
+              
+              className="h-[200px] w-[450px]"
+              sizes=""
+            />
+            {/* <Image
               src={product.coverImage}
               alt={product.name}
               fill
               className="object-cover rounded-md"
               sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, (max-width: 1280px) 25vw, 20vw"
-            />
+            /> */}
           <button
             onClick={() => handleFavourite(product._id)}
             className="absolute top-2 right-2 p-1.5 bg-white/80 rounded-full hover:bg-white transition-colors z-10"

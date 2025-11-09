@@ -1,7 +1,8 @@
+/* eslint-disable @next/next/no-img-element */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import Image from "next/image";
+// import Image from "next/image";
 import { Slider, Input, message } from "antd";
 
 
@@ -133,8 +134,16 @@ const router = useRouter()
 
     <div className="flex flex-col sm:flex-row gap-4 pb-6 border-b">
       <div className="flex-shrink-0 mx-auto sm:mx-0">
-        <Image
-          // src={wild}
+        {/* <Image
+   
+          src={boxs?.image }
+          alt="Book cover"
+          width={80}
+          height={100}
+          className="object-cover rounded-md"
+        /> */}
+        <img
+   
           src={boxs?.image }
           alt="Book cover"
           width={80}

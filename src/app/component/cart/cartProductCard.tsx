@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import {
   CartProduct,
   decrementOrderQuantity,
@@ -7,7 +8,7 @@ import {
 import { useAppDispatch } from "@/redux/hooks";
 import { currencyFormatter } from "@/utils/currencyFormatter";
 import { Minus, Plus, Trash } from "lucide-react";
-import Image from "next/image";
+// import Image from "next/image";
 
 export default function CartProductCard({ product }: { product: CartProduct }) {
   const dispatch = useAppDispatch();
@@ -28,7 +29,14 @@ export default function CartProductCard({ product }: { product: CartProduct }) {
     <div className="bg-white rounded-lg p-4 flex flex-col sm:flex-row gap-4 shadow-md hover:shadow-xl transition duration-300 w-full">
       {/* Product Image */}
       <div className="w-full sm:w-32 h-48 sm:h-auto mx-auto sm:mx-0 flex-shrink-0 border border-gray-200 rounded-md overflow-hidden">
-        <Image
+        {/* <Image
+          src={product?.coverImage}
+          width={200}
+          height={200}
+          alt="product"
+          className="w-full h-full object-cover"
+        /> */}
+        <img
           src={product?.coverImage}
           width={200}
           height={200}
