@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import { useState } from "react";
@@ -91,7 +92,14 @@ const {name,description,price,author,level,weight,format,coverImage,}=data?.data
           {/* Product Image */}
           <div className="flex justify-center items-start">
             <div className="relative w-full max-w-md aspect-square bg-amber-50 rounded-md p-4 flex items-center justify-center">
-              <Image
+              {/* <Image
+                src={coverImage}
+                alt="1001 Inventions and Awesome Facts from Muslim Civilization"
+                width={400}
+                height={400}
+                className="object-contain"
+              /> */}
+              <img
                 src={coverImage}
                 alt="1001 Inventions and Awesome Facts from Muslim Civilization"
                 width={400}
