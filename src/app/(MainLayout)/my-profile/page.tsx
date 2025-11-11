@@ -235,7 +235,7 @@ const MyProfilePage = () => {
           </form>
         </div>
         {/* Connect Account Card */}
-        <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
+        {/* <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
           <h2 className="text-xl font-semibold mb-2">Connect Account</h2>
           <p className="text-gray-600 mb-6">
             Log in with ease by connecting to your other accounts.
@@ -260,7 +260,7 @@ const MyProfilePage = () => {
               <p> Continue with Google</p>
             </div>
           </div>
-        </div>
+        </div> */}
 
         {/* Billing Card */}
         {/* <div className={`${styles.fontInter} bg-white rounded-lg shadow-sm p-6 mb-8`}>

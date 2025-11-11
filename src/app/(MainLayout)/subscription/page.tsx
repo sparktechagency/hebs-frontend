@@ -342,7 +342,7 @@ const SubscriptionPage = () => {
         {/* Books Section 1 */}
         <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
-            <h3 className="font-medium">Reader&apos;s Allah made me</h3>
+            <h3 className="font-medium">Book Received</h3>
             <Link href={"/reviews"}>
               <button className="mt-4 md:mt-0 bg-[#f08080] hover:bg-[#f08080]/90 text-white px-6 py-2 rounded-full">
                 Review Books
@@ -371,13 +371,12 @@ const SubscriptionPage = () => {
                           fill
                           className="object-cover"
                         /> */}
-                          <img
-                  src={book?.coverImage || "/placeholder.svg"}
-              alt=""
-              
-              className=" object-cover"
-              sizes=""
-            />
+                        <img
+                          src={book?.coverImage || "/placeholder.svg"}
+                          alt=""
+                          className=" object-cover"
+                          sizes=""
+                        />
                       </div>
                       <h3 className="text-sm font-medium text-gray-800 line-clamp-2">
                         {book?.name}

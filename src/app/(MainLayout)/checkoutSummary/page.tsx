@@ -99,7 +99,7 @@ const currentYear = now.getFullYear();
 
       {/* Books Section */}
       <div className="bg-[#fff5f5] rounded-2xl p-6">
-        <h2 className="text-xl font-semibold mb-6 text-gray-800">Keeping</h2>
+        <h2 className="text-xl font-semibold mb-6 text-gray-800">Reading</h2>
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 overflow-x-auto">
           {books?.map((book: any, idx: number) => (
