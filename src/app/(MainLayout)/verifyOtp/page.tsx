@@ -28,7 +28,7 @@ const router = useRouter();
         if(res?.data){
             message.success(res?.data?.message);
 
-            router.push("/login")
+            router.push("/resetPass")
         }
             message.error("something went wrong")
     } catch (error) {

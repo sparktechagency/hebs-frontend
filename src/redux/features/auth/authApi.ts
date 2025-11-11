@@ -67,9 +67,17 @@ const authApi = baseApi.injectEndpoints({
       }),
         invalidatesTags: ['user'],
     }),
+    resetPass: builder.mutation({
+      query: (info) => ({
+        url: `user/auth/reset-password`,
+        method: "POST",  
+        body: info,
+      }),
+        invalidatesTags: ['user'],
+    }),
 
 
   }),
 });   
 
-export const { useLoginMutation,useSignUpMutation,useLazyLoginWithGoogleQuery,useLazyLoginWithFacebookQuery,useGetSpecefiqUserQuery,useUpdateSpecefiqUserMutation,useChangePassMutation,useGetOtpMutation,useVerifyOtpMutation} = authApi;
+export const { useLoginMutation,useSignUpMutation,useLazyLoginWithGoogleQuery,useLazyLoginWithFacebookQuery,useGetSpecefiqUserQuery,useUpdateSpecefiqUserMutation,useChangePassMutation,useGetOtpMutation,useVerifyOtpMutation,useResetPassMutation} = authApi;
