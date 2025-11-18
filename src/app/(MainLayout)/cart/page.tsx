@@ -44,7 +44,7 @@ const CartPage = () => {
   }, 0);
 const router = useRouter();
   // Handle form submission
-  const onSubmit: SubmitHandler<FormData> = async (data) => {
+  const onSubmit: SubmitHandler<FormData> = async (data) => { 
     if(!user){
      message.error("Please sign in to keep going")
      return
@@ -60,10 +60,13 @@ const router = useRouter();
       parcelDetails: {
         weight: totalWeightOz.toFixed(2),
       },
+      forceAccept:true
     };
 
     try {
       const res = (await shippingInfo(orderData)) as any;
+      console.log("order data----------->",orderData);
+  
       if (res?.data) {
         message.success(res.data.message);
         localStorage.setItem("shippingMethod", JSON.stringify(res.data.data));
